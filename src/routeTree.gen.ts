@@ -9,38 +9,32 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as ActivateRouteImport } from './routes/activate'
-import { Route as PortalRouteImport } from './routes/_portal'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as PortalSupportRouteImport } from './routes/_portal.support'
-import { Route as PortalProgressRouteImport } from './routes/_portal.progress'
-import { Route as PortalProfileRouteImport } from './routes/_portal.profile'
-import { Route as PortalPaymentsRouteImport } from './routes/_portal.payments'
-import { Route as PortalNotificationsRouteImport } from './routes/_portal.notifications'
-import { Route as PortalDocumentsRouteImport } from './routes/_portal.documents'
-import { Route as PortalDashboardRouteImport } from './routes/_portal.dashboard'
-import { Route as PortalCommunityRouteImport } from './routes/_portal.community'
-import { Route as PortalCertificatesRouteImport } from './routes/_portal.certificates'
+import { Route as PortalRouteImport } from './routes/_portal'
+import { Route as ActivateRouteImport } from './routes/activate'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PortalCalendarRouteImport } from './routes/_portal.calendar'
+import { Route as PortalCertificatesRouteImport } from './routes/_portal.certificates'
+import { Route as PortalCommunityRouteImport } from './routes/_portal.community'
+import { Route as PortalDashboardRouteImport } from './routes/_portal.dashboard'
+import { Route as PortalDocumentsRouteImport } from './routes/_portal.documents'
+import { Route as PortalNotificationsRouteImport } from './routes/_portal.notifications'
+import { Route as PortalPaymentsRouteImport } from './routes/_portal.payments'
+import { Route as PortalProfileRouteImport } from './routes/_portal.profile'
+import { Route as PortalProgressRouteImport } from './routes/_portal.progress'
+import { Route as PortalSupportRouteImport } from './routes/_portal.support'
 import { Route as PortalTrainingsIndexRouteImport } from './routes/_portal.trainings.index'
 import { Route as PortalTrainingsIdRouteImport } from './routes/_portal.trainings.$id'
 
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
-  id: '/forgot-password',
-  path: '/forgot-password',
+const PortalRoute = PortalRouteImport.update({
+  id: '/_portal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ActivateRoute = ActivateRouteImport.update({
@@ -48,53 +42,24 @@ const ActivateRoute = ActivateRouteImport.update({
   path: '/activate',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PortalRoute = PortalRouteImport.update({
-  id: '/_portal',
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PortalSupportRoute = PortalSupportRouteImport.update({
-  id: '/support',
-  path: '/support',
-  getParentRoute: () => PortalRoute,
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const PortalProgressRoute = PortalProgressRouteImport.update({
-  id: '/progress',
-  path: '/progress',
-  getParentRoute: () => PortalRoute,
-} as any)
-const PortalProfileRoute = PortalProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => PortalRoute,
-} as any)
-const PortalPaymentsRoute = PortalPaymentsRouteImport.update({
-  id: '/payments',
-  path: '/payments',
-  getParentRoute: () => PortalRoute,
-} as any)
-const PortalNotificationsRoute = PortalNotificationsRouteImport.update({
-  id: '/notifications',
-  path: '/notifications',
-  getParentRoute: () => PortalRoute,
-} as any)
-const PortalDocumentsRoute = PortalDocumentsRouteImport.update({
-  id: '/documents',
-  path: '/documents',
-  getParentRoute: () => PortalRoute,
-} as any)
-const PortalDashboardRoute = PortalDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => PortalRoute,
-} as any)
-const PortalCommunityRoute = PortalCommunityRouteImport.update({
-  id: '/community',
-  path: '/community',
+const PortalCalendarRoute = PortalCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
   getParentRoute: () => PortalRoute,
 } as any)
 const PortalCertificatesRoute = PortalCertificatesRouteImport.update({
@@ -102,9 +67,44 @@ const PortalCertificatesRoute = PortalCertificatesRouteImport.update({
   path: '/certificates',
   getParentRoute: () => PortalRoute,
 } as any)
-const PortalCalendarRoute = PortalCalendarRouteImport.update({
-  id: '/calendar',
-  path: '/calendar',
+const PortalCommunityRoute = PortalCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalDashboardRoute = PortalDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalDocumentsRoute = PortalDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalNotificationsRoute = PortalNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalPaymentsRoute = PortalPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalProfileRoute = PortalProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalProgressRoute = PortalProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalSupportRoute = PortalSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
   getParentRoute: () => PortalRoute,
 } as any)
 const PortalTrainingsIndexRoute = PortalTrainingsIndexRouteImport.update({
@@ -249,32 +249,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forgot-password': {
-      id: '/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof ForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/activate': {
-      id: '/activate'
-      path: '/activate'
-      fullPath: '/activate'
-      preLoaderRoute: typeof ActivateRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_portal': {
@@ -284,67 +263,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/activate': {
+      id: '/activate'
+      path: '/activate'
+      fullPath: '/activate'
+      preLoaderRoute: typeof ActivateRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_portal/support': {
-      id: '/_portal/support'
-      path: '/support'
-      fullPath: '/support'
-      preLoaderRoute: typeof PortalSupportRouteImport
-      parentRoute: typeof PortalRoute
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_portal/progress': {
-      id: '/_portal/progress'
-      path: '/progress'
-      fullPath: '/progress'
-      preLoaderRoute: typeof PortalProgressRouteImport
-      parentRoute: typeof PortalRoute
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_portal/profile': {
-      id: '/_portal/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof PortalProfileRouteImport
-      parentRoute: typeof PortalRoute
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_portal/payments': {
-      id: '/_portal/payments'
-      path: '/payments'
-      fullPath: '/payments'
-      preLoaderRoute: typeof PortalPaymentsRouteImport
-      parentRoute: typeof PortalRoute
-    }
-    '/_portal/notifications': {
-      id: '/_portal/notifications'
-      path: '/notifications'
-      fullPath: '/notifications'
-      preLoaderRoute: typeof PortalNotificationsRouteImport
-      parentRoute: typeof PortalRoute
-    }
-    '/_portal/documents': {
-      id: '/_portal/documents'
-      path: '/documents'
-      fullPath: '/documents'
-      preLoaderRoute: typeof PortalDocumentsRouteImport
-      parentRoute: typeof PortalRoute
-    }
-    '/_portal/dashboard': {
-      id: '/_portal/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof PortalDashboardRouteImport
-      parentRoute: typeof PortalRoute
-    }
-    '/_portal/community': {
-      id: '/_portal/community'
-      path: '/community'
-      fullPath: '/community'
-      preLoaderRoute: typeof PortalCommunityRouteImport
+    '/_portal/calendar': {
+      id: '/_portal/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof PortalCalendarRouteImport
       parentRoute: typeof PortalRoute
     }
     '/_portal/certificates': {
@@ -354,11 +305,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalCertificatesRouteImport
       parentRoute: typeof PortalRoute
     }
-    '/_portal/calendar': {
-      id: '/_portal/calendar'
-      path: '/calendar'
-      fullPath: '/calendar'
-      preLoaderRoute: typeof PortalCalendarRouteImport
+    '/_portal/community': {
+      id: '/_portal/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof PortalCommunityRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/dashboard': {
+      id: '/_portal/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof PortalDashboardRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/documents': {
+      id: '/_portal/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof PortalDocumentsRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/notifications': {
+      id: '/_portal/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof PortalNotificationsRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/payments': {
+      id: '/_portal/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof PortalPaymentsRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/profile': {
+      id: '/_portal/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof PortalProfileRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/progress': {
+      id: '/_portal/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof PortalProgressRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/support': {
+      id: '/_portal/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof PortalSupportRouteImport
       parentRoute: typeof PortalRoute
     }
     '/_portal/trainings/': {
