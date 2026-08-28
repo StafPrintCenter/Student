@@ -53,7 +53,7 @@ function Dashboard() {
         eyebrow={`Bonjour, ${data.student.first_name}`}
         title={
           <>
-            Bienvenue dans votre <span className="italic text-primary">atelier</span> d'apprentissage.
+            Bienvenue dans votre atelier d'apprentissage.
           </>
         }
         description="Voici un aperçu de vos formations, de votre progression et de vos prochaines échéances."
