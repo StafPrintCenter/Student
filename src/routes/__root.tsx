@@ -7,8 +7,8 @@ import { AuthProvider } from "../lib/auth";
 import { SITE } from "@/data/site";
 import { NotFoundComponent, ErrorComponent } from "@/components/errors";
 
-const DOCS_TITLE = `Student Portal | ${SITE.name}`;
-const DOCS_DESC = `Portail étudiant sécurisé de ${SITE.name} : inscrivez-vous aux formations, suivez votre progression, payez en ligne et téléchargez vos certificats.`;
+const STUDENT_TITLE = `Student Portal | ${SITE.name}`;
+const STUDENT_DESC = `Portail étudiant sécurisé de ${SITE.name} : inscrivez-vous aux formations, suivez votre progression, payez en ligne et téléchargez vos certificats.`;
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
