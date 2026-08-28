@@ -15,13 +15,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "STAF Print Center — Student Portal" },
-      {
-        name: "description",
-        content:
-          "Secure student portal for STAF Print Center — enroll in trainings, follow your progress, pay online and download your certificates.",
-      },
-      { name: "author", content: "STAF Print Center" },
+      { title: STUDENT_TITLE },
+      { name: "description", content: STUDENT_DESC },
+      { name: "author", content: SITE.name },
       { property: "og:title", content: "STAF Print Center — Student Portal" },
       {
         property: "og:description",
