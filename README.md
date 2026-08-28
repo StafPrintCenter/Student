@@ -1,732 +1,99 @@
-# STAF Learn Hub
+# STAF PRINT CENTER - Plateforme Web (V1)
 
-Build a modern, premium, production-ready Student Portal for STAF PRINT CENTER, a creative studio and training center based in Benin.
+Ce dépôt contient le code source de la plateforme web officielle de **STAF PRINT CENTER** (`stafprint.com`), studio de création, d'impression numérique et de formation basé à Porto-Novo, Bénin - depuis 2019.
 
-The student portal is a secure area where learners can manage their entire training journey, from enrollment to certification.
+> L'empreinte de votre succès.
 
-The portal must be designed as a scalable Learning Management System (LMS) frontend that will later connect to a Laravel REST API.
+---
 
-For now, all data must be retrieved through a mocked API layer (Promise-based functions with simulated latency).
+## 📌 Présentation du projet
 
-1. MAIN GOAL
+La plateforme présente l'activité de STAF PRINT CENTER, valorise ses réalisations et facilite la prise de contact avec les clients, tout en donnant accès à un espace admin, un espace étudiant et des outils dédiés (QR codes, newsletter).
 
-Create a complete student workspace allowing learners to:
+Elle s'articule autour des pages suivantes :
 
- authenticate securely;
+- **Accueil** - Présentation du studio, argumentaire (qualité premium, délais courts, prix accessibles, expertise locale), avis Google, formulaire de contact / demande de devis.
+- **Services** (`/services`) - Catalogue des prestations d'impression, de design graphique et d'identité visuelle, filtrable par catégorie.
+- **Réalisations** (`/projects`) - Portfolio des projets clients, filtrable et paginé.
+- **Formations** (`/trainings`) - Programmes de formation (design, web, numérique) avec pré-inscription.
+- **Blog** (`/articles`) - Contenus métiers et actualités du studio.
+- **FAQs** (`/faqs`) - Questions fréquentes.
+- **Offres d'emploi** (`/careers/offers`) - Offres d'emploi, candidatures et demandes de stage.
+- **Contact** (`/#contact`) - Formulaire de demande de devis avec sélection du service souhaité.
+- **Newsletter** (`/tools/newsletter`) - Inscription à la newsletter.
+- **Mentions légales / Confidentialité / CGV** (`/legal/*`).
 
- manage their personal profile;
+---
 
- enroll in available trainings;
+## 🛠️ Stack technique
 
- pay training fees online;
+- **Frontend :**
+  React + TanStack Router + TanStack Query, décliné sur plusieurs sous-domaines :
+  - `stafprint.com` - site public
+  - `admin.stafprint.com` - back-office (gestion des services, projets, formations, offres, avis clients, bannières/annonces, newsletter)
+  - `student.stafprint.com` - espace étudiant / formations
+  - `go.stafprint.com` - liens courts / QR codes
 
- follow payment status;
+- **Backend :**
+  API REST Laravel 11, PHP 8.4, hébergement mutualisé alwaysdata.
+  Modules principaux : newsletter, avis clients (formulaire dynamique), pré-inscription aux formations, offres d'emploi & candidatures, demandes de stage, annonces/bannières, gestion des QR codes.
 
- monitor learning progress;
+- **Performance & SEO :**
+  - Structure optimisée pour les moteurs de recherche
+  - Metadata Open Graph / Twitter Card
+  - Données structurées Schema.org
+  - Optimisation des ressources statiques (CDN jsDelivr pour les assets)
 
- access training materials;
+- **Intégrations :**
+  - Formulaires de contact et de demande de devis (avec sélection de service)
+  - Intégration WhatsApp pour la communication directe
+  - Réseaux sociaux : Facebook, Instagram, LinkedIn, X
 
- complete lessons;
+---
 
- track attendance;
+## 🎯 Objectifs V1
 
- communicate with administrators;
+- Présenter clairement l'offre STAF PRINT CENTER (print, design, formations)
+- Améliorer la visibilité digitale de l'entreprise
+- Faciliter la génération de prospects via les devis et WhatsApp
+- Valoriser les réalisations, avis clients et l'expertise du studio
+- Centraliser la gestion opérationnelle (back-office admin) et l'espace étudiant
 
- download certificates;
+---
 
- view notifications.
+## 📂 Organisation du projet
 
-The architecture must be modular and production-ready.
-
-2. AUTHENTICATION
-
-Authentication pages:
-
- Login
-
- Forgot password
-
- Reset password
-
- Change password
-
- Invitation acceptance
-
- First account activation
-
-The platform supports two registration modes:
-
-Self registration
-
-A visitor selects a training and submits an enrollment request.
-
-The administrator reviews the request and may accept or reject it.
-
-Once approved:
-
- a student account is created;
-
- an activation email is sent;
-
- the student gains access to the portal.
-
-Invitation
-
-Administrators can directly invite students.
-
-The student receives:
-
- activation link
-
- temporary password
-
- onboarding instructions
-
-3. DASHBOARD
-
-Dashboard overview must display:
-
-Welcome message
-
-Student profile summary
-
-Current trainings
-
-Completed trainings
-
-Upcoming sessions
-
-Attendance percentage
-
-Overall learning progress
-
-Certificates earned
-
-Outstanding balance
-
-Recent payments
-
-Recent notifications
-
-Upcoming deadlines
-
-Quick actions:
-
-Continue learning
-
-Pay remaining balance
-
-Download certificate
-
-View timetable
-
-Contact administration
-
-4. MY TRAININGS
-
-Display every enrolled training.
-
-Each card contains:
-
-Training title
-
-Theme
-
-Level
-
-Duration
-
-Instructor
-
-Enrollment date
-
-Expected completion date
-
-Status
-
-Available places
-
-Maximum seats
-
-Remaining seats
-
-Progress
-
-Completion percentage
-
-Payment status
-
-Certificate status
-
-Possible statuses:
-
-Pending approval
-
-Waiting payment
-
-Confirmed
-
-In progress
-
-Completed
-
-Cancelled
-
-Suspended
-
-Expired
-
-5. TRAINING DETAILS
-
-Each training page displays:
-
-Cover image
-
-Description
-
-Objectives
-
-Prerequisites
-
-Program
-
-Modules
-
-Lessons
-
-Instructor
-
-Duration
-
-Schedule
-
-Location
-
-Price
-
-Maximum seats
-
-Remaining seats
-
-Enrollment deadline
-
-Training status
-
-Student progress
-
-Attendance
-
-Completion statistics
-
-Certificate eligibility
-
-Next session
-
-Resources
-
-Assignments
-
-Downloads
-
-Announcements
-
-FAQ
-
-6. ENROLLMENT
-
-Students may register only if:
-
-Training is enabled
-
-Training is published
-
-Registration deadline not reached
-
-Available seats remain
-
-Maximum capacity not exceeded
-
-Otherwise display appropriate messages:
-
-Registration closed
-
-Training full
-
-Waiting list available
-
-Enrollment pending validation
-
-7. PAYMENTS
-
-Payment dashboard
-
-Training cost
-
-Discount
-
-Scholarship
-
-Registration fee
-
-Amount already paid
-
-Remaining balance
-
-Due date
-
-Payment status
-
-Possible statuses:
-
-Pending
-
-Partial
-
-Paid
-
-Overdue
-
-Cancelled
-
-Refunded
-
-Payment history:
-
-Date
-
-Amount
-
-Method
-
-Reference
-
-Status
-
-Invoice
-
-Receipt
-
-Supported payment methods:
-
-Mobile Money
-
-Card
-
-Bank transfer
-
-Cash (recorded by administrator)
-
-8. LEARNING PROGRESS
-
-Each training contains:
-
-Modules
-
-Lessons
-
-Exercises
-
-Assignments
-
-Quizzes
-
-Projects
-
-Progress tracking:
-
-Overall percentage
-
-Completed lessons
-
-Remaining lessons
-
-Time spent
-
-Estimated remaining time
-
-Success rate
-
-Average score
-
-Quiz results
-
-Assignment grades
-
-Attendance percentage
-
-Progress bar
-
-Completion timeline
-
-9. CERTIFICATES
-
-Students can:
-
-View certificates
-
-Download PDF
-
-Verify certificate number
-
-View issue date
-
-Certificate status:
-
-Not eligible
-
-Eligible
-
-Issued
-
-Downloaded
-
-Revoked
-
-10. CALENDAR
-
-Training schedule
-
-Upcoming lessons
-
-Exams
-
-Assignment deadlines
-
-Live sessions
-
-Administrative appointments
-
-Calendar views:
-
-Month
-
-Week
-
-Day
-
-Agenda
-
-11. NOTIFICATIONS
-
-Notification center
-
-Examples:
-
-Payment received
-
-Payment overdue
-
-Lesson published
-
-Assignment graded
-
-Certificate available
-
-Administrator message
-
-Training updated
-
-Reminder
-
-Unread/read state
-
-Filtering
-
-Search
-
-12. PROFILE
-
-Editable information:
-
-Photo
-
-First name
-
-Last name
-
-Phone
-
-Address
-
-Occupation
-
-Birth date
-
-Biography
-
-Emergency contact
-
-Password management
-
-Account activity
-
-Connected devices
-
-13. DOCUMENTS
-
-Students may access:
-
-Invoices
-
-Receipts
-
-Enrollment documents
-
-Training materials
-
-Certificates
-
-Administrative documents
-
-Downloads must support preview when applicable.
-
-14. SUPPORT
-
-Messaging module
-
-Conversation with administration
-
-Support tickets
-
-Ticket history
-
-Status:
-
-Open
-
-Pending
-
-Resolved
-
-Closed
-
-15. SEARCH
-
-Global search inside the student portal.
-
-Search across:
-
-Trainings
-
-Lessons
-
-Documents
-
-Payments
-
-Certificates
-
-Notifications
-
-16. MOCK API
-
-Structure
-
-api/
-
-student.api.ts
-
-training.api.ts
-
-payment.api.ts
-
-progress.api.ts
-
-certificate.api.ts
-
-notification.api.ts
-
-calendar.api.ts
-
-document.api.ts
-
-support.api.ts
-
-Each service must implement:
-
-Get list
-
-Get details
-
-Create
-
-Update
-
-Delete (where applicable)
-
-Pagination
-
-Filtering
-
-Searching
-
-Sorting
-
-Promise-based requests
-
-Artificial latency using setTimeout
-
-17. UI REQUIREMENTS
-
-Premium SaaS interface
-
-Modern dashboard
-
-Responsive
-
-TailwindCSS
-
-Lucide React
-
-Dark mode
-
-Cards
-
-Tables
-
-Charts
-
-Timeline
-
-Progress bars
-
-Badges
-
-Skeleton loaders
-
-Empty states
-
-Toast notifications
-
-Modal dialogs
-
-Drawer panels
-
-Keyboard accessibility
-
-18. FUTURE LARAVEL API COMPATIBILITY
-
-Every mocked endpoint must mirror the future Laravel REST API.
-
-Example:
-
-GET    /student/dashboard
-
-GET    /student/trainings
-
-GET    /student/trainings/{id}
-
-GET    /student/payments
-
-GET    /student/progress
-
-GET    /student/certificates
-
-GET    /student/notifications
-
-PUT    /student/profile
-
-POST   /student/payments
-
-POST   /student/support
-
-19. DATA MODEL
-
-Every resource must contain:
-
- uuid
-
- created_at
-
- updated_at
-
- deleted_at (Soft Delete)
-
- is_enabled
-
- sort_order (when applicable)
-
-Trainings must additionally contain:
-
- slug
-
- theme
-
- level
-
- duration
-
- duration_hours
-
- price
-
- registration_fee
-
- registration_deadline
-
- start_date
-
- end_date
-
- instructor
-
- location
-
- maximum_students
-
- current_students
-
- remaining_seats
-
- waiting_list_enabled
-
- enrollment_status
-
- published_at
-
-20. BUSINESS RULES
-
-The platform must enforce the following rules:
-
- A student cannot enroll twice in the same training.
-
- A student cannot enroll if the training has reached its maximum number of seats (maximum_students).
-
- The number of remaining seats is calculated automatically as maximum_students - current_students.
-
- If the training is full and the waiting list is enabled, the student may join the waiting list.
-
- Enrollment closes automatically after the registration deadline.
-
- A student cannot access lessons until the enrollment is validated.
-
- A student cannot download the certificate until all required modules are completed and all mandatory payments have been settled.
-
- Learning progress is calculated automatically from completed lessons, quizzes and assignments.
-
- Payment balances are updated automatically after every successful transaction.
-
- Dashboard statistics, progress indicators and completion rates must always be derived from the underlying data rather than hardcoded values.
-
-Ce cahier des charges est suffisamment complet pour servir de base à un véritable portail étudiant professionnel, et il reste parfaitement aligné avec le backend Laravel que tu es en train de construire. Le champ maximum_students (nombre maximal de places) est désormais intégré au modèle métier et influence directement les règles d'inscription, l'affichage des places restantes et la gestion d'une éventuelle liste d'attente.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/66860af7-2a1b-4dbc-a94a-5158023b2152).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
 ```
+/
+├── apps/
+│   ├── web/          # Frontend public (stafprint.com)
+│   ├── admin/         # Back-office (admin.stafprint.com)
+│   └── student/        # Espace étudiant (student.stafprint.com)
+├── api/               # Backend Laravel 11 (REST API)
+├── packages/
+│   └── shared/         # Types, composants et utilitaires partagés (pattern api-frontend-sync)
+└── public/            # Fichiers publics / assets statiques
+```
+
+---
+
+## 🚀 Déploiement
+
+- Site public : https://stafprint.com
+- Back-office : https://admin.stafprint.com
+- Espace étudiant : https://student.stafprint.com
+- Liens courts / QR codes : https://go.stafprint.com
+
+---
+
+## 📍 Informations
+
+**STAF PRINT CENTER**
+Studio de création & impression
+Porto-Novo, Bénin · Depuis 2019
+
+- 📞 +229 01 66 52 36 39
+- 💬 WhatsApp : +229 01 60 30 06 07
+- ✉️ contact@stafprint.com
+
+> L'empreinte de votre succès.
