@@ -18,12 +18,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: STUDENT_TITLE },
       { name: "description", content: STUDENT_DESC },
       { name: "author", content: SITE.name },
-      { property: "og:title", content: "STAF Print Center — Student Portal" },
-      {
-        property: "og:description",
-        content:
-          "Your creative learning workspace: trainings, payments, progress, certificates.",
-      },
+      { property: "og:title", content: STUDENT_TITLE },
+      { property: "og:description", content: STUDENT_DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
