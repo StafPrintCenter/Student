@@ -1,5 +1,6 @@
 export const SITE = {
   name: "STAF PRINT CENTER",
+  tool: "Espace apprenant",
   slogan: "L'empreinte de votre succès",
   activity: "Studio de design et d'impression",
   manager: "Steve Aster Afovo",
