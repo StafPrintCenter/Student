@@ -1,4 +1,4 @@
-// Mock API layer — mirrors future Laravel REST endpoints.
+// Mock API layer - mirrors future Laravel REST endpoints.
 
 import {
   CALENDAR,
@@ -187,7 +187,7 @@ export const learningApi = {
     lesson.completed = true;
     lesson.score = score;
     lesson.instructor_feedback = {
-      comment: "Soumission reçue — en attente d'évaluation du formateur.",
+      comment: "Soumission reçue - en attente d'évaluation du formateur.",
       validated: false,
       at: nowISO(),
     };
@@ -455,19 +455,19 @@ export const dashboardApi = {
         reminders.push({
           enrollment_uuid: e.uuid, training_title: t.title, training_uuid: t.uuid,
           amount_due: e.amount_due, severity: "danger",
-          reason: `Formation terminée depuis ${Math.abs(daysToEnd)} j — solde à régulariser.`,
+          reason: `Formation terminée depuis ${Math.abs(daysToEnd)} j - solde à régulariser.`,
         });
       } else if (daysToEnd <= 15) {
         reminders.push({
           enrollment_uuid: e.uuid, training_title: t.title, training_uuid: t.uuid,
           amount_due: e.amount_due, severity: "warning",
-          reason: `Fin de formation dans ${daysToEnd} j — solde restant à régler.`,
+          reason: `Fin de formation dans ${daysToEnd} j - solde restant à régler.`,
         });
       } else if (e.progress >= 50) {
         reminders.push({
           enrollment_uuid: e.uuid, training_title: t.title, training_uuid: t.uuid,
           amount_due: e.amount_due, severity: "info",
-          reason: `Vous avez atteint ${e.progress}% — pensez à régler le solde.`,
+          reason: `Vous avez atteint ${e.progress}% - pensez à régler le solde.`,
         });
       }
     }
