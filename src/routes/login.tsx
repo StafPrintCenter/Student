@@ -44,9 +44,9 @@ function LoginPage() {
   return (
     <div className="min-h-screen grid md:grid-cols-2 bg-background">
       {/* Left — brand */}
-      <div className="relative hidden md:flex flex-col justify-between p-10 bg-gradient-to-br from-primary/15 via-background to-chart-5/10 border-r border-border">
+      <div className="relative hidden md:flex flex-col justify-between p-10 bg-linear-to-br from-primary/15 via-background to-chart-5/10 border-r border-border">
         <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-primary to-chart-4 text-primary-foreground">
+          <div className="grid h-10 w-10 place-items-center rounded-xl bg-linear-to-br from-primary to-chart-4 text-primary-foreground">
             <Printer className="h-5 w-5" />
           </div>
           <div>
