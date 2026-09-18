@@ -16,9 +16,9 @@ import { notificationApi } from "@/lib/api";
 export const Route = createFileRoute("/_portal/notifications")({
   head: () => ({
     meta: [
-      { title: "Notifications — STAF Student Portal" },
+      { title: "Notifications - STAF Student Portal" },
       { name: "description", content: "Centre de notifications de votre parcours." },
-      { property: "og:title", content: "Notifications — STAF" },
+      { property: "og:title", content: "Notifications - STAF" },
       { property: "og:description", content: "Toutes vos notifications au même endroit." },
     ],
   }),

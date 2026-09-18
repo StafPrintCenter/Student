@@ -43,9 +43,9 @@ import type { PaymentMethod } from "@/lib/api/types";
 export const Route = createFileRoute("/_portal/payments")({
   head: () => ({
     meta: [
-      { title: "Paiements — STAF Student Portal" },
+      { title: "Paiements - STAF Student Portal" },
       { name: "description", content: "Suivi de vos paiements, factures et reçus." },
-      { property: "og:title", content: "Paiements — STAF" },
+      { property: "og:title", content: "Paiements - STAF" },
       { property: "og:description", content: "Factures, reçus et paiements en cours." },
     ],
   }),
@@ -195,7 +195,7 @@ function PayDialog({
         <Button size="sm">Payer</Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader><DialogTitle>Régler — {trainingTitle}</DialogTitle></DialogHeader>
+        <DialogHeader><DialogTitle>Régler - {trainingTitle}</DialogTitle></DialogHeader>
         <div className="space-y-4">
           <div className="space-y-2">
             <Label>Méthode</Label>

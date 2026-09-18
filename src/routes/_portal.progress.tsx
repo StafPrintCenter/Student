@@ -12,9 +12,9 @@ import { progressApi } from "@/lib/api";
 export const Route = createFileRoute("/_portal/progress")({
   head: () => ({
     meta: [
-      { title: "Progression — STAF Student Portal" },
+      { title: "Progression - STAF Student Portal" },
       { name: "description", content: "Suivez votre progression et vos résultats." },
-      { property: "og:title", content: "Progression — STAF" },
+      { property: "og:title", content: "Progression - STAF" },
       { property: "og:description", content: "Progression, quiz, assiduité." },
     ],
   }),
@@ -45,16 +45,16 @@ export const Route = createFileRoute("/_portal/progress")({
                 <CardContent className="space-y-4">
                   <div>
                     <div className="flex justify-between text-sm mb-1"><span>Avancement</span><span className="tabular-nums font-medium">{r.enrollment.progress}%</span></div>
-                    <Progress value={r.enrollment.progress} className="h-2"/>
+                    <Progress value={r.enrollment.progress} className="h-2" />
                   </div>
                   <div>
                     <div className="flex justify-between text-sm mb-1"><span>Assiduité</span><span className="tabular-nums font-medium">{r.enrollment.attendance}%</span></div>
-                    <Progress value={r.enrollment.attendance} className="h-2"/>
+                    <Progress value={r.enrollment.attendance} className="h-2" />
                   </div>
                   <div className="grid grid-cols-3 gap-3 text-sm pt-2 border-t">
                     <div><p className="text-xs text-muted-foreground">Leçons</p><p className="font-medium">{done}/{totalLessons}</p></div>
                     <div><p className="text-xs text-muted-foreground">Restantes</p><p className="font-medium">{totalLessons - done}</p></div>
-                    <div><p className="text-xs text-muted-foreground">Score moyen</p><p className="font-medium">{avg !== null ? `${avg}/100` : "—"}</p></div>
+                    <div><p className="text-xs text-muted-foreground">Score moyen</p><p className="font-medium">{avg !== null ? `${avg}/100` : "-"}</p></div>
                   </div>
                 </CardContent>
               </Card>

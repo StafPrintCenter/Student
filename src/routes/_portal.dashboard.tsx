@@ -30,9 +30,9 @@ import { formatFCFA } from "@/lib/api/utils";
 export const Route = createFileRoute("/_portal/dashboard")({
   head: () => ({
     meta: [
-      { title: "Tableau de bord — STAF Student Portal" },
+      { title: "Tableau de bord - STAF Student Portal" },
       { name: "description", content: "Vue d'ensemble de votre parcours d'apprentissage." },
-      { property: "og:title", content: "Tableau de bord — STAF" },
+      { property: "og:title", content: "Tableau de bord - STAF" },
       { property: "og:description", content: "Progression, paiements, sessions et certificats." },
     ],
   }),
