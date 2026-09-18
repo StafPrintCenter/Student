@@ -26,7 +26,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) setUser(JSON.parse(raw));
-    } catch {}
+    } catch { }
     setReady(true);
   }, []);
 
@@ -41,8 +41,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!email || !password) throw new Error("Identifiants requis");
     const u: AuthUser = {
       email,
-      first_name: "Amina",
-      last_name: "Adjovi",
+      first_name: "Steve Aster",
+      last_name: "AFOVO",
     };
     persist(u);
   };
