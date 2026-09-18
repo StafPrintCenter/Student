@@ -28,7 +28,7 @@ export function ExerciseRunner({ training_uuid, lesson, onFinished }: Props) {
       learningApi.submitExercise({ training_uuid, lesson_uuid: lesson.uuid, answers }),
     onSuccess: (res) => {
       setSubmitted({ score: res.score });
-      toast.success(`Exercice soumis — ${res.score}%`);
+      toast.success(`Exercice soumis - ${res.score}%`);
       qc.invalidateQueries({ queryKey: ["training", training_uuid] });
       qc.invalidateQueries({ queryKey: ["my-enrollments"] });
     },
@@ -56,7 +56,7 @@ export function ExerciseRunner({ training_uuid, lesson, onFinished }: Props) {
       <div className="rounded-lg border border-border bg-muted/30 p-3 text-xs text-muted-foreground flex items-start gap-2">
         <ClipboardList className="h-4 w-4 text-primary mt-0.5" />
         <span>
-          Exercice non chronométré. Répondez à toutes les questions puis soumettez —
+          Exercice non chronométré. Répondez à toutes les questions puis soumettez -
           votre formateur validera votre score et pourra laisser un commentaire.
         </span>
       </div>
@@ -74,7 +74,7 @@ export function ExerciseRunner({ training_uuid, lesson, onFinished }: Props) {
 
       {submitted && (
         <div className="rounded-lg border border-primary/30 bg-primary/5 p-3 text-sm">
-          Score : <strong>{submitted.score}%</strong> — soumission envoyée au formateur.
+          Score : <strong>{submitted.score}%</strong> - soumission envoyée au formateur.
         </div>
       )}
 
