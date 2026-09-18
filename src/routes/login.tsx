@@ -13,7 +13,7 @@ export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
       { title: "Connexion - STAF Student Portal" },
-      { name: "description", content: "Accédez à votre espace apprenant STAF Print Center." },
+      { name: "description", content: `Accédez à votre espace apprenant ${SITE.name}.` },
       { property: "og:title", content: "Connexion - STAF Student Portal" },
       { property: "og:description", content: "Votre espace apprenant sécurisé." },
     ],
@@ -63,7 +63,7 @@ function LoginPage() {
           </p>
         </div>
 
-        <div className="text-xs text-muted-foreground">© {new Date().getFullYear()} STAF Print Center - Tous droits réservés</div>
+        <div className="text-xs text-muted-foreground">© {new Date().getFullYear()} {SITE.name} - Tous droits réservés</div>
       </div>
 
       {/* Right - form */}
