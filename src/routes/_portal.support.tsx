@@ -23,9 +23,9 @@ import type { SupportTicket } from "@/lib/api/types";
 export const Route = createFileRoute("/_portal/support")({
   head: () => ({
     meta: [
-      { title: "Support — STAF Student Portal" },
+      { title: "Support - STAF Student Portal" },
       { name: "description", content: "Contactez l'administration et suivez vos tickets." },
-      { property: "og:title", content: "Support — STAF" },
+      { property: "og:title", content: "Support - STAF" },
       { property: "og:description", content: "Contactez l'administration et suivez vos tickets." },
     ],
   }),

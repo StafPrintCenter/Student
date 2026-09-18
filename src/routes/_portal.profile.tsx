@@ -16,9 +16,9 @@ import type { Student } from "@/lib/api/types";
 export const Route = createFileRoute("/_portal/profile")({
   head: () => ({
     meta: [
-      { title: "Profil — STAF Student Portal" },
+      { title: "Profil - STAF Student Portal" },
       { name: "description", content: "Gérez vos informations personnelles et votre sécurité." },
-      { property: "og:title", content: "Profil — STAF" },
+      { property: "og:title", content: "Profil - STAF" },
       { property: "og:description", content: "Informations personnelles et sécurité." },
     ],
   }),
