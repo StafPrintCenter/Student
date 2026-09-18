@@ -9,9 +9,9 @@ import { Label } from "@/components/ui/label";
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
-      { title: "Réinitialiser le mot de passe — STAF" },
+      { title: "Réinitialiser le mot de passe - STAF" },
       { name: "description", content: "Choisissez un nouveau mot de passe." },
-      { property: "og:title", content: "Réinitialiser le mot de passe — STAF" },
+      { property: "og:title", content: "Réinitialiser le mot de passe - STAF" },
       { property: "og:description", content: "Choisissez un nouveau mot de passe." },
     ],
   }),
