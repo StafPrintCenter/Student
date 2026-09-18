@@ -1,7 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,7 +11,7 @@ export const Route = createFileRoute("/activate")({
   head: () => ({
     meta: [
       { title: "Activer votre compte - STAF" },
-      { name: "description", content: "Activez votre invitation apprenant STAF Print Center." },
+      { name: "description", content: `Activez votre invitation apprenant ${SITE.name}.` },
       { property: "og:title", content: "Activer votre compte - STAF" },
       { property: "og:description", content: "Activez votre invitation." },
     ],
