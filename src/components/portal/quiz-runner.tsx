@@ -52,7 +52,7 @@ export function QuizRunner({ training_uuid, lesson, onFinished }: Props) {
     onSuccess: (res, auto) => {
       setResult({ score: res.attempt.score, best: res.best, auto });
       setPhase("done");
-      toast.success(auto ? "Temps écoulé — quiz envoyé." : `Quiz soumis — ${res.attempt.score}%`);
+      toast.success(auto ? "Temps écoulé - quiz envoyé." : `Quiz soumis - ${res.attempt.score}%`);
       qc.invalidateQueries({ queryKey: ["training", training_uuid] });
       qc.invalidateQueries({ queryKey: ["quiz-attempts", lesson.uuid] });
       qc.invalidateQueries({ queryKey: ["my-enrollments"] });
@@ -120,7 +120,7 @@ export function QuizRunner({ training_uuid, lesson, onFinished }: Props) {
             <li>Durée : {fmtTime(totalTime)}</li>
             <li>Une fois démarré, le compteur ne s'arrête pas.</li>
             <li>Si vous ne finissez pas à temps, le quiz est soumis automatiquement.</li>
-            <li>Vous pouvez repasser le quiz — <strong>la meilleure note est conservée</strong>.</li>
+            <li>Vous pouvez repasser le quiz - <strong>la meilleure note est conservée</strong>.</li>
           </ul>
         </div>
 
@@ -180,7 +180,7 @@ export function QuizRunner({ training_uuid, lesson, onFinished }: Props) {
             index={i}
             question={q}
             selected={answers[i] ?? []}
-            onToggle={() => {}}
+            onToggle={() => { }}
             reveal
           />
         ))}
