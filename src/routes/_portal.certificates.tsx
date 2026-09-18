@@ -107,7 +107,7 @@ function CertificatesPage() {
             <DialogTitle>Certificat</DialogTitle>
           </DialogHeader>
           {preview && (
-            <div className="rounded-xl border-2 border-primary/20 bg-gradient-to-br from-background via-muted/30 to-primary/5 p-8 md:p-10 text-center space-y-5">
+            <div className="rounded-xl border-2 border-primary/20 bg-linear-to-br from-background via-muted/30 to-primary/5 p-8 md:p-10 text-center space-y-5">
               <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-primary/10 text-primary">
                 <Award className="h-8 w-8" />
               </div>
