@@ -54,13 +54,13 @@ export function VideoPlayer({ lesson, onComplete }: Props) {
 
   return (
     <div className="space-y-3">
-      <div className="relative overflow-hidden rounded-xl border border-border bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 aspect-video">
+      <div className="relative overflow-hidden rounded-xl border border-border bg-linear-to-br from-slate-950 via-slate-900 to-slate-800 aspect-video">
         {/* Simulated stage */}
         <div className="absolute inset-0 grid place-items-center text-slate-100">
           <div className="text-center space-y-2">
             <p className="text-[11px] uppercase tracking-[0.24em] text-slate-400">STAF · Vidéo</p>
             <p className="font-display text-2xl">{lesson.title}</p>
-            <p className="text-xs text-slate-400">Simulation de lecture — {fmt(total)}</p>
+            <p className="text-xs text-slate-400">Simulation de lecture - {fmt(total)}</p>
           </div>
         </div>
         {/* Animated pulse */}
