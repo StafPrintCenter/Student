@@ -5,22 +5,16 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useState } from "react";
 import { toast } from "sonner";
-
 import { PageHeader } from "@/components/portal/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CertificateBadge } from "@/components/portal/status-badges";
 import { EmptyState } from "@/components/portal/empty-state";
 import { Input } from "@/components/ui/input";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { certificateApi } from "@/lib/api";
 import type { Certificate } from "@/lib/api/types";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/_portal/certificates")({
   head: () => ({
