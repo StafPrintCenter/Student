@@ -64,7 +64,7 @@ function BrandMark({ collapsed }: { collapsed?: boolean }) {
       </div>
       {!collapsed && (
         <div className="leading-tight">
-          <div className="font-display text-base">import {SITE} from "@/data/site";</div>
+          <div className="font-display text-base">{SITE.name}</div>
           <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             Student Portal
           </div>
