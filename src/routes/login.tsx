@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/lib/auth";
+import logo from "@/assets/logos.json";
 import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/login")({
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/login")({
 function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("amina.adjovi@staf.bj");
+  const [email, setEmail] = useState("steveasterafovo@gmail.com");
   const [password, setPassword] = useState("demo1234");
   const [loading, setLoading] = useState(false);
 
@@ -46,15 +47,7 @@ function LoginPage() {
       {/* Left — brand */}
       <div className="relative hidden md:flex flex-col justify-between p-10 bg-linear-to-br from-primary/15 via-background to-chart-5/10 border-r border-border">
         <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-xl bg-linear-to-br from-primary to-chart-4 text-primary-foreground">
-            <Printer className="h-5 w-5" />
-          </div>
-          <div>
-            <div className="font-display text-lg leading-none">STAF Print Center</div>
-            <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-              Student Portal — Cotonou
-            </div>
-          </div>
+          <img src={logo.dc} alt="Logo SPC" className="h-10 md:h-12 w-auto" />
         </div>
 
         <div className="space-y-4 max-w-md">
