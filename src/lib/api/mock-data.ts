@@ -1,5 +1,6 @@
 import type { CalendarEvent, Certificate, CommunityPost, Enrollment, Instructor, NotificationItem, Payment, QuizQuestion, Student, StudentDocument, SupportTicket, Training, Module, Lesson } from "./types";
 import { daysFromNow, nowISO, uuid } from "./utils";
+import { SITE } from "@/data/site";
 
 const base = () => ({
   uuid: uuid(),
