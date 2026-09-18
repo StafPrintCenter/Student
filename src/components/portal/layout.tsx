@@ -1,6 +1,6 @@
 import { Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { BadgeCheck, Bell, Calendar, CreditCard, FileText, GraduationCap, LayoutDashboard, LifeBuoy, LineChart, LogOut, Menu, Moon, Printer, Search, Sun, User, Users, X } from "lucide-react";
+import { BadgeCheck, Bell, Calendar, CreditCard, FileText, GraduationCap, LayoutDashboard, LifeBuoy, LineChart, LogOut, Menu, Moon, Search, Sun, User, Users } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/lib/auth";
 import { notificationApi, searchApi } from "@/lib/api";
@@ -12,6 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { SITE } from "@/data/site";
+import logo from "@/assets/logos.json";
 
 const NAV = [
   { to: "/dashboard", label: "Tableau de bord", icon: LayoutDashboard },
@@ -59,9 +60,9 @@ function ThemeToggle() {
 function BrandMark({ collapsed }: { collapsed?: boolean }) {
   return (
     <Link to="/dashboard" className="flex items-center gap-2.5 px-2 py-3">
-      <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-linear-to-br from-primary to-chart-4 text-primary-foreground">
-        <Printer className="h-4 w-4" />
-      </div>
+      <span className="flex size-7 shrink-0 items-center justify-center overflow-hidden">
+        <img src={logo.mc} alt="Logo SPC" className="h-7 w-auto object-contain" />
+      </span>
       {!collapsed && (
         <div className="leading-tight">
           <div className="font-display text-base">{SITE.name}</div>
