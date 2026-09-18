@@ -1,19 +1,4 @@
-import type {
-  CalendarEvent,
-  Certificate,
-  CommunityPost,
-  Enrollment,
-  Instructor,
-  NotificationItem,
-  Payment,
-  QuizQuestion,
-  Student,
-  StudentDocument,
-  SupportTicket,
-  Training,
-  Module,
-  Lesson,
-} from "./types";
+import type { CalendarEvent, Certificate, CommunityPost, Enrollment, Instructor, NotificationItem, Payment, QuizQuestion, Student, StudentDocument, SupportTicket, Training, Module, Lesson } from "./types";
 import { daysFromNow, nowISO, uuid } from "./utils";
 
 const base = () => ({
@@ -28,16 +13,15 @@ const base = () => ({
 export const STUDENT: Student = {
   ...base(),
   uuid: "stu-001",
-  first_name: "Amina",
-  last_name: "Adjovi",
-  email: "amina.adjovi@staf.bj",
-  phone: "+229 97 12 34 56",
-  address: "Cotonou, Bénin",
-  occupation: "Graphiste junior",
-  birth_date: "1999-04-12",
-  biography:
-    "Passionnée par la typographie et l'édition, en formation pour devenir directrice artistique.",
-  emergency_contact: "Koffi Adjovi — +229 96 00 11 22",
+  first_name: "Steve Aster",
+  last_name: "AFOVO",
+  email: "steveasterafovo@gmail.com",
+  phone: "+229 01 66 52 36 39",
+  address: "Porto-Novo, Bénin",
+  occupation: "Graphiste senior",
+  birth_date: "1996-02-05",
+  biography: "Passionnée par la typographie et l'édition, en formation pour devenir directrice artistique.",
+  emergency_contact: "Koffi Adjovi — +229 01 43 22 07 00",
   photo_url: "",
 };
 
