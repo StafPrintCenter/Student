@@ -22,8 +22,8 @@ export const STUDENT: Student = {
   occupation: "Graphiste senior",
   birth_date: "1996-02-05",
   biography: "Passionnée par la typographie et l'édition, en formation pour devenir directrice artistique.",
-  emergency_contact: "Koffi Adjovi — +229 01 43 22 07 00",
-  photo_url: "",
+  emergency_contact: "AFOVO Michel - +229 01 43 22 07 00",
+  photo_url: "https://cdn.jsdelivr.net/gh/steveasterafovo/Files/Images/Illustrations/0.%20Chemise.png",
 };
 
 // ---- Instructors ----
@@ -178,7 +178,7 @@ export const TRAININGS: Training[] = [
     ...base(),
     uuid: "tr-graphic-01",
     slug: "design-graphique-fondamentaux",
-    title: "Design Graphique — Fondamentaux",
+    title: "Design Graphique - Fondamentaux",
     theme: "Design",
     level: "Débutant",
     description:
@@ -199,7 +199,7 @@ export const TRAININGS: Training[] = [
     end_date: daysFromNow(12),
     instructor: "Séraphin Houngbédji",
     instructor_profile: INSTRUCTORS.seraphin,
-    location: "STAF Print Center — Cotonou",
+    location: "STAF Print Center - Cotonou",
     maximum_students: 20,
     current_students: 14,
     waiting_list_enabled: true,
@@ -279,7 +279,7 @@ export const TRAININGS: Training[] = [
           completed: false,
         }),
         mk_lesson({
-          title: "Projet — Identité visuelle",
+          title: "Projet - Identité visuelle",
           kind: "project",
           duration_minutes: 240,
           completed: false,
@@ -317,7 +317,7 @@ export const TRAININGS: Training[] = [
     end_date: daysFromNow(10),
     instructor: "Reine Aholou",
     instructor_profile: INSTRUCTORS.reine,
-    location: "STAF Print Center — Cotonou",
+    location: "STAF Print Center - Cotonou",
     maximum_students: 15,
     current_students: 15,
     waiting_list_enabled: true,
@@ -419,7 +419,7 @@ export const TRAININGS: Training[] = [
     end_date: daysFromNow(-20),
     instructor: "Séraphin Houngbédji",
     instructor_profile: INSTRUCTORS.seraphin,
-    location: "STAF Print Center — Cotonou",
+    location: "STAF Print Center - Cotonou",
     maximum_students: 12,
     current_students: 12,
     waiting_list_enabled: false,
@@ -537,7 +537,7 @@ export const CERTIFICATES: Certificate[] = [
   },
   {
     ...base(), uuid: "cert-02", training_uuid: "tr-graphic-01",
-    training_title: "Design Graphique — Fondamentaux",
+    training_title: "Design Graphique - Fondamentaux",
     number: "", issued_at: null, status: "not_eligible",
   },
 ];
@@ -573,17 +573,17 @@ export const NOTIFICATIONS: NotificationItem[] = [
 // ---- Calendar ----
 export const CALENDAR: CalendarEvent[] = [
   { ...base(), uuid: "ev-01", title: "Live : Hiérarchie & pairage", start: daysFromNow(2), end: daysFromNow(2), kind: "live", training_uuid: "tr-graphic-01", location: "Studio A" },
-  { ...base(), uuid: "ev-02", title: "Remise projet — Identité visuelle", start: daysFromNow(9), end: daysFromNow(9), kind: "assignment", training_uuid: "tr-graphic-01" },
+  { ...base(), uuid: "ev-02", title: "Remise projet - Identité visuelle", start: daysFromNow(9), end: daysFromNow(9), kind: "assignment", training_uuid: "tr-graphic-01" },
   { ...base(), uuid: "ev-03", title: "Examen colorimétrie", start: daysFromNow(4), end: daysFromNow(4), kind: "exam", training_uuid: "tr-print-02", location: "Salle B" },
   { ...base(), uuid: "ev-04", title: "Rendez-vous administratif", start: daysFromNow(6), end: daysFromNow(6), kind: "appointment", location: "Accueil" },
 ];
 
 // ---- Documents ----
 export const DOCUMENTS: StudentDocument[] = [
-  { ...base(), uuid: "doc-01", name: "Facture — Design Graphique", kind: "invoice", training_uuid: "tr-graphic-01", size_kb: 128, url: "#" },
+  { ...base(), uuid: "doc-01", name: "Facture - Design Graphique", kind: "invoice", training_uuid: "tr-graphic-01", size_kb: 128, url: "#" },
   { ...base(), uuid: "doc-02", name: "Reçu MTN #88291122", kind: "receipt", training_uuid: "tr-graphic-01", size_kb: 42, url: "#" },
-  { ...base(), uuid: "doc-03", name: "Support de cours — Typographie", kind: "material", training_uuid: "tr-graphic-01", size_kb: 3120, url: "#" },
-  { ...base(), uuid: "doc-04", name: "Certificat — Branding", kind: "certificate", training_uuid: "tr-branding-04", size_kb: 512, url: "#" },
+  { ...base(), uuid: "doc-03", name: "Support de cours - Typographie", kind: "material", training_uuid: "tr-graphic-01", size_kb: 3120, url: "#" },
+  { ...base(), uuid: "doc-04", name: "Certificat - Branding", kind: "certificate", training_uuid: "tr-branding-04", size_kb: 512, url: "#" },
   { ...base(), uuid: "doc-05", name: "Règlement intérieur", kind: "admin", size_kb: 220, url: "#" },
 ];
 
