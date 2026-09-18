@@ -31,9 +31,9 @@ import { formatFCFA } from "@/lib/api/utils";
 export const Route = createFileRoute("/_portal/trainings/")({
   head: () => ({
     meta: [
-      { title: "Mes formations — STAF Student Portal" },
+      { title: "Mes formations - STAF Student Portal" },
       { name: "description", content: "Toutes vos formations et le catalogue disponible." },
-      { property: "og:title", content: "Mes formations — STAF" },
+      { property: "og:title", content: "Mes formations - STAF" },
       { property: "og:description", content: "Vos formations et le catalogue." },
     ],
   }),
@@ -72,7 +72,7 @@ function MyEnrollments() {
     queryFn: trainingApi.myEnrollments,
   });
 
-  if (isLoading) return <div className="grid gap-4 md:grid-cols-2">{Array.from({length:4}).map((_,i)=><Skeleton key={i} className="h-52"/>)}</div>;
+  if (isLoading) return <div className="grid gap-4 md:grid-cols-2">{Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-52" />)}</div>;
   if (!data || data.length === 0)
     return (
       <EmptyState
@@ -169,7 +169,7 @@ function Catalog() {
       />
       {isLoading ? (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {Array.from({length:6}).map((_,i)=><Skeleton key={i} className="h-64"/>)}
+          {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-64" />)}
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -181,10 +181,10 @@ function Catalog() {
             const cta = already
               ? "Déjà inscrit"
               : deadlinePassed
-              ? "Inscriptions fermées"
-              : remaining <= 0
-              ? "Liste d'attente"
-              : "S'inscrire";
+                ? "Inscriptions fermées"
+                : remaining <= 0
+                  ? "Liste d'attente"
+                  : "S'inscrire";
             return (
               <Card key={t.uuid} className="overflow-hidden flex flex-col">
                 <div className="h-24" style={{ background: `linear-gradient(135deg, ${t.cover_color}, color-mix(in oklab, ${t.cover_color} 40%, transparent))` }} />
