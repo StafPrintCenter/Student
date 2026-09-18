@@ -45,7 +45,7 @@ function CertificatesPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader eyebrow="Reconnaissance" title="Certificats" description=`Vos diplômes délivrés par ${SITE.name}.` />
+      <PageHeader eyebrow="Reconnaissance" title="Certificats" description={`Vos diplômes délivrés par ${SITE.name}.`} />
       <div className="grid gap-4 md:grid-cols-2">
         {(data ?? []).map((c) => {
           const canOpen = c.status === "issued" || c.status === "downloaded";
