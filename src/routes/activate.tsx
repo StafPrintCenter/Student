@@ -6,13 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/lib/auth";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/activate")({
   head: () => ({
     meta: [
-      { title: "Activer votre compte — STAF" },
+      { title: "Activer votre compte - STAF" },
       { name: "description", content: "Activez votre invitation apprenant STAF Print Center." },
-      { property: "og:title", content: "Activer votre compte — STAF" },
+      { property: "og:title", content: "Activer votre compte - STAF" },
       { property: "og:description", content: "Activez votre invitation." },
     ],
   }),
