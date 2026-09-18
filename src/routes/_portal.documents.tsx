@@ -33,9 +33,9 @@ const KIND_ICON: Record<StudentDocument["kind"], any> = {
 export const Route = createFileRoute("/_portal/documents")({
   head: () => ({
     meta: [
-      { title: "Documents — STAF Student Portal" },
+      { title: "Documents - STAF Student Portal" },
       { name: "description", content: "Factures, reçus, supports de cours et certificats." },
-      { property: "og:title", content: "Documents — STAF" },
+      { property: "og:title", content: "Documents - STAF" },
       { property: "og:description", content: "Tous vos documents disponibles au téléchargement." },
     ],
   }),
@@ -74,7 +74,7 @@ export const Route = createFileRoute("/_portal/documents")({
                     <p className="text-sm font-medium truncate">{d.name}</p>
                     <p className="text-xs text-muted-foreground">{KIND_LABEL[d.kind]} · {(d.size_kb / 1024).toFixed(2)} Mo</p>
                   </div>
-                  <Button size="sm" variant="ghost"><Download className="h-4 w-4 mr-1"/>Télécharger</Button>
+                  <Button size="sm" variant="ghost"><Download className="h-4 w-4 mr-1" />Télécharger</Button>
                 </div>
               );
             })}

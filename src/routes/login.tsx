@@ -12,9 +12,9 @@ import { SITE } from "@/data/site";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Connexion — STAF Student Portal" },
+      { title: "Connexion - STAF Student Portal" },
       { name: "description", content: "Accédez à votre espace apprenant STAF Print Center." },
-      { property: "og:title", content: "Connexion — STAF Student Portal" },
+      { property: "og:title", content: "Connexion - STAF Student Portal" },
       { property: "og:description", content: "Votre espace apprenant sécurisé." },
     ],
   }),
@@ -44,7 +44,7 @@ function LoginPage() {
 
   return (
     <div className="min-h-screen grid md:grid-cols-2 bg-background">
-      {/* Left — brand */}
+      {/* Left - brand */}
       <div className="relative hidden md:flex flex-col justify-between p-10 bg-linear-to-br from-primary/15 via-background to-chart-5/10 border-r border-border">
         <div className="flex items-center gap-3">
           <img src={logo.dc} alt="Logo SPC" className="h-10 md:h-12 w-auto" />
@@ -59,14 +59,14 @@ function LoginPage() {
           </h1>
           <p className="text-sm text-muted-foreground">
             Inscrivez-vous à nos formations, suivez votre progression, gérez vos paiements et
-            téléchargez vos certificats — depuis un espace unique, pensé pour vous.
+            téléchargez vos certificats - depuis un espace unique, pensé pour vous.
           </p>
         </div>
 
-        <div className="text-xs text-muted-foreground">© {new Date().getFullYear()} STAF Print Center — Tous droits réservés</div>
+        <div className="text-xs text-muted-foreground">© {new Date().getFullYear()} STAF Print Center - Tous droits réservés</div>
       </div>
 
-      {/* Right — form */}
+      {/* Right - form */}
       <div className="flex items-center justify-center p-6 md:p-10">
         <div className="w-full max-w-sm">
           <div className="mb-8">

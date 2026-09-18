@@ -9,9 +9,9 @@ import { Label } from "@/components/ui/label";
 export const Route = createFileRoute("/forgot-password")({
   head: () => ({
     meta: [
-      { title: "Mot de passe oublié — STAF Student Portal" },
+      { title: "Mot de passe oublié - STAF Student Portal" },
       { name: "description", content: "Réinitialisez votre mot de passe apprenant." },
-      { property: "og:title", content: "Mot de passe oublié — STAF" },
+      { property: "og:title", content: "Mot de passe oublié - STAF" },
       { property: "og:description", content: "Réinitialisez votre mot de passe." },
     ],
   }),

@@ -57,9 +57,9 @@ import { QuizRunner } from "@/components/portal/quiz-runner";
 export const Route = createFileRoute("/_portal/trainings/$id")({
   head: () => ({
     meta: [
-      { title: "Formation — STAF Student Portal" },
+      { title: "Formation - STAF Student Portal" },
       { name: "description", content: "Détail de la formation, programme et progression." },
-      { property: "og:title", content: "Formation — STAF" },
+      { property: "og:title", content: "Formation - STAF" },
       { property: "og:description", content: "Programme, modules et progression." },
     ],
   }),
@@ -132,7 +132,7 @@ function TrainingDetail() {
         <div className="lg:col-span-2 space-y-6">
           {/* Objectives */}
           <Card>
-            <CardHeader><CardTitle className="text-base flex items-center gap-2"><Target className="h-4 w-4 text-primary"/>Objectifs pédagogiques</CardTitle></CardHeader>
+            <CardHeader><CardTitle className="text-base flex items-center gap-2"><Target className="h-4 w-4 text-primary" />Objectifs pédagogiques</CardTitle></CardHeader>
             <CardContent>
               <ul className="grid gap-2 sm:grid-cols-2">
                 {training.objectives.map((o, i) => (
@@ -145,7 +145,7 @@ function TrainingDetail() {
             </CardContent>
           </Card>
 
-          {/* Program — always visible outline; content gated */}
+          {/* Program - always visible outline; content gated */}
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-base flex items-center gap-2">
@@ -399,9 +399,9 @@ function LessonDialog({
           </div>
           <DialogTitle>{lesson.title}</DialogTitle>
           <DialogDescription>
-            {lesson.kind === "video" && "Simulation de lecture vidéo — la leçon est marquée complétée à la fin."}
+            {lesson.kind === "video" && "Simulation de lecture vidéo - la leçon est marquée complétée à la fin."}
             {lesson.kind === "reading" && "Support de lecture pour cette leçon."}
-            {lesson.kind === "quiz" && "Quiz chronométré — la meilleure note est conservée."}
+            {lesson.kind === "quiz" && "Quiz chronométré - la meilleure note est conservée."}
             {lesson.kind === "exercise" && "Exercice non chronométré, évalué par votre formateur."}
             {(lesson.kind === "assignment" || lesson.kind === "project") && "Livrez votre travail à votre formateur."}
           </DialogDescription>
