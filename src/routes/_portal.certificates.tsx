@@ -19,9 +19,9 @@ import { SITE } from "@/data/site";
 export const Route = createFileRoute("/_portal/certificates")({
   head: () => ({
     meta: [
-      { title: "Certificats — STAF Student Portal" },
+      { title: "Certificats - STAF Student Portal" },
       { name: "description", content: "Vos certificats obtenus et vérification en ligne." },
-      { property: "og:title", content: "Certificats — STAF" },
+      { property: "og:title", content: "Certificats - STAF" },
       { property: "og:description", content: "Téléchargez et vérifiez vos certificats." },
     ],
   }),
@@ -38,7 +38,7 @@ function CertificatesPage() {
     const r = await certificateApi.verify(verify);
     setResult(
       r
-        ? `Valide : ${r.training_title} — délivré le ${format(new Date(r.issued_at!), "d MMM yyyy", { locale: fr })}`
+        ? `Valide : ${r.training_title} - délivré le ${format(new Date(r.issued_at!), "d MMM yyyy", { locale: fr })}`
         : "Certificat introuvable.",
     );
   };
@@ -107,7 +107,7 @@ function CertificatesPage() {
               </div>
               <div className="space-y-1">
                 <p className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-                  STAF Print Center — Cotonou
+                  STAF Print Center - Cotonou
                 </p>
                 <h2 className="font-display text-2xl md:text-3xl">Certificat de réussite</h2>
               </div>

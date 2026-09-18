@@ -23,9 +23,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_portal/community")({
   head: () => ({
     meta: [
-      { title: "Communauté — STAF Student Portal" },
+      { title: "Communauté - STAF Student Portal" },
       { name: "description", content: "Échangez avec les apprenants et les formateurs STAF." },
-      { property: "og:title", content: "Communauté — STAF" },
+      { property: "og:title", content: "Communauté - STAF" },
       { property: "og:description", content: "Discussions, entraide et annonces des formateurs." },
     ],
   }),
