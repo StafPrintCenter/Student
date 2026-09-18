@@ -45,7 +45,7 @@ function CertificatesPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader eyebrow="Reconnaissance" title="Certificats" description="Vos diplômes délivrés par STAF Print Center." />
+      <PageHeader eyebrow="Reconnaissance" title="Certificats" description=`Vos diplômes délivrés par ${SITE.name}.` />
       <div className="grid gap-4 md:grid-cols-2">
         {(data ?? []).map((c) => {
           const canOpen = c.status === "issued" || c.status === "downloaded";
@@ -107,7 +107,7 @@ function CertificatesPage() {
               </div>
               <div className="space-y-1">
                 <p className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-                  STAF Print Center - Cotonou
+                  {SITE.name} - Cotonou
                 </p>
                 <h2 className="font-display text-2xl md:text-3xl">Certificat de réussite</h2>
               </div>
