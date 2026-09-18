@@ -1,47 +1,17 @@
 import { Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import {
-  BadgeCheck,
-  Bell,
-  Calendar,
-  CreditCard,
-  FileText,
-  GraduationCap,
-  LayoutDashboard,
-  LifeBuoy,
-  LineChart,
-  LogOut,
-  Menu,
-  Moon,
-  Printer,
-  Search,
-  Sun,
-  User,
-  Users,
-  X,
-} from "lucide-react";
+import { BadgeCheck, Bell, Calendar, CreditCard, FileText, GraduationCap, LayoutDashboard, LifeBuoy, LineChart, LogOut, Menu, Moon, Printer, Search, Sun, User, Users, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-
 import { useAuth } from "@/lib/auth";
 import { notificationApi, searchApi } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Badge } from "@/components/ui/badge";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { SITE } from "@/data/site";
 
 const NAV = [
   { to: "/dashboard", label: "Tableau de bord", icon: LayoutDashboard },
@@ -89,12 +59,12 @@ function ThemeToggle() {
 function BrandMark({ collapsed }: { collapsed?: boolean }) {
   return (
     <Link to="/dashboard" className="flex items-center gap-2.5 px-2 py-3">
-      <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-primary to-chart-4 text-primary-foreground">
+      <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-linear-to-br from-primary to-chart-4 text-primary-foreground">
         <Printer className="h-4 w-4" />
       </div>
       {!collapsed && (
         <div className="leading-tight">
-          <div className="font-display text-base">STAF Print</div>
+          <div className="font-display text-base">import {SITE} from "@/data/site";</div>
           <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             Student Portal
           </div>
@@ -183,7 +153,7 @@ function GlobalSearch() {
       </PopoverTrigger>
       <PopoverContent
         align="start"
-        className="w-[440px] p-0"
+        className="w-110 p-0"
         onOpenAutoFocus={(e) => e.preventDefault()}
         onInteractOutside={() => close()}
         onEscapeKeyDown={() => close()}
