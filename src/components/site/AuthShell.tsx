@@ -43,7 +43,7 @@ export function useAuthShellContent(content: AuthShellContent) {
 }
 
 /**
- * Le shell visuel formateur : colonne hero à gauche (thème "espace formateur"), formulaire à droite. title/subtitle/footer sont lus depuis le contexte ; children = <Outlet/>.
+ * Le shell visuel student : colonne hero à gauche (thème "espace étudiant"), formulaire à droite. title/subtitle/footer sont lus depuis le contexte ; children = <Outlet/>.
  */
 export function AuthShell({ children }: { children: ReactNode }) {
   const ctx = useContext(AuthShellContext);
