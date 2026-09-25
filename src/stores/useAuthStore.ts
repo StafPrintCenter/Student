@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
-import type { APIStudentUser, APIStudentLoginResponse, StudentInviteVerifyResponse, StudentRegisterPayload } from "@/data/auth";
+import type { APIStudentUser, APIStudentLoginResponse, StudentInviteVerifyResponse } from "@/data/auth";
 
 export class StudentAuthApiError extends Error { }
 
