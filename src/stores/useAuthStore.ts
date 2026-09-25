@@ -86,7 +86,7 @@ export async function acceptStudentInvite(params: {
 }
 
 /**
- * Hook pour récupérer le formateur actuellement connecté
+ * Hook pour récupérer l'étudiant actuellement connecté
  */
 export function useCurrentStudent() {
   const { data: student, isLoading, error } = useQuery({
