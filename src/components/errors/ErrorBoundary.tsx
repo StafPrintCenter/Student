@@ -28,7 +28,7 @@ export function ErrorComponent({ error, reset }: { error: Error; reset: () => vo
                 Une erreur est survenue
               </h1>
               <p className="text-sm text-muted-foreground mt-0.5">
-                Le rendu de cette page du backoffice a rencontré un obstacle technique.
+                Le rendu de cette page de l'apprenant a rencontré un obstacle technique.
               </p>
             </div>
           </div>
