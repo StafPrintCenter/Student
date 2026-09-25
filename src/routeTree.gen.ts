@@ -13,8 +13,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PortalRouteImport } from './routes/_portal'
 import { Route as ActivateRouteImport } from './routes/activate'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as LoginRouteImport } from './routes/login'
+import { Route as LoginOldRouteImport } from './routes/login-old'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthInviteRouteImport } from './routes/_auth/invite'
+import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as PortalCalendarRouteImport } from './routes/_portal.calendar'
 import { Route as PortalCertificatesRouteImport } from './routes/_portal.certificates'
 import { Route as PortalCommunityRouteImport } from './routes/_portal.community'
@@ -47,14 +49,24 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
+const LoginOldRoute = LoginOldRouteImport.update({
+  id: '/login-old',
+  path: '/login-old',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthInviteRoute = AuthInviteRouteImport.update({
+  id: '/_auth/invite',
+  path: '/invite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/_auth/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortalCalendarRoute = PortalCalendarRouteImport.update({
@@ -122,8 +134,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
+  '/login-old': typeof LoginOldRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/invite': typeof AuthInviteRoute
+  '/login': typeof AuthLoginRoute
   '/calendar': typeof PortalCalendarRoute
   '/certificates': typeof PortalCertificatesRoute
   '/community': typeof PortalCommunityRoute
@@ -141,8 +155,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
+  '/login-old': typeof LoginOldRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/invite': typeof AuthInviteRoute
+  '/login': typeof AuthLoginRoute
   '/calendar': typeof PortalCalendarRoute
   '/certificates': typeof PortalCertificatesRoute
   '/community': typeof PortalCommunityRoute
@@ -162,8 +178,10 @@ export interface FileRoutesById {
   '/_portal': typeof PortalRouteWithChildren
   '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
+  '/login-old': typeof LoginOldRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_auth/invite': typeof AuthInviteRoute
+  '/_auth/login': typeof AuthLoginRoute
   '/_portal/calendar': typeof PortalCalendarRoute
   '/_portal/certificates': typeof PortalCertificatesRoute
   '/_portal/community': typeof PortalCommunityRoute
@@ -183,8 +201,10 @@ export interface FileRouteTypes {
     | '/'
     | '/activate'
     | '/forgot-password'
-    | '/login'
+    | '/login-old'
     | '/reset-password'
+    | '/invite'
+    | '/login'
     | '/calendar'
     | '/certificates'
     | '/community'
@@ -202,8 +222,10 @@ export interface FileRouteTypes {
     | '/'
     | '/activate'
     | '/forgot-password'
-    | '/login'
+    | '/login-old'
     | '/reset-password'
+    | '/invite'
+    | '/login'
     | '/calendar'
     | '/certificates'
     | '/community'
@@ -222,8 +244,10 @@ export interface FileRouteTypes {
     | '/_portal'
     | '/activate'
     | '/forgot-password'
-    | '/login'
+    | '/login-old'
     | '/reset-password'
+    | '/_auth/invite'
+    | '/_auth/login'
     | '/_portal/calendar'
     | '/_portal/certificates'
     | '/_portal/community'
@@ -243,8 +267,10 @@ export interface RootRouteChildren {
   PortalRoute: typeof PortalRouteWithChildren
   ActivateRoute: typeof ActivateRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
-  LoginRoute: typeof LoginRoute
+  LoginOldRoute: typeof LoginOldRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  AuthInviteRoute: typeof AuthInviteRoute
+  AuthLoginRoute: typeof AuthLoginRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -277,11 +303,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
+    '/login-old': {
+      id: '/login-old'
+      path: '/login-old'
+      fullPath: '/login-old'
+      preLoaderRoute: typeof LoginOldRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -289,6 +315,20 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/invite': {
+      id: '/_auth/invite'
+      path: '/invite'
+      fullPath: '/invite'
+      preLoaderRoute: typeof AuthInviteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/login': {
+      id: '/_auth/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_portal/calendar': {
@@ -416,8 +456,10 @@ const rootRouteChildren: RootRouteChildren = {
   PortalRoute: PortalRouteWithChildren,
   ActivateRoute: ActivateRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
-  LoginRoute: LoginRoute,
+  LoginOldRoute: LoginOldRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  AuthInviteRoute: AuthInviteRoute,
+  AuthLoginRoute: AuthLoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
