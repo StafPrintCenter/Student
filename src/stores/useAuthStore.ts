@@ -4,34 +4,6 @@ import type { APIStudentUser, APIStudentLoginResponse, StudentInviteVerifyRespon
 
 export class StudentAuthApiError extends Error { }
 
-export async function registerStudent(
-  payload: StudentRegisterPayload
-): Promise<APIStudentUser> {
-  const fd = new FormData();
-  fd.append("first_name", payload.firstName);
-  fd.append("last_name", payload.lastName);
-  fd.append("email", payload.email);
-  fd.append("password", payload.password);
-  if (payload.bio) {
-    fd.append("bio", payload.bio);
-  }
-
-  const response = await studentFetch(`/api/student/auth/register`, {
-    method: "POST",
-    body: fd,
-  });
-
-  const body = await response.json().catch(() => null);
-
-  if (!response.ok) {
-    throw new StudentAuthApiError(
-      body?.message || "Impossible de créer le compte. Vérifiez vos informations."
-    );
-  }
-
-  return body.data as APIStudentUser;
-}
-
 export async function loginStudent(email: string, password: string): Promise<APIStudentLoginResponse> {
   const formData = new FormData();
   formData.append("email", email);
