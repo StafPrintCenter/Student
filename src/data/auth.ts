@@ -1,51 +1,6 @@
-export type StudentRegistrationSource = "self_registered" | "invited" | string;
-
-export type StudentTrainingAssignment = {
-  assignmentId: string;
-  trainingId: string;
-  trainingTitle: string | null;
-  trainingStatus: string | null;
-  role: "lead" | "assistant" | string;
-  assignedAt: string | null;
-};
-
-
 /**
- * Type aligné sur inscription et connexion
- */
-export interface StudentRegisterPayload {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  bio?: string;
-}
-export interface StudentAuthUser {
-  id: string;
-  firstName: string;
-  lastName: string;
-  name: string;
-  email: string;
-  registrationSource: string | null;
-  photo: string | null;
-  bio: string | null;
-  isActive: boolean;
-  isBlocked: boolean;
-  isPending: boolean;
-  needsApproval: boolean;
-  blockedAt: string | null;
-  blockedReason: string | null;
-  invitedBy: string | null;
-  invitedAt: string | null;
-  acceptedAt: string | null;
-  approvedBy: string | null;
-  approvedAt: string | null;
-  trainings?: StudentTrainingAssignment[];
-  createdAt: string;
-}
-
-/**
- * Type aligné sur StudentResource
+ * Type aligné sur la réponse de l'API student (StudentResource)
+ * et /auth/me (racine directe)
  */
 export type APIStudentUser = {
   id: string;
