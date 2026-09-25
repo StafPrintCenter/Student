@@ -10,12 +10,12 @@ export function NotFoundComponent() {
           <div className="absolute inset-0 rounded-3xl bg-accent/15 rotate-6" />
           <div className="absolute inset-0 rounded-3xl bg-secondary -rotate-6" />
           <div className="relative rounded-3xl bg-card border border-border w-20 h-20 flex items-center justify-center shadow-soft">
-            <GraduationCap className="h-10 w-10 text-accent" strokeWidth={1.5} />
+            <GraduationCap className="h-10 w-10 text-primary" strokeWidth={1.5} />
           </div>
         </div>
 
         <h1 className="text-8xl font-bold tracking-tight text-foreground select-none">
-          4<span className="text-accent">0</span>4
+          4<span className="text-primary">0</span>4
         </h1>
 
         <h2 className="mt-4 text-2xl font-semibold text-foreground">
