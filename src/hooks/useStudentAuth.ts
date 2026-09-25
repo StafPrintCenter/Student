@@ -1,66 +1,57 @@
 import { useEffect, useState, useCallback } from "react";
-import { loginInstructor, fetchInstructorMe, logoutInstructor, verifyInstructorInvite, acceptInstructorInvite, registerInstructor, InstructorAuthApiError } from "@/stores/useAuthStore";
-import type { APIInstructorCategory, InstructorInviteVerifyResponse, InstructorTrainingAssignment, InstructorRegisterPayload } from "@/data/auth";
+import { loginStudent, fetchStudentMe, logoutStudent, verifyStudentInvite, acceptStudentInvite, StudentAuthApiError } from "@/stores/useAuthStore";
+import type { StudentInviteVerifyResponse } from "@/data/auth";
 
-export interface InstructorAuthUser {
+export interface StudentAuthUser {
   id: string;
   firstName: string;
   lastName: string;
   name: string;
+  fullname: string;
   email: string;
-  registrationSource: string | null;
+  phone: string | null;
+  birthDate: string | null;
+  address: string | null;
+  occupation: string | null;
   photo: string | null;
   bio: string | null;
   isActive: boolean;
   isBlocked: boolean;
-  isPending: boolean;
-  needsApproval: boolean;
-  categories?: APIInstructorCategory[];
   blockedAt: string | null;
   blockedReason: string | null;
-  invitedBy: string | null;
-  invitedAt: string | null;
-  acceptedAt: string | null;
-  approvedBy: string | null;
-  approvedAt: string | null;
-  trainings?: InstructorTrainingAssignment[];
   createdAt: string;
+  updatedAt: string;
 }
 
-function toInstructorAuthUser(rawInstructor: any): InstructorAuthUser {
-  const instructor = rawInstructor?.data ?? rawInstructor?.instructor ?? rawInstructor ?? {};
-  const firstName = instructor.firstName ?? instructor.first_name ?? "";
-  const lastName = instructor.lastName ?? instructor.last_name ?? "";
-  const fullName = instructor.name ?? instructor.fullname ?? (`${firstName} ${lastName}`.trim() || "Formateur");
+function toStudentAuthUser(rawStudent: any): StudentAuthUser {
+  const student = rawStudent?.data ?? rawStudent?.student ?? rawStudent ?? {};
+  const firstName = student.firstName ?? student.first_name ?? "";
+  const lastName = student.lastName ?? student.last_name ?? "";
+  const fullName = (student.fullname ?? student.name ?? `${firstName} ${lastName}`.trim()) || "Étudiant";
 
   return {
-    id: instructor.id ?? "",
+    id: student.id ?? "",
     firstName: firstName,
     lastName: lastName,
     name: fullName,
-    email: instructor.email ?? "",
-    registrationSource: instructor.registrationSource ?? instructor.registration_source ?? null,
-    photo: instructor.photo ?? null,
-    bio: instructor.bio ?? null,
-    isActive: instructor.isActive ?? instructor.is_active ?? true,
-    isBlocked: instructor.isBlocked ?? instructor.is_blocked ?? false,
-    isPending: instructor.isPending ?? instructor.is_pending ?? false,
-    needsApproval: instructor.needsApproval ?? instructor.needs_approval ?? false,
-    categories: instructor.categories,
-    blockedAt: instructor.blockedAt ?? instructor.blocked_at ?? null,
-    blockedReason: instructor.blockedReason ?? instructor.blocked_reason ?? null,
-    invitedBy: instructor.invitedBy ?? instructor.invited_by ?? null,
-    invitedAt: instructor.invitedAt ?? instructor.invited_at ?? null,
-    acceptedAt: instructor.acceptedAt ?? instructor.accepted_at ?? null,
-    approvedBy: instructor.approvedBy ?? instructor.approved_by ?? null,
-    approvedAt: instructor.approvedAt ?? instructor.approved_at ?? null,
-    trainings: instructor.trainings,
-    createdAt: instructor.createdAt ?? instructor.created_at ?? "",
+    fullname: fullName,
+    email: student.email ?? "",
+    phone: student.phone ?? null,
+    birthDate: student.birthDate ?? student.birth_date ?? null,
+    address: student.address ?? null,
+    occupation: student.occupation ?? null,
+    photo: student.photo ?? null,
+    bio: student.bio ?? null,
+    isActive: student.isActive ?? student.is_active ?? true,
+    isBlocked: student.isBlocked ?? student.is_blocked ?? false,
+    blockedAt: student.blockedAt ?? student.blocked_at ?? null,
+    blockedReason: student.blockedReason ?? student.blocked_reason ?? null,
+    createdAt: student.createdAt ?? student.created_at ?? "",
+    updatedAt: student.updatedAt ?? student.updated_at ?? "",
   };
 }
 
-// État partagé en dehors du hook
-let sharedUser: InstructorAuthUser | null = null;
+let sharedUser: StudentAuthUser | null = null;
 let sharedReady = false;
 const listeners = new Set<() => void>();
 
@@ -70,8 +61,8 @@ function notify() {
 
 async function bootstrap() {
   try {
-    const instructor = await fetchInstructorMe();
-    sharedUser = instructor ? toInstructorAuthUser(instructor) : null;
+    const student = await fetchStudentMe();
+    sharedUser = student ? toStudentAuthUser(student) : null;
   } catch {
     sharedUser = null;
   } finally {
@@ -82,7 +73,7 @@ async function bootstrap() {
 
 let bootstrapped = false;
 
-export function useInstructorAuth() {
+export function useStudentAuth() {
   const [, forceRender] = useState(0);
 
   useEffect(() => {
@@ -99,55 +90,38 @@ export function useInstructorAuth() {
     };
   }, []);
 
-  const register = useCallback(
-    async (payload: InstructorRegisterPayload): Promise<InstructorAuthUser> => {
-      const instructor = await registerInstructor(payload);
-
-      return toInstructorAuthUser(instructor);
-    },
-    []
-  );
-
   const login = useCallback(async (email: string, password: string) => {
-    await loginInstructor(email, password);
-    const instructor = await fetchInstructorMe();
-    if (!instructor) {
-      throw new InstructorAuthApiError("La session n'a pas pu être établie.");
+    await loginStudent(email, password);
+    const student = await fetchStudentMe();
+    if (!student) {
+      throw new StudentAuthApiError("La session n'a pas pu être établie.");
     }
-    sharedUser = toInstructorAuthUser(instructor);
+    sharedUser = toStudentAuthUser(student);
     sharedReady = true;
     notify();
   }, []);
 
-  const refresh = useCallback(async () => {
-    await bootstrap();
-  }, []);
-
   const logout = useCallback(async () => {
-    await logoutInstructor();
+    await logoutStudent();
     sharedUser = null;
     notify();
   }, []);
 
   const verifyInvite = useCallback(
-    async (params: {
-      instructor: string;
-      expires: string;
-      signature: string;
-    }): Promise<InstructorInviteVerifyResponse> => {
-      return verifyInstructorInvite(params);
+    async (params: { student: string; expires: string; signature: string }): Promise<StudentInviteVerifyResponse> => {
+      return verifyStudentInvite(params);
     },
     []
   );
 
   const acceptInvite = useCallback(
     async (params: {
-      instructor: string;
+      student: string;
       expires: string;
       signature: string;
       password: string;
     }): Promise<{ message: string }> => {
-      return acceptInstructorInvite(params);
+      return acceptStudentInvite(params);
     },
     []
   );
@@ -156,11 +130,9 @@ export function useInstructorAuth() {
     user: sharedUser,
     isAuthenticated: !!sharedUser,
     ready: sharedReady,
-    register,
     login,
     logout,
     verifyInvite,
     acceptInvite,
-    refresh,
   };
 }
