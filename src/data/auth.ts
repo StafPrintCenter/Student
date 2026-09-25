@@ -6,7 +6,8 @@ export type APIStudentUser = {
   id: string;
   firstName: string;
   lastName: string;
-  name: string;
+  fullname?: string;
+  name?: string;
   email: string;
   phone?: string | null;
   birthDate?: string | null;
