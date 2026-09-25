@@ -82,14 +82,3 @@ export interface StudentInviteVerifyResponse {
   fullname: string;
   email: string;
 }
-
-export const roleLabels: Record<string, string> = {
-  lead: "Formateur principal",
-  assistant: "Formateur assistant",
-};
-
-export function getStudentRoleLabel(trainings?: { role: string }[]): string {
-  const primaryRole = trainings?.[0]?.role;
-  if (!primaryRole) return "Non assigné";
-  return roleLabels[primaryRole.toLowerCase()] ?? primaryRole;
-}
