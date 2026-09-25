@@ -13,10 +13,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PortalRouteImport } from './routes/_portal'
 import { Route as ActivateRouteImport } from './routes/activate'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as LoginOldRouteImport } from './routes/login.tsx'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthInviteRouteImport } from './routes/_auth/invite'
-import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as AuthLoginOldRouteImport } from './routes/_auth/login-old'
 import { Route as PortalCalendarRouteImport } from './routes/_portal.calendar'
 import { Route as PortalCertificatesRouteImport } from './routes/_portal.certificates'
 import { Route as PortalCommunityRouteImport } from './routes/_portal.community'
@@ -49,9 +49,9 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LoginOldRoute = LoginOldRouteImport.update({
-  id: '/login-old',
-  path: '/login-old',
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -64,9 +64,9 @@ const AuthInviteRoute = AuthInviteRouteImport.update({
   path: '/invite',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthLoginRoute = AuthLoginRouteImport.update({
-  id: '/_auth/login',
-  path: '/login',
+const AuthLoginOldRoute = AuthLoginOldRouteImport.update({
+  id: '/_auth/login-old',
+  path: '/login-old',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortalCalendarRoute = PortalCalendarRouteImport.update({
@@ -134,10 +134,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login-old': typeof LoginOldRoute
+  '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/invite': typeof AuthInviteRoute
-  '/login': typeof AuthLoginRoute
+  '/login-old': typeof AuthLoginOldRoute
   '/calendar': typeof PortalCalendarRoute
   '/certificates': typeof PortalCertificatesRoute
   '/community': typeof PortalCommunityRoute
@@ -155,10 +155,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login-old': typeof LoginOldRoute
+  '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/invite': typeof AuthInviteRoute
-  '/login': typeof AuthLoginRoute
+  '/login-old': typeof AuthLoginOldRoute
   '/calendar': typeof PortalCalendarRoute
   '/certificates': typeof PortalCertificatesRoute
   '/community': typeof PortalCommunityRoute
@@ -178,10 +178,10 @@ export interface FileRoutesById {
   '/_portal': typeof PortalRouteWithChildren
   '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login-old': typeof LoginOldRoute
+  '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_auth/invite': typeof AuthInviteRoute
-  '/_auth/login': typeof AuthLoginRoute
+  '/_auth/login-old': typeof AuthLoginOldRoute
   '/_portal/calendar': typeof PortalCalendarRoute
   '/_portal/certificates': typeof PortalCertificatesRoute
   '/_portal/community': typeof PortalCommunityRoute
@@ -198,68 +198,68 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-  | '/'
-  | '/activate'
-  | '/forgot-password'
-  | '/login-old'
-  | '/reset-password'
-  | '/invite'
-  | '/login'
-  | '/calendar'
-  | '/certificates'
-  | '/community'
-  | '/dashboard'
-  | '/documents'
-  | '/notifications'
-  | '/payments'
-  | '/profile'
-  | '/progress'
-  | '/support'
-  | '/trainings/$id'
-  | '/trainings/'
+    | '/'
+    | '/activate'
+    | '/forgot-password'
+    | '/login'
+    | '/reset-password'
+    | '/invite'
+    | '/login-old'
+    | '/calendar'
+    | '/certificates'
+    | '/community'
+    | '/dashboard'
+    | '/documents'
+    | '/notifications'
+    | '/payments'
+    | '/profile'
+    | '/progress'
+    | '/support'
+    | '/trainings/$id'
+    | '/trainings/'
   fileRoutesByTo: FileRoutesByTo
   to:
-  | '/'
-  | '/activate'
-  | '/forgot-password'
-  | '/login-old'
-  | '/reset-password'
-  | '/invite'
-  | '/login'
-  | '/calendar'
-  | '/certificates'
-  | '/community'
-  | '/dashboard'
-  | '/documents'
-  | '/notifications'
-  | '/payments'
-  | '/profile'
-  | '/progress'
-  | '/support'
-  | '/trainings/$id'
-  | '/trainings'
+    | '/'
+    | '/activate'
+    | '/forgot-password'
+    | '/login'
+    | '/reset-password'
+    | '/invite'
+    | '/login-old'
+    | '/calendar'
+    | '/certificates'
+    | '/community'
+    | '/dashboard'
+    | '/documents'
+    | '/notifications'
+    | '/payments'
+    | '/profile'
+    | '/progress'
+    | '/support'
+    | '/trainings/$id'
+    | '/trainings'
   id:
-  | '__root__'
-  | '/'
-  | '/_portal'
-  | '/activate'
-  | '/forgot-password'
-  | '/login-old'
-  | '/reset-password'
-  | '/_auth/invite'
-  | '/_auth/login'
-  | '/_portal/calendar'
-  | '/_portal/certificates'
-  | '/_portal/community'
-  | '/_portal/dashboard'
-  | '/_portal/documents'
-  | '/_portal/notifications'
-  | '/_portal/payments'
-  | '/_portal/profile'
-  | '/_portal/progress'
-  | '/_portal/support'
-  | '/_portal/trainings/$id'
-  | '/_portal/trainings/'
+    | '__root__'
+    | '/'
+    | '/_portal'
+    | '/activate'
+    | '/forgot-password'
+    | '/login'
+    | '/reset-password'
+    | '/_auth/invite'
+    | '/_auth/login-old'
+    | '/_portal/calendar'
+    | '/_portal/certificates'
+    | '/_portal/community'
+    | '/_portal/dashboard'
+    | '/_portal/documents'
+    | '/_portal/notifications'
+    | '/_portal/payments'
+    | '/_portal/profile'
+    | '/_portal/progress'
+    | '/_portal/support'
+    | '/_portal/trainings/$id'
+    | '/_portal/trainings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -267,10 +267,10 @@ export interface RootRouteChildren {
   PortalRoute: typeof PortalRouteWithChildren
   ActivateRoute: typeof ActivateRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
-  LoginOldRoute: typeof LoginOldRoute
+  LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   AuthInviteRoute: typeof AuthInviteRoute
-  AuthLoginRoute: typeof AuthLoginRoute
+  AuthLoginOldRoute: typeof AuthLoginOldRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -303,11 +303,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/login-old': {
-      id: '/login-old'
-      path: '/login-old'
-      fullPath: '/login-old'
-      preLoaderRoute: typeof LoginOldRouteImport
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -324,11 +324,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthInviteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/login': {
-      id: '/_auth/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof AuthLoginRouteImport
+    '/_auth/login-old': {
+      id: '/_auth/login-old'
+      path: '/login-old'
+      fullPath: '/login-old'
+      preLoaderRoute: typeof AuthLoginOldRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_portal/calendar': {
@@ -456,10 +456,10 @@ const rootRouteChildren: RootRouteChildren = {
   PortalRoute: PortalRouteWithChildren,
   ActivateRoute: ActivateRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
-  LoginOldRoute: LoginOldRoute,
+  LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   AuthInviteRoute: AuthInviteRoute,
-  AuthLoginRoute: AuthLoginRoute,
+  AuthLoginOldRoute: AuthLoginOldRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
