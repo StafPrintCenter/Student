@@ -53,22 +53,18 @@ export type APIStudentUser = {
   lastName: string;
   name: string;
   email: string;
-  registrationSource: StudentRegistrationSource | null;
-  photo: string | null;
-  bio: string | null;
-  isActive: boolean;
-  isBlocked: boolean;
-  isPending: boolean;
-  needsApproval: boolean;
-  blockedAt: string | null;
-  blockedReason: string | null;
-  invitedBy: string | null;
-  invitedAt: string | null;
-  acceptedAt: string | null;
-  approvedBy: string | null;
-  approvedAt: string | null;
-  trainings?: StudentTrainingAssignment[];
-  createdAt: string;
+  phone?: string | null;
+  birthDate?: string | null;
+  address?: string | null;
+  occupation?: string | null;
+  photo?: string | null;
+  bio?: string | null;
+  isActive?: boolean;
+  isBlocked?: boolean;
+  blockedAt?: string | null;
+  blockedReason?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export type APIStudentLoginResponse = {
