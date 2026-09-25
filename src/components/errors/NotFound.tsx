@@ -7,7 +7,7 @@ export function NotFoundComponent() {
     <div className="bg-grain relative flex min-h-screen items-center justify-center bg-background px-6 py-12 overflow-hidden">
       <div className="relative z-10 max-w-lg w-full text-center">
         <div className="relative mx-auto w-24 h-24 mb-8 flex items-center justify-center">
-          <div className="absolute inset-0 rounded-3xl bg-accent/15 rotate-6" />
+          <div className="absolute inset-0 rounded-3xl bg-primary/15 rotate-6" />
           <div className="absolute inset-0 rounded-3xl bg-secondary -rotate-6" />
           <div className="relative rounded-3xl bg-card border border-border w-20 h-20 flex items-center justify-center shadow-soft">
             <GraduationCap className="h-10 w-10 text-primary" strokeWidth={1.5} />
@@ -19,11 +19,11 @@ export function NotFoundComponent() {
         </h1>
 
         <h2 className="mt-4 text-2xl font-semibold text-foreground">
-          Session introuvable
+          module introuvable
         </h2>
 
         <p className="mt-3 text-muted-foreground max-w-md mx-auto text-sm sm:text-base leading-relaxed">
-          Cette ressource formateur n'existe pas sur {SITE.tool} ou vos droits d'accès ne la couvrent pas.
+          Cette partie de l'apprentissage n'existe pas sur {SITE.tool} ou vos droits d'accès ne la couvrent pas.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
