@@ -2,6 +2,7 @@ import { useRouter, Link } from "@tanstack/react-router";
 import { AlertCircle, RefreshCw, Home } from "lucide-react";
 import { useEffect } from "react";
 import { reportError } from "@/lib/error/reporting";
+import { SITE } from "@/data/site";
 
 export function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
