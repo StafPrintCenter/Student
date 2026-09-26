@@ -82,7 +82,7 @@ function StudentSidebarContent({
           </span>
           <span className="flex flex-col group-data-[collapsible=icon]:hidden min-w-0">
             <span className="font-display font-bold text-sm tracking-tight truncate">{SITE.name}</span>
-            <span className="text-[10px] opacity-60 truncate">Espace Étudiant</span>
+            <span className="text-[10px] opacity-60 truncate">{SITE.tool}</span>
           </span>
         </Link>
       </SidebarHeader>
