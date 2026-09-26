@@ -1,4 +1,3 @@
-// src/routes/_student.tsx
 import { useEffect } from "react";
 import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
