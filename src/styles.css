@@ -199,10 +199,8 @@
 }
 
 @utility bg-grain {
-  background-image:
-    linear-gradient(oklch(0.18 0.02 45 / 2%) 1px, transparent 1px),
-    linear-gradient(90deg, oklch(0.18 0.02 45 / 2%) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-image: radial-gradient(oklch(0.24 0.02 260 / 5%) 0.75px, transparent 0.75px);
+  background-size: 16px 16px;
 }
 
 .docs-prose>*:first-child {
