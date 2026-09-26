@@ -1,18 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import {
-  BadgeCheck,
-  Bell,
-  CalendarDays,
-  CreditCard,
-  GraduationCap,
-  LineChart,
-  Play,
-  Wallet,
-  Clock,
-  ArrowRight,
-  AlertTriangle,
-} from "lucide-react";
+import { BadgeCheck, Bell, CalendarDays, CreditCard, GraduationCap, LineChart, Play, Wallet, Clock, ArrowRight, AlertTriangle } from "lucide-react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
