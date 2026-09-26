@@ -77,9 +77,12 @@ export function AuthShell({ children }: { children: ReactNode }) {
             Accédez à vos formations, vos projets et vos échanges avec vos formateurs.
           </p>
         </div>
-        <p className="text-xs text-primary-foreground/50">
-          © {new Date().getFullYear()} {SITE.name} - Tous droits réservés.
-        </p>
+
+        <div className="flex items-center justify-between pt-6 border-t border-primary-foreground/10">
+          <p className="text-xs text-primary-foreground/50">
+            © {new Date().getFullYear()} {SITE.name} - Tous droits réservés.
+          </p>
+        </div>
       </div>
 
       {/* Colonne droite / Formulaire */}
