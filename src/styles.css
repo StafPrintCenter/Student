@@ -121,6 +121,9 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+
+  --gradient-hero: linear-gradient(135deg, oklch(0.208 0.042 265.755) 0%, oklch(0.7 0.184 45.5) 100%);
+  --gradiessnt-hero: linear-gradient(135deg, oklch(0.68 0.16 45) 0%, oklch(0.55 0.14 30) 100%);
 }
 
 .dark {
@@ -191,14 +194,17 @@
   }
 }
 
-/* Remplacez l'ancien @utility paper-grid */
-@utility paper-grid {
+@utility bg-gradient-hero {
+  background: var(--gradient-hero);
+}
+
+@utility bg-grain {
   background-image:
-    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-  background-size: 36px 36px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 20%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 20%, transparent 85%);
+    radial-gradient(oklch(0.24 0.02 260 / 5%) 1px, transparent 1px),
+    radial-gradient(circle at 12% 8%, oklch(0.8 0.14 74 / 0.12), transparent 42%),
+    radial-gradient(circle at 88% 0%, oklch(0.6 0.11 240 / 0.1), transparent 40%);
+  background-size: 4px 4px, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat;
 }
 
 .docs-prose>*:first-child {
