@@ -15,7 +15,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { dashboardApi } from "@/lib/api";
 import { formatFCFA } from "@/lib/api/utils";
 
-export const Route = createFileRoute("/_portal/dashboard")({
+export const Route = createFileRoute("/_student/dashboard")({
   head: () => ({
     meta: [
       { title: "Tableau de bord - STAF Student Portal" },
