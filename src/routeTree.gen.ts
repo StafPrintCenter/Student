@@ -14,7 +14,6 @@ import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as PortalRouteImport } from './routes/_portal'
 import { Route as ActivateRouteImport } from './routes/activate'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as LoginRouteImport } from './routes/login'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthInviteRouteImport } from './routes/_auth/invite'
 import { Route as AuthLoginOldRouteImport } from './routes/_auth/login-old'
@@ -52,11 +51,6 @@ const ActivateRoute = ActivateRouteImport.update({
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -139,7 +133,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/invite': typeof AuthInviteRoute
   '/login-old': typeof AuthLoginOldRoute
@@ -160,7 +153,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/invite': typeof AuthInviteRoute
   '/login-old': typeof AuthLoginOldRoute
@@ -184,7 +176,6 @@ export interface FileRoutesById {
   '/_portal': typeof PortalRouteWithChildren
   '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_auth/invite': typeof AuthInviteRoute
   '/_auth/login-old': typeof AuthLoginOldRoute
@@ -207,7 +198,6 @@ export interface FileRouteTypes {
     | '/'
     | '/activate'
     | '/forgot-password'
-    | '/login'
     | '/reset-password'
     | '/invite'
     | '/login-old'
@@ -228,7 +218,6 @@ export interface FileRouteTypes {
     | '/'
     | '/activate'
     | '/forgot-password'
-    | '/login'
     | '/reset-password'
     | '/invite'
     | '/login-old'
@@ -251,7 +240,6 @@ export interface FileRouteTypes {
     | '/_portal'
     | '/activate'
     | '/forgot-password'
-    | '/login'
     | '/reset-password'
     | '/_auth/invite'
     | '/_auth/login-old'
@@ -275,7 +263,6 @@ export interface RootRouteChildren {
   PortalRoute: typeof PortalRouteWithChildren
   ActivateRoute: typeof ActivateRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
-  LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
@@ -314,13 +301,6 @@ declare module '@tanstack/react-router' {
       path: '/forgot-password'
       fullPath: '/forgot-password'
       preLoaderRoute: typeof ForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -482,7 +462,6 @@ const rootRouteChildren: RootRouteChildren = {
   PortalRoute: PortalRouteWithChildren,
   ActivateRoute: ActivateRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
-  LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
