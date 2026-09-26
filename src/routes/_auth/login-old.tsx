@@ -1,12 +1,12 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
-import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { useAuthShellContent } from "@/components/site/AuthShell";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/_auth/login-old")({
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/_auth/login-old")({
 });
 
 function LoginPage() {
-  const { login, isAuthenticated, ready } = useAdminAuth();
+  const { login, isAuthenticated, ready } = useStudentAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -29,10 +29,19 @@ function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   useAuthShellContent({
-    title: "Connexion admin",
-    subtitle: "Connectez-vous avec vos identifiants administrateur.",
+    title: "Connexion étudiant",
+    subtitle: "Accédez à vos formations, vos projets et votre suivi.",
+    footer: (
+      <span>
+        Mot de passe oublié ?{" "}
+        <Link to="/mot-de-passe-oublie" className="font-medium text-foreground underline underline-offset-4">
+          Réinitialiser
+        </Link>
+      </span>
+    ),
   });
 
+  // Redirection automatique si l'étudiant est déjà connecté
   useEffect(() => {
     if (ready && isAuthenticated) navigate({ to: "/dashboard" });
   }, [ready, isAuthenticated, navigate]);
