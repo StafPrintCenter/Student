@@ -1,4 +1,3 @@
-// src/components/site/StudentShell.tsx
 import { useState, useEffect } from "react";
 import { Link, useRouterState, useNavigate, Outlet } from "@tanstack/react-router";
 import { LayoutDashboard, GraduationCap, FolderKanban, ClipboardCheck, CalendarDays, LogOut, UserCircle, Users2, Mail, Award } from "lucide-react";
