@@ -1,10 +1,4 @@
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  WhatsAppIcon,
-  XIcon,
-} from "@/components/site/icons";
+import { FacebookIcon, InstagramIcon, LinkedinIcon, WhatsAppIcon, XIcon } from "@/components/site/icons";
 
 export const SOCIAL_LINKS = [
   { label: "LinkedIn", href: "https://linkedin.com/company/stafprintcenter", Icon: LinkedinIcon },
