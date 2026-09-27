@@ -62,15 +62,6 @@ function BrandMark({ collapsed }: { collapsed?: boolean }) {
   );
 }
 
-function SidebarNav({
-  onNavigate,
-  collapsed,
-}: {
-  onNavigate?: () => void;
-  collapsed?: boolean;
-}) {
-}
-
 function GlobalSearch() {
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
