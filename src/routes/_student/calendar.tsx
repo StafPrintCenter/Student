@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { calendarApi } from "@/lib/api";
 import type { CalendarEvent } from "@/lib/api/types";
 
-export const Route = createFileRoute("/_portal/calendar")({
+export const Route = createFileRoute("/_student/calendar")({
   head: () => ({
     meta: [
       { title: "Calendrier - STAF Student Portal" },
