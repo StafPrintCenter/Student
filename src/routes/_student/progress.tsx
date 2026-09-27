@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { progressApi } from "@/lib/api";
 
-export const Route = createFileRoute("/_portal/progress")({
+export const Route = createFileRoute("/_student/progress")({
   head: () => ({
     meta: [
       { title: "Progression - STAF Student Portal" },
