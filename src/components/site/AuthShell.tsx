@@ -65,7 +65,7 @@ export function AuthShell({ children }: { children: ReactNode }) {
 
         <div className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">{SITE.tool}</p>
-          <h1 className="font-display text-5xl font-bold tracking-tight text-balance">
+          <h1 className="mt-3 font-display text-5xl font-bold tracking-tight text-balance">
             Suivez vos formations, projets et progrès en un seul endroit.
           </h1>
           <p className="mt-4 opacity-90">
