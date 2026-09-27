@@ -364,7 +364,7 @@ export function PortalLayout() {
           collapsed ? "w-16" : "w-64",
         )}
       >
-        <BrandMark collapsed={collapsed} />
+        <BMtoDelete collapsed={collapsed} />
         <div className="mt-2 flex-1 overflow-y-auto">
           <SidebarNav collapsed={collapsed} />
         </div>
