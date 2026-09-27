@@ -251,7 +251,7 @@ function SidebarFooter({ collapsed, onNavigate }: { collapsed?: boolean; onNavig
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const initials = user ? `${user.first_name[0] ?? ""}${user.last_name[0] ?? ""}`.toUpperCase() : "?";
-  const goProfile = () => { onNavigate?.(); navigate({ to: "/profile" }); };
+  const goProfile = () => { onNavigate?.(); navigate({ to: "/profil" }); };
   const doLogout = () => { onNavigate?.(); logout(); navigate({ to: "/login" }); };
   return (
     <div className={cn("mt-auto border-t border-sidebar-border p-2 space-y-1", collapsed && "px-1")}>
