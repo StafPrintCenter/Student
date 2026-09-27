@@ -3,7 +3,6 @@ import { Outlet, createRootRouteWithContext, HeadContent, Scripts } from "@tanst
 import { type ReactNode } from "react";
 import { Toaster } from "sonner";
 import appCss from "../styles.css?url";
-import { AuthProvider } from "../lib/auth";
 import { SITE } from "@/data/site";
 import { NotFoundComponent, ErrorComponent } from "@/components/errors";
 
