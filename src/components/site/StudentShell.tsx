@@ -9,6 +9,8 @@ import { ConfirmDisconnect } from "@/components/site/StudentBits";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger, SidebarInset, useSidebar } from "@/components/ui/sidebar";
 import { SocialLinks } from "@/components/site/SocialLinks";
 
+const docsUrl = `${SITE_LINK.docsUrl}/docs/student/intro`;
+
 type NavItem = {
   to: string;
   label: string;
