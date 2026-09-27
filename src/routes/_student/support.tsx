@@ -20,7 +20,7 @@ import { EmptyState } from "@/components/portal/empty-state";
 import { supportApi } from "@/lib/api";
 import type { SupportTicket } from "@/lib/api/types";
 
-export const Route = createFileRoute("/_portal/support")({
+export const Route = createFileRoute("/_student/support")({
   head: () => ({
     meta: [
       { title: "Support - STAF Student Portal" },
