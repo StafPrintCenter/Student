@@ -18,18 +18,18 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthInviteRouteImport } from './routes/_auth/invite'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
-import { Route as PortalCalendarRouteImport } from './routes/_portal.calendar'
-import { Route as PortalCertificatesRouteImport } from './routes/_portal.certificates'
-import { Route as PortalCommunityRouteImport } from './routes/_portal.community'
-import { Route as PortalDocumentsRouteImport } from './routes/_portal.documents'
 import { Route as PortalNotificationsRouteImport } from './routes/_portal.notifications'
 import { Route as PortalPaymentsRouteImport } from './routes/_portal.payments'
-import { Route as PortalProfileRouteImport } from './routes/_student/_portal.profile.tsx'
-import { Route as PortalProgressRouteImport } from './routes/_portal.progress'
-import { Route as PortalSupportRouteImport } from './routes/_portal.support'
+import { Route as StudentCalendarRouteImport } from './routes/_student/calendar'
+import { Route as StudentCertificatesRouteImport } from './routes/_student/certificates'
+import { Route as StudentCommunityRouteImport } from './routes/_student/community'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
-import { Route as PortalTrainingsIndexRouteImport } from './routes/_portal.trainings.index'
-import { Route as PortalTrainingsIdRouteImport } from './routes/_portal.trainings.$id'
+import { Route as StudentDocumentsRouteImport } from './routes/_student/documents'
+import { Route as StudentProfilRouteImport } from './routes/_student/profil'
+import { Route as StudentProgressRouteImport } from './routes/_student/progress'
+import { Route as StudentSupportRouteImport } from './routes/_student/support'
+import { Route as StudentTrainingsIndexRouteImport } from './routes/_student/trainings/index'
+import { Route as StudentTrainingsIdRouteImport } from './routes/_student/trainings/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -73,26 +73,6 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AuthRoute,
 } as any)
-const PortalCalendarRoute = PortalCalendarRouteImport.update({
-  id: '/calendar',
-  path: '/calendar',
-  getParentRoute: () => PortalRoute,
-} as any)
-const PortalCertificatesRoute = PortalCertificatesRouteImport.update({
-  id: '/certificates',
-  path: '/certificates',
-  getParentRoute: () => PortalRoute,
-} as any)
-const PortalCommunityRoute = PortalCommunityRouteImport.update({
-  id: '/community',
-  path: '/community',
-  getParentRoute: () => PortalRoute,
-} as any)
-const PortalDocumentsRoute = PortalDocumentsRouteImport.update({
-  id: '/documents',
-  path: '/documents',
-  getParentRoute: () => PortalRoute,
-} as any)
 const PortalNotificationsRoute = PortalNotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
@@ -103,35 +83,55 @@ const PortalPaymentsRoute = PortalPaymentsRouteImport.update({
   path: '/payments',
   getParentRoute: () => PortalRoute,
 } as any)
-const PortalProfileRoute = PortalProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => PortalRoute,
+const StudentCalendarRoute = StudentCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => StudentRoute,
 } as any)
-const PortalProgressRoute = PortalProgressRouteImport.update({
-  id: '/progress',
-  path: '/progress',
-  getParentRoute: () => PortalRoute,
+const StudentCertificatesRoute = StudentCertificatesRouteImport.update({
+  id: '/certificates',
+  path: '/certificates',
+  getParentRoute: () => StudentRoute,
 } as any)
-const PortalSupportRoute = PortalSupportRouteImport.update({
-  id: '/support',
-  path: '/support',
-  getParentRoute: () => PortalRoute,
+const StudentCommunityRoute = StudentCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => StudentRoute,
 } as any)
 const StudentDashboardRoute = StudentDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => StudentRoute,
 } as any)
-const PortalTrainingsIndexRoute = PortalTrainingsIndexRouteImport.update({
+const StudentDocumentsRoute = StudentDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentProfilRoute = StudentProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentProgressRoute = StudentProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentSupportRoute = StudentSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentTrainingsIndexRoute = StudentTrainingsIndexRouteImport.update({
   id: '/trainings/',
   path: '/trainings/',
-  getParentRoute: () => PortalRoute,
+  getParentRoute: () => StudentRoute,
 } as any)
-const PortalTrainingsIdRoute = PortalTrainingsIdRouteImport.update({
+const StudentTrainingsIdRoute = StudentTrainingsIdRouteImport.update({
   id: '/trainings/$id',
   path: '/trainings/$id',
-  getParentRoute: () => PortalRoute,
+  getParentRoute: () => StudentRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -141,18 +141,18 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
-  '/calendar': typeof PortalCalendarRoute
-  '/certificates': typeof PortalCertificatesRoute
-  '/community': typeof PortalCommunityRoute
-  '/documents': typeof PortalDocumentsRoute
   '/notifications': typeof PortalNotificationsRoute
   '/payments': typeof PortalPaymentsRoute
-  '/profile': typeof PortalProfileRoute
-  '/progress': typeof PortalProgressRoute
-  '/support': typeof PortalSupportRoute
+  '/calendar': typeof StudentCalendarRoute
+  '/certificates': typeof StudentCertificatesRoute
+  '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
-  '/trainings/$id': typeof PortalTrainingsIdRoute
-  '/trainings/': typeof PortalTrainingsIndexRoute
+  '/documents': typeof StudentDocumentsRoute
+  '/profil': typeof StudentProfilRoute
+  '/progress': typeof StudentProgressRoute
+  '/support': typeof StudentSupportRoute
+  '/trainings/$id': typeof StudentTrainingsIdRoute
+  '/trainings/': typeof StudentTrainingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -161,18 +161,18 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
-  '/calendar': typeof PortalCalendarRoute
-  '/certificates': typeof PortalCertificatesRoute
-  '/community': typeof PortalCommunityRoute
-  '/documents': typeof PortalDocumentsRoute
   '/notifications': typeof PortalNotificationsRoute
   '/payments': typeof PortalPaymentsRoute
-  '/profile': typeof PortalProfileRoute
-  '/progress': typeof PortalProgressRoute
-  '/support': typeof PortalSupportRoute
+  '/calendar': typeof StudentCalendarRoute
+  '/certificates': typeof StudentCertificatesRoute
+  '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
-  '/trainings/$id': typeof PortalTrainingsIdRoute
-  '/trainings': typeof PortalTrainingsIndexRoute
+  '/documents': typeof StudentDocumentsRoute
+  '/profil': typeof StudentProfilRoute
+  '/progress': typeof StudentProgressRoute
+  '/support': typeof StudentSupportRoute
+  '/trainings/$id': typeof StudentTrainingsIdRoute
+  '/trainings': typeof StudentTrainingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -185,83 +185,83 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/_auth/invite': typeof AuthInviteRoute
   '/_auth/login': typeof AuthLoginRoute
-  '/_portal/calendar': typeof PortalCalendarRoute
-  '/_portal/certificates': typeof PortalCertificatesRoute
-  '/_portal/community': typeof PortalCommunityRoute
-  '/_portal/documents': typeof PortalDocumentsRoute
   '/_portal/notifications': typeof PortalNotificationsRoute
   '/_portal/payments': typeof PortalPaymentsRoute
-  '/_portal/profile': typeof PortalProfileRoute
-  '/_portal/progress': typeof PortalProgressRoute
-  '/_portal/support': typeof PortalSupportRoute
+  '/_student/calendar': typeof StudentCalendarRoute
+  '/_student/certificates': typeof StudentCertificatesRoute
+  '/_student/community': typeof StudentCommunityRoute
   '/_student/dashboard': typeof StudentDashboardRoute
-  '/_portal/trainings/$id': typeof PortalTrainingsIdRoute
-  '/_portal/trainings/': typeof PortalTrainingsIndexRoute
+  '/_student/documents': typeof StudentDocumentsRoute
+  '/_student/profil': typeof StudentProfilRoute
+  '/_student/progress': typeof StudentProgressRoute
+  '/_student/support': typeof StudentSupportRoute
+  '/_student/trainings/$id': typeof StudentTrainingsIdRoute
+  '/_student/trainings/': typeof StudentTrainingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-  | '/'
-  | '/activate'
-  | '/forgot-password'
-  | '/reset-password'
-  | '/invite'
-  | '/login'
-  | '/calendar'
-  | '/certificates'
-  | '/community'
-  | '/documents'
-  | '/notifications'
-  | '/payments'
-  | '/profile'
-  | '/progress'
-  | '/support'
-  | '/dashboard'
-  | '/trainings/$id'
-  | '/trainings/'
+    | '/'
+    | '/activate'
+    | '/forgot-password'
+    | '/reset-password'
+    | '/invite'
+    | '/login'
+    | '/notifications'
+    | '/payments'
+    | '/calendar'
+    | '/certificates'
+    | '/community'
+    | '/dashboard'
+    | '/documents'
+    | '/profil'
+    | '/progress'
+    | '/support'
+    | '/trainings/$id'
+    | '/trainings/'
   fileRoutesByTo: FileRoutesByTo
   to:
-  | '/'
-  | '/activate'
-  | '/forgot-password'
-  | '/reset-password'
-  | '/invite'
-  | '/login'
-  | '/calendar'
-  | '/certificates'
-  | '/community'
-  | '/documents'
-  | '/notifications'
-  | '/payments'
-  | '/profile'
-  | '/progress'
-  | '/support'
-  | '/dashboard'
-  | '/trainings/$id'
-  | '/trainings'
+    | '/'
+    | '/activate'
+    | '/forgot-password'
+    | '/reset-password'
+    | '/invite'
+    | '/login'
+    | '/notifications'
+    | '/payments'
+    | '/calendar'
+    | '/certificates'
+    | '/community'
+    | '/dashboard'
+    | '/documents'
+    | '/profil'
+    | '/progress'
+    | '/support'
+    | '/trainings/$id'
+    | '/trainings'
   id:
-  | '__root__'
-  | '/'
-  | '/_auth'
-  | '/_portal'
-  | '/_student'
-  | '/activate'
-  | '/forgot-password'
-  | '/reset-password'
-  | '/_auth/invite'
-  | '/_auth/login'
-  | '/_portal/calendar'
-  | '/_portal/certificates'
-  | '/_portal/community'
-  | '/_portal/documents'
-  | '/_portal/notifications'
-  | '/_portal/payments'
-  | '/_portal/profile'
-  | '/_portal/progress'
-  | '/_portal/support'
-  | '/_student/dashboard'
-  | '/_portal/trainings/$id'
-  | '/_portal/trainings/'
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/_portal'
+    | '/_student'
+    | '/activate'
+    | '/forgot-password'
+    | '/reset-password'
+    | '/_auth/invite'
+    | '/_auth/login'
+    | '/_portal/notifications'
+    | '/_portal/payments'
+    | '/_student/calendar'
+    | '/_student/certificates'
+    | '/_student/community'
+    | '/_student/dashboard'
+    | '/_student/documents'
+    | '/_student/profil'
+    | '/_student/progress'
+    | '/_student/support'
+    | '/_student/trainings/$id'
+    | '/_student/trainings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -339,34 +339,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRoute
     }
-    '/_portal/calendar': {
-      id: '/_portal/calendar'
-      path: '/calendar'
-      fullPath: '/calendar'
-      preLoaderRoute: typeof PortalCalendarRouteImport
-      parentRoute: typeof PortalRoute
-    }
-    '/_portal/certificates': {
-      id: '/_portal/certificates'
-      path: '/certificates'
-      fullPath: '/certificates'
-      preLoaderRoute: typeof PortalCertificatesRouteImport
-      parentRoute: typeof PortalRoute
-    }
-    '/_portal/community': {
-      id: '/_portal/community'
-      path: '/community'
-      fullPath: '/community'
-      preLoaderRoute: typeof PortalCommunityRouteImport
-      parentRoute: typeof PortalRoute
-    }
-    '/_portal/documents': {
-      id: '/_portal/documents'
-      path: '/documents'
-      fullPath: '/documents'
-      preLoaderRoute: typeof PortalDocumentsRouteImport
-      parentRoute: typeof PortalRoute
-    }
     '/_portal/notifications': {
       id: '/_portal/notifications'
       path: '/notifications'
@@ -381,26 +353,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalPaymentsRouteImport
       parentRoute: typeof PortalRoute
     }
-    '/_portal/profile': {
-      id: '/_portal/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof PortalProfileRouteImport
-      parentRoute: typeof PortalRoute
+    '/_student/calendar': {
+      id: '/_student/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof StudentCalendarRouteImport
+      parentRoute: typeof StudentRoute
     }
-    '/_portal/progress': {
-      id: '/_portal/progress'
-      path: '/progress'
-      fullPath: '/progress'
-      preLoaderRoute: typeof PortalProgressRouteImport
-      parentRoute: typeof PortalRoute
+    '/_student/certificates': {
+      id: '/_student/certificates'
+      path: '/certificates'
+      fullPath: '/certificates'
+      preLoaderRoute: typeof StudentCertificatesRouteImport
+      parentRoute: typeof StudentRoute
     }
-    '/_portal/support': {
-      id: '/_portal/support'
-      path: '/support'
-      fullPath: '/support'
-      preLoaderRoute: typeof PortalSupportRouteImport
-      parentRoute: typeof PortalRoute
+    '/_student/community': {
+      id: '/_student/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof StudentCommunityRouteImport
+      parentRoute: typeof StudentRoute
     }
     '/_student/dashboard': {
       id: '/_student/dashboard'
@@ -409,19 +381,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentDashboardRouteImport
       parentRoute: typeof StudentRoute
     }
-    '/_portal/trainings/': {
-      id: '/_portal/trainings/'
+    '/_student/documents': {
+      id: '/_student/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof StudentDocumentsRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/profil': {
+      id: '/_student/profil'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof StudentProfilRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/progress': {
+      id: '/_student/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof StudentProgressRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/support': {
+      id: '/_student/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof StudentSupportRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/trainings/': {
+      id: '/_student/trainings/'
       path: '/trainings'
       fullPath: '/trainings/'
-      preLoaderRoute: typeof PortalTrainingsIndexRouteImport
-      parentRoute: typeof PortalRoute
+      preLoaderRoute: typeof StudentTrainingsIndexRouteImport
+      parentRoute: typeof StudentRoute
     }
-    '/_portal/trainings/$id': {
-      id: '/_portal/trainings/$id'
+    '/_student/trainings/$id': {
+      id: '/_student/trainings/$id'
       path: '/trainings/$id'
       fullPath: '/trainings/$id'
-      preLoaderRoute: typeof PortalTrainingsIdRouteImport
-      parentRoute: typeof PortalRoute
+      preLoaderRoute: typeof StudentTrainingsIdRouteImport
+      parentRoute: typeof StudentRoute
     }
   }
 }
@@ -439,42 +439,42 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface PortalRouteChildren {
-  PortalCalendarRoute: typeof PortalCalendarRoute
-  PortalCertificatesRoute: typeof PortalCertificatesRoute
-  PortalCommunityRoute: typeof PortalCommunityRoute
-  PortalDocumentsRoute: typeof PortalDocumentsRoute
   PortalNotificationsRoute: typeof PortalNotificationsRoute
   PortalPaymentsRoute: typeof PortalPaymentsRoute
-  PortalProfileRoute: typeof PortalProfileRoute
-  PortalProgressRoute: typeof PortalProgressRoute
-  PortalSupportRoute: typeof PortalSupportRoute
-  PortalTrainingsIdRoute: typeof PortalTrainingsIdRoute
-  PortalTrainingsIndexRoute: typeof PortalTrainingsIndexRoute
 }
 
 const PortalRouteChildren: PortalRouteChildren = {
-  PortalCalendarRoute: PortalCalendarRoute,
-  PortalCertificatesRoute: PortalCertificatesRoute,
-  PortalCommunityRoute: PortalCommunityRoute,
-  PortalDocumentsRoute: PortalDocumentsRoute,
   PortalNotificationsRoute: PortalNotificationsRoute,
   PortalPaymentsRoute: PortalPaymentsRoute,
-  PortalProfileRoute: PortalProfileRoute,
-  PortalProgressRoute: PortalProgressRoute,
-  PortalSupportRoute: PortalSupportRoute,
-  PortalTrainingsIdRoute: PortalTrainingsIdRoute,
-  PortalTrainingsIndexRoute: PortalTrainingsIndexRoute,
 }
 
 const PortalRouteWithChildren =
   PortalRoute._addFileChildren(PortalRouteChildren)
 
 interface StudentRouteChildren {
+  StudentCalendarRoute: typeof StudentCalendarRoute
+  StudentCertificatesRoute: typeof StudentCertificatesRoute
+  StudentCommunityRoute: typeof StudentCommunityRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
+  StudentDocumentsRoute: typeof StudentDocumentsRoute
+  StudentProfilRoute: typeof StudentProfilRoute
+  StudentProgressRoute: typeof StudentProgressRoute
+  StudentSupportRoute: typeof StudentSupportRoute
+  StudentTrainingsIdRoute: typeof StudentTrainingsIdRoute
+  StudentTrainingsIndexRoute: typeof StudentTrainingsIndexRoute
 }
 
 const StudentRouteChildren: StudentRouteChildren = {
+  StudentCalendarRoute: StudentCalendarRoute,
+  StudentCertificatesRoute: StudentCertificatesRoute,
+  StudentCommunityRoute: StudentCommunityRoute,
   StudentDashboardRoute: StudentDashboardRoute,
+  StudentDocumentsRoute: StudentDocumentsRoute,
+  StudentProfilRoute: StudentProfilRoute,
+  StudentProgressRoute: StudentProgressRoute,
+  StudentSupportRoute: StudentSupportRoute,
+  StudentTrainingsIdRoute: StudentTrainingsIdRoute,
+  StudentTrainingsIndexRoute: StudentTrainingsIndexRoute,
 }
 
 const StudentRouteWithChildren =
