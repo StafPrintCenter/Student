@@ -80,6 +80,7 @@ function StudentSidebarContent({
         : pathname.startsWith(n.to);
 
   const profileActive = pathname.startsWith("/profil");
+  const docsUrl = `${SITE_LINK.docsUrl}/docs/student/intro`;
 
   return (
     <Sidebar collapsible="icon" className="border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
