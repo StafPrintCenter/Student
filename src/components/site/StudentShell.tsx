@@ -38,6 +38,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { to: "/certificates", label: "Certificats", icon: BadgeCheck },
       { to: "/documents", label: "Documents", icon: FileText },
+      { to: "/payments", label: "Paiements", icon: CreditCard },
     ],
   },
   {
