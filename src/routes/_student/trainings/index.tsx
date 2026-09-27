@@ -28,7 +28,7 @@ import { Badge } from "@/components/ui/badge";
 import { trainingApi } from "@/lib/api";
 import { formatFCFA } from "@/lib/api/utils";
 
-export const Route = createFileRoute("/_portal/trainings/")({
+export const Route = createFileRoute("/_student/trainings/")({
   head: () => ({
     meta: [
       { title: "Mes formations - STAF Student Portal" },
