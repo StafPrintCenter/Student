@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useRouterState, useNavigate, Outlet } from "@tanstack/react-router";
-import { LayoutDashboard, GraduationCap, LogOut, UserCircle, Users2, LifeBuoy, BookOpen, LineChart, BadgeCheck, FileText, Calendar, Bell } from "lucide-react";
+import { LayoutDashboard, GraduationCap, LogOut, UserCircle, Users2, LifeBuoy, BookOpen, LineChart, BadgeCheck, FileText, Calendar, Bell, CreditCard } from "lucide-react";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { toast } from "sonner";
 import logo from "@/assets/logos.json";
