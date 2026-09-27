@@ -14,9 +14,6 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { SITE } from "@/data/site";
 import logo from "@/assets/logos.json";
 
-const NAV = [
-] as const;
-
 function useIsAuthed() {
   const { user, ready } = useAuth();
   const navigate = useNavigate();
