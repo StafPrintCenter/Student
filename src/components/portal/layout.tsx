@@ -61,34 +61,3 @@ function BrandMark({ collapsed }: { collapsed?: boolean }) {
     </Link>
   );
 }
-
-function SearchGroup({
-  label,
-  items,
-  onNavigate,
-}: {
-  label: string;
-  items: { id: string; label: string; to: string }[];
-  onNavigate?: () => void;
-}) {
-  if (items.length === 0) return null;
-  return (
-    <div>
-      <p className="px-2 py-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-        {label}
-      </p>
-      <div className="flex flex-col">
-        {items.map((it) => (
-          <Link
-            key={it.id}
-            to={it.to as any}
-            onClick={onNavigate}
-            className="rounded-md px-2 py-1.5 text-sm hover:bg-muted"
-          >
-            {it.label}
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
