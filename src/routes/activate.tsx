@@ -16,7 +16,6 @@ export const Route = createFileRoute("/activate")({
     ],
   }),
   component: () => {
-    const { activate } = useAuth();
     const nav = useNavigate();
     const [email, setEmail] = useState("");
     const [tempCode, setTempCode] = useState("");
