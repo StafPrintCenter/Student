@@ -72,33 +72,6 @@ function SidebarNav({
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
     <nav className="flex flex-col gap-0.5 px-2">
-      {NAV.map((item) => {
-        const active =
-          pathname === item.to || (pathname.startsWith(item.to));
-        return (
-          <Link
-            key={item.to}
-            to={item.to}
-            onClick={onNavigate}
-            title={collapsed ? item.label : undefined}
-            className={cn(
-              "group flex items-center gap-3 rounded-lg py-2 text-sm transition-colors",
-              collapsed ? "justify-center px-2" : "px-3",
-              active
-                ? "bg-primary/12 text-foreground font-medium"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground",
-            )}
-          >
-            <item.icon
-              className={cn(
-                "h-4 w-4 shrink-0",
-                active ? "text-primary" : "text-muted-foreground group-hover:text-foreground",
-              )}
-            />
-            {!collapsed && <span className="truncate">{item.label}</span>}
-          </Link>
-        );
-      })}
     </nav>
   );
 }
