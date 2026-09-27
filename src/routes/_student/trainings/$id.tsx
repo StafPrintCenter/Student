@@ -24,7 +24,7 @@ import { VideoPlayer } from "@/components/portal/video-player";
 import { ExerciseRunner } from "@/components/portal/exercise-runner";
 import { QuizRunner } from "@/components/portal/quiz-runner";
 
-export const Route = createFileRoute("/_portal/trainings/$id")({
+export const Route = createFileRoute("/_student/trainings/$id")({
   head: () => ({
     meta: [
       { title: "Formation - STAF Student Portal" },
