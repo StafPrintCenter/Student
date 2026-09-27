@@ -15,9 +15,6 @@ import { SITE } from "@/data/site";
 import logo from "@/assets/logos.json";
 
 const NAV = [
-  { to: "/dashboard", label: "Tableau de bord", icon: LayoutDashboard },
-  { to: "/trainings", label: "Mes formations", icon: GraduationCap },
-  { to: "/progress", label: "Progression", icon: LineChart },
   { to: "/payments", label: "Paiements", icon: CreditCard },
   { to: "/certificates", label: "Certificats", icon: BadgeCheck },
   { to: "/calendar", label: "Calendrier", icon: Calendar },
