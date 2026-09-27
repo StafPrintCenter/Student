@@ -26,7 +26,7 @@ const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    label: "Formation",
+    label: "Session",
     items: [
       { to: "/trainings", label: "Mes formations", icon: GraduationCap },
       { to: "/projects", label: "Mes projets", icon: FolderKanban },
