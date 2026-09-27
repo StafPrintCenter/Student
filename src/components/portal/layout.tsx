@@ -44,20 +44,3 @@ function ThemeToggle() {
   );
 }
 
-function BrandMark({ collapsed }: { collapsed?: boolean }) {
-  return (
-    <Link to="/dashboard" className="flex items-center gap-2.5 px-2 py-3">
-      <span className="flex size-7 shrink-0 items-center justify-center overflow-hidden">
-        <img src={logo.mc} alt="Logo SPC" className="h-7 w-auto object-contain" />
-      </span>
-      {!collapsed && (
-        <div className="leading-tight">
-          <div className="font-display text-base">{SITE.name}</div>
-          <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            A REMPLACER
-          </div>
-        </div>
-      )}
-    </Link>
-  );
-}
