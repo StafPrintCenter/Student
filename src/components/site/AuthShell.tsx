@@ -68,7 +68,7 @@ export function AuthShell({ children }: { children: ReactNode }) {
           <h1 className="mt-3 font-display text-5xl font-bold tracking-tight text-balance">
             Suivez vos formations, projets et progrès en un seul endroit.
           </h1>
-          <p className="opacity-90 max-w-lg">
+          <p className="mt-4 opacity-90">
             Accédez à vos formations, vos projets et vos échanges avec vos formateurs.
           </p>
 
