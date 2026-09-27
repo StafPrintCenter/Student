@@ -1,25 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import {
-  ArrowLeft,
-  BookOpen,
-  Calendar,
-  CheckCircle2,
-  Circle,
-  Clock,
-  Lock,
-  MapPin,
-  Users,
-  Target,
-  Trophy,
-  Wallet,
-  Video,
-  ClipboardList,
-  Sparkles,
-  PlayCircle,
-  MessageSquare,
-} from "lucide-react";
+import {  ArrowLeft,  BookOpen,  Calendar,  CheckCircle2,  Circle,  Clock,  Lock,  MapPin,  Users,  Target,  Trophy,  Wallet,  Video,  ClipboardList,  Sparkles,  PlayCircle,  MessageSquare} from "lucide-react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { toast } from "sonner";
@@ -29,20 +11,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Progress } from "@/components/ui/progress";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
+import {  Accordion,  AccordionContent,  AccordionItem,  AccordionTrigger} from "@/components/ui/accordion";
+import {  Dialog,  DialogContent,  DialogDescription,  DialogHeader,  DialogTitle,  DialogFooter} from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { trainingApi, learningApi, hasUnlockedAccess, minAccessAmount } from "@/lib/api";
