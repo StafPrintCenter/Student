@@ -320,7 +320,6 @@ export function PortalLayout() {
       >
         <BrandMark collapsed={collapsed} />
         <div className="mt-2 flex-1 overflow-y-auto">
-          <SidebarNav collapsed={collapsed} />
         </div>
         <SidebarFooter collapsed={collapsed} />
       </aside>
