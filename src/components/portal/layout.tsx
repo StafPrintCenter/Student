@@ -79,7 +79,7 @@ function SidebarNav({
     <nav className="flex flex-col gap-0.5 px-2">
       {NAV.map((item) => {
         const active =
-          pathname === item.to;
+          pathname === item.to || (pathname.startsWith(item.to));
         return (
           <Link
             key={item.to}
