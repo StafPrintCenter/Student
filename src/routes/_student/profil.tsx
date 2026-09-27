@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { studentApi } from "@/lib/api";
 import type { Student } from "@/lib/api/types";
 
-export const Route = createFileRoute("/_portal/profile")({
+export const Route = createFileRoute("/_student/profil")({
   head: () => ({
     meta: [
       { title: "Profil - STAF Student Portal" },
