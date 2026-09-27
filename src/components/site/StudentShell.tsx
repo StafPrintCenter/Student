@@ -4,7 +4,7 @@ import { LayoutDashboard, GraduationCap, LogOut, UserCircle, Users2, LifeBuoy, B
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { toast } from "sonner";
 import logo from "@/assets/logos.json";
-import { SITE } from "@/data/site";
+import { SITE, SITE_LINK } from "@/data/site";
 import { ConfirmDisconnect } from "@/components/site/StudentBits";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger, SidebarInset, useSidebar } from "@/components/ui/sidebar";
 
