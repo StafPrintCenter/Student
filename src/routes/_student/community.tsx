@@ -20,7 +20,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { communityApi, trainingApi } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/_portal/community")({
+export const Route = createFileRoute("/_student/community")({
   head: () => ({
     meta: [
       { title: "Communauté - STAF Student Portal" },
