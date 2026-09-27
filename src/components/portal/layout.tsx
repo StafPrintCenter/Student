@@ -69,8 +69,6 @@ function SidebarNav({
   onNavigate?: () => void;
   collapsed?: boolean;
 }) {
-  return (
-  );
 }
 
 function GlobalSearch() {
