@@ -49,7 +49,7 @@ function ThemeToggle() {
   );
 }
 
-function BrandMark({ collapsed }: { collapsed?: boolean }) {
+function BMtoDelete({ collapsed }: { collapsed?: boolean }) {
   return (
     <Link to="/dashboard" className="flex items-center gap-2.5 px-2 py-3">
       <span className="flex size-7 shrink-0 items-center justify-center overflow-hidden">
