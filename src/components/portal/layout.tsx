@@ -70,8 +70,6 @@ function SidebarNav({
   collapsed?: boolean;
 }) {
   return (
-    <nav className="flex flex-col gap-0.5 px-2">
-    </nav>
   );
 }
 
