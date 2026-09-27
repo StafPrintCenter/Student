@@ -32,7 +32,13 @@ const NAV_GROUPS: NavGroup[] = [
       { to: "/projects", label: "Mes projets", icon: FolderKanban },
       { to: "/corrections", label: "Corrections", icon: ClipboardCheck },
       { to: "/sessions", label: "Sessions", icon: CalendarDays },
-      { to: "/certificates", label: "Certificats", icon: Award },
+    ],
+  },
+  {
+    label: "Librairie",
+    items: [
+      { to: "/certificates", label: "Certificats", icon: BadgeCheck },
+      { to: "/documents", label: "Documents", icon: FileText },
     ],
   },
   {
