@@ -16,7 +16,7 @@ import { certificateApi } from "@/lib/api";
 import type { Certificate } from "@/lib/api/types";
 import { SITE } from "@/data/site";
 
-export const Route = createFileRoute("/_portal/certificates")({
+export const Route = createFileRoute("/_student/certificates")({
   head: () => ({
     meta: [
       { title: "Certificats - STAF Student Portal" },
