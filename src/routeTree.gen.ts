@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/_auth'
-import { Route as PortalRouteImport } from './routes/_portal'
 import { Route as StudentRouteImport } from './routes/_student'
 import { Route as ActivateRouteImport } from './routes/activate'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
@@ -38,10 +37,6 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PortalRoute = PortalRouteImport.update({
-  id: '/_portal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StudentRoute = StudentRouteImport.update({
@@ -178,7 +173,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
-  '/_portal': typeof PortalRouteWithChildren
   '/_student': typeof StudentRouteWithChildren
   '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
@@ -243,7 +237,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_auth'
-    | '/_portal'
     | '/_student'
     | '/activate'
     | '/forgot-password'
@@ -267,7 +260,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
-  PortalRoute: typeof PortalRouteWithChildren
   StudentRoute: typeof StudentRouteWithChildren
   ActivateRoute: typeof ActivateRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
@@ -288,13 +280,6 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_portal': {
-      id: '/_portal'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof PortalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_student': {
@@ -438,19 +423,6 @@ const AuthRouteChildren: AuthRouteChildren = {
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
-interface PortalRouteChildren {
-  PortalNotificationsRoute: typeof PortalNotificationsRoute
-  PortalPaymentsRoute: typeof PortalPaymentsRoute
-}
-
-const PortalRouteChildren: PortalRouteChildren = {
-  PortalNotificationsRoute: PortalNotificationsRoute,
-  PortalPaymentsRoute: PortalPaymentsRoute,
-}
-
-const PortalRouteWithChildren =
-  PortalRoute._addFileChildren(PortalRouteChildren)
-
 interface StudentRouteChildren {
   StudentCalendarRoute: typeof StudentCalendarRoute
   StudentCertificatesRoute: typeof StudentCertificatesRoute
@@ -483,7 +455,6 @@ const StudentRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
-  PortalRoute: PortalRouteWithChildren,
   StudentRoute: StudentRouteWithChildren,
   ActivateRoute: ActivateRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
