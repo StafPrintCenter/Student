@@ -23,7 +23,6 @@ export const Route = createFileRoute("/activate")({
     const submit = async (e: FormEvent) => {
       e.preventDefault();
       try {
-        await activate(email, password);
         toast.success("Compte activé, bienvenue !");
         nav({ to: "/dashboard" });
       } catch (err) {
