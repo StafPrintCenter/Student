@@ -45,7 +45,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Échanges",
     items: [
       { to: "/community", label: "Communauté", icon: Users2 },
-      { to: "/messages", label: "Messages privés", icon: Mail },
+      { to: "/support", label: "Support", icon: LifeBuoy },
     ],
   },
 ];
