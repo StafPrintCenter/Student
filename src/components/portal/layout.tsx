@@ -15,7 +15,6 @@ import { SITE } from "@/data/site";
 import logo from "@/assets/logos.json";
 
 const NAV = [
-  { to: "/payments", label: "Paiements", icon: CreditCard },
 ] as const;
 
 function useIsAuthed() {
