@@ -337,7 +337,7 @@ export function PortalLayout() {
                 <SheetTitle className="sr-only">Navigation</SheetTitle>
               </SheetHeader>
               <BrandMark />
-              <div className="mt-2 flex-1"><SidebarNav onNavigate={() => setMobileOpen(false)} /></div>
+              <div className="mt-2 flex-1"></div>
               <SidebarFooter onNavigate={() => setMobileOpen(false)} />
             </SheetContent>
           </Sheet>
