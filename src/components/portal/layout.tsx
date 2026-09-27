@@ -5,14 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/lib/auth";
 import { notificationApi, searchApi } from "@/lib/api";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { SITE } from "@/data/site";
-import logo from "@/assets/logos.json";
 
 function useIsAuthed() {
   const { user, ready } = useAuth();
