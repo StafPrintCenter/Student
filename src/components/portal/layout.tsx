@@ -5,14 +5,6 @@ import { useAuth } from "@/lib/auth";
 import { notificationApi, searchApi } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 
-function useIsAuthed() {
-  const { user, ready } = useAuth();
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (ready && !user) navigate({ to: "/login" });
-  }, [ready, user, navigate]);
-  return { user, ready };
-}
 
 function ThemeToggle() {
   const [dark, setDark] = useState(false);
