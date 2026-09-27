@@ -30,7 +30,7 @@ const KIND_ICON: Record<StudentDocument["kind"], any> = {
   admin: FileBadge,
 };
 
-export const Route = createFileRoute("/_portal/documents")({
+export const Route = createFileRoute("/_student/documents")({
   head: () => ({
     meta: [
       { title: "Documents - STAF Student Portal" },
