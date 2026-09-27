@@ -1,6 +1,6 @@
 import { Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { BadgeCheck, Bell, Calendar, CreditCard, FileText, GraduationCap, LayoutDashboard, LifeBuoy, LineChart, LogOut, Menu, Moon, Search, Sun, User, Users } from "lucide-react";
+import { Bell, LogOut, Menu, Moon, Search, Sun, User } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/lib/auth";
 import { notificationApi, searchApi } from "@/lib/api";
