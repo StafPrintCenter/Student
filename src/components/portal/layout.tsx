@@ -69,7 +69,6 @@ function SidebarNav({
   onNavigate?: () => void;
   collapsed?: boolean;
 }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
     <nav className="flex flex-col gap-0.5 px-2">
     </nav>
