@@ -40,7 +40,7 @@ import { paymentApi } from "@/lib/api";
 import { formatFCFA } from "@/lib/api/utils";
 import type { PaymentMethod } from "@/lib/api/types";
 
-export const Route = createFileRoute("/_portal/payments")({
+export const Route = createFileRoute("/_student/payments")({
   head: () => ({
     meta: [
       { title: "Paiements - STAF Student Portal" },
