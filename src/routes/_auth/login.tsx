@@ -78,9 +78,14 @@ function LoginPage() {
         />
       </div>
 
-      <div>
-        <Label htmlFor="pw">Mot de passe</Label>
-        <div className="relative mt-1">
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <Label htmlFor="pw">Mot de passe</Label>
+          <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
+            Mot de passe oublié ?
+          </Link>
+        </div>
+        <div className="relative">
           <Input
             id="pw"
             type={showPassword ? "text" : "password"}
