@@ -89,7 +89,7 @@ function LoginPage() {
           <Input
             id="pw"
             type={showPassword ? "text" : "password"}
-            required
+            className="bg-card pr-10"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
