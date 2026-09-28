@@ -96,6 +96,7 @@ function LoginPage() {
             autoComplete="current-password"
             className="bg-card pr-10"
             disabled={loading}
+            required
           />
           <button
             type="button"
