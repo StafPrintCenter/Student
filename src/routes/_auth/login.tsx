@@ -34,7 +34,7 @@ function LoginPage() {
     footer: (
       <span>
         Mot de passe oublié ?{" "}
-        <Link to="/forgot-password" className="font-medium text-foreground underline underline-offset-4">
+        <Link to="/" className="font-medium text-foreground underline underline-offset-4">
           Réinitialiser
         </Link>
       </span>
