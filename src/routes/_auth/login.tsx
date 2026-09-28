@@ -35,7 +35,7 @@ function LoginPage() {
       <span>
         Pas encore inscrire ?{" "}
         <Link to="/" className="font-medium text-foreground underline underline-offset-4">
-          Réinitialiser
+          Souscrire à une formation
         </Link>
       </span>
     ),
