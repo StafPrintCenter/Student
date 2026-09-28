@@ -36,7 +36,7 @@ function LoginPage() {
         Pas encore inscrire ?{" "}
         <Link to={`${SITE_LINK.landingUrl}/trainings`} className="font-medium text-foreground underline underline-offset-4">
           Souscrire à une formation
-        </Link>
+        </a>
       </span>
     ),
   });
