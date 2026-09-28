@@ -34,7 +34,7 @@ function LoginPage() {
     footer: (
       <span>
         Pas encore inscrire ?{" "}
-        <Link to="/" className="font-medium text-foreground underline underline-offset-4">
+        <Link to={`${SITE_LINK.docsUrl}/docs/student/intro`} className="font-medium text-foreground underline underline-offset-4">
           Souscrire à une formation
         </Link>
       </span>
