@@ -31,6 +31,14 @@ function LoginPage() {
   useAuthShellContent({
     title: "Connexion étudiant",
     subtitle: "Accédez à vos formations, vos projets et votre suivi.",
+    footer: (
+      <span>
+        Pas encore inscrire ?{" "}
+        <Link to="/" className="font-medium text-foreground underline underline-offset-4">
+          Réinitialiser
+        </Link>
+      </span>
+    ),
   });
 
   // Redirection automatique si l'étudiant est déjà connecté
