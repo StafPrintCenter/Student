@@ -12,18 +12,17 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as StudentRouteImport } from './routes/_student'
-import { Route as ActivateRouteImport } from './routes/activate'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthInviteRouteImport } from './routes/_auth/invite'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
-import { Route as PortalNotificationsRouteImport } from './routes/_student/_portal.notifications.tsx'
-import { Route as PortalPaymentsRouteImport } from './routes/_student/payments.tsx'
 import { Route as StudentCalendarRouteImport } from './routes/_student/calendar'
 import { Route as StudentCertificatesRouteImport } from './routes/_student/certificates'
 import { Route as StudentCommunityRouteImport } from './routes/_student/community'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
 import { Route as StudentDocumentsRouteImport } from './routes/_student/documents'
+import { Route as StudentNotificationsRouteImport } from './routes/_student/notifications'
+import { Route as StudentPaymentsRouteImport } from './routes/_student/payments'
 import { Route as StudentProfilRouteImport } from './routes/_student/profil'
 import { Route as StudentProgressRouteImport } from './routes/_student/progress'
 import { Route as StudentSupportRouteImport } from './routes/_student/support'
@@ -41,11 +40,6 @@ const AuthRoute = AuthRouteImport.update({
 } as any)
 const StudentRoute = StudentRouteImport.update({
   id: '/_student',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ActivateRoute = ActivateRouteImport.update({
-  id: '/activate',
-  path: '/activate',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
@@ -67,16 +61,6 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => AuthRoute,
-} as any)
-const PortalNotificationsRoute = PortalNotificationsRouteImport.update({
-  id: '/notifications',
-  path: '/notifications',
-  getParentRoute: () => PortalRoute,
-} as any)
-const PortalPaymentsRoute = PortalPaymentsRouteImport.update({
-  id: '/payments',
-  path: '/payments',
-  getParentRoute: () => PortalRoute,
 } as any)
 const StudentCalendarRoute = StudentCalendarRouteImport.update({
   id: '/calendar',
@@ -101,6 +85,16 @@ const StudentDashboardRoute = StudentDashboardRouteImport.update({
 const StudentDocumentsRoute = StudentDocumentsRouteImport.update({
   id: '/documents',
   path: '/documents',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentPaymentsRoute = StudentPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
   getParentRoute: () => StudentRoute,
 } as any)
 const StudentProfilRoute = StudentProfilRouteImport.update({
@@ -131,18 +125,17 @@ const StudentTrainingsIdRoute = StudentTrainingsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
-  '/notifications': typeof PortalNotificationsRoute
-  '/payments': typeof PortalPaymentsRoute
   '/calendar': typeof StudentCalendarRoute
   '/certificates': typeof StudentCertificatesRoute
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/documents': typeof StudentDocumentsRoute
+  '/notifications': typeof StudentNotificationsRoute
+  '/payments': typeof StudentPaymentsRoute
   '/profil': typeof StudentProfilRoute
   '/progress': typeof StudentProgressRoute
   '/support': typeof StudentSupportRoute
@@ -151,18 +144,17 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
-  '/notifications': typeof PortalNotificationsRoute
-  '/payments': typeof PortalPaymentsRoute
   '/calendar': typeof StudentCalendarRoute
   '/certificates': typeof StudentCertificatesRoute
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/documents': typeof StudentDocumentsRoute
+  '/notifications': typeof StudentNotificationsRoute
+  '/payments': typeof StudentPaymentsRoute
   '/profil': typeof StudentProfilRoute
   '/progress': typeof StudentProgressRoute
   '/support': typeof StudentSupportRoute
@@ -174,18 +166,17 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/_student': typeof StudentRouteWithChildren
-  '/activate': typeof ActivateRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_auth/invite': typeof AuthInviteRoute
   '/_auth/login': typeof AuthLoginRoute
-  '/_portal/notifications': typeof PortalNotificationsRoute
-  '/_portal/payments': typeof PortalPaymentsRoute
   '/_student/calendar': typeof StudentCalendarRoute
   '/_student/certificates': typeof StudentCertificatesRoute
   '/_student/community': typeof StudentCommunityRoute
   '/_student/dashboard': typeof StudentDashboardRoute
   '/_student/documents': typeof StudentDocumentsRoute
+  '/_student/notifications': typeof StudentNotificationsRoute
+  '/_student/payments': typeof StudentPaymentsRoute
   '/_student/profil': typeof StudentProfilRoute
   '/_student/progress': typeof StudentProgressRoute
   '/_student/support': typeof StudentSupportRoute
@@ -195,73 +186,69 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-  | '/'
-  | '/activate'
-  | '/forgot-password'
-  | '/reset-password'
-  | '/invite'
-  | '/login'
-  | '/notifications'
-  | '/payments'
-  | '/calendar'
-  | '/certificates'
-  | '/community'
-  | '/dashboard'
-  | '/documents'
-  | '/profil'
-  | '/progress'
-  | '/support'
-  | '/trainings/$id'
-  | '/trainings/'
+    | '/'
+    | '/forgot-password'
+    | '/reset-password'
+    | '/invite'
+    | '/login'
+    | '/calendar'
+    | '/certificates'
+    | '/community'
+    | '/dashboard'
+    | '/documents'
+    | '/notifications'
+    | '/payments'
+    | '/profil'
+    | '/progress'
+    | '/support'
+    | '/trainings/$id'
+    | '/trainings/'
   fileRoutesByTo: FileRoutesByTo
   to:
-  | '/'
-  | '/activate'
-  | '/forgot-password'
-  | '/reset-password'
-  | '/invite'
-  | '/login'
-  | '/notifications'
-  | '/payments'
-  | '/calendar'
-  | '/certificates'
-  | '/community'
-  | '/dashboard'
-  | '/documents'
-  | '/profil'
-  | '/progress'
-  | '/support'
-  | '/trainings/$id'
-  | '/trainings'
+    | '/'
+    | '/forgot-password'
+    | '/reset-password'
+    | '/invite'
+    | '/login'
+    | '/calendar'
+    | '/certificates'
+    | '/community'
+    | '/dashboard'
+    | '/documents'
+    | '/notifications'
+    | '/payments'
+    | '/profil'
+    | '/progress'
+    | '/support'
+    | '/trainings/$id'
+    | '/trainings'
   id:
-  | '__root__'
-  | '/'
-  | '/_auth'
-  | '/_student'
-  | '/activate'
-  | '/forgot-password'
-  | '/reset-password'
-  | '/_auth/invite'
-  | '/_auth/login'
-  | '/_portal/notifications'
-  | '/_portal/payments'
-  | '/_student/calendar'
-  | '/_student/certificates'
-  | '/_student/community'
-  | '/_student/dashboard'
-  | '/_student/documents'
-  | '/_student/profil'
-  | '/_student/progress'
-  | '/_student/support'
-  | '/_student/trainings/$id'
-  | '/_student/trainings/'
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/_student'
+    | '/forgot-password'
+    | '/reset-password'
+    | '/_auth/invite'
+    | '/_auth/login'
+    | '/_student/calendar'
+    | '/_student/certificates'
+    | '/_student/community'
+    | '/_student/dashboard'
+    | '/_student/documents'
+    | '/_student/notifications'
+    | '/_student/payments'
+    | '/_student/profil'
+    | '/_student/progress'
+    | '/_student/support'
+    | '/_student/trainings/$id'
+    | '/_student/trainings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
   StudentRoute: typeof StudentRouteWithChildren
-  ActivateRoute: typeof ActivateRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
 }
@@ -287,13 +274,6 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof StudentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/activate': {
-      id: '/activate'
-      path: '/activate'
-      fullPath: '/activate'
-      preLoaderRoute: typeof ActivateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/forgot-password': {
@@ -323,20 +303,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/login'
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRoute
-    }
-    '/_portal/notifications': {
-      id: '/_portal/notifications'
-      path: '/notifications'
-      fullPath: '/notifications'
-      preLoaderRoute: typeof PortalNotificationsRouteImport
-      parentRoute: typeof PortalRoute
-    }
-    '/_portal/payments': {
-      id: '/_portal/payments'
-      path: '/payments'
-      fullPath: '/payments'
-      preLoaderRoute: typeof PortalPaymentsRouteImport
-      parentRoute: typeof PortalRoute
     }
     '/_student/calendar': {
       id: '/_student/calendar'
@@ -371,6 +337,20 @@ declare module '@tanstack/react-router' {
       path: '/documents'
       fullPath: '/documents'
       preLoaderRoute: typeof StudentDocumentsRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/notifications': {
+      id: '/_student/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof StudentNotificationsRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/payments': {
+      id: '/_student/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof StudentPaymentsRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/profil': {
@@ -429,6 +409,8 @@ interface StudentRouteChildren {
   StudentCommunityRoute: typeof StudentCommunityRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
   StudentDocumentsRoute: typeof StudentDocumentsRoute
+  StudentNotificationsRoute: typeof StudentNotificationsRoute
+  StudentPaymentsRoute: typeof StudentPaymentsRoute
   StudentProfilRoute: typeof StudentProfilRoute
   StudentProgressRoute: typeof StudentProgressRoute
   StudentSupportRoute: typeof StudentSupportRoute
@@ -442,6 +424,8 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentCommunityRoute: StudentCommunityRoute,
   StudentDashboardRoute: StudentDashboardRoute,
   StudentDocumentsRoute: StudentDocumentsRoute,
+  StudentNotificationsRoute: StudentNotificationsRoute,
+  StudentPaymentsRoute: StudentPaymentsRoute,
   StudentProfilRoute: StudentProfilRoute,
   StudentProgressRoute: StudentProgressRoute,
   StudentSupportRoute: StudentSupportRoute,
@@ -456,7 +440,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
   StudentRoute: StudentRouteWithChildren,
-  ActivateRoute: ActivateRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   ResetPasswordRoute: ResetPasswordRoute,
 }
