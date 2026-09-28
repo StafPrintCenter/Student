@@ -13,7 +13,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EmptyState } from "@/components/portal/empty-state";
 import { notificationApi } from "@/lib/api";
 
-export const Route = createFileRoute("/_portal/notifications")({
+export const Route = createFileRoute("/_student/notifications")({
   head: () => ({
     meta: [
       { title: "Notifications - STAF Student Portal" },
