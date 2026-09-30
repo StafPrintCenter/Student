@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { GraduationCap, Users, MapPin, Clock, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
-
 import { PageHeader } from "@/components/portal/page-header";
 import { EmptyState } from "@/components/portal/empty-state";
 import { Badge } from "@/components/ui/badge";
@@ -20,10 +19,7 @@ function formatFCFA(amount: number) {
   return `${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(amount)} FCFA`;
 }
 
-function StatusBadge({
-  status,
-  map,
-}: {
+function StatusBadge({ status, map }: {
   status: string;
   map: Record<string, { label: string; className: string }>;
 }) {
@@ -119,7 +115,7 @@ function MyEnrollments() {
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
               <span className="flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5" /> {e.durationHours}
+                <Clock className="h-3.5 w-3.5" /> {e.duration}
               </span>
               <span className="flex items-center gap-1.5">
                 <Users className="h-3.5 w-3.5" /> {e.seatsRemaining}/{e.maxSeats} places
