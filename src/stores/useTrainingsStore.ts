@@ -24,7 +24,7 @@ export interface TrainingsCatalogParams {
 /* ---- Mes formations (inscriptions de l'étudiant connecté) ---- */
 
 async function fetchTrainings(): Promise<APIStudentTrainingEnrollment[]> {
-  const response = await studentFetch(`/api/v1/student/trainings/list`);
+  const response = await studentFetch(`/api/student/trainings/list`);
   if (!response.ok) throw new Error("Erreur lors de la récupération de vos formations");
   const json: { data: APIStudentTrainingEnrollment[] } = await response.json();
   return json.data;
@@ -49,7 +49,7 @@ async function fetchCatalog(params: TrainingsCatalogParams = {}): Promise<Catalo
   qp.append("perPage", String(params.perPage ?? 12));
   if (params.search) qp.append("search", params.search);
 
-  const response = await studentFetch(`/api/v1/public/trainings/catalogs/list?${qp.toString()}`);
+  const response = await studentFetch(`/api/public/trainings/catalogs/list?${qp.toString()}`);
   if (!response.ok) throw new Error("Erreur lors de la récupération du catalogue");
   return response.json();
 }
@@ -74,7 +74,7 @@ export function useTrainingsCatalog(params: TrainingsCatalogParams = {}) {
 /* ---- Détail public — route /trainings/public/$id, pour toute formation du catalogue ---- */
 
 async function fetchPublicDetail(id: string): Promise<APIPublicTrainingDetail | null> {
-  const response = await studentFetch(`/api/v1/public/trainings/catalogs/${id}`);
+  const response = await studentFetch(`/api/public/trainings/catalogs/${id}`);
   if (response.status === 404) return null;
   if (!response.ok) throw new Error("Erreur lors de la récupération de la formation");
   const json: { data: APIPublicTrainingDetail } = await response.json();
@@ -95,7 +95,7 @@ export function usePublicTrainingDetail(id: string | undefined) {
 /* ---- Détail privé — route /trainings/$id, uniquement pour une formation où l'étudiant est inscrit ---- */
 
 async function fetchTrainingById(id: string): Promise<APIStudentTrainingDetailResponse | null> {
-  const response = await studentFetch(`/api/v1/student/trainings/${id}`);
+  const response = await studentFetch(`/api/student/trainings/${id}`);
   // 403 = "Vous n'êtes pas inscrit à cette formation" côté API, 404 = formation inexistante.
   // On traite les deux comme "pas de contenu privé à afficher ici" — la route /trainings/$id
   // n'est de toute façon censée être atteinte que depuis la table "Mes inscriptions".
@@ -118,7 +118,7 @@ export function useStudentTrainingDetail(id: string | undefined) {
 /* ---- Souscription ---- */
 
 async function subscribeTraining(id: string): Promise<void> {
-  const response = await studentFetch(`/api/v1/student/trainings/${id}/subscribe`, { method: "POST" });
+  const response = await studentFetch(`/api/student/trainings/${id}/subscribe`, { method: "POST" });
   if (!response.ok) throw new Error("Erreur lors de la souscription à la formation");
 }
 
