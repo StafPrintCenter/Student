@@ -4,7 +4,6 @@ import { GraduationCap, Users, MapPin, Clock, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 
 import { PageHeader } from "@/components/portal/page-header";
-import { EnrollmentBadge, PaymentBadge } from "@/components/portal/status-badges";
 import { EmptyState } from "@/components/portal/empty-state";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
