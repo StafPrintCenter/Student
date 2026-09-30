@@ -1,7 +1,38 @@
 /** Aligné sur App\Enums\TrainingLevel (backend) */
 export type TrainingLevel = "Débutant" | "Intermédiaire" | "Avancé";
-type EnrollmentStatus = "confirmed" | "pending" | "cancelled" | "completed";
-type PaymentStatus = "unpaid" | "partial" | "paid";
+
+/** Aligné sur App\Enums\EnrollmentStatus (backend) */
+export type TrainingEnrollmentStatus =
+  | "confirmed"
+  | "in_progress"
+  | "completed"
+  | "waiting_list"
+  | "cancelled"
+  | "expired";
+
+/** Aligné sur App\Enums\PaymentStatus (backend) */
+export type TrainingPaymentStatus = "unpaid" | "partial" | "paid";
+
+interface StatusBadgeConfig {
+  label: string;
+  className: string;
+}
+
+/** Badges dédiés aux formations */
+export const trainingEnrollmentStatusMap: Record<TrainingEnrollmentStatus, StatusBadgeConfig> = {
+  confirmed: { label: "Confirmée", className: "bg-info/15 text-info border-info/40" },
+  in_progress: { label: "En cours", className: "bg-primary/15 text-primary border-primary/40" },
+  completed: { label: "Terminée", className: "bg-success/15 text-success border-success/40" },
+  waiting_list: { label: "Liste d'attente", className: "bg-warning/15 text-warning-foreground border-warning/40" },
+  cancelled: { label: "Annulée", className: "bg-muted text-muted-foreground border-border" },
+  expired: { label: "Expirée", className: "bg-muted text-muted-foreground border-border" },
+};
+
+export const trainingPaymentStatusMap: Record<TrainingPaymentStatus, StatusBadgeConfig> = {
+  unpaid: { label: "Non payé", className: "bg-warning/15 text-warning-foreground border-warning/40" },
+  partial: { label: "Partiel", className: "bg-info/15 text-info border-info/40" },
+  paid: { label: "Payé", className: "bg-success/15 text-success border-success/40" },
+};
 
 /**
  * Une formation à laquelle l'étudiant est inscrit
@@ -17,15 +48,15 @@ export type APIStudentTrainingEnrollment = {
   seatsRemaining: number;
   location: string;
   durationHours: string;
-  status: EnrollmentStatus;
+  status: TrainingEnrollmentStatus;
   progress: number;
-  paymentStatus: PaymentStatus;
+  paymentStatus: TrainingPaymentStatus;
   accessUnlocked: boolean;
   enrolledAt: string;
 };
 
 /**
- * Une formation du catalogue public
+ * Une formation du catalogue public (vue liste)
  * GET /api/v1/public/trainings/catalogs/list
  */
 export type APIPublicTrainingCatalogItem = {
@@ -57,7 +88,25 @@ export type APIPublicTrainingCatalogItem = {
   updatedAt: string;
 };
 
-/** Une leçon d'un module (programme détail) */
+/** Une section du programme public (formation non encore suivie) */
+export type APIPublicTrainingProgramSection = {
+  title: string;
+  items: string[];
+};
+
+/**
+ * Détail public d'une formation — accessible sans être inscrit
+ * GET /api/v1/public/trainings/catalogs/{id}
+ */
+export type APIPublicTrainingDetail = APIPublicTrainingCatalogItem & {
+  audience: string;
+  prerequisites: string[];
+  program: APIPublicTrainingProgramSection[];
+  certification: string;
+  schedule: string;
+};
+
+/** Une leçon d'un module (programme détail, étudiant inscrit) */
 export type APIStudentTrainingLesson = {
   id: string;
   title: string;
@@ -99,23 +148,23 @@ export type APIStudentTrainingDetail = {
   endDate: string;
 };
 
-/** Infos d'inscription de l'étudiant courant pour cette formation (null si pas encore inscrit) */
+/** Infos d'inscription de l'étudiant courant pour cette formation */
 export type APIStudentTrainingEnrollmentInfo = {
   id: string;
-  status: EnrollmentStatus;
+  status: TrainingEnrollmentStatus;
   progress: number;
-  paymentStatus: PaymentStatus;
+  paymentStatus: TrainingPaymentStatus;
   amountPaid: number;
   accessUnlocked: boolean;
 };
 
 /**
  * Réponse complète de GET /api/v1/student/trainings/{id}
- * NB: la clé "data" ici contient les champs de la formation elle-même (pas un wrapper générique)
+ * Renvoyée uniquement si l'étudiant est inscrit (404 sinon — voir usePublicTrainingDetail pour le cas non-inscrit)
  */
 export type APIStudentTrainingDetailResponse = {
   data: APIStudentTrainingDetail;
-  enrollment: APIStudentTrainingEnrollmentInfo | null;
+  enrollment: APIStudentTrainingEnrollmentInfo;
   contentLocked: boolean;
   modules: APIStudentTrainingModule[];
 };
