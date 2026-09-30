@@ -73,7 +73,7 @@ function Dashboard() {
                     <p className="text-xs text-muted-foreground">{r.reason}</p>
                   </div>
                   <Link
-                    to="/trainings/$id"
+                    to="/trainings/$id/mine"
                     params={{ id: r.training_uuid }}
                     className="text-xs font-medium text-primary hover:underline shrink-0 tabular-nums"
                   >
