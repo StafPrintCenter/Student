@@ -9,24 +9,9 @@ export interface BaseModel {
   sort_order?: number;
 }
 
-export type EnrollmentStatus =
-  | "pending_approval"
-  | "awaiting_initial_payment"
-  | "waiting_payment"
-  | "confirmed"
-  | "in_progress"
-  | "completed"
-  | "cancelled"
-  | "suspended"
-  | "expired";
+export type EnrollmentStatus = | "pending_approval" | "awaiting_initial_payment" | "waiting_payment" | "confirmed" | "in_progress" | "completed" | "cancelled" | "suspended" | "expired";
 
-export type PaymentStatus =
-  | "pending"
-  | "partial"
-  | "paid"
-  | "overdue"
-  | "cancelled"
-  | "refunded";
+export type PaymentStatus = | "pending" | "partial" | "paid" | "overdue" | "cancelled" | "refunded";
 
 export type CertificateStatus =
   | "not_eligible"
@@ -163,15 +148,15 @@ export interface Certificate extends BaseModel {
 
 export interface NotificationItem extends BaseModel {
   kind:
-    | "payment_received"
-    | "payment_overdue"
-    | "payment_reminder"
-    | "lesson_published"
-    | "assignment_graded"
-    | "certificate_available"
-    | "admin_message"
-    | "training_updated"
-    | "reminder";
+  | "payment_received"
+  | "payment_overdue"
+  | "payment_reminder"
+  | "lesson_published"
+  | "assignment_graded"
+  | "certificate_available"
+  | "admin_message"
+  | "training_updated"
+  | "reminder";
   title: string;
   body: string;
   read: boolean;
