@@ -98,7 +98,6 @@ async function fetchTrainingById(id: string): Promise<APIStudentTrainingDetailRe
 
 export const fetchStudentTrainingById = fetchTrainingById;
 
-
 export function useStudentTrainingDetail(id: string | undefined, enabled = true) {
   const query = useQuery({
     queryKey: [resourceKey, "student-detail", id],
