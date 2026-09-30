@@ -13,16 +13,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import {
-  useStudentTrainingsList,
-  useTrainingsCatalog,
-  useSubscribeToTraining,
-} from "@/stores/useTrainingsStore";
-import {
-  trainingEnrollmentStatusMap,
-  trainingPaymentStatusMap,
-  type APIPublicTrainingCatalogItem,
-} from "@/data/trainings";
+import { useStudentTrainingsList, useTrainingsCatalog, useSubscribeToTraining } from "@/stores/useTrainingsStore";
+import { trainingEnrollmentStatusMap, trainingPaymentStatusMap, type APIPublicTrainingCatalogItem } from "@/data/trainings";
 
 function formatFCFA(amount: number) {
   return `${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(amount)} FCFA`;
@@ -130,7 +122,7 @@ function MyEnrollments() {
                 <Clock className="h-3.5 w-3.5" /> {e.durationHours}
               </span>
               <span className="flex items-center gap-1.5">
-                <Users className="h-3.5 w-3.5" /> {e.seatsRemaining}/{e.maxSeats} places restantes
+                <Users className="h-3.5 w-3.5" /> {e.seatsRemaining}/{e.maxSeats} places
               </span>
               <span className="col-span-2 flex items-center gap-1.5">
                 <MapPin className="h-3.5 w-3.5" /> {e.location}
