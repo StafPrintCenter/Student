@@ -102,7 +102,7 @@ export function useStudentTrainingDetail(id: string | undefined, enabled = true)
   const query = useQuery({
     queryKey: [resourceKey, "student-detail", id],
     queryFn: () => fetchTrainingById(id as string),
-    enabled: !!id,
+    enabled: !!id && enabled,
   });
   return { item: query.data ?? null, isLoading: query.isLoading, isError: query.isError, refetch: query.refetch };
 }
