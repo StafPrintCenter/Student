@@ -16,7 +16,7 @@ export interface TrainingsCatalogParams {
   search?: string;
 }
 
-/* ---- Mes formations (inscriptions de l'étudiant connecté) ---- */
+/* ---- Mes formations ---- */
 
 async function fetchTrainings(): Promise<APIStudentTrainingEnrollment[]> {
   const response = await studentFetch(`/api/student/trainings/list`);
