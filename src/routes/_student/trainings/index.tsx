@@ -112,7 +112,7 @@ function MyEnrollments() {
                 <p className="text-xs text-muted-foreground">{e.theme} · {e.level}</p>
                 {/* Route privée : réservée aux formations où l'étudiant est inscrit */}
                 <Link
-                  to="/trainings/$id"
+                  to="/trainings/$id/mine"
                   params={{ id: e.trainingId }}
                   className="mt-0.5 block font-medium truncate hover:underline"
                 >
