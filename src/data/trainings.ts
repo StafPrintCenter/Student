@@ -52,6 +52,7 @@ export type APIStudentTrainingEnrollment = {
   paymentStatus: TrainingPaymentStatus;
   accessUnlocked: boolean;
   enrolledAt: string;
+  coverColor: string;
 };
 
 /**
