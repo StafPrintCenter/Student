@@ -1,5 +1,3 @@
-// src/data/trainings.ts
-
 /** Aligné sur App\Enums\TrainingLevel (backend) */
 export type TrainingLevel = "Débutant" | "Intermédiaire" | "Avancé";
 
