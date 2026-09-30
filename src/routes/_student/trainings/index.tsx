@@ -110,6 +110,7 @@ function MyEnrollments() {
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">
                 <p className="text-xs text-muted-foreground">{e.theme} · {e.level}</p>
+                {/* Route privée : réservée aux formations où l'étudiant est inscrit */}
                 <Link
                   to="/trainings/$id"
                   params={{ id: e.trainingId }}
@@ -207,7 +208,8 @@ function Catalog() {
                 <CardContent className="flex flex-1 flex-col space-y-3 p-5">
                   <div>
                     <p className="text-xs text-muted-foreground">{t.theme} · {t.level}</p>
-                    <Link to="/trainings/$id" params={{ id: t.id }} className="mt-0.5 block font-medium hover:underline">
+                    {/* Route publique : accessible pour toute formation du catalogue, inscrit ou non */}
+                    <Link to="/trainings/public/$id" params={{ id: t.id }} className="mt-0.5 block font-medium hover:underline">
                       {t.title}
                     </Link>
                   </div>
