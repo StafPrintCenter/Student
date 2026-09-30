@@ -142,7 +142,7 @@ function MyEnrollments() {
             <div className="flex items-center justify-between gap-2 border-t border-border pt-2">
               <StatusBadge status={e.paymentStatus} map={trainingPaymentStatusMap} />
               <Button size="sm" variant="ghost" asChild>
-                <Link to="/trainings/$id" params={{ id: e.trainingId }}>
+                <Link to="/trainings/$id/mine" params={{ id: e.trainingId }}>
                   Ouvrir <ArrowRight className="ml-1 h-3.5 w-3.5" />
                 </Link>
               </Button>
