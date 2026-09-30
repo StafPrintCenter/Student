@@ -66,7 +66,28 @@ export function useTrainingsCatalog(params: TrainingsCatalogParams = {}) {
   };
 }
 
-/* ---- Détail d'une formation (programme + inscription + verrouillage) ---- */
+/* ---- Détail public ---- */
+
+async function fetchPublicDetail(id: string): Promise<APIPublicTrainingDetail | null> {
+  const response = await studentFetch(`/api/public/trainings/catalogs/${id}`);
+  if (response.status === 404) return null;
+  if (!response.ok) throw new Error("Erreur lors de la récupération de la formation");
+  const json: { data: APIPublicTrainingDetail } = await response.json();
+  return json.data;
+}
+
+export const fetchPublicTrainingDetail = fetchPublicDetail;
+
+export function usePublicTrainingDetail(id: string | undefined) {
+  const query = useQuery({
+    queryKey: [resourceKey, "public-detail", id],
+    queryFn: () => fetchPublicDetail(id as string),
+    enabled: !!id,
+  });
+  return { item: query.data ?? null, isLoading: query.isLoading, isError: query.isError, refetch: query.refetch };
+}
+
+/* ---- Détail privé (programme + inscription + verrouillage) — uniquement si inscrit ---- */
 
 async function fetchTrainingById(id: string): Promise<APIStudentTrainingDetailResponse | null> {
   const response = await studentFetch(`/api/student/trainings/${id}`);
