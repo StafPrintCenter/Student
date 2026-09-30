@@ -105,7 +105,11 @@ function MyEnrollments() {
   return (
     <div className="grid gap-4 md:grid-cols-2">
       {items.map((e) => (
-        <Card key={e.enrollmentId} className="overflow-hidden">
+        <Card
+          key={e.enrollmentId}
+          className="overflow-hidden border-3"
+          style={{ borderTopColor: e.coverColor ?? "var(--border)" }}
+        >
           <CardContent className="p-5 space-y-4">
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">
