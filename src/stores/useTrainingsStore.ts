@@ -91,9 +91,7 @@ export function usePublicTrainingDetail(id: string | undefined) {
 
 async function fetchTrainingById(id: string): Promise<APIStudentTrainingDetailResponse | null> {
   const response = await studentFetch(`/api/student/trainings/${id}`);
-  // 403 = "Vous n'êtes pas inscrit à cette formation" côté API, 404 = formation inexistante.
-  // On traite les deux comme "pas de contenu privé à afficher ici" — la route /trainings/$id
-  // n'est de toute façon censée être atteinte que depuis la table "Mes inscriptions".
+
   if (response.status === 404 || response.status === 403) return null;
   if (!response.ok) throw new Error("Erreur lors de la récupération de la formation");
   return response.json();
