@@ -46,7 +46,7 @@ export type APIStudentTrainingEnrollment = {
   maxSeats: number;
   seatsRemaining: number;
   location: string;
-  durationHours: string;
+  duration: string;
   status: TrainingEnrollmentStatus;
   progress: number;
   paymentStatus: TrainingPaymentStatus;
@@ -57,7 +57,6 @@ export type APIStudentTrainingEnrollment = {
 
 /**
  * Une formation du catalogue public (vue liste)
- * GET /api/v1/public/trainings/catalogs/list
  */
 export type APIPublicTrainingCatalogItem = {
   id: string;
