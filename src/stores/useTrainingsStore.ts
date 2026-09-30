@@ -1,10 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
-import type {
-  APIStudentTrainingEnrollment,
-  APIStudentTrainingDetailResponse,
-  APIPublicTrainingCatalogItem,
-} from "@/data/trainings";
+import type { APIStudentTrainingEnrollment, APIStudentTrainingDetailResponse, APIPublicTrainingCatalogItem } from "@/data/trainings";
 
 interface PaginatedResponse<T> {
   data: T[];
