@@ -1,5 +1,7 @@
 /** Aligné sur App\Enums\TrainingLevel (backend) */
 export type TrainingLevel = "Débutant" | "Intermédiaire" | "Avancé";
+type EnrollmentStatus = "confirmed" | "pending" | "cancelled" | "completed";
+type PaymentStatus = "unpaid" | "partial" | "paid";
 
 /**
  * Une formation à laquelle l'étudiant est inscrit
@@ -15,9 +17,9 @@ export type APIStudentTrainingEnrollment = {
   seatsRemaining: number;
   location: string;
   durationHours: string;
-  status: string; // "confirmed" | ...
+  status: EnrollmentStatus;
   progress: number;
-  paymentStatus: string; // "unpaid" | "paid" | ...
+  paymentStatus: PaymentStatus;
   accessUnlocked: boolean;
   enrolledAt: string;
 };
@@ -100,9 +102,9 @@ export type APIStudentTrainingDetail = {
 /** Infos d'inscription de l'étudiant courant pour cette formation (null si pas encore inscrit) */
 export type APIStudentTrainingEnrollmentInfo = {
   id: string;
-  status: string;
+  status: EnrollmentStatus;
   progress: number;
-  paymentStatus: string;
+  paymentStatus: PaymentStatus;
   amountPaid: number;
   accessUnlocked: boolean;
 };
