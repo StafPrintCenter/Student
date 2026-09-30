@@ -139,7 +139,7 @@ function Dashboard() {
             {data.current_trainings.map((e) => (
               <Link
                 key={e.uuid}
-                to="/trainings/$id"
+                to="/trainings/$id/mine"
                 params={{ id: e.training.uuid }}
                 className="block rounded-xl border border-border p-4 hover:border-primary/40 hover:bg-muted/40 transition-colors"
               >
