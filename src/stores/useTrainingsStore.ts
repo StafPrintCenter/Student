@@ -36,7 +36,7 @@ export function useStudentTrainingsList() {
   return { items: query.data ?? [], isLoading: query.isLoading, isError: query.isError, refetch: query.refetch };
 }
 
-/* ---- Catalogue public (liste) ---- */
+/* ---- Catalogue public ---- */
 
 async function fetchCatalog(params: TrainingsCatalogParams = {}): Promise<CatalogListResponse> {
   const qp = new URLSearchParams();
