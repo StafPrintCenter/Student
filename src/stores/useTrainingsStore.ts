@@ -98,7 +98,12 @@ async function fetchTrainingById(id: string): Promise<APIStudentTrainingDetailRe
 
 export const fetchStudentTrainingById = fetchTrainingById;
 
-export function useStudentTrainingDetail(id: string | undefined) {
+/**
+ * `enabled` doit être mis à `false` tant que l'inscription de l'étudiant n'est pas confirmée :
+ * l'API renvoie 404 pour un étudiant non inscrit, inutile d'appeler cet endpoint dans ce cas
+ * (voir usePublicTrainingDetail pour afficher la formation avant inscription).
+ */
+export function useStudentTrainingDetail(id: string | undefined, enabled = true) {
   const query = useQuery({
     queryKey: [resourceKey, "student-detail", id],
     queryFn: () => fetchTrainingById(id as string),
