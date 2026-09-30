@@ -185,7 +185,7 @@ function PublicTrainingDetail() {
               </div>
               {isEnrolled ? (
                 <Button className="w-full" variant="outline" asChild>
-                  <Link to="/trainings/$id" params={{ id: training.id }}>Voir ma formation</Link>
+                  <Link to="/trainings/$id/mine" params={{ id: training.id }}>Voir ma formation</Link>
                 </Button>
               ) : (
                 <Button className="w-full" disabled={!canEnroll || subscribeMutation.isPending} onClick={handleSubscribe}>
