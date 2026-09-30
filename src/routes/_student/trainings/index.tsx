@@ -1,4 +1,3 @@
-// src/routes/_student/trainings/index.tsx
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { GraduationCap, Users, MapPin, Clock, ArrowRight } from "lucide-react";
