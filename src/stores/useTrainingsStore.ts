@@ -1,4 +1,3 @@
-// src/stores/useTrainingsStore.ts
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
 import type {
