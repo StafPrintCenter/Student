@@ -5,22 +5,42 @@ import { toast } from "sonner";
 
 import { PageHeader } from "@/components/portal/page-header";
 import { EmptyState } from "@/components/portal/empty-state";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import {
   useStudentTrainingsList,
   useTrainingsCatalog,
   useSubscribeToTraining,
 } from "@/stores/useTrainingsStore";
-import type { APIPublicTrainingCatalogItem } from "@/data/trainings";
-import { toEnrollmentStatus, toPaymentStatus } from "@/lib/status-mappers";
+import {
+  trainingEnrollmentStatusMap,
+  trainingPaymentStatusMap,
+  type APIPublicTrainingCatalogItem,
+} from "@/data/trainings";
 
 function formatFCFA(amount: number) {
   return `${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(amount)} FCFA`;
+}
+
+function StatusBadge({
+  status,
+  map,
+}: {
+  status: string;
+  map: Record<string, { label: string; className: string }>;
+}) {
+  const config = map[status] ?? { label: status, className: "bg-muted text-muted-foreground border-border" };
+  return (
+    <Badge variant="outline" className={cn("font-medium", config.className)}>
+      {config.label}
+    </Badge>
+  );
 }
 
 export const Route = createFileRoute("/_student/trainings/")({
@@ -98,11 +118,11 @@ function MyEnrollments() {
                   {e.trainingTitle}
                 </Link>
               </div>
-              <EnrollmentBadge status={toEnrollmentStatus(e.status)} />
+              <StatusBadge status={e.status} map={trainingEnrollmentStatusMap} />
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
               <span className="flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5" /> {e.duration}
+                <Clock className="h-3.5 w-3.5" /> {e.durationHours}
               </span>
               <span className="flex items-center gap-1.5">
                 <Users className="h-3.5 w-3.5" /> {e.seatsRemaining}/{e.maxSeats} places restantes
@@ -119,7 +139,7 @@ function MyEnrollments() {
               <Progress value={e.progress} className="h-2" />
             </div>
             <div className="flex items-center justify-between gap-2 border-t border-border pt-2">
-              <PaymentBadge status={toPaymentStatus(e.paymentStatus)} />
+              <StatusBadge status={e.paymentStatus} map={trainingPaymentStatusMap} />
               <Button size="sm" variant="ghost" asChild>
                 <Link to="/trainings/$id" params={{ id: e.trainingId }}>
                   Ouvrir <ArrowRight className="ml-1 h-3.5 w-3.5" />
