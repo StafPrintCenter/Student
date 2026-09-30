@@ -1,10 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import type {
-  CertificateStatus,
-  EnrollmentStatus,
-  PaymentStatus,
-  TicketStatus,
-} from "@/lib/api/types";
+import type { CertificateStatus, EnrollmentStatus, PaymentStatus, TicketStatus } from "@/lib/api/types";
 import { cn } from "@/lib/utils";
 
 const enrollmentMap: Record<EnrollmentStatus, { label: string; className: string }> = {
