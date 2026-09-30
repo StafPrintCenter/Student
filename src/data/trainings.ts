@@ -36,7 +36,6 @@ export const trainingPaymentStatusMap: Record<TrainingPaymentStatus, StatusBadge
 
 /**
  * Une formation à laquelle l'étudiant est inscrit
- * GET /api/v1/student/trainings/list
  */
 export type APIStudentTrainingEnrollment = {
   enrollmentId: string;
