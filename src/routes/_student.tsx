@@ -11,6 +11,7 @@ export const Route = createFileRoute("/_student")({
 function StudentLayout() {
   const { ready, isAuthenticated } = useStudentAuth();
   const navigate = useNavigate();
+  const currentHref = useLocation({ select: (location) => location.href });
 
   useEffect(() => {
     if (ready && !isAuthenticated) {
