@@ -128,3 +128,15 @@ function LoginPage() {
     </form>
   );
 }
+
+function getInternalRedirect(redirectTo?: string) {
+  if (!redirectTo || !redirectTo.startsWith("/")) return null;
+
+  try {
+    const url = new URL(redirectTo, window.location.origin);
+    if (url.origin !== window.location.origin) return null;
+    return `${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return null;
+  }
+}
