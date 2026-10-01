@@ -14,6 +14,7 @@ function StudentLayout() {
   const currentHref = useLocation({ select: (location) => location.href });
   const requestedHref = useRef(currentHref);
   const redirectStarted = useRef(false);
+  const wasAuthenticated = useRef(false);
 
   useEffect(() => {
     if (ready && !isAuthenticated && !redirectStarted.current) {
