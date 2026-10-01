@@ -122,7 +122,7 @@ function MyEnrollments() {
               <span className="flex items-center gap-1.5">
                 <Users className="h-3.5 w-3.5" /> {e.seatsRemaining}/{e.maxSeats} places
               </span>
-              <span className="col-span-2 flex items-center gap-1.5">
+              <span className="flex items-center gap-1.5">
                 <MapPin className="h-3.5 w-3.5" /> {e.location}
               </span>
               <span className="flex items-center gap-1.5">
