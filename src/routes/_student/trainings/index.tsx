@@ -223,7 +223,10 @@ function Catalog() {
                       size="sm"
                       disabled={!canEnroll || subscribeMutation.isPending}
                       onClick={() => handleSubscribe(t)}
-                      className={cn(closed && "opacity-50 cursor-not-allowed")}
+                      className={cn(
+                        already && "opacity-50",
+                        closed && "bg-muted text-muted-foreground hover:bg-muted"
+                      )}
                     >
                       {isSubmittingThis ? (
                         <>
