@@ -84,7 +84,7 @@ function PublicTrainingDetail() {
             <Badge variant="outline">{training.theme}</Badge>
             <Badge variant="outline">{training.level}</Badge>
             <Badge variant="outline">{training.duration}</Badge>
-            {isEnrolled && <Badge className="border-emerald/40 bg-emerald/15 text-emerald">Déjà inscrit</Badge>}
+            {isEnrolled && <Badge variant="outline" className="border-emerald/40 bg-emerald/15 text-emerald">Déjà inscrit</Badge>}
           </div>
           <h1 className="font-display text-3xl leading-tight md:text-4xl">{training.title}</h1>
           <p className="max-w-3xl text-sm text-muted-foreground">{training.short}</p>
