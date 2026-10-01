@@ -201,7 +201,6 @@ function Catalog() {
                 <CardContent className="flex flex-1 flex-col space-y-3 p-5">
                   <div>
                     <p className="text-xs text-muted-foreground">{t.theme} · {t.level}</p>
-                    {/* Route publique : accessible pour toute formation du catalogue, inscrit ou non */}
                     <Link to="/trainings/$id/catalogue" params={{ id: t.id }} className="mt-0.5 block font-medium hover:underline">
                       {t.title}
                     </Link>
