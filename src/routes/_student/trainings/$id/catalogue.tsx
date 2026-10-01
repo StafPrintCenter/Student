@@ -109,7 +109,7 @@ function PublicTrainingDetail() {
               <ul className="grid gap-2 sm:grid-cols-2">
                 {training.objectives.map((o, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success" />
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald" />
                     <span>{o}</span>
                   </li>
                 ))}
