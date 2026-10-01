@@ -1,9 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import {
-  ArrowLeft, BookOpen, Calendar, CheckCircle2, Circle, Clock, Lock, MapPin, Users, Target,
-  Trophy, ClipboardList, Sparkles, Video,
-} from "lucide-react";
+import { ArrowLeft, BookOpen, Calendar, CheckCircle2, Circle, Clock, Lock, MapPin, Users, Target, Trophy, ClipboardList, Sparkles, Video } from "lucide-react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
