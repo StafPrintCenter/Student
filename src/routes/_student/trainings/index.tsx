@@ -126,7 +126,7 @@ function MyEnrollments() {
                 <MapPin className="h-3.5 w-3.5" /> {e.location}
               </span>
               <span className="flex items-center gap-1.5">
-                <MapPin className="h-3.5 w-3.5" /> {format(new Date(e.enrolledAt), "d MMM yyyy hh:mm", { locale: fr })}
+                <Calendar className="h-3.5 w-3.5" /> {format(new Date(e.enrolledAt), "d MMM yyyy hh:mm", { locale: fr })}
               </span>
             </div>
             <div>
