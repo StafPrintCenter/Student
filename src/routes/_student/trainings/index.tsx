@@ -125,6 +125,9 @@ function MyEnrollments() {
               <span className="col-span-2 flex items-center gap-1.5">
                 <MapPin className="h-3.5 w-3.5" /> {e.location}
               </span>
+              <span className="flex items-center gap-1.5">
+                <MapPin className="h-3.5 w-3.5" /> {format(new Date(e.enrolledAt), "d MMM yyyy hh:mm", { locale: fr })}
+              </span>
             </div>
             <div>
               <div className="mb-1 flex items-center justify-between text-xs">
