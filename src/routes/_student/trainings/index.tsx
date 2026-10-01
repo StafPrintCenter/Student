@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { GraduationCap, Users, MapPin, Clock, ArrowRight, Loader2 } from "lucide-react";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 import { toast } from "sonner";
 import { PageHeader } from "@/components/portal/page-header";
 import { EmptyState } from "@/components/portal/empty-state";
