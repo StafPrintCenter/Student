@@ -219,8 +219,20 @@ function Catalog() {
                       <p className="text-xs text-muted-foreground">Prix</p>
                       <p className="font-semibold tabular-nums">{formatFCFA(t.price)}</p>
                     </div>
-                    <Button size="sm" disabled={!canEnroll || subscribeMutation.isPending} onClick={() => handleSubscribe(t)}>
-                      {cta}
+                    <Button
+                      size="sm"
+                      disabled={!canEnroll || subscribeMutation.isPending}
+                      onClick={() => handleSubscribe(t)}
+                      className={cn(closed && "opacity-50 cursor-not-allowed")}
+                    >
+                      {isSubmittingThis ? (
+                        <>
+                          <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+                          Inscription…
+                        </>
+                      ) : (
+                        cta
+                      )}
                     </Button>
                   </div>
                 </CardContent>
