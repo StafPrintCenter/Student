@@ -182,6 +182,7 @@ function Catalog() {
             const already = enrolledIds.has(t.id);
             const closed = t.enrollmentStatus !== "open" || deadlinePassed;
             const canEnroll = !already && !closed && (t.seatsRemaining > 0 || t.waitingListEnabled);
+            const isSubmittingThis = subscribeMutation.isPending && subscribeMutation.variables === t.id;
             const cta = already
               ? "Déjà inscrit"
               : closed
