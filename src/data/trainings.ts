@@ -155,6 +155,7 @@ export type APIStudentTrainingEnrollmentInfo = {
   paymentStatus: TrainingPaymentStatus;
   amountPaid: number;
   accessUnlocked: boolean;
+  enrolledAt: string;
 };
 
 /**
