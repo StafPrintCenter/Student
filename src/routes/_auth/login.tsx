@@ -60,8 +60,11 @@ function LoginPage() {
 
   // Redirection automatique si l'étudiant est déjà connecté
   useEffect(() => {
-    if (ready && isAuthenticated) navigate({ to: "/dashboard" });
-  }, [ready, isAuthenticated, navigate]);
+    if (ready && isAuthenticated) {
+      if (destination) router.history.push(destination);
+      else navigate({ to: "/dashboard" });
+    }
+  }, [ready, isAuthenticated, destination, navigate, router]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
