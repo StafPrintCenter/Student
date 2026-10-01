@@ -171,6 +171,10 @@ function TrainingDetail() {
             <CardHeader><CardTitle className="text-base">Votre inscription</CardTitle></CardHeader>
             <CardContent className="space-y-3 text-sm">
               <div className="flex items-center justify-between">
+                <span className="text-muted-foreground">Inscription</span>
+                {format(new Date(enrollment.enrolledAt), "d MMM yyyy à hh:mm", { locale: fr })}
+              </div>
+              <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Statut</span>
                 <StatusBadge status={enrollment.status} map={trainingEnrollmentStatusMap} />
               </div>
