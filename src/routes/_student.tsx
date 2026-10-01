@@ -20,7 +20,7 @@ function StudentLayout() {
       redirectStarted.current = true;
       navigate({ to: "/login", search: { redirectTo: requestedHref.current } });
     }
-  }, [ready, isAuthenticated, currentHref, navigate]);
+  }, [ready, isAuthenticated, navigate]);
 
   if (!ready || !isAuthenticated) {
     return (
