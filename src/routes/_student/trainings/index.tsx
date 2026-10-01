@@ -221,6 +221,7 @@ function Catalog() {
                     </div>
                     <Button
                       size="sm"
+                      variant={closed ? "secondary" : "default"}
                       disabled={!canEnroll || subscribeMutation.isPending}
                       onClick={() => handleSubscribe(t)}
                       className={cn(
