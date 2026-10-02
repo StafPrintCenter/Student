@@ -84,7 +84,7 @@ function TrainingDetail() {
           className="relative h-24"
           style={{ background: `linear-gradient(135deg, ${training.coverColor}, color-mix(in oklab, ${training.coverColor} 30%, transparent))` }}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.25),transparent_60%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.25),transparent_60%)]" />
         </div>
         <div className="space-y-4 p-6 md:p-8">
           <div className="flex flex-wrap items-center gap-2 text-xs">
