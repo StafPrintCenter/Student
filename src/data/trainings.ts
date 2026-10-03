@@ -141,6 +141,7 @@ export type APIStudentTrainingDetail = {
   objectives: string[];
   maxSeats: number;
   seatsRemaining: number;
+  accessMinRatio: string;
   location: string;
   coverColor: string;
   startDate: string;
