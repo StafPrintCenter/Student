@@ -13,6 +13,21 @@ export type TrainingEnrollmentStatus =
 /** Aligné sur App\Enums\PaymentStatus (backend) */
 export type TrainingPaymentStatus = "unpaid" | "partial" | "paid";
 
+/** Aligné sur App\Enums\LessonKind (backend) */
+export type LessonKind = "video" | "reading" | "quiz" | "exercise" | "assignment" | "project";
+
+export const lessonKindLabels: Record<LessonKind, string> = {
+  video: "Vidéo",
+  reading: "Lecture",
+  quiz: "Quiz",
+  exercise: "Exercice",
+  assignment: "Devoir à rendre",
+  project: "Projet",
+};
+
+/** Leçons dont la progression se suit via MarkProgressController (/student/lessons/{id}/progress) */
+export const TRACKABLE_LESSON_KINDS: LessonKind[] = ["video", "reading"];
+
 interface StatusBadgeConfig {
   label: string;
   className: string;
@@ -109,14 +124,14 @@ export type APIPublicTrainingDetail = APIPublicTrainingCatalogItem & {
 export type APIStudentTrainingLesson = {
   id: string;
   title: string;
-  kind: "video" | "reading" | "quiz" | "exercise" | "assignment" | "project";
-  durationMinutes: number;
+  kind: LessonKind;
+  durationMinutes: number | null;
   sortOrder: number;
   isMandatory: boolean;
   brief: string | null;
   content: string | null;
   videoUrl: string | null;
-  chapters: unknown | null;
+  chapters: string[] | null;
 };
 
 /** Un module (regroupement de leçons) */
@@ -139,9 +154,9 @@ export type APIStudentTrainingDetail = {
   durationHours: number;
   short: string;
   objectives: string[];
+  accessMinRatio: string;
   maxSeats: number;
   seatsRemaining: number;
-  accessMinRatio: string;
   location: string;
   coverColor: string;
   startDate: string;
@@ -161,7 +176,7 @@ export type APIStudentTrainingEnrollmentInfo = {
 
 /**
  * Réponse complète de GET /api/v1/student/trainings/{id}
- * Renvoyée uniquement si l'étudiant est inscrit (404 sinon — voir usePublicTrainingDetail pour le cas non-inscrit)
+ * Renvoyée uniquement si l'étudiant est inscrit (403/404 sinon)
  */
 export type APIStudentTrainingDetailResponse = {
   data: APIStudentTrainingDetail;
