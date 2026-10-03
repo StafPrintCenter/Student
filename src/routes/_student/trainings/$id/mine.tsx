@@ -14,7 +14,7 @@ import { EmptyState } from "@/components/portal/empty-state";
 import { LessonDialog, kindIcons, Circle } from "@/components/portal/lesson-dialog";
 import { cn } from "@/lib/utils";
 import { useStudentTrainingDetail } from "@/stores/useTrainingsStore";
-import { trainingEnrollmentStatusMap, trainingPaymentStatusMap, type APIStudentTrainingLesson } from "@/data/trainings";
+import { trainingEnrollmentStatusMap, trainingPaymentStatusMap, lessonKindLabels, type APIStudentTrainingLesson } from "@/data/trainings";
 
 function StatusBadge({ status, map }: {
   status: string;
@@ -275,7 +275,10 @@ function LessonRow({ lesson, locked, onOpen }: { lesson: APIStudentTrainingLesso
             <Icon className="h-4 w-4 shrink-0 text-primary" />
           )}
           <span className="truncate">{lesson.title}</span>
-          <Badge variant="outline" className="text-[10px] uppercase tracking-wider">{lesson.kind}</Badge>
+          {/* avant : {lesson.kind} — maintenant le libellé mappé */}
+          <Badge variant="outline" className="text-[10px] uppercase tracking-wider">
+            {lessonKindLabels[lesson.kind] ?? lesson.kind}
+          </Badge>
           {lesson.isMandatory && (
             <Badge variant="outline" className="border-warning/40 bg-warning/10 text-[10px] text-warning-foreground">
               Obligatoire
