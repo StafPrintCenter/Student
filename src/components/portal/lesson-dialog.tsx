@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
   BookOpen, Circle, ClipboardList, ListOrdered, Sparkles, Trophy, Video, FileText, CheckCircle2,
@@ -19,20 +19,66 @@ export const kindIcons: Record<string, typeof Video> = {
   project: Sparkles,
 };
 
-/** Extrait l'id d'une vidéo YouTube depuis différents formats d'URL */
-function getYoutubeEmbedUrl(url: string): string | null {
+/* ---- YouTube IFrame API : chargement global partagé ---- */
+
+declare global {
+  interface Window {
+    YT?: {
+      Player: new (
+        el: HTMLElement,
+        opts: {
+          videoId: string;
+          playerVars?: Record<string, unknown>;
+          events?: {
+            onReady?: () => void;
+            onStateChange?: (e: { data: number }) => void;
+          };
+        }
+      ) => YoutubePlayerInstance;
+      PlayerState: { PLAYING: number; ENDED: number; PAUSED: number };
+    };
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
+
+interface YoutubePlayerInstance {
+  getCurrentTime(): number;
+  getDuration(): number;
+  destroy(): void;
+}
+
+let youtubeApiPromise: Promise<void> | null = null;
+
+function loadYoutubeIframeApi(): Promise<void> {
+  if (typeof window === "undefined") return Promise.resolve();
+  if (window.YT?.Player) return Promise.resolve();
+  if (youtubeApiPromise) return youtubeApiPromise;
+
+  youtubeApiPromise = new Promise((resolve) => {
+    const existing = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      existing?.();
+      resolve();
+    };
+    if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+      const script = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  });
+  return youtubeApiPromise;
+}
+
+function extractYoutubeVideoId(url: string): string | null {
   try {
     const u = new URL(url);
-    let videoId: string | null = null;
-
-    if (u.hostname.includes("youtu.be")) {
-      videoId = u.pathname.slice(1);
-    } else if (u.hostname.includes("youtube.com")) {
-      if (u.pathname === "/watch") videoId = u.searchParams.get("v");
-      else if (u.pathname.startsWith("/embed/")) return url;
+    if (u.hostname.includes("youtu.be")) return u.pathname.slice(1);
+    if (u.hostname.includes("youtube.com")) {
+      if (u.pathname === "/watch") return u.searchParams.get("v");
+      if (u.pathname.startsWith("/embed/")) return u.pathname.split("/embed/")[1] ?? null;
     }
-
-    return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+    return null;
   } catch {
     return null;
   }
@@ -86,7 +132,7 @@ export function LessonDialog({ lesson, onClose }: { lesson: APIStudentTrainingLe
           {lesson.brief && <DialogDescription>{lesson.brief}</DialogDescription>}
         </DialogHeader>
 
-        <LessonBody lesson={lesson} onReportProgress={reportProgress} />
+        <LessonBody lesson={lesson} onReportProgress={reportProgress} justCompleted={justCompleted} />
 
         <ChaptersList chapters={lesson.chapters} />
 
@@ -117,13 +163,15 @@ export function LessonDialog({ lesson, onClose }: { lesson: APIStudentTrainingLe
 function LessonBody({
   lesson,
   onReportProgress,
+  justCompleted,
 }: {
   lesson: APIStudentTrainingLesson;
   onReportProgress: (payload: { watched_seconds: number } | { completed: boolean }) => void;
+  justCompleted: boolean;
 }) {
   switch (lesson.kind) {
     case "video":
-      return <VideoBlock lesson={lesson} onReportProgress={onReportProgress} />;
+      return <VideoBlock lesson={lesson} onReportProgress={onReportProgress} justCompleted={justCompleted} />;
     case "reading":
       return <ContentBlock content={lesson.content} emptyMessage="Aucun support de lecture n'a encore été ajouté pour cette leçon." />;
     case "quiz":
@@ -146,22 +194,69 @@ function LessonBody({
   }
 }
 
+/**
+ * Suivi réel de la lecture :
+ * - fichier direct (.mp4/.webm/.ogg) : <video> natif, onTimeUpdate/onEnded
+ * - YouTube : API IFrame, polling de player.getCurrentTime()/getDuration() pendant la lecture
+ * - autre lien externe : aucune position connue, marquage manuel
+ */
 function VideoBlock({
   lesson,
   onReportProgress,
+  justCompleted,
 }: {
   lesson: APIStudentTrainingLesson;
   onReportProgress: (payload: { watched_seconds: number } | { completed: boolean }) => void;
+  justCompleted: boolean;
 }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const reportedRef = useRef(false);
-
   if (!lesson.videoUrl) {
     return <EmptyLessonContent icon={Video} message="Aucune vidéo n'a encore été ajoutée pour cette leçon." />;
   }
 
-  const youtubeEmbed = getYoutubeEmbedUrl(lesson.videoUrl);
+  const youtubeId = extractYoutubeVideoId(lesson.videoUrl);
   const isDirectFile = isDirectVideoFile(lesson.videoUrl);
+
+  if (isDirectFile) {
+    return <DirectVideoPlayer lesson={lesson} onReportProgress={onReportProgress} />;
+  }
+
+  if (youtubeId) {
+    return (
+      <YoutubePlayer
+        videoId={youtubeId}
+        lesson={lesson}
+        onReportProgress={onReportProgress}
+        justCompleted={justCompleted}
+      />
+    );
+  }
+
+  // Lien externe non reconnu (ni fichier direct, ni YouTube) : pas de position connue
+  return (
+    <div className="space-y-4">
+      <div className="rounded-lg border border-border bg-muted/30 p-4 text-sm">
+        <p className="mb-2 text-muted-foreground">Cette vidéo est hébergée sur un lien externe :</p>
+        <a href={lesson.videoUrl} target="_blank" rel="noreferrer" className="font-medium text-primary underline underline-offset-4">
+          Ouvrir la vidéo
+        </a>
+      </div>
+      <ContentBlock content={lesson.content} />
+      <Button size="sm" variant="outline" disabled={justCompleted} onClick={() => onReportProgress({ watched_seconds: (lesson.durationMinutes ?? 0) * 60 || 1 })}>
+        J'ai terminé cette vidéo
+      </Button>
+    </div>
+  );
+}
+
+function DirectVideoPlayer({
+  lesson,
+  onReportProgress,
+}: {
+  lesson: APIStudentTrainingLesson;
+  onReportProgress: (payload: { watched_seconds: number }) => void;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const reportedRef = useRef(false);
 
   const reportOnce = (watchedSeconds: number) => {
     if (reportedRef.current) return;
@@ -169,61 +264,107 @@ function VideoBlock({
     onReportProgress({ watched_seconds: watchedSeconds });
   };
 
-  if (isDirectFile) {
-    // Lecture native : suivi réel du temps regardé via l'élément <video>
-    return (
-      <div className="space-y-4">
-        <video
-          ref={videoRef}
-          src={lesson.videoUrl}
-          controls
-          className="w-full rounded-lg"
-          onTimeUpdate={() => {
-            const el = videoRef.current;
-            if (!el || reportedRef.current) return;
-            const totalSeconds = (lesson.durationMinutes ?? 0) * 60;
-            if (totalSeconds > 0 && el.currentTime / totalSeconds >= 0.95) {
-              reportOnce(Math.round(el.currentTime));
-            }
-          }}
-          onEnded={() => reportOnce(Math.round(videoRef.current?.currentTime ?? (lesson.durationMinutes ?? 0) * 60))}
-        />
-        <ContentBlock content={lesson.content} />
-      </div>
-    );
-  }
-
-  // YouTube ou autre lien externe : pas d'accès à la position de lecture réelle depuis ici,
-  // donc marquage manuel plutôt que de simuler un suivi précis.
   return (
     <div className="space-y-4">
-      {youtubeEmbed ? (
-        <div className="aspect-video w-full overflow-hidden rounded-lg bg-black">
-          <iframe
-            src={youtubeEmbed}
-            title={lesson.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="h-full w-full"
-          />
-        </div>
-      ) : (
-        <div className="rounded-lg border border-border bg-muted/30 p-4 text-sm">
-          <p className="mb-2 text-muted-foreground">Cette vidéo est hébergée sur un lien externe :</p>
-          <a href={lesson.videoUrl} target="_blank" rel="noreferrer" className="font-medium text-primary underline underline-offset-4">
-            Ouvrir la vidéo
-          </a>
-        </div>
-      )}
+      <video
+        ref={videoRef}
+        src={lesson.videoUrl!}
+        controls
+        className="w-full rounded-lg"
+        onTimeUpdate={() => {
+          const el = videoRef.current;
+          if (!el || reportedRef.current || !el.duration) return;
+          if (el.currentTime / el.duration >= 0.95) reportOnce(Math.round(el.currentTime));
+        }}
+        onEnded={() => reportOnce(Math.round(videoRef.current?.duration ?? (lesson.durationMinutes ?? 0) * 60))}
+      />
       <ContentBlock content={lesson.content} />
-      <Button
-        size="sm"
-        variant="outline"
-        disabled={reportedRef.current}
-        onClick={() => reportOnce((lesson.durationMinutes ?? 0) * 60 || 1)}
-      >
-        J'ai terminé cette vidéo
-      </Button>
+    </div>
+  );
+}
+
+function YoutubePlayer({
+  videoId,
+  lesson,
+  onReportProgress,
+  justCompleted,
+}: {
+  videoId: string;
+  lesson: APIStudentTrainingLesson;
+  onReportProgress: (payload: { watched_seconds: number }) => void;
+  justCompleted: boolean;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<YoutubePlayerInstance | null>(null);
+  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const reportedRef = useRef(false);
+  const [ready, setReady] = useState(false);
+
+  const reportOnce = (watchedSeconds: number) => {
+    if (reportedRef.current) return;
+    reportedRef.current = true;
+    onReportProgress({ watched_seconds: watchedSeconds });
+  };
+
+  useEffect(() => {
+    let cancelled = false;
+
+    loadYoutubeIframeApi().then(() => {
+      if (cancelled || !containerRef.current || !window.YT) return;
+
+      playerRef.current = new window.YT.Player(containerRef.current, {
+        videoId,
+        playerVars: { rel: 0 },
+        events: {
+          onReady: () => setReady(true),
+          onStateChange: (e) => {
+            const YT = window.YT!;
+            if (e.data === YT.PlayerState.PLAYING) {
+              // Interroge la position réelle toutes les 2s pendant la lecture
+              if (pollRef.current) clearInterval(pollRef.current);
+              pollRef.current = setInterval(() => {
+                const player = playerRef.current;
+                if (!player) return;
+                const duration = player.getDuration();
+                const current = player.getCurrentTime();
+                if (duration > 0 && current / duration >= 0.95) {
+                  reportOnce(Math.round(current));
+                  if (pollRef.current) clearInterval(pollRef.current);
+                }
+              }, 2000);
+            } else if (e.data === YT.PlayerState.ENDED) {
+              const player = playerRef.current;
+              reportOnce(Math.round(player?.getDuration() ?? (lesson.durationMinutes ?? 0) * 60));
+              if (pollRef.current) clearInterval(pollRef.current);
+            } else if (e.data === YT.PlayerState.PAUSED) {
+              if (pollRef.current) clearInterval(pollRef.current);
+            }
+          },
+        },
+      });
+    });
+
+    return () => {
+      cancelled = true;
+      if (pollRef.current) clearInterval(pollRef.current);
+      playerRef.current?.destroy();
+      playerRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoId]);
+
+  return (
+    <div className="space-y-4">
+      <div className="aspect-video w-full overflow-hidden rounded-lg bg-black">
+        <div ref={containerRef} className="h-full w-full" />
+        {!ready && <div className="flex h-full items-center justify-center text-xs text-white/60">Chargement du lecteur…</div>}
+      </div>
+      <ContentBlock content={lesson.content} />
+      {!justCompleted && (
+        <p className="text-xs text-muted-foreground">
+          La leçon sera marquée terminée automatiquement une fois 95% de la vidéo visionnés.
+        </p>
+      )}
     </div>
   );
 }
