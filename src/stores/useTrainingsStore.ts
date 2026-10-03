@@ -19,7 +19,7 @@ export interface TrainingsCatalogParams {
 /* ---- Mes formations (inscriptions de l'étudiant connecté) ---- */
 
 async function fetchTrainings(): Promise<APIStudentTrainingEnrollment[]> {
-  const response = await studentFetch(`/api/student/trainings/list`);
+  const response = await studentFetch(`/api/student/trainings/catalogs/list`);
   if (!response.ok) throw new Error("Erreur lors de la récupération de vos formations");
   const json: { data: APIStudentTrainingEnrollment[] } = await response.json();
   return json.data;
@@ -90,7 +90,7 @@ export function usePublicTrainingDetail(id: string | undefined) {
 /* ---- Détail privé — route /trainings/$id, uniquement pour une formation où l'étudiant est inscrit ---- */
 
 async function fetchTrainingById(id: string): Promise<APIStudentTrainingDetailResponse | null> {
-  const response = await studentFetch(`/api/student/trainings/${id}`);
+  const response = await studentFetch(`/api/student/trainings/catalogs/${id}`);
 
   if (response.status === 404 || response.status === 403) return null;
   if (!response.ok) throw new Error("Erreur lors de la récupération de la formation");
@@ -111,7 +111,7 @@ export function useStudentTrainingDetail(id: string | undefined) {
 /* ---- Souscription ---- */
 
 async function subscribeTraining(id: string): Promise<void> {
-  const response = await studentFetch(`/api/student/trainings/${id}/subscribe`, { method: "POST" });
+  const response = await studentFetch(`/api/student/trainings/catalogs/${id}/subscribe`, { method: "POST" });
   if (!response.ok) throw new Error("Erreur lors de la souscription à la formation");
 }
 
