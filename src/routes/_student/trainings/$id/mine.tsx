@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, BookOpen, Calendar, CheckCircle2, Circle, Clock, Lock, MapPin, Users, Target, Trophy, ClipboardList, Sparkles, Video } from "lucide-react";
+import { ArrowLeft, BookOpen, Calendar, CheckCircle2, Circle, Clock, Lock, Unlock, MapPin, Users, Target, Trophy, ClipboardList, Sparkles, Video, Wallet, Percent, AlertTriangle, CreditCard } from "lucide-react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/_student/trainings/$id/mine")({
   head: () => ({
     meta: [
       { title: "Formation - STAF Student Portal" },
-      { name: "description", content: "Détail de votre formation, programme et progression." },
+      { name: "description", content: "Détail de votre formation, programme, paiement et progression." },
     ],
   }),
   component: TrainingDetail,
@@ -73,15 +73,19 @@ function TrainingDetail() {
   const unlocked = !contentLocked;
   const totalLessons = modules.reduce((s, m) => s + m.lessons.length, 0);
 
+  // Calculs financiers et ratios
+  const accessMinRatioPercent = Math.round(parseFloat(training.accessMinRatio || "0") * 100);
+
   return (
     <div className="space-y-6">
       <Button asChild variant="ghost" size="sm" className="-ml-2">
         <Link to="/trainings"><ArrowLeft className="mr-1 h-4 w-4" /> Retour</Link>
       </Button>
 
+      {/* Header Banner */}
       <div className="overflow-hidden rounded-2xl border border-border">
         <div
-          className="relative h-24"
+          className="relative h-28"
           style={{ background: `linear-gradient(135deg, ${training.coverColor}, color-mix(in oklab, ${training.coverColor} 30%, transparent))` }}
         >
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.25),transparent_60%)]" />
@@ -92,25 +96,50 @@ function TrainingDetail() {
             <Badge variant="outline">{training.level}</Badge>
             <Badge variant="outline">{training.duration}</Badge>
             <StatusBadge status={enrollment.status} map={trainingEnrollmentStatusMap} />
-            {contentLocked && (
+
+            {/* Statut de déverrouillage */}
+            {contentLocked ? (
               <Badge className="border-warning/40 bg-warning/20 text-warning-foreground">
                 <Lock className="mr-1 h-3 w-3" /> Contenu verrouillé
               </Badge>
+            ) : (
+              <Badge className="border-success/40 bg-success/20 text-success-foreground">
+                <Unlock className="mr-1 h-3 w-3" /> Accès débloqué
+              </Badge>
             )}
           </div>
+
           <h1 className="font-display text-3xl leading-tight md:text-4xl">{training.title}</h1>
           <p className="max-w-3xl text-sm text-muted-foreground">{training.short}</p>
+
           <div className="grid gap-3 pt-2 text-sm sm:grid-cols-2 md:grid-cols-4">
-            <Info icon={Clock} label="Durée" value={`${training.durationHours} h`} />
-            <Info icon={Users} label="Places" value={`${training.seatsRemaining}/${training.maxSeats}`} />
+            <Info icon={Clock} label="Durée" value={`${training.durationHours} h (${training.duration})`} />
+            <Info icon={Users} label="Places restantes" value={`${training.seatsRemaining} / ${training.maxSeats}`} />
             <Info icon={MapPin} label="Lieu" value={training.location} />
-            <Info icon={Calendar} label="Démarre" value={format(new Date(training.startDate), "d MMM yyyy", { locale: fr })} />
+            <Info icon={Calendar} label="Période" value={`${format(new Date(training.startDate), "d MMM", { locale: fr })} - ${format(new Date(training.endDate), "d MMM yyyy", { locale: fr })}`} />
           </div>
         </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
+        {/* Colonne Principale */}
         <div className="space-y-6 lg:col-span-2">
+          {/* Alert de déverrouillage si verrouillé */}
+          {contentLocked && (
+            <Card className="border-warning/40 bg-warning/5">
+              <CardContent className="flex items-start gap-4 p-4 text-sm text-warning-foreground">
+                <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-warning" />
+                <div className="space-y-1">
+                  <p className="font-semibold">Accès au contenu restreint</p>
+                  <p className="text-xs opacity-90">
+                    Pour débloquer l'accès complet aux leçons et vidéos, vous devez régler le montant minimum d'acompte requis ({accessMinRatioPercent}% du total).
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Objectifs pédagogiques */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-base">
@@ -129,6 +158,7 @@ function TrainingDetail() {
             </CardContent>
           </Card>
 
+          {/* Programme de formation */}
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="flex items-center gap-2 text-base">
@@ -137,27 +167,33 @@ function TrainingDetail() {
               <p className="text-xs text-muted-foreground">{totalLessons} leçons</p>
             </CardHeader>
             <CardContent>
-              {contentLocked && (
-                <div className="mb-4 flex items-start gap-2 rounded-lg border border-warning/40 bg-warning/5 p-3 text-sm text-warning-foreground">
-                  <Lock className="mt-0.5 h-4 w-4" />
-                  <span>Le contenu se débloque une fois le paiement minimum effectué.</span>
-                </div>
-              )}
               <Accordion type="multiple" defaultValue={modules[0] ? [modules[0].id] : []}>
                 {modules.map((m) => (
                   <AccordionItem key={m.id} value={m.id}>
                     <AccordionTrigger>
-                      <div className="flex items-center gap-3 text-left">
+                      <div className="flex flex-col text-left sm:flex-row sm:items-center sm:gap-3">
                         <span className="font-medium">{m.title}</span>
-                        <span className="text-xs text-muted-foreground">{m.lessons.length} leçons</span>
+                        <span className="text-xs text-muted-foreground">({m.lessons.length} leçons)</span>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <ul className="divide-y">
-                        {m.lessons.map((l) => (
-                          <LessonRow key={l.id} lesson={l} locked={!unlocked} onOpen={() => unlocked && setActiveLesson(l)} />
-                        ))}
-                      </ul>
+                      {m.description && (
+                        <p className="mb-3 text-xs text-muted-foreground italic">{m.description}</p>
+                      )}
+                      {m.lessons.length > 0 ? (
+                        <ul className="divide-y">
+                          {m.lessons.map((l) => (
+                            <LessonRow
+                              key={l.id}
+                              lesson={l}
+                              locked={contentLocked}
+                              onOpen={() => unlocked && setActiveLesson(l)}
+                            />
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="py-2 text-xs text-muted-foreground italic">Aucune leçon dans ce module pour le moment.</p>
+                      )}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -166,37 +202,81 @@ function TrainingDetail() {
           </Card>
         </div>
 
+        {/* Colonne Latérale : Inscription & Détails Financiers */}
         <div className="space-y-6">
+          {/* Card Inscription & Progression */}
           <Card>
-            <CardHeader><CardTitle className="text-base">Votre inscription</CardTitle></CardHeader>
-            <CardContent className="space-y-3 text-sm">
+            <CardHeader>
+              <CardTitle className="text-base">Votre Inscription</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 text-sm">
               <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Inscription</span>
-                {format(new Date(enrollment.enrolledAt), "d MMM yyyy à hh:mm", { locale: fr })}
+                <span className="text-muted-foreground">Inscrit le</span>
+                <span className="font-medium">
+                  {format(new Date(enrollment.enrolledAt), "d MMM yyyy à HH:mm", { locale: fr })}
+                </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Statut</span>
+                <span className="text-muted-foreground">Statut d'inscription</span>
                 <StatusBadge status={enrollment.status} map={trainingEnrollmentStatusMap} />
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Paiement</span>
-                <StatusBadge status={enrollment.paymentStatus} map={trainingPaymentStatusMap} />
-              </div>
-              <div>
-                <div className="mb-1 flex justify-between">
-                  <span>Progression</span>
-                  <span className="tabular-nums font-medium">{enrollment.progress}%</span>
+
+              <div className="pt-2 border-t">
+                <div className="mb-1 flex justify-between text-xs">
+                  <span className="text-muted-foreground">Progression du cours</span>
+                  <span className="tabular-nums font-semibold">{enrollment.progress}%</span>
                 </div>
                 <Progress value={enrollment.progress} className="h-2" />
               </div>
-              <p className="pt-2 text-xs text-muted-foreground">
-                Fin prévue le {format(new Date(training.endDate), "d MMMM yyyy", { locale: fr })}
-              </p>
+            </CardContent>
+          </Card>
+
+          {/* Card Financière & Modalités de paiement */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base">
+                <CreditCard className="h-4 w-4 text-primary" /> Statut Financier
+              </CardTitle>
+              <CardDescription className="text-xs">
+                Détails du règlement et conditions d'accès
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4 text-sm">
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground">Statut du paiement</span>
+                <StatusBadge status={enrollment.paymentStatus} map={trainingPaymentStatusMap} />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5 text-muted-foreground">
+                  <Wallet className="h-4 w-4" /> Montant réglé
+                </span>
+                <span className="font-semibold text-primary">
+                  {enrollment.amountPaid.toLocaleString("fr-FR")} FCFA
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5 text-muted-foreground">
+                  <Percent className="h-4 w-4" /> Seuil d'accès requis
+                </span>
+                <span className="font-medium">
+                  {accessMinRatioPercent}%
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground">Accès aux cours</span>
+                <span className={cn("font-medium", enrollment.accessUnlocked ? "text-success" : "text-warning")}>
+                  {enrollment.accessUnlocked ? "Débloqué" : "Verrouillé"}
+                </span>
+              </div>
             </CardContent>
           </Card>
         </div>
       </div>
 
+      {/* Modal Détail Leçon */}
       {activeLesson && (
         <Dialog open={!!activeLesson} onOpenChange={(o) => !o && setActiveLesson(null)}>
           <DialogContent className="max-h-[85vh] max-w-2xl overflow-y-auto">
@@ -208,10 +288,18 @@ function TrainingDetail() {
               <DialogTitle>{activeLesson.title}</DialogTitle>
               {activeLesson.brief && <DialogDescription>{activeLesson.brief}</DialogDescription>}
             </DialogHeader>
-            {activeLesson.videoUrl && <video src={activeLesson.videoUrl} controls className="w-full rounded-lg" />}
-            {activeLesson.content && (
-              <div className="prose prose-sm max-w-none dark:prose-invert" dangerouslySetInnerHTML={{ __html: activeLesson.content }} />
+
+            {activeLesson.videoUrl && (
+              <video src={activeLesson.videoUrl} controls className="w-full rounded-lg" />
             )}
+
+            {activeLesson.content && (
+              <div
+                className="prose prose-sm max-w-none dark:prose-invert"
+                dangerouslySetInnerHTML={{ __html: activeLesson.content }}
+              />
+            )}
+
             <Button variant="outline" onClick={() => setActiveLesson(null)}>Fermer</Button>
           </DialogContent>
         </Dialog>
@@ -231,7 +319,11 @@ function LessonRow({ lesson, locked, onOpen }: { lesson: APIStudentTrainingLesso
         className="-mx-2 flex w-full items-center justify-between rounded-md px-2 py-2.5 text-left text-sm transition-colors hover:bg-muted/40 disabled:cursor-not-allowed disabled:opacity-60"
       >
         <div className="flex min-w-0 items-center gap-3">
-          {locked ? <Lock className="h-4 w-4 shrink-0 text-muted-foreground" /> : <Icon className="h-4 w-4 shrink-0 text-primary" />}
+          {locked ? (
+            <Lock className="h-4 w-4 shrink-0 text-muted-foreground" />
+          ) : (
+            <Icon className="h-4 w-4 shrink-0 text-primary" />
+          )}
           <span className="truncate">{lesson.title}</span>
           <Badge variant="outline" className="text-[10px] uppercase tracking-wider">{lesson.kind}</Badge>
         </div>
@@ -244,7 +336,7 @@ function LessonRow({ lesson, locked, onOpen }: { lesson: APIStudentTrainingLesso
 function Info({ icon: Icon, label, value }: { icon: any; label: string; value: string }) {
   return (
     <div className="flex items-center gap-3">
-      <div className="grid h-9 w-9 place-items-center rounded-lg bg-muted text-muted-foreground">
+      <div className="grid h-9 w-9 place-items-center rounded-lg bg-muted text-muted-foreground shrink-0">
         <Icon className="h-4 w-4" />
       </div>
       <div className="min-w-0">
