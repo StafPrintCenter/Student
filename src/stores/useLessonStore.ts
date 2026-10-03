@@ -24,7 +24,7 @@ async function markLessonProgress(
   lessonId: string,
   payload: LessonProgressPayload
 ): Promise<APILessonProgressResult> {
-  const response = await studentFetch(`/api/v1/student/lessons/${lessonId}/progress`, {
+  const response = await studentFetch(`/api/student/lessons/${lessonId}/progress`, {
     method: "POST",
     body: buildFormData(payload as Record<string, unknown>),
   });
