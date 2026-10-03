@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, BookOpen, Calendar, CheckCircle2, Circle, Clock, Lock, Unlock, MapPin, Users, Target, Trophy, ClipboardList, Sparkles, Video, Wallet, Percent, AlertTriangle, CreditCard } from "lucide-react";
+import { ArrowLeft, BookOpen, Calendar, CheckCircle2, Clock, Lock, Unlock, MapPin, Users, Target, Wallet, Percent, AlertTriangle, CreditCard } from "lucide-react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Progress } from "@/components/ui/progress";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { EmptyState } from "@/components/portal/empty-state";
+import { LessonDialog, kindIcons, Circle } from "@/components/portal/lesson-dialog";
 import { cn } from "@/lib/utils";
 import { useStudentTrainingDetail } from "@/stores/useTrainingsStore";
 import { trainingEnrollmentStatusMap, trainingPaymentStatusMap, type APIStudentTrainingLesson } from "@/data/trainings";
@@ -38,15 +38,6 @@ export const Route = createFileRoute("/_student/trainings/$id/mine")({
   component: TrainingDetail,
 });
 
-const kindIcons: Record<string, typeof Video> = {
-  video: Video,
-  reading: BookOpen,
-  quiz: Trophy,
-  exercise: ClipboardList,
-  assignment: ClipboardList,
-  project: Sparkles,
-};
-
 function TrainingDetail() {
   const { id } = Route.useParams();
   const { item: response, isLoading } = useStudentTrainingDetail(id);
@@ -70,10 +61,7 @@ function TrainingDetail() {
   }
 
   const { data: training, enrollment, contentLocked, modules } = response;
-  const unlocked = !contentLocked;
   const totalLessons = modules.reduce((s, m) => s + m.lessons.length, 0);
-
-  // Calculs financiers et ratios
   const accessMinRatioPercent = Math.round(parseFloat(training.accessMinRatio || "0") * 100);
 
   return (
@@ -82,7 +70,6 @@ function TrainingDetail() {
         <Link to="/trainings"><ArrowLeft className="mr-1 h-4 w-4" /> Retour</Link>
       </Button>
 
-      {/* Header Banner */}
       <div className="overflow-hidden rounded-2xl border border-border">
         <div
           className="relative h-28"
@@ -97,7 +84,6 @@ function TrainingDetail() {
             <Badge variant="outline">{training.duration}</Badge>
             <StatusBadge status={enrollment.status} map={trainingEnrollmentStatusMap} />
 
-            {/* Statut de déverrouillage */}
             {contentLocked ? (
               <Badge className="border-warning/40 bg-warning/20 text-warning-foreground">
                 <Lock className="mr-1 h-3 w-3" /> Contenu verrouillé
@@ -122,9 +108,7 @@ function TrainingDetail() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        {/* Colonne Principale */}
         <div className="space-y-6 lg:col-span-2">
-          {/* Alert de déverrouillage si verrouillé */}
           {contentLocked && (
             <Card className="border-warning/40 bg-warning/5">
               <CardContent className="flex items-start gap-4 p-4 text-sm text-warning-foreground">
@@ -139,7 +123,6 @@ function TrainingDetail() {
             </Card>
           )}
 
-          {/* Objectifs pédagogiques */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-base">
@@ -158,7 +141,6 @@ function TrainingDetail() {
             </CardContent>
           </Card>
 
-          {/* Programme de formation */}
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="flex items-center gap-2 text-base">
@@ -187,7 +169,7 @@ function TrainingDetail() {
                               key={l.id}
                               lesson={l}
                               locked={contentLocked}
-                              onOpen={() => unlocked && setActiveLesson(l)}
+                              onOpen={() => !contentLocked && setActiveLesson(l)}
                             />
                           ))}
                         </ul>
@@ -202,9 +184,7 @@ function TrainingDetail() {
           </Card>
         </div>
 
-        {/* Colonne Latérale : Inscription & Détails Financiers */}
         <div className="space-y-6">
-          {/* Card Inscription & Progression */}
           <Card>
             <CardHeader>
               <CardTitle className="text-base">Votre Inscription</CardTitle>
@@ -231,7 +211,6 @@ function TrainingDetail() {
             </CardContent>
           </Card>
 
-          {/* Card Financière & Modalités de paiement */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-base">
@@ -260,9 +239,7 @@ function TrainingDetail() {
                 <span className="flex items-center gap-1.5 text-muted-foreground">
                   <Percent className="h-4 w-4" /> Seuil d'accès requis
                 </span>
-                <span className="font-medium">
-                  {accessMinRatioPercent}%
-                </span>
+                <span className="font-medium">{accessMinRatioPercent}%</span>
               </div>
 
               <div className="flex items-center justify-between">
@@ -276,34 +253,7 @@ function TrainingDetail() {
         </div>
       </div>
 
-      {/* Modal Détail Leçon */}
-      {activeLesson && (
-        <Dialog open={!!activeLesson} onOpenChange={(o) => !o && setActiveLesson(null)}>
-          <DialogContent className="max-h-[85vh] max-w-2xl overflow-y-auto">
-            <DialogHeader>
-              <div className="mb-1 flex items-center gap-2">
-                <Badge variant="outline" className="text-[10px] uppercase tracking-wider">{activeLesson.kind}</Badge>
-                <span className="text-xs text-muted-foreground">{activeLesson.durationMinutes} min</span>
-              </div>
-              <DialogTitle>{activeLesson.title}</DialogTitle>
-              {activeLesson.brief && <DialogDescription>{activeLesson.brief}</DialogDescription>}
-            </DialogHeader>
-
-            {activeLesson.videoUrl && (
-              <video src={activeLesson.videoUrl} controls className="w-full rounded-lg" />
-            )}
-
-            {activeLesson.content && (
-              <div
-                className="prose prose-sm max-w-none dark:prose-invert"
-                dangerouslySetInnerHTML={{ __html: activeLesson.content }}
-              />
-            )}
-
-            <Button variant="outline" onClick={() => setActiveLesson(null)}>Fermer</Button>
-          </DialogContent>
-        </Dialog>
-      )}
+      {activeLesson && <LessonDialog lesson={activeLesson} onClose={() => setActiveLesson(null)} />}
     </div>
   );
 }
@@ -326,8 +276,15 @@ function LessonRow({ lesson, locked, onOpen }: { lesson: APIStudentTrainingLesso
           )}
           <span className="truncate">{lesson.title}</span>
           <Badge variant="outline" className="text-[10px] uppercase tracking-wider">{lesson.kind}</Badge>
+          {lesson.isMandatory && (
+            <Badge variant="outline" className="border-warning/40 bg-warning/10 text-[10px] text-warning-foreground">
+              Obligatoire
+            </Badge>
+          )}
         </div>
-        <span className="shrink-0 text-xs tabular-nums text-muted-foreground">{lesson.durationMinutes} min</span>
+        <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+          {lesson.durationMinutes != null ? `${lesson.durationMinutes} min` : "—"}
+        </span>
       </button>
     </li>
   );
