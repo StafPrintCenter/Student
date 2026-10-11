@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { lessonKindLabels, TRACKABLE_LESSON_KINDS, type APIStudentTrainingLesson } from "@/data/trainings";
 import { useMarkLessonProgress } from "@/stores/useLessonStore";
+import { QuizRunner } from "@/components/portal/quiz/quiz-runner";
 
 export const kindIcons: Record<string, typeof Video> = {
   video: Video,
@@ -143,11 +144,6 @@ export function LessonDialog({ lesson, onClose }: { lesson: APIStudentTrainingLe
               {justCompleted ? "Lecture validée" : progressMutation.isPending ? "Enregistrement…" : "Marquer comme lue"}
             </Button>
           )}
-          {!isTrackable && (
-            <p className="text-xs text-muted-foreground">
-              Le suivi de ce type d'activité ({lessonKindLabels[lesson.kind]}) se fait via un autre module.
-            </p>
-          )}
           <Button variant="outline" size="sm" onClick={onClose} className="ml-auto">
             Fermer
           </Button>
@@ -172,6 +168,16 @@ function LessonBody({
     case "reading":
       return <ContentBlock content={lesson.content} emptyMessage="Aucun support de lecture n'a encore été ajouté pour cette leçon." />;
     case "quiz":
+      return (
+        <div className="space-y-4">
+          <ContentBlock content={lesson.content} />
+          {lesson.quizId ? (
+            <QuizRunner quizId={lesson.quizId} />
+          ) : (
+            <EmptyLessonContent icon={ClipboardList} message="Ce quiz n'est pas encore disponible." />
+          )}
+        </div>
+      );
     case "exercise":
     case "assignment":
     case "project":
