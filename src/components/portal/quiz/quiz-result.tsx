@@ -47,6 +47,7 @@ export function QuizResult({ result, quiz, onBack }: QuizResultProps) {
         <p className="text-sm font-medium">Correction</p>
         {result.answers.map((a, i) => {
           const question = questionsById.get(a.questionId);
+          const explanation = a.explanation ?? question?.explanation ?? null;
           return (
             <div key={a.questionId} className="space-y-2 rounded-lg border border-border p-4 text-sm">
               <div className="flex items-start justify-between gap-3">
