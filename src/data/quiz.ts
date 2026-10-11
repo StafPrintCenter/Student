@@ -21,9 +21,7 @@ export type APIQuiz = {
   lessonId: string;
   /** Seule la valeur "exercise" est connue pour l'instant */
   mode: string;
-  /** null = pas de limite de temps */
   timeLimitSec: number | null;
-  /** Seuil de réussite, comparé tel quel au score par le backend */
   passScore: number;
   maxAttempts: number | null;
   totalPoints: number;
