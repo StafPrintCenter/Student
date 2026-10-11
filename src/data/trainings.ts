@@ -132,6 +132,7 @@ export type APIStudentTrainingLesson = {
   content: string | null;
   videoUrl: string | null;
   chapters: string[] | null;
+  quizId?: string | null;
 };
 
 /** Un module (regroupement de leçons) */
