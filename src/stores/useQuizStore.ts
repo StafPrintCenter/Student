@@ -51,7 +51,7 @@ export function useQuizAttempts(quizId: string | undefined) {
 /* ---- Démarrage d'une tentative ---- */
 
 async function startQuiz(quizId: string): Promise<APIQuizStartResult> {
-  const response = await studentFetch(`/api/v1/student/quizzes/${quizId}/start`, { method: "POST" });
+  const response = await studentFetch(`/api/student/quizzes/${quizId}/start`, { method: "POST" });
   if (!response.ok) throw await toQuizError(response, "Impossible de démarrer le quiz");
   const json: { data: APIQuizStartResult } = await response.json();
   return json.data;
