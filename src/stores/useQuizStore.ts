@@ -26,7 +26,7 @@ async function toQuizError(response: Response, fallback: string): Promise<QuizAp
 /* ---- Historique des tentatives ---- */
 
 async function fetchQuizAttempts(quizId: string): Promise<APIQuizAttemptsResponse> {
-  const response = await studentFetch(`/api/v1/student/quizzes/${quizId}/attempts`);
+  const response = await studentFetch(`/api/student/quizzes/${quizId}/attempts`);
   if (!response.ok) throw await toQuizError(response, "Erreur lors de la récupération des tentatives");
   return response.json();
 }
