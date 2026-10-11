@@ -20,4 +20,11 @@ export type APILessonProgressResult = {
   enrollmentProgress: number;
 };
 
+/** Message affiché après un dépôt réussi, selon le comportement du backend par type de leçon */
+export const submissionSuccessMessages: Partial<Record<LessonKind, string>> = {
+  exercise: "Exercice terminé : votre dépôt a été enregistré.",
+  assignment: "Devoir déposé : il sera corrigé par votre formateur.",
+  project: "Projet déposé : il sera corrigé par votre formateur.",
+};
+
 export type { LessonKind };
