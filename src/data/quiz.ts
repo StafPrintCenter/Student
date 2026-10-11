@@ -35,6 +35,7 @@ export type APIQuizStartResult = {
   attemptId: string;
   startedAt: string;
   timeLimitSec: number | null;
+  isAutoSubmitted: boolean;
   quiz: APIQuiz;
 };
 
