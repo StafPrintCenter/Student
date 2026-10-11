@@ -50,8 +50,9 @@ export const quizAttemptStatusMap: Record<QuizAttemptStatus, { label: string; cl
   expired: { label: "Expirée", className: "bg-muted text-muted-foreground border-border" },
 };
 
-export const quizModeLabels: Record<string, string> = {
-  exercise: "Exercice",
+export const quizModeLabels: Record<QuizMode, string> = {
+  quiz: "Quiz chronométré",
+  exercise: "Exercice libre",
 };
 
 /** Un élément de GET /api/v1/student/quizzes/{quizId}/attempts */
