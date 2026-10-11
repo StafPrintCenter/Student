@@ -12,7 +12,6 @@ export type APIQuizQuestion = {
   type: QuizQuestionType;
   points: number;
   sortOrder: number;
-  /** Facultatif : à n'afficher que s'il est présent */
   explanation?: string | null;
   choices: APIQuizChoice[];
 };
