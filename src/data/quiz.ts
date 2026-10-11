@@ -1,4 +1,5 @@
 export type QuizQuestionType = "single" | "multiple";
+export type QuizMode = "quiz" | "exercise";
 
 export type APIQuizChoice = {
   id: string;
