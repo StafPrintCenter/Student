@@ -73,7 +73,7 @@ async function submitQuizAttempt(attemptId: string, answers: QuizAnswers): Promi
   const fd = new FormData();
   fd.append("answers", JSON.stringify(answers));
 
-  const response = await studentFetch(`/api/v1/student/quiz-attempts/${attemptId}/submit`, {
+  const response = await studentFetch(`/api/student/quiz-attempts/${attemptId}/submit`, {
     method: "POST",
     body: fd,
   });
