@@ -36,7 +36,7 @@ export function QuizRunner({ quizId }: { quizId: string }) {
     return (
       <div className="space-y-4">
         <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-          <Badge variant="outline">{quizModeLabels[quiz.mode] ?? quiz.mode}</Badge>
+          <Badge variant="outline">{quizModeLabels[quiz.mode]}</Badge>
           <span>{quiz.questions.length} questions</span>
           <span>· {quiz.totalPoints} pts</span>
           <span>· seuil {quiz.passScore}%</span>
