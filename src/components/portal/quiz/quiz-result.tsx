@@ -78,7 +78,7 @@ export function QuizResult({ result, quiz, onBack }: QuizResultProps) {
                   <span className="text-success">{labelsOf(a.questionId, a.correctChoiceIds).join(", ")}</span>
                 </p>
               )}
-              {a.explanation && (
+              {explanation && (
                 <p className="flex items-start gap-1.5 rounded-md bg-muted/40 p-2 text-xs text-muted-foreground">
                   <Lightbulb className="mt-0.5 h-3.5 w-3.5 shrink-0" /> {explanation}
                 </p>
