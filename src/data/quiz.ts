@@ -20,8 +20,7 @@ export type APIQuizQuestion = {
 export type APIQuiz = {
   id: string;
   lessonId: string;
-  /** Seule la valeur "exercise" est connue pour l'instant */
-  mode: string;
+  mode: QuizMode;
   timeLimitSec: number | null;
   passScore: number;
   maxAttempts: number | null;
