@@ -15,7 +15,6 @@ export type APIQuizQuestion = {
   /** Facultatif : à n'afficher que s'il est présent */
   explanation?: string | null;
   choices: APIQuizChoice[];
-  explanation: string;
 };
 
 export type APIQuiz = {
