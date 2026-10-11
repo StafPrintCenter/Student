@@ -56,7 +56,7 @@ async function createSubmission(lessonId: string, payload: SubmissionPayload): P
   if (payload.body !== undefined) fd.append("body", payload.body);
   if (payload.file) fd.append("file", payload.file);
 
-  const response = await studentFetch(`/api/student/lessons/${lessonId}/submissions/create`, {
+  const response = await studentFetch(`/api/student/trainings/lessons/${lessonId}/submit-work`, {
     method: "POST",
     body: fd,
   });
