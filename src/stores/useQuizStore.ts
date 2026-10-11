@@ -90,7 +90,6 @@ export function useSubmitQuizAttempt() {
     mutationFn: ({ attemptId, answers }: { attemptId: string; answers: QuizAnswers }) =>
       submitQuizAttempt(attemptId, answers),
     onSuccess: () => {
-      // historique + best score, et progression de l'inscription (meilleur score ≥ passScore = leçon terminée)
       qc.invalidateQueries({ queryKey: [resourceKey] });
       qc.invalidateQueries({ queryKey: ["trainings"] });
     },
