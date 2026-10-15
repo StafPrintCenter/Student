@@ -4,9 +4,11 @@ interface FilePreviewModalProps {
   url: string | null;
   title: string;
   onClose: () => void;
+  /** Optionnel : appelé au clic sur "Télécharger" (ex: enregistrer le téléchargement côté API) */
+  onDownload?: () => void;
 }
 
-export function FilePreviewModal({ url, title, onClose }: FilePreviewModalProps) {
+export function FilePreviewModal({ url, title, onClose, onDownload }: FilePreviewModalProps) {
   if (!url) return null;
 
   const absoluteUrl = typeof window !== "undefined" ? window.location.origin + url : url;
@@ -37,6 +39,7 @@ export function FilePreviewModal({ url, title, onClose }: FilePreviewModalProps)
             <a
               href={url}
               download
+              onClick={onDownload}
               className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-muted transition-colors"
             >
               <Download size={14} /> Télécharger
