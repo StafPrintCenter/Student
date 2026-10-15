@@ -24,6 +24,7 @@ import { Route as StudentPaymentsRouteImport } from './routes/_student/payments'
 import { Route as StudentProfilRouteImport } from './routes/_student/profil'
 import { Route as StudentProgressRouteImport } from './routes/_student/progress'
 import { Route as StudentSupportRouteImport } from './routes/_student/support'
+import { Route as StudentCertificatesIndexRouteImport } from './routes/_student/certificates/index'
 import { Route as StudentTrainingsIndexRouteImport } from './routes/_student/trainings/index'
 import { Route as StudentTrainingsIdCatalogueRouteImport } from './routes/_student/trainings/$id/catalogue'
 import { Route as StudentTrainingsIdMineRouteImport } from './routes/_student/trainings/$id/mine'
@@ -101,6 +102,12 @@ const StudentSupportRoute = StudentSupportRouteImport.update({
   path: '/support',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentCertificatesIndexRoute =
+  StudentCertificatesIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => StudentCertificatesRoute,
+  } as any)
 const StudentTrainingsIndexRoute = StudentTrainingsIndexRouteImport.update({
   id: '/trainings/',
   path: '/trainings/',
@@ -123,7 +130,7 @@ export interface FileRoutesByFullPath {
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
   '/calendar': typeof StudentCalendarRoute
-  '/certificates': typeof StudentCertificatesRoute
+  '/certificates': typeof StudentCertificatesRouteWithChildren
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/documents': typeof StudentDocumentsRoute
@@ -132,6 +139,7 @@ export interface FileRoutesByFullPath {
   '/profil': typeof StudentProfilRoute
   '/progress': typeof StudentProgressRoute
   '/support': typeof StudentSupportRoute
+  '/certificates/': typeof StudentCertificatesIndexRoute
   '/trainings/': typeof StudentTrainingsIndexRoute
   '/trainings/$id/catalogue': typeof StudentTrainingsIdCatalogueRoute
   '/trainings/$id/mine': typeof StudentTrainingsIdMineRoute
@@ -141,7 +149,6 @@ export interface FileRoutesByTo {
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
   '/calendar': typeof StudentCalendarRoute
-  '/certificates': typeof StudentCertificatesRoute
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/documents': typeof StudentDocumentsRoute
@@ -150,6 +157,7 @@ export interface FileRoutesByTo {
   '/profil': typeof StudentProfilRoute
   '/progress': typeof StudentProgressRoute
   '/support': typeof StudentSupportRoute
+  '/certificates': typeof StudentCertificatesIndexRoute
   '/trainings': typeof StudentTrainingsIndexRoute
   '/trainings/$id/catalogue': typeof StudentTrainingsIdCatalogueRoute
   '/trainings/$id/mine': typeof StudentTrainingsIdMineRoute
@@ -162,7 +170,7 @@ export interface FileRoutesById {
   '/_auth/invite': typeof AuthInviteRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_student/calendar': typeof StudentCalendarRoute
-  '/_student/certificates': typeof StudentCertificatesRoute
+  '/_student/certificates': typeof StudentCertificatesRouteWithChildren
   '/_student/community': typeof StudentCommunityRoute
   '/_student/dashboard': typeof StudentDashboardRoute
   '/_student/documents': typeof StudentDocumentsRoute
@@ -171,6 +179,7 @@ export interface FileRoutesById {
   '/_student/profil': typeof StudentProfilRoute
   '/_student/progress': typeof StudentProgressRoute
   '/_student/support': typeof StudentSupportRoute
+  '/_student/certificates/': typeof StudentCertificatesIndexRoute
   '/_student/trainings/': typeof StudentTrainingsIndexRoute
   '/_student/trainings/$id/catalogue': typeof StudentTrainingsIdCatalogueRoute
   '/_student/trainings/$id/mine': typeof StudentTrainingsIdMineRoute
@@ -191,6 +200,7 @@ export interface FileRouteTypes {
     | '/profil'
     | '/progress'
     | '/support'
+    | '/certificates/'
     | '/trainings/'
     | '/trainings/$id/catalogue'
     | '/trainings/$id/mine'
@@ -200,7 +210,6 @@ export interface FileRouteTypes {
     | '/invite'
     | '/login'
     | '/calendar'
-    | '/certificates'
     | '/community'
     | '/dashboard'
     | '/documents'
@@ -209,6 +218,7 @@ export interface FileRouteTypes {
     | '/profil'
     | '/progress'
     | '/support'
+    | '/certificates'
     | '/trainings'
     | '/trainings/$id/catalogue'
     | '/trainings/$id/mine'
@@ -229,6 +239,7 @@ export interface FileRouteTypes {
     | '/_student/profil'
     | '/_student/progress'
     | '/_student/support'
+    | '/_student/certificates/'
     | '/_student/trainings/'
     | '/_student/trainings/$id/catalogue'
     | '/_student/trainings/$id/mine'
@@ -347,6 +358,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentSupportRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/_student/certificates/': {
+      id: '/_student/certificates/'
+      path: '/'
+      fullPath: '/certificates/'
+      preLoaderRoute: typeof StudentCertificatesIndexRouteImport
+      parentRoute: typeof StudentCertificatesRoute
+    }
     '/_student/trainings/': {
       id: '/_student/trainings/'
       path: '/trainings'
@@ -383,9 +401,20 @@ const AuthRouteChildren: AuthRouteChildren = {
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
+interface StudentCertificatesRouteChildren {
+  StudentCertificatesIndexRoute: typeof StudentCertificatesIndexRoute
+}
+
+const StudentCertificatesRouteChildren: StudentCertificatesRouteChildren = {
+  StudentCertificatesIndexRoute: StudentCertificatesIndexRoute,
+}
+
+const StudentCertificatesRouteWithChildren =
+  StudentCertificatesRoute._addFileChildren(StudentCertificatesRouteChildren)
+
 interface StudentRouteChildren {
   StudentCalendarRoute: typeof StudentCalendarRoute
-  StudentCertificatesRoute: typeof StudentCertificatesRoute
+  StudentCertificatesRoute: typeof StudentCertificatesRouteWithChildren
   StudentCommunityRoute: typeof StudentCommunityRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
   StudentDocumentsRoute: typeof StudentDocumentsRoute
@@ -401,7 +430,7 @@ interface StudentRouteChildren {
 
 const StudentRouteChildren: StudentRouteChildren = {
   StudentCalendarRoute: StudentCalendarRoute,
-  StudentCertificatesRoute: StudentCertificatesRoute,
+  StudentCertificatesRoute: StudentCertificatesRouteWithChildren,
   StudentCommunityRoute: StudentCommunityRoute,
   StudentDashboardRoute: StudentDashboardRoute,
   StudentDocumentsRoute: StudentDocumentsRoute,
