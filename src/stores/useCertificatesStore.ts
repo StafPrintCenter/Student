@@ -11,7 +11,7 @@ const resourceKey = "certificates";
 /* ---- Certificat d'une inscription ---- */
 
 async function fetchEnrollmentCertificate(enrollmentId: string): Promise<APIEnrollmentCertificateResponse | null> {
-  const response = await studentFetch(`/api/student/enrollments/${enrollmentId}/certificate`);
+  const response = await studentFetch(`/api/student/trainings/enrollments/${enrollmentId}/certificate`);
   if (response.status === 404) return null;
   if (!response.ok) throw new Error("Erreur lors de la récupération du certificat");
   return response.json();
