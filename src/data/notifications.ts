@@ -1,68 +1,64 @@
-/** Catégories rencontrées dans /notifications/preferences */
+import { Bell, CreditCard, GraduationCap, ShieldCheck, UserCircle, Users, type LucideIcon } from "lucide-react";
+
 export type NotificationCategory = "security" | "general" | "profile" | "training" | "payment" | "community";
 
-export const notificationCategoryMap: Record<
-  NotificationCategory,
-  { label: string; description: string; className: string }
-> = {
+export const NOTIFICATION_CATEGORIES: NotificationCategory[] = [
+  "security", "general", "profile", "training", "payment", "community",
+];
+
+export const CATEGORY_META: Record<NotificationCategory, { label: string; description: string; icon: LucideIcon; className: string }> = {
   security: {
     label: "Sécurité",
-    description: "Connexions et alertes sur votre compte. Toujours actives et instantanées.",
-    className: "bg-destructive/10 text-destructive border-destructive/40",
+    description: "Connexions et alertes de compte. Toujours actives, toujours instantanées.",
+    icon: ShieldCheck,
+    className: "bg-red-500/10 text-red-600"
   },
   general: {
     label: "Général",
-    description: "Messages et informations générales de la plateforme.",
-    className: "bg-muted text-muted-foreground border-border",
+    description: "Messages de contact, rendez-vous, signalements et activité du site.",
+    icon: Bell,
+    className: "bg-blue-500/10 text-blue-600"
   },
   profile: {
     label: "Profil",
-    description: "Changements liés à votre profil et à votre compte.",
-    className: "bg-info/15 text-info border-info/40",
+    description: "Modifications liées à votre profil.",
+    icon: UserCircle,
+    className: "bg-violet-500/10 text-violet-600"
   },
   training: {
     label: "Formations",
-    description: "Inscriptions, leçons, corrections et certificats.",
-    className: "bg-primary/15 text-primary border-primary/40",
+    description: "Inscriptions et activité des formations.",
+    icon: GraduationCap,
+    className: "bg-amber-500/10 text-amber-600"
   },
   payment: {
     label: "Paiements",
-    description: "Règlements, reçus et échéances.",
-    className: "bg-warning/15 text-warning-foreground border-warning/40",
+    description: "Paiements et facturation.",
+    icon: CreditCard,
+    className: "bg-emerald-500/10 text-emerald-600"
   },
   community: {
     label: "Communauté",
-    description: "Échanges et activité de la communauté.",
-    className: "bg-success/15 text-success border-success/40",
+    description: "Interactions de la communauté.",
+    icon: Users,
+    className: "bg-pink-500/10 text-pink-600"
   },
 };
 
-export type NotificationDeliveryMode = "instant" | "scheduled";
-
-export const notificationDeliveryModeLabels: Record<NotificationDeliveryMode, string> = {
-  instant: "Instantanée",
-  scheduled: "Programmée",
-};
-
-/** 1 = lundi ... 7 = dimanche (convention du backend) */
-export const NOTIFICATION_WEEKDAYS = [
-  { value: 1, short: "Lun", full: "Lundi" },
-  { value: 2, short: "Mar", full: "Mardi" },
-  { value: 3, short: "Mer", full: "Mercredi" },
-  { value: 4, short: "Jeu", full: "Jeudi" },
-  { value: 5, short: "Ven", full: "Vendredi" },
-  { value: 6, short: "Sam", full: "Samedi" },
-  { value: 7, short: "Dim", full: "Dimanche" },
-] as const;
-
-/** Élément de GET /api/notifications/manage/list */
 export type APINotificationListItem = {
   id: string;
-  category: NotificationCategory | string;
+  category: NotificationCategory;
   type: string;
   title: string;
   isRead: boolean;
   deliveredAt: string;
+};
+
+export type APINotificationDetail = APINotificationListItem & {
+  body: string;
+  data?: Record<string, unknown> | null;
+  actionUrl?: string | null;
+  readAt: string | null;
 };
 
 export type APINotificationsMeta = {
@@ -73,53 +69,28 @@ export type APINotificationsMeta = {
   unreadTotal: number;
 };
 
-export type APINotificationsListResponse = {
-  data: APINotificationListItem[];
-  meta: APINotificationsMeta;
-};
+export type DeliveryMode = "instant" | "scheduled";
 
-/** GET /api/notifications/manage/{id} : data et actionUrl sont facultatifs */
-export type APINotificationDetail = APINotificationListItem & {
-  body: string;
-  data?: Record<string, unknown> | null;
-  actionUrl?: string | null;
-  readAt: string | null;
-};
-
-/** Élément de GET /api/notifications/preferences */
 export type APINotificationPreference = {
-  category: NotificationCategory | string;
-  /** true pour "security" : non modifiable (403 côté backend) */
+  category: NotificationCategory;
   locked: boolean;
   enabled: boolean;
-  deliveryMode: NotificationDeliveryMode;
+  deliveryMode: DeliveryMode;
   scheduleDays: number[];
-  /** Renvoyé au format HH:MM:SS, ex: "20:00:00" */
-  scheduleStartTime: string | null;
+  scheduleStartTime: string | null; // "HH:mm:ss"
   scheduleEndTime: string | null;
 };
 
-/** Payload de PUT /api/notifications/preferences/{category} (horaires au format HH:MM) */
-export type NotificationPreferencePayload =
-  | { enabled: boolean; deliveryMode: "instant" }
-  | {
-    enabled: boolean;
-    deliveryMode: "scheduled";
-    scheduleDays: number[];
-    scheduleStartTime: string;
-    scheduleEndTime: string;
-  };
+export const WEEKDAYS = [
+  { value: 1, label: "Lun" },
+  { value: 2, label: "Mar" },
+  { value: 3, label: "Mer" },
+  { value: 4, label: "Jeu" },
+  { value: 5, label: "Ven" },
+  { value: 6, label: "Sam" },
+  { value: 7, label: "Dim" },
+];
 
-/** "20:00:00" -> "20:00" : le backend valide les horaires en H:i, il refuse HH:MM:SS */
-export function toTimeInput(value: string | null | undefined): string {
-  return value ? value.slice(0, 5) : "";
-}
-
-/**
- * actionUrl arrive sous la forme "/student/..." : le layout _student ne fait pas partie des URLs du front,
- * donc on retire ce préfixe. Les liens http(s) sont considérés comme externes.
- */
-export function resolveNotificationActionUrl(actionUrl: string): { external: boolean; href: string } {
-  if (/^https?:\/\//i.test(actionUrl)) return { external: true, href: actionUrl };
-  return { external: false, href: actionUrl.replace(/^\/student(?=\/|$)/, "") || "/" };
+export function formatNotificationDate(iso: string): string {
+  return new Date(iso).toLocaleString("fr-FR", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
 }
