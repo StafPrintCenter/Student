@@ -52,7 +52,6 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { to: "/community", label: "Communauté", icon: Users2 },
       { to: "/support", label: "Support", icon: LifeBuoy },
-      { to: "/notifications", label: "Notifications", icon: Bell },
     ],
   },
 ];
