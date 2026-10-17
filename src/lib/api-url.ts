@@ -17,6 +17,7 @@ function resolveApiUrl(path: string): string {
 export async function studentFetch(path: string, init: RequestInit = {}): Promise<Response> {
   const headers = new Headers(init.headers);
   headers.set("Accept", "application/json");
+  headers.set("X-Actor", "student");
 
   return fetch(resolveApiUrl(path), {
     ...init,
