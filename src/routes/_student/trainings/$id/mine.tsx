@@ -12,6 +12,7 @@ import { Progress } from "@/components/ui/progress";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { EmptyState } from "@/components/portal/empty-state";
 import { LessonDialog, kindIcons, Circle } from "@/components/portal/lesson-dialog";
+import { CertificateAvailableBanner } from "@/components/portal/certificates/certificate-available-banner";
 import { cn } from "@/lib/utils";
 import { useStudentTrainingDetail } from "@/stores/useTrainingsStore";
 import { trainingEnrollmentStatusMap, trainingPaymentStatusMap, lessonKindLabels, type APIStudentTrainingLesson } from "@/data/trainings";
