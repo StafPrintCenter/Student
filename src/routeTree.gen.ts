@@ -15,7 +15,6 @@ import { Route as StudentRouteImport } from './routes/_student'
 import { Route as AuthInviteRouteImport } from './routes/_auth/invite'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as StudentCalendarRouteImport } from './routes/_student/calendar'
-import { Route as StudentCertificatesRouteImport } from './routes/_student/certificates'
 import { Route as StudentCommunityRouteImport } from './routes/_student/community'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
 import { Route as StudentDocumentsRouteImport } from './routes/_student/documents'
@@ -59,11 +58,6 @@ const StudentCalendarRoute = StudentCalendarRouteImport.update({
   path: '/calendar',
   getParentRoute: () => StudentRoute,
 } as any)
-const StudentCertificatesRoute = StudentCertificatesRouteImport.update({
-  id: '/certificates',
-  path: '/certificates',
-  getParentRoute: () => StudentRoute,
-} as any)
 const StudentCommunityRoute = StudentCommunityRouteImport.update({
   id: '/community',
   path: '/community',
@@ -101,9 +95,9 @@ const StudentSupportRoute = StudentSupportRouteImport.update({
 } as any)
 const StudentCertificatesIndexRoute =
   StudentCertificatesIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => StudentCertificatesRoute,
+    id: '/certificates/',
+    path: '/certificates/',
+    getParentRoute: () => StudentRoute,
   } as any)
 const StudentNotificationsIndexRoute =
   StudentNotificationsIndexRouteImport.update({
@@ -144,7 +138,6 @@ export interface FileRoutesByFullPath {
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
   '/calendar': typeof StudentCalendarRoute
-  '/certificates': typeof StudentCertificatesRouteWithChildren
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/documents': typeof StudentDocumentsRoute
@@ -188,7 +181,6 @@ export interface FileRoutesById {
   '/_auth/invite': typeof AuthInviteRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_student/calendar': typeof StudentCalendarRoute
-  '/_student/certificates': typeof StudentCertificatesRouteWithChildren
   '/_student/community': typeof StudentCommunityRoute
   '/_student/dashboard': typeof StudentDashboardRoute
   '/_student/documents': typeof StudentDocumentsRoute
@@ -211,7 +203,6 @@ export interface FileRouteTypes {
     | '/invite'
     | '/login'
     | '/calendar'
-    | '/certificates'
     | '/community'
     | '/dashboard'
     | '/documents'
@@ -254,7 +245,6 @@ export interface FileRouteTypes {
     | '/_auth/invite'
     | '/_auth/login'
     | '/_student/calendar'
-    | '/_student/certificates'
     | '/_student/community'
     | '/_student/dashboard'
     | '/_student/documents'
@@ -321,13 +311,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentCalendarRouteImport
       parentRoute: typeof StudentRoute
     }
-    '/_student/certificates': {
-      id: '/_student/certificates'
-      path: '/certificates'
-      fullPath: '/certificates'
-      preLoaderRoute: typeof StudentCertificatesRouteImport
-      parentRoute: typeof StudentRoute
-    }
     '/_student/community': {
       id: '/_student/community'
       path: '/community'
@@ -379,10 +362,10 @@ declare module '@tanstack/react-router' {
     }
     '/_student/certificates/': {
       id: '/_student/certificates/'
-      path: '/'
+      path: '/certificates'
       fullPath: '/certificates/'
       preLoaderRoute: typeof StudentCertificatesIndexRouteImport
-      parentRoute: typeof StudentCertificatesRoute
+      parentRoute: typeof StudentRoute
     }
     '/_student/notifications/': {
       id: '/_student/notifications/'
@@ -441,20 +424,8 @@ const AuthRouteChildren: AuthRouteChildren = {
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
-interface StudentCertificatesRouteChildren {
-  StudentCertificatesIndexRoute: typeof StudentCertificatesIndexRoute
-}
-
-const StudentCertificatesRouteChildren: StudentCertificatesRouteChildren = {
-  StudentCertificatesIndexRoute: StudentCertificatesIndexRoute,
-}
-
-const StudentCertificatesRouteWithChildren =
-  StudentCertificatesRoute._addFileChildren(StudentCertificatesRouteChildren)
-
 interface StudentRouteChildren {
   StudentCalendarRoute: typeof StudentCalendarRoute
-  StudentCertificatesRoute: typeof StudentCertificatesRouteWithChildren
   StudentCommunityRoute: typeof StudentCommunityRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
   StudentDocumentsRoute: typeof StudentDocumentsRoute
@@ -464,6 +435,7 @@ interface StudentRouteChildren {
   StudentSupportRoute: typeof StudentSupportRoute
   StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
   StudentNotificationsPreferencesRoute: typeof StudentNotificationsPreferencesRoute
+  StudentCertificatesIndexRoute: typeof StudentCertificatesIndexRoute
   StudentNotificationsIndexRoute: typeof StudentNotificationsIndexRoute
   StudentTrainingsIndexRoute: typeof StudentTrainingsIndexRoute
   StudentTrainingsIdCatalogueRoute: typeof StudentTrainingsIdCatalogueRoute
@@ -472,7 +444,6 @@ interface StudentRouteChildren {
 
 const StudentRouteChildren: StudentRouteChildren = {
   StudentCalendarRoute: StudentCalendarRoute,
-  StudentCertificatesRoute: StudentCertificatesRouteWithChildren,
   StudentCommunityRoute: StudentCommunityRoute,
   StudentDashboardRoute: StudentDashboardRoute,
   StudentDocumentsRoute: StudentDocumentsRoute,
@@ -482,6 +453,7 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentSupportRoute: StudentSupportRoute,
   StudentNotificationsIdRoute: StudentNotificationsIdRoute,
   StudentNotificationsPreferencesRoute: StudentNotificationsPreferencesRoute,
+  StudentCertificatesIndexRoute: StudentCertificatesIndexRoute,
   StudentNotificationsIndexRoute: StudentNotificationsIndexRoute,
   StudentTrainingsIndexRoute: StudentTrainingsIndexRoute,
   StudentTrainingsIdCatalogueRoute: StudentTrainingsIdCatalogueRoute,
