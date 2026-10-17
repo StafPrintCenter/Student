@@ -26,6 +26,7 @@ import { Route as StudentProgressRouteImport } from './routes/_student/progress'
 import { Route as StudentSupportRouteImport } from './routes/_student/support'
 import { Route as StudentCertificatesIndexRouteImport } from './routes/_student/certificates/index'
 import { Route as StudentNotificationsIndexRouteImport } from './routes/_student/notifications/index'
+import { Route as StudentNotificationsIdRouteImport } from './routes/_student/notifications/$id'
 import { Route as StudentTrainingsIndexRouteImport } from './routes/_student/trainings/index'
 import { Route as StudentTrainingsIdCatalogueRouteImport } from './routes/_student/trainings/$id/catalogue'
 import { Route as StudentTrainingsIdMineRouteImport } from './routes/_student/trainings/$id/mine'
@@ -115,6 +116,11 @@ const StudentNotificationsIndexRoute =
     path: '/',
     getParentRoute: () => StudentNotificationsRoute,
   } as any)
+const StudentNotificationsIdRoute = StudentNotificationsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => StudentNotificationsRoute,
+} as any)
 const StudentTrainingsIndexRoute = StudentTrainingsIndexRouteImport.update({
   id: '/trainings/',
   path: '/trainings/',
@@ -146,6 +152,7 @@ export interface FileRoutesByFullPath {
   '/profil': typeof StudentProfilRoute
   '/progress': typeof StudentProgressRoute
   '/support': typeof StudentSupportRoute
+  '/notifications/$id': typeof StudentNotificationsIdRoute
   '/certificates/': typeof StudentCertificatesIndexRoute
   '/notifications/': typeof StudentNotificationsIndexRoute
   '/trainings/': typeof StudentTrainingsIndexRoute
@@ -164,6 +171,7 @@ export interface FileRoutesByTo {
   '/profil': typeof StudentProfilRoute
   '/progress': typeof StudentProgressRoute
   '/support': typeof StudentSupportRoute
+  '/notifications/$id': typeof StudentNotificationsIdRoute
   '/certificates': typeof StudentCertificatesIndexRoute
   '/notifications': typeof StudentNotificationsIndexRoute
   '/trainings': typeof StudentTrainingsIndexRoute
@@ -187,6 +195,7 @@ export interface FileRoutesById {
   '/_student/profil': typeof StudentProfilRoute
   '/_student/progress': typeof StudentProgressRoute
   '/_student/support': typeof StudentSupportRoute
+  '/_student/notifications/$id': typeof StudentNotificationsIdRoute
   '/_student/certificates/': typeof StudentCertificatesIndexRoute
   '/_student/notifications/': typeof StudentNotificationsIndexRoute
   '/_student/trainings/': typeof StudentTrainingsIndexRoute
@@ -209,6 +218,7 @@ export interface FileRouteTypes {
     | '/profil'
     | '/progress'
     | '/support'
+    | '/notifications/$id'
     | '/certificates/'
     | '/notifications/'
     | '/trainings/'
@@ -227,6 +237,7 @@ export interface FileRouteTypes {
     | '/profil'
     | '/progress'
     | '/support'
+    | '/notifications/$id'
     | '/certificates'
     | '/notifications'
     | '/trainings'
@@ -249,6 +260,7 @@ export interface FileRouteTypes {
     | '/_student/profil'
     | '/_student/progress'
     | '/_student/support'
+    | '/_student/notifications/$id'
     | '/_student/certificates/'
     | '/_student/notifications/'
     | '/_student/trainings/'
@@ -383,6 +395,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentNotificationsIndexRouteImport
       parentRoute: typeof StudentNotificationsRoute
     }
+    '/_student/notifications/$id': {
+      id: '/_student/notifications/$id'
+      path: '/$id'
+      fullPath: '/notifications/$id'
+      preLoaderRoute: typeof StudentNotificationsIdRouteImport
+      parentRoute: typeof StudentNotificationsRoute
+    }
     '/_student/trainings/': {
       id: '/_student/trainings/'
       path: '/trainings'
@@ -431,10 +450,12 @@ const StudentCertificatesRouteWithChildren =
   StudentCertificatesRoute._addFileChildren(StudentCertificatesRouteChildren)
 
 interface StudentNotificationsRouteChildren {
+  StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
   StudentNotificationsIndexRoute: typeof StudentNotificationsIndexRoute
 }
 
 const StudentNotificationsRouteChildren: StudentNotificationsRouteChildren = {
+  StudentNotificationsIdRoute: StudentNotificationsIdRoute,
   StudentNotificationsIndexRoute: StudentNotificationsIndexRoute,
 }
 
