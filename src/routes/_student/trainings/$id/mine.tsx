@@ -110,6 +110,9 @@ function TrainingDetail() {
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
+          {/* Formation terminée : annonce du certificat */}
+          {enrollment.progress >= 100 && <CertificateAvailableBanner enrollmentId={enrollment.id} />}
+
           {contentLocked && (
             <Card className="border-warning/40 bg-warning/5">
               <CardContent className="flex items-start gap-4 p-4 text-sm text-warning-foreground">
