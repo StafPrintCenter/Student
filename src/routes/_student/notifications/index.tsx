@@ -1,133 +1,142 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { Bell, CheckCheck, ChevronLeft, ChevronRight, Loader2, Settings } from "lucide-react";
-
-import { PageHeader } from "@/components/portal/page-header";
-import { EmptyState } from "@/components/portal/empty-state";
+import { CheckCheck, ChevronLeft, ChevronRight, Loader2, Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { NotificationItem } from "@/components/portal/notifications/notification-item";
+import { NotificationItem } from "@/components/notifications/NotificationItem";
 import {
-  useMarkAllNotificationsAsRead,
-  useMarkNotificationAsRead,
-  useNotificationsList,
-} from "@/stores/useNotificationsStore";
+  CATEGORY_META,
+  NOTIFICATION_CATEGORIES,
+  type NotificationCategory,
+} from "@/data/notifications";
+import { useMarkAllAsRead, useNotificationsList } from "@/stores/useStudentNotificationsStore";
 
 export const Route = createFileRoute("/_student/notifications/")({
   head: () => ({
-    meta: [
-      { title: "Notifications - STAF Student Portal" },
-      { name: "description", content: "Vos notifications et leur historique." },
-    ],
+    meta: [{ title: "Notifications — Apprenant" }, { name: "robots", content: "noindex" }],
   }),
   component: NotificationsPage,
 });
 
-const PER_PAGE = 20;
-
 function NotificationsPage() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const [filter, setFilter] = useState<"all" | "unread">("all");
+  const [category, setCategory] = useState<NotificationCategory | "all">("all");
+  const [unreadOnly, setUnreadOnly] = useState(false);
 
-  const { items, meta, isLoading, isError, refetch } = useNotificationsList({ page, perPage: PER_PAGE });
-  const markAsRead = useMarkNotificationAsRead();
-  const markAll = useMarkAllNotificationsAsRead();
+  const { items, meta, isLoading } = useNotificationsList({ page, perPage: 20 });
+  const markAll = useMarkAllAsRead();
+
+  // Filtres appliqués sur la page chargée (l'API de liste n'expose pas de filtre)
+  const filtered = useMemo(
+    () =>
+      items.filter(
+        (n) => (category === "all" || n.category === category) && (!unreadOnly || !n.isRead),
+      ),
+    [items, category, unreadOnly],
+  );
 
   const unread = meta?.unreadTotal ?? 0;
-  // Le backend ne documente pas de filtre : "Non lues" filtre la page affichée
-  const visible = filter === "unread" ? items.filter((n) => !n.isRead) : items;
-
-  const handleMarkAll = () =>
-    markAll.mutate(undefined, {
-      onSuccess: (message) => toast.success(message),
-      onError: (err) => toast.error(err instanceof Error ? err.message : "Erreur lors du marquage"),
-    });
 
   return (
-    <div className="space-y-6">
-      <PageHeader
-        eyebrow="Échanges"
-        title="Notifications"
-        description="Retrouvez vos alertes et messages, et choisissez comment les recevoir."
-      />
-
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <Tabs value={filter} onValueChange={(v) => setFilter(v as "all" | "unread")}>
-          <TabsList>
-            <TabsTrigger value="all">Toutes{meta ? ` (${meta.total})` : ""}</TabsTrigger>
-            <TabsTrigger value="unread">Non lues{meta ? ` (${unread})` : ""}</TabsTrigger>
-          </TabsList>
-        </Tabs>
-
-        <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline" asChild>
-            <Link to="/notifications/preferences">
-              <Settings className="mr-1.5 h-3.5 w-3.5" /> Préférences
-            </Link>
+    <>
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="font-display text-2xl font-bold">Notifications</h1>
+          <p className="text-sm text-muted-foreground">
+            {meta
+              ? `${meta.total} notification${meta.total > 1 ? "s" : ""} · ${unread} non lue${unread > 1 ? "s" : ""}`
+              : "Chargement…"}
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={unread === 0 || markAll.isPending}
+            onClick={() =>
+              markAll.mutate(undefined, {
+                onSuccess: (m) => toast.success(m),
+                onError: (e) => toast.error(e.message),
+              })
+            }
+          >
+            <CheckCheck className="mr-1 h-4 w-4" /> Tout marquer comme lu
           </Button>
-          <Button size="sm" disabled={unread === 0 || markAll.isPending} onClick={handleMarkAll}>
-            {markAll.isPending ? (
-              <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
-            ) : (
-              <CheckCheck className="mr-1.5 h-3.5 w-3.5" />
-            )}
-            Tout marquer comme lu
+          <Button asChild size="sm" variant="outline">
+            <Link to="/notifications/preferences">
+              <Settings2 className="mr-1 h-4 w-4" /> Préférences
+            </Link>
           </Button>
         </div>
       </div>
 
-      {isLoading ? (
-        <div className="space-y-2">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Skeleton key={i} className="h-16 w-full" />
-          ))}
-        </div>
-      ) : isError ? (
-        <EmptyState
-          icon={Bell}
-          title="Impossible de charger les notifications"
-          description="Vérifiez votre connexion, puis réessayez."
-          action={<Button size="sm" onClick={() => refetch()}>Réessayer</Button>}
-        />
-      ) : visible.length === 0 ? (
-        <EmptyState
-          icon={Bell}
-          title={filter === "unread" ? "Aucune notification non lue sur cette page" : "Aucune notification"}
-          description="Vos prochaines notifications apparaîtront ici."
-        />
-      ) : (
-        <Card className="overflow-hidden">
-          <ul className="divide-y">
-            {visible.map((n) => (
-              <NotificationItem
-                key={n.id}
-                notification={n}
-                isMarking={markAsRead.isPending && markAsRead.variables === n.id}
-                onMarkRead={() => markAsRead.mutate(n.id)}
-                onOpen={() => navigate({ to: "/notifications/$id", params: { id: n.id } })}
-              />
-            ))}
-          </ul>
-        </Card>
-      )}
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        {(["all", ...NOTIFICATION_CATEGORIES] as const).map((c) => (
+          <button
+            key={c}
+            onClick={() => setCategory(c)}
+            className={`cursor-pointer rounded-full border px-3 py-1.5 text-xs font-medium transition ${category === c
+              ? "border-primary bg-primary text-primary-foreground"
+              : "border-border bg-card hover:border-primary"
+              }`}
+          >
+            {c === "all" ? "Toutes" : CATEGORY_META[c].label}
+          </button>
+        ))}
+        <label className="ml-auto flex cursor-pointer items-center gap-2 text-xs text-muted-foreground">
+          <input
+            type="checkbox"
+            checked={unreadOnly}
+            onChange={(e) => setUnreadOnly(e.target.checked)}
+          />
+          Non lues uniquement
+        </label>
+      </div>
 
-      {meta && meta.lastPage > 1 && (
-        <div className="flex items-center justify-between">
-          <Button size="sm" variant="outline" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
-            <ChevronLeft className="mr-1 h-4 w-4" /> Précédent
-          </Button>
-          <span className="text-xs text-muted-foreground">
-            Page {meta.currentPage} / {meta.lastPage}
-          </span>
-          <Button size="sm" variant="outline" disabled={page >= meta.lastPage} onClick={() => setPage((p) => p + 1)}>
-            Suivant <ChevronRight className="ml-1 h-4 w-4" />
-          </Button>
-        </div>
-      )}
-    </div>
+      <div className="max-w-3xl space-y-2">
+        {isLoading ? (
+          <div className="flex items-center justify-center gap-2 py-16 text-sm text-muted-foreground">
+            <Loader2 className="h-4 w-4 animate-spin" /> Chargement…
+          </div>
+        ) : filtered.length === 0 ? (
+          <p className="rounded-xl border border-dashed py-16 text-center text-sm text-muted-foreground">
+            Aucune notification ne correspond à ce filtre.
+          </p>
+        ) : (
+          filtered.map((n) => (
+            <NotificationItem
+              key={n.id}
+              notification={n}
+              onClick={() => navigate({ to: "/notifications/$id", params: { id: n.id } })}
+            />
+          ))
+        )}
+
+        {meta && meta.lastPage > 1 && (
+          <div className="flex items-center justify-between pt-4 text-sm">
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={page <= 1}
+              onClick={() => setPage((p) => p - 1)}
+            >
+              <ChevronLeft className="mr-1 h-4 w-4" /> Précédent
+            </Button>
+            <span className="text-muted-foreground">
+              Page {meta.currentPage} / {meta.lastPage}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={page >= meta.lastPage}
+              onClick={() => setPage((p) => p + 1)}
+            >
+              Suivant <ChevronRight className="ml-1 h-4 w-4" />
+            </Button>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
