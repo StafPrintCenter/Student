@@ -1,4 +1,4 @@
-import { useMutation, useQueries, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
 import type {
   APICertificateDownloadResult,
@@ -18,6 +18,17 @@ async function fetchEnrollmentCertificate(enrollmentId: string): Promise<APIEnro
 }
 
 export const fetchStudentEnrollmentCertificate = fetchEnrollmentCertificate;
+
+/** Certificat d'une seule inscription (même clé de cache que useEnrollmentCertificates : pas de double appel) */
+export function useEnrollmentCertificate(enrollmentId: string | undefined) {
+  const query = useQuery({
+    queryKey: [resourceKey, "enrollment", enrollmentId],
+    queryFn: () => fetchEnrollmentCertificate(enrollmentId as string),
+    enabled: !!enrollmentId,
+    staleTime: 1000 * 30,
+  });
+  return { data: query.data ?? null, isLoading: query.isLoading, isError: query.isError };
+}
 
 /**
  * Aucun endpoint ne liste les certificats : on interroge celui de chaque inscription.
