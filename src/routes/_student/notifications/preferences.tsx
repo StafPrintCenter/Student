@@ -1,63 +1,51 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, BellOff } from "lucide-react";
-
-import { PageHeader } from "@/components/portal/page-header";
-import { EmptyState } from "@/components/portal/empty-state";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { NotificationPreferenceCard } from "@/components/portal/notifications/notification-preference-card";
-import { useNotificationPreferences } from "@/stores/useNotificationsStore";
+import { PreferenceCard } from "@/components/notifications/PreferenceCard";
+import { useNotificationPreferences } from "@/stores/useAdminNotificationsStore";
 
 export const Route = createFileRoute("/_student/notifications/preferences")({
   head: () => ({
     meta: [
-      { title: "Préférences de notification - STAF Student Portal" },
+      { title: "Préférences de notifications — Admin" },
       { name: "robots", content: "noindex" },
     ],
   }),
-  component: NotificationPreferencesPage,
+  component: PreferencesPage,
 });
 
-function NotificationPreferencesPage() {
-  const { items, isLoading, isError } = useNotificationPreferences();
+function PreferencesPage() {
+  const { preferences, isLoading, isError } = useNotificationPreferences();
 
   return (
-    <div className="space-y-6">
-      <Button asChild variant="ghost" size="sm" className="-ml-2">
-        <Link to="/notifications">
-          <ArrowLeft className="mr-1 h-4 w-4" /> Retour aux notifications
-        </Link>
-      </Button>
-
-      <PageHeader
-        eyebrow="Notifications"
-        title="Préférences"
-        description="Choisissez les catégories que vous souhaitez recevoir, et quand."
-      />
+    <>
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="font-display text-2xl font-bold">Préférences de notifications</h1>
+          <p className="text-sm text-muted-foreground">
+            Choisissez ce que vous recevez, et à quels moments.
+          </p>
+        </div>
+        <Button asChild variant="outline" size="sm">
+          <Link to="/notifications">
+            <ArrowLeft className="mr-1 h-4 w-4" /> Notifications
+          </Link>
+        </Button>
+      </div>
 
       {isLoading ? (
-        <div className="max-w-3xl space-y-4">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <Skeleton key={i} className="h-40 w-full" />
-          ))}
+        <div className="flex items-center justify-center gap-2 py-24 text-muted-foreground">
+          <Loader2 className="h-5 w-5 animate-spin" /> Chargement…
         </div>
       ) : isError ? (
-        <EmptyState
-          icon={BellOff}
-          title="Impossible de charger vos préférences"
-          description="Vérifiez votre connexion, puis réessayez."
-        />
+        <p className="text-sm text-destructive">Impossible de charger vos préférences.</p>
       ) : (
-        <div className="max-w-3xl space-y-4">
-          {items.map((p) => (
-            <NotificationPreferenceCard
-              // la carte est remontée quand les valeurs serveur changent, pour resynchroniser son état local
-              key={`${p.category}-${p.enabled}-${p.deliveryMode}-${(p.scheduleDays ?? []).join()}-${p.scheduleStartTime}-${p.scheduleEndTime}`}
-              preference={p}
-            />
+        <div className="grid max-w-4xl gap-4 md:grid-cols-2">
+          {preferences.map((p) => (
+            <PreferenceCard key={p.category} preference={p} />
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 }
