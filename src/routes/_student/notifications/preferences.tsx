@@ -7,7 +7,7 @@ import { useNotificationPreferences } from "@/stores/useStudentNotificationsStor
 export const Route = createFileRoute("/_student/notifications/preferences")({
   head: () => ({
     meta: [
-      { title: "Préférences de notifications — Student" },
+      { title: "Préférences de notifications - Student" },
       { name: "robots", content: "noindex" },
     ],
   }),
