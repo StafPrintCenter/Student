@@ -6,7 +6,9 @@ import { toast } from "sonner";
 import logo from "@/assets/logos.json";
 import { SITE, SITE_LINK } from "@/data/site";
 import { ConfirmDisconnect } from "@/components/site/StudentBits";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger, SidebarInset, useSidebar } from "@/components/ui/sidebar";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger, SidebarInset, useSidebar, SidebarMenuBadge } from "@/components/ui/sidebar";
+import { NotificationBell } from "@/components/notifications/NotificationBell";
+import { useUnreadCount } from "@/stores/useStudentNotificationsStore";
 import { SocialLinks } from "@/components/site/SocialLinks";
 
 const docsUrl = `${SITE_LINK.docsUrl}/docs/student/index`;
@@ -26,6 +28,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Général",
     items: [
       { to: "/dashboard", label: "Tableau de bord", icon: LayoutDashboard, exact: true },
+      { to: "/notifications", label: "Notifications", icon: Bell, matchPrefixes: ["/notifications"] },
     ],
   },
   {
@@ -70,6 +73,7 @@ function StudentSidebarContent({
   onDisconnectClick: () => void;
 }) {
   const { setOpenMobile } = useSidebar();
+  const { count: unreadCount } = useUnreadCount();
 
   const handleNavClick = () => {
     setOpenMobile(false);
@@ -110,17 +114,15 @@ function StudentSidebarContent({
                   const active = isLinkActive(item);
                   return (
                     <SidebarMenuItem key={item.to}>
-                      <SidebarMenuButton
-                        asChild
-                        isActive={active}
-                        tooltip={item.label}
-                        className={navItemClass}
-                      >
+                      <SidebarMenuButton asChild isActive={active} tooltip={item.label} className={navItemClass}>
                         <Link to={item.to as "/dashboard"} onClick={handleNavClick}>
                           <item.icon className="size-4 shrink-0" />
                           <span>{item.label}</span>
                         </Link>
                       </SidebarMenuButton>
+                      {item.to === "/notifications" && unreadCount > 0 && (
+                        <SidebarMenuBadge className="bg-destructive text-white">{unreadCount > 99 ? "99+" : unreadCount}</SidebarMenuBadge>
+                      )}
                     </SidebarMenuItem>
                   );
                 })}
@@ -237,7 +239,8 @@ export function StudentShell({ children }: { children?: React.ReactNode }) {
           <SidebarTrigger />
           <div className="font-display font-semibold text-sm">Étudiant</div>
 
-          <div className="ml-auto flex items-center gap-4">
+          <div className="ml-auto flex items-center gap-3">
+            <NotificationBell />
             <a
               href={docsUrl}
               target="_blank"
