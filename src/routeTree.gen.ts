@@ -27,6 +27,7 @@ import { Route as StudentSupportRouteImport } from './routes/_student/support'
 import { Route as StudentCertificatesIndexRouteImport } from './routes/_student/certificates/index'
 import { Route as StudentNotificationsIndexRouteImport } from './routes/_student/notifications/index'
 import { Route as StudentNotificationsIdRouteImport } from './routes/_student/notifications/$id'
+import { Route as StudentNotificationsPreferencesRouteImport } from './routes/_student/notifications/preferences'
 import { Route as StudentTrainingsIndexRouteImport } from './routes/_student/trainings/index'
 import { Route as StudentTrainingsIdCatalogueRouteImport } from './routes/_student/trainings/$id/catalogue'
 import { Route as StudentTrainingsIdMineRouteImport } from './routes/_student/trainings/$id/mine'
@@ -121,6 +122,12 @@ const StudentNotificationsIdRoute = StudentNotificationsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => StudentNotificationsRoute,
 } as any)
+const StudentNotificationsPreferencesRoute =
+  StudentNotificationsPreferencesRouteImport.update({
+    id: '/preferences',
+    path: '/preferences',
+    getParentRoute: () => StudentNotificationsRoute,
+  } as any)
 const StudentTrainingsIndexRoute = StudentTrainingsIndexRouteImport.update({
   id: '/trainings/',
   path: '/trainings/',
@@ -153,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/progress': typeof StudentProgressRoute
   '/support': typeof StudentSupportRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
+  '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/certificates/': typeof StudentCertificatesIndexRoute
   '/notifications/': typeof StudentNotificationsIndexRoute
   '/trainings/': typeof StudentTrainingsIndexRoute
@@ -172,6 +180,7 @@ export interface FileRoutesByTo {
   '/progress': typeof StudentProgressRoute
   '/support': typeof StudentSupportRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
+  '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/certificates': typeof StudentCertificatesIndexRoute
   '/notifications': typeof StudentNotificationsIndexRoute
   '/trainings': typeof StudentTrainingsIndexRoute
@@ -196,6 +205,7 @@ export interface FileRoutesById {
   '/_student/progress': typeof StudentProgressRoute
   '/_student/support': typeof StudentSupportRoute
   '/_student/notifications/$id': typeof StudentNotificationsIdRoute
+  '/_student/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/_student/certificates/': typeof StudentCertificatesIndexRoute
   '/_student/notifications/': typeof StudentNotificationsIndexRoute
   '/_student/trainings/': typeof StudentTrainingsIndexRoute
@@ -219,6 +229,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/support'
     | '/notifications/$id'
+    | '/notifications/preferences'
     | '/certificates/'
     | '/notifications/'
     | '/trainings/'
@@ -238,6 +249,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/support'
     | '/notifications/$id'
+    | '/notifications/preferences'
     | '/certificates'
     | '/notifications'
     | '/trainings'
@@ -261,6 +273,7 @@ export interface FileRouteTypes {
     | '/_student/progress'
     | '/_student/support'
     | '/_student/notifications/$id'
+    | '/_student/notifications/preferences'
     | '/_student/certificates/'
     | '/_student/notifications/'
     | '/_student/trainings/'
@@ -402,6 +415,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentNotificationsIdRouteImport
       parentRoute: typeof StudentNotificationsRoute
     }
+    '/_student/notifications/preferences': {
+      id: '/_student/notifications/preferences'
+      path: '/preferences'
+      fullPath: '/notifications/preferences'
+      preLoaderRoute: typeof StudentNotificationsPreferencesRouteImport
+      parentRoute: typeof StudentNotificationsRoute
+    }
     '/_student/trainings/': {
       id: '/_student/trainings/'
       path: '/trainings'
@@ -451,11 +471,13 @@ const StudentCertificatesRouteWithChildren =
 
 interface StudentNotificationsRouteChildren {
   StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
+  StudentNotificationsPreferencesRoute: typeof StudentNotificationsPreferencesRoute
   StudentNotificationsIndexRoute: typeof StudentNotificationsIndexRoute
 }
 
 const StudentNotificationsRouteChildren: StudentNotificationsRouteChildren = {
   StudentNotificationsIdRoute: StudentNotificationsIdRoute,
+  StudentNotificationsPreferencesRoute: StudentNotificationsPreferencesRoute,
   StudentNotificationsIndexRoute: StudentNotificationsIndexRoute,
 }
 
