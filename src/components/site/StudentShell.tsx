@@ -8,8 +8,6 @@ import { SITE, SITE_LINK } from "@/data/site";
 import { ConfirmDisconnect } from "@/components/site/StudentBits";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger, SidebarInset, useSidebar } from "@/components/ui/sidebar";
 import { SocialLinks } from "@/components/site/SocialLinks";
-import { NotificationBell } from "@/components/portal/notifications/notification-bell";
-import { useUnreadNotificationsCount } from "@/stores/useNotificationsStore";
 
 const docsUrl = `${SITE_LINK.docsUrl}/docs/student/index`;
 
@@ -19,8 +17,6 @@ type NavItem = {
   icon: typeof LayoutDashboard;
   exact?: boolean;
   matchPrefixes?: string[];
-  /** Pastille de compteur affichée à droite du libellé */
-  badge?: "unread-notifications";
 };
 
 type NavGroup = { label: string; items: NavItem[] };
@@ -53,7 +49,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { to: "/community", label: "Communauté", icon: Users2 },
       { to: "/support", label: "Support", icon: LifeBuoy },
-      { to: "/notifications", label: "Notifications", icon: Bell, badge: "unread-notifications" },
+      { to: "/notifications", label: "Notifications", icon: Bell },
     ],
   },
 ];
@@ -74,7 +70,6 @@ function StudentSidebarContent({
   onDisconnectClick: () => void;
 }) {
   const { setOpenMobile } = useSidebar();
-  const { count: unreadNotifications } = useUnreadNotificationsCount();
 
   const handleNavClick = () => {
     setOpenMobile(false);
@@ -86,8 +81,6 @@ function StudentSidebarContent({
       : n.matchPrefixes
         ? n.matchPrefixes.some((prefix) => pathname.startsWith(prefix))
         : pathname.startsWith(n.to);
-
-  const badgeCount = (item: NavItem) => (item.badge === "unread-notifications" ? unreadNotifications : 0);
 
   const profileActive = pathname.startsWith("/profil");
 
@@ -115,23 +108,17 @@ function StudentSidebarContent({
               <SidebarMenu>
                 {g.items.map((item) => {
                   const active = isLinkActive(item);
-                  const count = badgeCount(item);
                   return (
                     <SidebarMenuItem key={item.to}>
                       <SidebarMenuButton
                         asChild
                         isActive={active}
-                        tooltip={count > 0 ? `${item.label} (${count})` : item.label}
+                        tooltip={item.label}
                         className={navItemClass}
                       >
                         <Link to={item.to as "/dashboard"} onClick={handleNavClick}>
                           <item.icon className="size-4 shrink-0" />
                           <span>{item.label}</span>
-                          {count > 0 && (
-                            <span className="ml-auto grid h-5 min-w-5 place-items-center rounded-full bg-destructive px-1.5 text-[10px] font-semibold leading-none text-white group-data-[collapsible=icon]:hidden">
-                              {count > 99 ? "99+" : count}
-                            </span>
-                          )}
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -250,7 +237,7 @@ export function StudentShell({ children }: { children?: React.ReactNode }) {
           <SidebarTrigger />
           <div className="font-display font-semibold text-sm">Étudiant</div>
 
-          <div className="ml-auto flex items-center gap-2 sm:gap-4">
+          <div className="ml-auto flex items-center gap-4">
             <a
               href={docsUrl}
               target="_blank"
@@ -260,10 +247,7 @@ export function StudentShell({ children }: { children?: React.ReactNode }) {
               <BookOpen className="size-3.5" />
               <span className="hidden sm:inline">Documentation</span>
             </a>
-            <div className="flex items-center gap-1.5">
-              <NotificationBell />
-              <div className="text-xs text-muted-foreground hidden sm:block">{user?.email}</div>
-            </div>
+            <div className="text-xs text-muted-foreground hidden sm:block">{user?.email}</div>
           </div>
         </header>
 
