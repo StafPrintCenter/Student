@@ -2,12 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PreferenceCard } from "@/components/notifications/PreferenceCard";
-import { useNotificationPreferences } from "@/stores/useAdminNotificationsStore";
+import { useNotificationPreferences } from "@/stores/useStudentNotificationsStore";
 
 export const Route = createFileRoute("/_student/notifications/preferences")({
   head: () => ({
     meta: [
-      { title: "Préférences de notifications — Admin" },
+      { title: "Préférences de notifications — Student" },
       { name: "robots", content: "noindex" },
     ],
   }),
