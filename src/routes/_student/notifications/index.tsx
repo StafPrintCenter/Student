@@ -13,7 +13,7 @@ import { useMarkAllAsRead, useNotificationsList } from "@/stores/useStudentNotif
 
 export const Route = createFileRoute("/_student/notifications/")({
   head: () => ({
-    meta: [{ title: "Notifications — Apprenant" }, { name: "robots", content: "noindex" }],
+    meta: [{ title: "Notifications - Apprenant" }, { name: "robots", content: "noindex" }],
   }),
   component: NotificationsPage,
 });
