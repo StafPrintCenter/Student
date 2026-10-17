@@ -1,138 +1,118 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
-import { ArrowLeft, BellOff, CheckCircle2, ExternalLink, Info } from "lucide-react";
-
-import { EmptyState } from "@/components/portal/empty-state";
+import { ArrowLeft, ExternalLink, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import {
-  NotificationCategoryBadge,
-  NotificationCategoryIcon,
-} from "@/components/portal/notifications/notification-category";
-import { resolveNotificationActionUrl } from "@/data/notifications";
-import { useNotificationDetail } from "@/stores/useNotificationsStore";
+import { CATEGORY_META, formatNotificationDate } from "@/data/notifications";
+import { useNotificationDetail } from "@/stores/useAdminNotificationsStore";
 
 export const Route = createFileRoute("/_student/notifications/$id")({
   head: () => ({
-    meta: [
-      { title: "Notification - STAF Student Portal" },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: "Notification — Admin" }, { name: "robots", content: "noindex" }],
   }),
   component: NotificationDetail,
 });
 
-/** "contactMessageId" -> "Contact message id" */
-function humanizeKey(key: string) {
-  const spaced = key.replace(/([A-Z])/g, " $1").trim().toLowerCase();
-  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
-}
-
-function formatValue(value: unknown) {
-  return typeof value === "object" && value !== null ? JSON.stringify(value) : String(value);
-}
-
-function BackButton() {
-  return (
-    <Button asChild variant="ghost" size="sm" className="-ml-2">
-      <Link to="/notifications">
-        <ArrowLeft className="mr-1 h-4 w-4" /> Retour
-      </Link>
-    </Button>
-  );
-}
-
 function NotificationDetail() {
   const { id } = Route.useParams();
   const navigate = useNavigate();
-  const { item, isLoading, isError } = useNotificationDetail(id);
+  const { notification: n, isLoading } = useNotificationDetail(id);
 
-  if (isLoading) return <Skeleton className="h-72 w-full" />;
+  const back = (
+    <Button variant="outline" size="sm" onClick={() => navigate({ to: "/notifications" })}>
+      <ArrowLeft className="mr-1 h-4 w-4" /> Retour
+    </Button>
+  );
 
-  if (isError || !item) {
+  if (isLoading) {
     return (
-      <div className="space-y-6">
-        <BackButton />
-        <EmptyState
-          icon={BellOff}
-          title="Notification introuvable"
-          description="Elle a peut-être été supprimée, ou le lien est incorrect."
-        />
-      </div>
+      <>
+        <div className="flex items-center justify-center gap-2 py-24 text-muted-foreground">
+          <Loader2 className="h-5 w-5 animate-spin" /> Chargement…
+        </div>
+      </>
     );
   }
 
-  const action = item.actionUrl ? resolveNotificationActionUrl(item.actionUrl) : null;
-  const extraData = item.data ? Object.entries(item.data) : [];
+  if (!n) {
+    return (
+      <>
+        <div className="mb-6">{back}</div>
+        <div className="rounded-xl border p-8 text-center text-muted-foreground">
+          Notification introuvable.
+          <div className="mt-2">
+            <Link to="/notifications" className="text-primary underline">
+              Retour à la liste
+            </Link>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  const meta = CATEGORY_META[n.category];
+  const Icon = meta.icon;
+  const dataEntries = n.data ? Object.entries(n.data) : [];
 
   return (
-    <div className="space-y-6">
-      <BackButton />
+    <>
+      <div className="mb-6">{back}</div>
 
-      <Card className="max-w-3xl">
-        <CardHeader className="space-y-4">
-          <div className="flex items-start gap-3">
-            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
-              <NotificationCategoryIcon category={item.category} className="h-5 w-5" />
-            </div>
-            <div className="min-w-0 space-y-2">
-              <div className="flex flex-wrap items-center gap-2">
-                <NotificationCategoryBadge category={item.category} />
-                <span className="font-mono text-[11px] text-muted-foreground">{item.type}</span>
-              </div>
-              <h1 className="font-display text-2xl leading-tight">{item.title}</h1>
+      <div className="max-w-3xl space-y-6">
+        <div className="overflow-hidden rounded-2xl border bg-card">
+          <div className="flex items-start gap-4 border-b bg-muted/30 p-6">
+            <span
+              className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${meta.className}`}
+            >
+              <Icon className="h-5 w-5" />
+            </span>
+            <div className="min-w-0">
+              <span
+                className={`inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${meta.className}`}
+              >
+                {meta.label}
+              </span>
+              <h1 className="mt-2 font-display text-xl font-bold">{n.title}</h1>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Reçue le {formatNotificationDate(n.deliveredAt)}
+                {n.readAt && ` · Lue le ${formatNotificationDate(n.readAt)}`}
+              </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
-            <span>Reçue le {format(new Date(item.deliveredAt), "d MMMM yyyy 'à' HH:mm", { locale: fr })}</span>
-            {item.readAt && (
-              <span className="inline-flex items-center gap-1">
-                <CheckCircle2 className="h-3.5 w-3.5 text-success" />
-                Lue le {format(new Date(item.readAt), "d MMMM yyyy 'à' HH:mm", { locale: fr })}
-              </span>
+          <div className="space-y-4 p-6">
+            <p className="text-sm leading-relaxed">{n.body}</p>
+
+            {n.actionUrl && (
+              <Button
+                onClick={() =>
+                  navigate({ to: n.actionUrl as never })
+                }
+              >
+                <ExternalLink className="mr-1 h-4 w-4" /> Ouvrir l'élément concerné
+              </Button>
             )}
           </div>
-        </CardHeader>
+        </div>
 
-        <CardContent className="space-y-5">
-          <p className="whitespace-pre-line text-sm leading-relaxed">{item.body}</p>
+        {dataEntries.length > 0 && (
+          <div className="rounded-2xl border bg-card p-6">
+            <h2 className="mb-3 font-display text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Détails techniques
+            </h2>
+            <dl className="space-y-2 text-sm">
+              {dataEntries.map(([key, value]) => (
+                <div key={key} className="flex flex-wrap gap-x-3">
+                  <dt className="font-medium">{key}</dt>
+                  <dd className="break-all font-mono text-xs text-muted-foreground">
+                    {typeof value === "object" ? JSON.stringify(value) : String(value)}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
 
-          {extraData.length > 0 && (
-            <div className="space-y-2 rounded-lg border border-border bg-muted/20 p-4">
-              <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-                <Info className="h-3.5 w-3.5" /> Informations associées
-              </p>
-              <dl className="space-y-1.5 text-sm">
-                {extraData.map(([key, value]) => (
-                  <div key={key} className="flex items-start justify-between gap-4">
-                    <dt className="text-muted-foreground">{humanizeKey(key)}</dt>
-                    <dd className="break-all text-right font-mono text-xs">{formatValue(value)}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          )}
-
-          {action && (
-            <div className="border-t pt-4">
-              {action.external ? (
-                <Button asChild>
-                  <a href={action.href} target="_blank" rel="noreferrer">
-                    <ExternalLink className="mr-1.5 h-4 w-4" /> Ouvrir le lien
-                  </a>
-                </Button>
-              ) : (
-                <Button onClick={() => navigate({ to: action.href as never })}>
-                  <ExternalLink className="mr-1.5 h-4 w-4" /> Voir le détail
-                </Button>
-              )}
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+        <p className="font-mono text-[11px] text-muted-foreground/70">Type : {n.type}</p>
+      </div>
+    </>
   );
 }
