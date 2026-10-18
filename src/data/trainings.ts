@@ -82,6 +82,7 @@ export const trainingPaymentStatusMap: Record<TrainingPaymentStatus, StatusBadge
 /**
  * Une formation à laquelle l'étudiant est inscrit
  */
+/** GET /api/student/trainings/list */
 export type APIStudentTrainingEnrollment = {
   enrollmentId: string;
   trainingId: string;
@@ -193,6 +194,7 @@ export type APIStudentTrainingDetail = {
   coverColor: string;
   startDate: string;
   endDate: string;
+  instructors: APITrainingInstructor[];
 };
 
 /** Infos d'inscription de l'étudiant courant pour cette formation */
