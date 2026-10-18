@@ -6,6 +6,15 @@ export const trainingInstructorRoleLabels: Record<TrainingInstructorRole, string
   assistant: "Formateur assistant",
 };
 
+export type APITrainingInstructor = {
+  instructorId: string;
+  name: string;
+  photo: string | null;
+  role: TrainingInstructorRole;
+  /** Présent uniquement dans le détail d'une formation (absent de la liste) */
+  bio?: string | null;
+};
+
 /** Aligné sur App\Enums\TrainingLevel (backend) */
 export type TrainingLevel = "Débutant" | "Intermédiaire" | "Avancé";
 
