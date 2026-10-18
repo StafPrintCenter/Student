@@ -100,14 +100,14 @@ function Metric({ label, value, hint }: { label: string; value: string; hint?: s
 }
 
 /**
- * Bouton "Certificat" qui charge le certificat de l'inscription
- * et fournit le certificateId exact dans la recherche TanStack Router (?certificateId=...).
+ * Bouton affichant le numéro du certificat (ex: SPC-CERT-2026-...) 
+ * et permettant d'ouvrir la modale correspondante.
  */
 function TrainingCertificateButton({ enrollmentId }: { enrollmentId: string }) {
   const { data, isLoading } = useEnrollmentCertificate(enrollmentId);
 
   if (isLoading) {
-    return <Skeleton className="h-8 w-24" />;
+    return <Skeleton className="h-8 w-32" />;
   }
 
   const certificate = data?.certificate;
@@ -116,7 +116,8 @@ function TrainingCertificateButton({ enrollmentId }: { enrollmentId: string }) {
   return (
     <Button size="sm" variant="ghost" asChild>
       <Link to="/certificates" search={{ certificateId: certificate.id }}>
-        <BadgeCheck className="mr-1 h-3.5 w-3.5" /> Certificat
+        <BadgeCheck className="mr-1.5 h-3.5 w-3.5 text-primary shrink-0" />
+        <span className="font-mono text-xs">{certificate.number}</span>
       </Link>
     </Button>
   );
