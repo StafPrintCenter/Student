@@ -20,7 +20,6 @@ import { Route as StudentDashboardRouteImport } from './routes/_student/dashboar
 import { Route as StudentDocumentsRouteImport } from './routes/_student/documents'
 import { Route as StudentPaymentsRouteImport } from './routes/_student/payments'
 import { Route as StudentProfilRouteImport } from './routes/_student/profil'
-import { Route as StudentProgressRouteImport } from './routes/_student/progress'
 import { Route as StudentSupportRouteImport } from './routes/_student/support'
 import { Route as StudentCertificatesIndexRouteImport } from './routes/_student/certificates/index'
 import { Route as StudentNotificationsIndexRouteImport } from './routes/_student/notifications/index'
@@ -84,11 +83,6 @@ const StudentProfilRoute = StudentProfilRouteImport.update({
   path: '/profil',
   getParentRoute: () => StudentRoute,
 } as any)
-const StudentProgressRoute = StudentProgressRouteImport.update({
-  id: '/progress',
-  path: '/progress',
-  getParentRoute: () => StudentRoute,
-} as any)
 const StudentSupportRoute = StudentSupportRouteImport.update({
   id: '/support',
   path: '/support',
@@ -118,9 +112,9 @@ const StudentNotificationsPreferencesRoute =
     getParentRoute: () => StudentRoute,
   } as any)
 const StudentProgressIndexRoute = StudentProgressIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => StudentProgressRoute,
+  id: '/progress/',
+  path: '/progress/',
+  getParentRoute: () => StudentRoute,
 } as any)
 const StudentTrainingsIndexRoute = StudentTrainingsIndexRouteImport.update({
   id: '/trainings/',
@@ -149,7 +143,6 @@ export interface FileRoutesByFullPath {
   '/documents': typeof StudentDocumentsRoute
   '/payments': typeof StudentPaymentsRoute
   '/profil': typeof StudentProfilRoute
-  '/progress': typeof StudentProgressRouteWithChildren
   '/support': typeof StudentSupportRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
@@ -193,7 +186,6 @@ export interface FileRoutesById {
   '/_student/documents': typeof StudentDocumentsRoute
   '/_student/payments': typeof StudentPaymentsRoute
   '/_student/profil': typeof StudentProfilRoute
-  '/_student/progress': typeof StudentProgressRouteWithChildren
   '/_student/support': typeof StudentSupportRoute
   '/_student/notifications/$id': typeof StudentNotificationsIdRoute
   '/_student/notifications/preferences': typeof StudentNotificationsPreferencesRoute
@@ -216,7 +208,6 @@ export interface FileRouteTypes {
     | '/documents'
     | '/payments'
     | '/profil'
-    | '/progress'
     | '/support'
     | '/notifications/$id'
     | '/notifications/preferences'
@@ -259,7 +250,6 @@ export interface FileRouteTypes {
     | '/_student/documents'
     | '/_student/payments'
     | '/_student/profil'
-    | '/_student/progress'
     | '/_student/support'
     | '/_student/notifications/$id'
     | '/_student/notifications/preferences'
@@ -356,13 +346,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentProfilRouteImport
       parentRoute: typeof StudentRoute
     }
-    '/_student/progress': {
-      id: '/_student/progress'
-      path: '/progress'
-      fullPath: '/progress'
-      preLoaderRoute: typeof StudentProgressRouteImport
-      parentRoute: typeof StudentRoute
-    }
     '/_student/support': {
       id: '/_student/support'
       path: '/support'
@@ -400,10 +383,10 @@ declare module '@tanstack/react-router' {
     }
     '/_student/progress/': {
       id: '/_student/progress/'
-      path: '/'
+      path: '/progress'
       fullPath: '/progress/'
       preLoaderRoute: typeof StudentProgressIndexRouteImport
-      parentRoute: typeof StudentProgressRoute
+      parentRoute: typeof StudentRoute
     }
     '/_student/trainings/': {
       id: '/_student/trainings/'
@@ -441,18 +424,6 @@ const AuthRouteChildren: AuthRouteChildren = {
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
-interface StudentProgressRouteChildren {
-  StudentProgressIndexRoute: typeof StudentProgressIndexRoute
-}
-
-const StudentProgressRouteChildren: StudentProgressRouteChildren = {
-  StudentProgressIndexRoute: StudentProgressIndexRoute,
-}
-
-const StudentProgressRouteWithChildren = StudentProgressRoute._addFileChildren(
-  StudentProgressRouteChildren,
-)
-
 interface StudentRouteChildren {
   StudentCalendarRoute: typeof StudentCalendarRoute
   StudentCommunityRoute: typeof StudentCommunityRoute
@@ -460,12 +431,12 @@ interface StudentRouteChildren {
   StudentDocumentsRoute: typeof StudentDocumentsRoute
   StudentPaymentsRoute: typeof StudentPaymentsRoute
   StudentProfilRoute: typeof StudentProfilRoute
-  StudentProgressRoute: typeof StudentProgressRouteWithChildren
   StudentSupportRoute: typeof StudentSupportRoute
   StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
   StudentNotificationsPreferencesRoute: typeof StudentNotificationsPreferencesRoute
   StudentCertificatesIndexRoute: typeof StudentCertificatesIndexRoute
   StudentNotificationsIndexRoute: typeof StudentNotificationsIndexRoute
+  StudentProgressIndexRoute: typeof StudentProgressIndexRoute
   StudentTrainingsIndexRoute: typeof StudentTrainingsIndexRoute
   StudentTrainingsIdCatalogueRoute: typeof StudentTrainingsIdCatalogueRoute
   StudentTrainingsIdMineRoute: typeof StudentTrainingsIdMineRoute
@@ -478,12 +449,12 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentDocumentsRoute: StudentDocumentsRoute,
   StudentPaymentsRoute: StudentPaymentsRoute,
   StudentProfilRoute: StudentProfilRoute,
-  StudentProgressRoute: StudentProgressRouteWithChildren,
   StudentSupportRoute: StudentSupportRoute,
   StudentNotificationsIdRoute: StudentNotificationsIdRoute,
   StudentNotificationsPreferencesRoute: StudentNotificationsPreferencesRoute,
   StudentCertificatesIndexRoute: StudentCertificatesIndexRoute,
   StudentNotificationsIndexRoute: StudentNotificationsIndexRoute,
+  StudentProgressIndexRoute: StudentProgressIndexRoute,
   StudentTrainingsIndexRoute: StudentTrainingsIndexRoute,
   StudentTrainingsIdCatalogueRoute: StudentTrainingsIdCatalogueRoute,
   StudentTrainingsIdMineRoute: StudentTrainingsIdMineRoute,
