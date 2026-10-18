@@ -92,6 +92,7 @@ export type APIStudentTrainingEnrollment = {
   seatsRemaining: number;
   location: string;
   duration: string;
+  coverColor: string;
   status: TrainingEnrollmentStatus;
   progress: number;
   paymentStatus: TrainingPaymentStatus;
