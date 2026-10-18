@@ -1,0 +1,38 @@
+import { GraduationCap } from "lucide-react";
+
+import { EmptyState } from "@/components/portal/empty-state";
+import { Skeleton } from "@/components/ui/skeleton";
+import { EnrollmentCard } from "@/components/portal/trainings/enrollment-card";
+import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
+
+export function MyEnrollments() {
+  const { items, isLoading } = useStudentTrainingsList();
+
+  if (isLoading) {
+    return (
+      <div className="grid gap-4 md:grid-cols-2">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <Skeleton key={i} className="h-52" />
+        ))}
+      </div>
+    );
+  }
+
+  if (items.length === 0) {
+    return (
+      <EmptyState
+        icon={GraduationCap}
+        title="Vous n'êtes inscrit à aucune formation"
+        description="Consultez le catalogue pour choisir une formation."
+      />
+    );
+  }
+
+  return (
+    <div className="grid gap-4 md:grid-cols-2">
+      {items.map((e) => (
+        <EnrollmentCard key={e.enrollmentId} enrollment={e} />
+      ))}
+    </div>
+  );
+}
