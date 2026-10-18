@@ -23,10 +23,22 @@ export type LessonProgressPayload =
 export type APILessonProgressResult = {
   lessonId: string;
   status: LessonProgressStatus;
-  /** Renvoyé par le backend sous forme de string décimale, ex: "0.00" */
+  /** String décimale renvoyée par le backend, ex: "0.00" */
   completionRatio: string;
   /** Nouvelle progression globale de l'inscription (0-100) */
   enrollmentProgress: number;
+};
+
+/** Progression de l'étudiant sur une leçon (détail de formation et détail de leçon) */
+export type APILessonProgress = {
+  status: LessonProgressStatus;
+  isCompleted: boolean;
+  /** Pourcentage ("100.00") : pertinent pour les vidéos uniquement, null tant que non commencée */
+  completionRatio: string | null;
+  watchedSeconds: number | null;
+  bestScore: number | null;
+  completedAt: string | null;
+  lastActivityAt: string | null;
 };
 
 /* ---- Soumissions (exercise / assignment / project) ---- */
@@ -41,10 +53,7 @@ export const submissionStatusMap: Record<SubmissionStatus, { label: string; clas
   rejected: { label: "À reprendre", className: "bg-destructive/10 text-destructive border-destructive/40" },
 };
 
-/**
- * Payload de POST /api/student/lessons/{lessonId}/submissions/create
- * Au moins l'un des deux champs est requis (422 côté backend sinon).
- */
+/** Payload de POST /api/student/lessons/{lessonId}/submissions/create (au moins un des deux champs) */
 export type SubmissionPayload = {
   body?: string;
   file?: File;
@@ -57,14 +66,60 @@ export type APISubmissionResult = {
   submittedAt: string;
 };
 
-/** Leçons pour lesquelles un dépôt de travail est pertinent */
 export const SUBMITTABLE_LESSON_KINDS: LessonKind[] = ["exercise", "assignment", "project"];
 
-/** Message de succès selon le comportement du backend : un exercice est terminé au dépôt, les autres attendent la correction */
+/** Un exercice est terminé au dépôt, les autres attendent la correction */
 export const submissionSuccessMessages: Partial<Record<LessonKind, string>> = {
   exercise: "Exercice terminé : votre dépôt a été enregistré.",
   assignment: "Devoir déposé : il sera corrigé par votre formateur.",
   project: "Projet déposé : il sera corrigé par votre formateur.",
+};
+
+export type APILessonSubmissionFeedback = {
+  note: number | null;
+  comment: string | null;
+  validated: boolean;
+  gradedAt: string | null;
+};
+
+/** Dépôt tel que renvoyé dans le détail de formation (dernier dépôt) et le détail de leçon (liste) */
+export type APILessonSubmission = {
+  id: string;
+  status: SubmissionStatus;
+  body: string | null;
+  fileUrl: string | null;
+  submittedAt: string;
+  feedback: APILessonSubmissionFeedback | null;
+  attemptsCount: number;
+};
+
+/* ---- Détail d'une leçon : GET /api/student/trainings/lessons/{lessonId} ---- */
+
+export type APILessonLink = { id: string; title: string };
+
+export type APILessonDetail = {
+  id: string;
+  title: string;
+  kind: LessonKind;
+  durationMinutes: number | null;
+  isMandatory: boolean;
+  brief: string | null;
+  content: string | null;
+  videoUrl: string | null;
+  chapters: string[] | null;
+  quizId: string | null;
+  module: { id: string; title: string };
+  trainingId: string;
+  enrollmentId: string;
+  contentLocked: boolean;
+  /** true pour les leçons vidéo / lecture dont la progression peut être enregistrée */
+  canMarkProgress: boolean;
+  /** true quand un nouveau dépôt est possible */
+  canSubmitWork: boolean;
+  progress: APILessonProgress;
+  submissions: APILessonSubmission[];
+  previousLesson: APILessonLink | null;
+  nextLesson: APILessonLink | null;
 };
 
 export type { LessonKind };
