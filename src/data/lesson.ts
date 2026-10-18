@@ -11,8 +11,6 @@ export type LessonProgressPayload =
   | { watched_seconds: number; completed?: never }
   | { completed?: boolean; watched_seconds?: never };
 
-export type LessonProgressStatus = "in_progress" | "completed";
-
 /** Réponse de POST /api/student/lessons/{lessonId}/progress */
 export type APILessonProgressResult = {
   lessonId: string;
