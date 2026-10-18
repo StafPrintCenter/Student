@@ -1,3 +1,11 @@
+/** Rôle d'un formateur sur une formation */
+export type TrainingInstructorRole = "lead" | "assistant";
+
+export const trainingInstructorRoleLabels: Record<TrainingInstructorRole, string> = {
+  lead: "Formateur principal",
+  assistant: "Formateur assistant",
+};
+
 /** Aligné sur App\Enums\TrainingLevel (backend) */
 export type TrainingLevel = "Débutant" | "Intermédiaire" | "Avancé";
 
