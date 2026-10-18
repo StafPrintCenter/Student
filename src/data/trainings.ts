@@ -1,3 +1,5 @@
+import type { APILessonProgress, APILessonSubmission } from "@/data/lesson";
+
 /** Rôle d'un formateur sur une formation */
 export type TrainingInstructorRole = "lead" | "assistant";
 
@@ -166,6 +168,10 @@ export type APIStudentTrainingLesson = {
   videoUrl: string | null;
   chapters: string[] | null;
   quizId?: string | null;
+  /** Progression de l'étudiant sur cette leçon */
+  progress: APILessonProgress;
+  /** Dernier dépôt de l'étudiant (exercise / assignment / project), sinon null */
+  submission: APILessonSubmission | null;
 };
 
 /** Un module (regroupement de leçons) */
@@ -174,6 +180,9 @@ export type APIStudentTrainingModule = {
   title: string;
   description: string | null;
   sortOrder: number;
+  lessonsCount: number;
+  completedLessonsCount: number;
+  isCompleted: boolean;
   lessons: APIStudentTrainingLesson[];
 };
 
