@@ -15,6 +15,19 @@ export type APITrainingInstructor = {
   bio?: string | null;
 };
 
+/** Le formateur principal passe en premier */
+export function sortInstructors(instructors: APITrainingInstructor[]): APITrainingInstructor[] {
+  return [...instructors].sort((a, b) => Number(b.role === "lead") - Number(a.role === "lead"));
+}
+
+/** "Steve AFOVO" ou "Steve AFOVO + 2 autres" ; null si aucun formateur */
+export function summarizeInstructors(instructors: APITrainingInstructor[]): string | null {
+  if (instructors.length === 0) return null;
+  const [main] = sortInstructors(instructors);
+  const others = instructors.length - 1;
+  return others === 0 ? main.name : `${main.name} + ${others} autre${others > 1 ? "s" : ""}`;
+}
+
 /** Aligné sur App\Enums\TrainingLevel (backend) */
 export type TrainingLevel = "Débutant" | "Intermédiaire" | "Avancé";
 
