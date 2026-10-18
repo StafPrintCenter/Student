@@ -1,9 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { GraduationCap, Users, MapPin, Clock, ArrowRight, Loader2, Calendar } from "lucide-react";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
-import { toast } from "sonner";
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+
 import { PageHeader } from "@/components/portal/page-header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MyEnrollments } from "@/components/portal/trainings/my-enrollments";
