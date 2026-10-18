@@ -92,6 +92,7 @@ export type APIStudentTrainingEnrollment = {
   maxSeats: number;
   seatsRemaining: number;
   location: string;
+  price: number;
   duration: string;
   coverColor: string;
   status: TrainingEnrollmentStatus;
@@ -191,6 +192,7 @@ export type APIStudentTrainingDetail = {
   maxSeats: number;
   seatsRemaining: number;
   location: string;
+  price: number;
   coverColor: string;
   startDate: string;
   endDate: string;
