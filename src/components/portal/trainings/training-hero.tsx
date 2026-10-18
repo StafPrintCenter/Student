@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Calendar, Clock, MapPin, Users } from "lucide-react";
-
+import { Calendar, Clock, MapPin, Users, CircleEuro } from "lucide-react";
+import { formatFCFA } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
 import { AccessBadge } from "@/components/portal/trainings/access-badge";
 import { StatusBadge } from "@/components/portal/trainings/status-badge";
@@ -34,6 +34,7 @@ export function TrainingHero({ training, enrollment, contentLocked }: TrainingHe
           <Badge variant="outline">{training.level}</Badge>
           <Badge variant="outline">{training.duration}</Badge>
           <StatusBadge status={enrollment.status} map={trainingEnrollmentStatusMap} />
+          <Badge variant="outline"><CircleEuro className="h-3 w-3 mr-2" /> {formatFCFA(training.price)}</Badge>
           <AccessBadge unlocked={!contentLocked} />
         </div>
 
