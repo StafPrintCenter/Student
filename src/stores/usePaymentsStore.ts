@@ -5,7 +5,7 @@ import type { APITrainingPaymentsSummary } from "@/data/payments";
 const resourceKey = "training-payments";
 
 async function fetchTrainingPayments(trainingId: string): Promise<APITrainingPaymentsSummary | null> {
-  const response = await studentFetch(`/api/student/trainings/catalogs/${trainingId}/payments`);
+  const response = await studentFetch(`/api/student/trainings/payments/${trainingId}/detail`);
   if (response.status === 404 || response.status === 403) return null;
   if (!response.ok) throw new Error("Erreur lors de la récupération des paiements");
   const json: { data: APITrainingPaymentsSummary } = await response.json();
