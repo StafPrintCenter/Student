@@ -1,29 +1,49 @@
+import { useState } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { MessageSquare, Paperclip } from "lucide-react";
 
+import { FilePreviewPortal } from "@/components/portal/lesson/file-preview-portal";
 import { StatusBadge } from "@/components/portal/trainings/status-badge";
 import { resolveStorageUrl } from "@/lib/file-url";
 import { submissionStatusMap, type APILessonSubmission } from "@/data/lesson";
 
 const formatDateTime = (iso: string) => format(new Date(iso), "d MMM yyyy 'à' HH:mm", { locale: fr });
 
+type Preview = { url: string; title: string };
+
 export function SubmissionHistory({ submissions }: { submissions: APILessonSubmission[] }) {
+  const [preview, setPreview] = useState<Preview | null>(null);
+
   if (submissions.length === 0) return null;
 
   return (
-    <div className="space-y-3">
-      <p className="text-sm font-medium">Mes dépôts</p>
-      <ul className="space-y-3">
-        {submissions.map((s) => (
-          <SubmissionItem key={s.id} submission={s} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="space-y-3">
+        <p className="text-sm font-medium">Mes dépôts</p>
+        <ul className="space-y-3">
+          {submissions.map((s) => (
+            <SubmissionItem key={s.id} submission={s} onPreview={setPreview} />
+          ))}
+        </ul>
+      </div>
+
+      <FilePreviewPortal
+        url={preview?.url ?? null}
+        title={preview?.title ?? ""}
+        onClose={() => setPreview(null)}
+      />
+    </>
   );
 }
 
-function SubmissionItem({ submission: s }: { submission: APILessonSubmission }) {
+function SubmissionItem({
+  submission: s,
+  onPreview,
+}: {
+  submission: APILessonSubmission;
+  onPreview: (preview: Preview) => void;
+}) {
   const fileUrl = resolveStorageUrl(s.fileUrl);
   const feedback = s.feedback;
   const hasFeedback = !!feedback && (feedback.note != null || !!feedback.comment);
@@ -45,14 +65,13 @@ function SubmissionItem({ submission: s }: { submission: APILessonSubmission }) 
       {s.body && <p className="whitespace-pre-line text-sm">{s.body}</p>}
 
       {fileUrl && (
-        <a
-          href={fileUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-primary underline underline-offset-4"
+        <button
+          type="button"
+          onClick={() => onPreview({ url: fileUrl, title: `Fichier joint · ${formatDateTime(s.submittedAt)}` })}
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-primary underline underline-offset-4 hover:opacity-80 cursor-pointer"
         >
           <Paperclip className="h-3.5 w-3.5" /> Voir le fichier joint
-        </a>
+        </button>
       )}
 
       {hasFeedback && (
