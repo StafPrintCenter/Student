@@ -7,15 +7,16 @@ import { PaymentsDialog } from "@/components/portal/trainings/payments-dialog";
 import { StatusBadge } from "@/components/portal/trainings/status-badge";
 import { cn } from "@/lib/utils";
 import { formatFCFA } from "@/lib/format";
-import { trainingPaymentStatusMap, type APIStudentTrainingEnrollmentInfo } from "@/data/trainings";
+import { trainingPaymentStatusMap, type APIStudentTrainingDetail, type APIStudentTrainingEnrollmentInfo } from "@/data/trainings";
 
 interface FinancialStatusCardProps {
+  training: APIStudentTrainingDetail;
   trainingId: string;
   enrollment: APIStudentTrainingEnrollmentInfo;
   accessMinRatioPercent: number;
 }
 
-export function FinancialStatusCard({ trainingId, enrollment, accessMinRatioPercent }: FinancialStatusCardProps) {
+export function FinancialStatusCard({ training, trainingId, enrollment, accessMinRatioPercent }: FinancialStatusCardProps) {
   const [paymentsOpen, setPaymentsOpen] = useState(false);
 
   return (
@@ -28,6 +29,11 @@ export function FinancialStatusCard({ trainingId, enrollment, accessMinRatioPerc
           <CardDescription className="text-xs">Détails du règlement et conditions d'accès</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 text-sm">
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">Coût de la formation</span>
+            <span className="font-medium">{formatFCFA(training.price)}</span>
+          </div>
+
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground">Statut du paiement</span>
             <StatusBadge status={enrollment.paymentStatus} map={trainingPaymentStatusMap} />
