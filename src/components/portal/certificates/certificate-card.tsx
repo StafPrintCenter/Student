@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Award, Calendar, Eye, Hash, ShieldCheck } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -36,7 +37,13 @@ export function CertificateCard({ enrollment, data, onView, onVerify }: Certific
               <p className="text-xs text-muted-foreground">
                 {enrollment.theme} · {enrollment.level}
               </p>
-              <p className="truncate font-medium">{enrollment.trainingTitle}</p>
+              <Link
+                to="/trainings/$id/mine"
+                params={{ id: enrollment.trainingId }}
+                className="block truncate font-medium hover:text-primary hover:underline"
+              >
+                {enrollment.trainingTitle}
+              </Link>
             </div>
           </div>
           <Badge variant="outline" className={cn("shrink-0 font-medium", config.className)}>
