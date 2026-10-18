@@ -1,6 +1,14 @@
 import type { LessonKind } from "@/data/trainings";
 
-/* ---- Progression (video / reading) ---- */
+/* ---- Progression ---- */
+
+export type LessonProgressStatus = "not_started" | "in_progress" | "completed";
+
+export const lessonProgressStatusMap: Record<LessonProgressStatus, { label: string; className: string }> = {
+  not_started: { label: "Non commencée", className: "bg-muted text-muted-foreground border-border" },
+  in_progress: { label: "En cours", className: "bg-info/15 text-info border-info/40" },
+  completed: { label: "Terminée", className: "bg-success/15 text-success border-success/40" },
+};
 
 /**
  * Payload de POST /api/student/lessons/{lessonId}/progress
