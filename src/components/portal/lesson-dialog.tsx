@@ -42,17 +42,17 @@ export function LessonDialog({ lesson, onClose }: LessonDialogProps) {
 
   return (
     <Dialog open onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="max-h-[85vh] max-w-2xl overflow-y-auto">
-         // L'aperçu de fichier est monté hors du dialogue (portail) : ses clics et son focus ne doivent pas le fermer
+      <DialogContent
+        className="max-h-[85vh] max-w-2xl overflow-y-auto"
+        // L'aperçu de fichier est monté hors du dialogue (portail) : ses clics et son focus ne doivent pas le fermer
         onInteractOutside={(e) => {
           if (isInsideFilePreview(e.target)) e.preventDefault();
         }}
-
-         // Échap ferme l'aperçu d'abord, puis le dialogue à la frappe suivante
+        // Échap ferme l'aperçu d'abord, puis le dialogue à la frappe suivante
         onEscapeKeyDown={(e) => {
           if (isFilePreviewOpen()) e.preventDefault();
         }}
-
+      >
         <LessonHeader title={detail?.title ?? current.title} lesson={detail} />
 
         {isLoading ? (
