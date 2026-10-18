@@ -6,9 +6,11 @@ import { ArrowRight, BadgeCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
 import { StatusBadge } from "@/components/portal/trainings/status-badge";
 import { certificateEligibilityStatusMap } from "@/data/certificates";
 import { trainingEnrollmentStatusMap, trainingPaymentStatusMap } from "@/data/trainings";
+import { useEnrollmentCertificate } from "@/stores/useCertificatesStore";
 import type { APIProgressItem, APIProgressLessonsCount } from "@/data/progress";
 
 /** "7/10", ou "—" tant que la formation n'a aucune leçon publiée */
@@ -73,13 +75,7 @@ export function TrainingProgressCard({ item }: { item: APIProgressItem }) {
                   : "Aucune activité pour le moment"}
             </p>
             <div className="flex items-center gap-1">
-              {hasCertificate && (
-                <Button size="sm" variant="ghost" asChild>
-                  <Link to="/certificates">
-                    <BadgeCheck className="mr-1 h-3.5 w-3.5" /> Certificat
-                  </Link>
-                </Button>
-              )}
+              {hasCertificate && <TrainingCertificateButton enrollmentId={item.enrollmentId} />}
               <Button size="sm" variant="ghost" asChild>
                 <Link to="/trainings/$id/mine" params={{ id: item.trainingId }}>
                   Ouvrir <ArrowRight className="ml-1 h-3.5 w-3.5" />
