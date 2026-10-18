@@ -73,6 +73,7 @@ function TrainingDetail() {
         <div className="space-y-6">
           <EnrollmentStatusCard enrollment={enrollment} />
           <FinancialStatusCard
+            training={training}
             trainingId={training.id}
             enrollment={enrollment}
             accessMinRatioPercent={accessMinRatioPercent}
