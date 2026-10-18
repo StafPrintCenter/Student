@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { AccessBadge } from "@/components/portal/trainings/access-badge";
 import { InstructorsLink } from "@/components/portal/trainings/instructors-link";
 import { StatusBadge } from "@/components/portal/trainings/status-badge";
+import { formatFCFA } from "@/lib/format";
 import {
   trainingEnrollmentStatusMap,
   trainingPaymentStatusMap,
@@ -51,7 +52,7 @@ export function EnrollmentCard({ enrollment: e }: { enrollment: APIStudentTraini
             {format(new Date(e.enrolledAt), "d MMM yyyy hh:mm", { locale: fr })}
           </span>
           <span className="flex items-center gap-1.5">
-            <CircleEuro className="h-3.5 w-3.5" /> {e.price} FCFA
+            <CircleEuro className="h-3.5 w-3.5" /> {formatFCFA(e.price)}
           </span>
           <InstructorsLink instructors={e.instructors} trainingTitle={e.trainingTitle} />
         </div>
