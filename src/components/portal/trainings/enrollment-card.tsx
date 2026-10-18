@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { ArrowRight, Calendar, Clock, MapPin, Users } from "lucide-react";
+import { ArrowRight, Calendar, Clock, MapPin, Users, CircleEuro } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -50,9 +50,11 @@ export function EnrollmentCard({ enrollment: e }: { enrollment: APIStudentTraini
             <Calendar className="h-3.5 w-3.5" />
             {format(new Date(e.enrolledAt), "d MMM yyyy hh:mm", { locale: fr })}
           </span>
+          <span className="flex items-center gap-1.5">
+            <CircleEuro className="h-3.5 w-3.5" /> {e.price} FCFA
+          </span>
+          <InstructorsLink instructors={e.instructors} trainingTitle={e.trainingTitle} />
         </div>
-
-        <InstructorsLink instructors={e.instructors} trainingTitle={e.trainingTitle} />
 
         <div>
           <div className="mb-1 flex items-center justify-between text-xs">
