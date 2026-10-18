@@ -29,7 +29,7 @@ export function InstructorsLink({
         type="button"
         onClick={() => setOpen(true)}
         title="Voir les formateurs"
-        className="flex max-w-full items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground hover:underline"
+        className="flex max-w-full items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground hover:underline cursor-pointer"
       >
         <UserRound className="h-3.5 w-3.5 shrink-0" />
         <span className="truncate">{summary}</span>
