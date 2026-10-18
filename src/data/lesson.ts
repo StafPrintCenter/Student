@@ -6,7 +6,6 @@ import type { LessonKind } from "@/data/trainings";
  * Payload de POST /api/student/lessons/{lessonId}/progress
  * — "video" : watched_seconds requis
  * — "reading" : completed optionnel (true par défaut côté backend)
- * Valide uniquement pour les kinds de TRACKABLE_LESSON_KINDS (@/data/trainings), 422 sinon.
  */
 export type LessonProgressPayload =
   | { watched_seconds: number; completed?: never }
