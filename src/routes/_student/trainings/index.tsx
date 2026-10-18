@@ -6,27 +6,8 @@ import { fr } from "date-fns/locale";
 import { toast } from "sonner";
 import { PageHeader } from "@/components/portal/page-header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
-import { useStudentTrainingsList, useTrainingsCatalog, useSubscribeToTraining } from "@/stores/useTrainingsStore";
-import { trainingEnrollmentStatusMap, trainingPaymentStatusMap, type APIPublicTrainingCatalogItem } from "@/data/trainings";
-
-function formatFCFA(amount: number) {
-  return `${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(amount)} FCFA`;
-}
-
-function StatusBadge({ status, map }: {
-  status: string;
-  map: Record<string, { label: string; className: string }>;
-}) {
-  const config = map[status] ?? { label: status, className: "bg-muted text-muted-foreground border-border" };
-  return (
-    <Badge variant="outline" className={cn("font-medium", config.className)}>
-      {config.label}
-    </Badge>
-  );
-}
+import { MyEnrollments } from "@/components/portal/trainings/my-enrollments";
+import { Catalog } from "@/components/portal/trainings/catalog";
 
 export const Route = createFileRoute("/_student/trainings/")({
   head: () => ({
