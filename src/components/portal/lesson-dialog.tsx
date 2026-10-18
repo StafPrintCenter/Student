@@ -10,6 +10,7 @@ import { LessonProgressInfo } from "@/components/portal/lesson/lesson-progress-i
 import { LessonError, LessonLockedNotice, LessonSkeleton } from "@/components/portal/lesson/lesson-states";
 import type { APILessonLink, LessonProgressPayload } from "@/data/lesson";
 import { useLessonDetail, useMarkLessonProgress } from "@/stores/useLessonStore";
+import { isFilePreviewOpen, isInsideFilePreview } from "@/components/portal/lesson/file-preview-portal";
 
 // Ré-exporté pour ne casser aucun import existant
 export { kindIcons } from "@/components/portal/lesson/lesson-kind-icons";
@@ -42,6 +43,16 @@ export function LessonDialog({ lesson, onClose }: LessonDialogProps) {
   return (
     <Dialog open onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="max-h-[85vh] max-w-2xl overflow-y-auto">
+         // L'aperçu de fichier est monté hors du dialogue (portail) : ses clics et son focus ne doivent pas le fermer
+        onInteractOutside={(e) => {
+          if (isInsideFilePreview(e.target)) e.preventDefault();
+        }}
+
+         // Échap ferme l'aperçu d'abord, puis le dialogue à la frappe suivante
+        onEscapeKeyDown={(e) => {
+          if (isFilePreviewOpen()) e.preventDefault();
+        }}
+
         <LessonHeader title={detail?.title ?? current.title} lesson={detail} />
 
         {isLoading ? (
