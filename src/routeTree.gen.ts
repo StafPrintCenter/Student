@@ -17,7 +17,6 @@ import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as StudentCalendarRouteImport } from './routes/_student/calendar'
 import { Route as StudentCommunityRouteImport } from './routes/_student/community'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
-import { Route as StudentDocumentsRouteImport } from './routes/_student/documents'
 import { Route as StudentProfilRouteImport } from './routes/_student/profil'
 import { Route as StudentSupportRouteImport } from './routes/_student/support'
 import { Route as StudentCertificatesIndexRouteImport } from './routes/_student/certificates/index'
@@ -66,11 +65,6 @@ const StudentCommunityRoute = StudentCommunityRouteImport.update({
 const StudentDashboardRoute = StudentDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => StudentRoute,
-} as any)
-const StudentDocumentsRoute = StudentDocumentsRouteImport.update({
-  id: '/documents',
-  path: '/documents',
   getParentRoute: () => StudentRoute,
 } as any)
 const StudentProfilRoute = StudentProfilRouteImport.update({
@@ -140,7 +134,6 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof StudentCalendarRoute
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
-  '/documents': typeof StudentDocumentsRoute
   '/profil': typeof StudentProfilRoute
   '/support': typeof StudentSupportRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
@@ -160,7 +153,6 @@ export interface FileRoutesByTo {
   '/calendar': typeof StudentCalendarRoute
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
-  '/documents': typeof StudentDocumentsRoute
   '/profil': typeof StudentProfilRoute
   '/support': typeof StudentSupportRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
@@ -183,7 +175,6 @@ export interface FileRoutesById {
   '/_student/calendar': typeof StudentCalendarRoute
   '/_student/community': typeof StudentCommunityRoute
   '/_student/dashboard': typeof StudentDashboardRoute
-  '/_student/documents': typeof StudentDocumentsRoute
   '/_student/profil': typeof StudentProfilRoute
   '/_student/support': typeof StudentSupportRoute
   '/_student/notifications/$id': typeof StudentNotificationsIdRoute
@@ -205,7 +196,6 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/community'
     | '/dashboard'
-    | '/documents'
     | '/profil'
     | '/support'
     | '/notifications/$id'
@@ -225,7 +215,6 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/community'
     | '/dashboard'
-    | '/documents'
     | '/profil'
     | '/support'
     | '/notifications/$id'
@@ -247,7 +236,6 @@ export interface FileRouteTypes {
     | '/_student/calendar'
     | '/_student/community'
     | '/_student/dashboard'
-    | '/_student/documents'
     | '/_student/profil'
     | '/_student/support'
     | '/_student/notifications/$id'
@@ -323,13 +311,6 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof StudentDashboardRouteImport
-      parentRoute: typeof StudentRoute
-    }
-    '/_student/documents': {
-      id: '/_student/documents'
-      path: '/documents'
-      fullPath: '/documents'
-      preLoaderRoute: typeof StudentDocumentsRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/profil': {
@@ -428,7 +409,6 @@ interface StudentRouteChildren {
   StudentCalendarRoute: typeof StudentCalendarRoute
   StudentCommunityRoute: typeof StudentCommunityRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
-  StudentDocumentsRoute: typeof StudentDocumentsRoute
   StudentProfilRoute: typeof StudentProfilRoute
   StudentSupportRoute: typeof StudentSupportRoute
   StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
@@ -446,7 +426,6 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentCalendarRoute: StudentCalendarRoute,
   StudentCommunityRoute: StudentCommunityRoute,
   StudentDashboardRoute: StudentDashboardRoute,
-  StudentDocumentsRoute: StudentDocumentsRoute,
   StudentProfilRoute: StudentProfilRoute,
   StudentSupportRoute: StudentSupportRoute,
   StudentNotificationsIdRoute: StudentNotificationsIdRoute,
