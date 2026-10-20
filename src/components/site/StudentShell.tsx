@@ -7,7 +7,7 @@ import logo from "@/assets/logos.json";
 import { SITE, SITE_LINK } from "@/data/site";
 import { ConfirmDisconnect } from "@/components/site/StudentBits";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger, SidebarInset, useSidebar, SidebarMenuBadge } from "@/components/ui/sidebar";
-import { NotificationBell } from "@/components/notifications/NotificationBell";
+import { NotificationBell } from "@/components/pages/notifications";
 import { useUnreadCount } from "@/stores/useStudentNotificationsStore";
 import { SocialLinks } from "@/components/site/SocialLinks";
 
@@ -43,7 +43,6 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Librairie",
     items: [
       { to: "/certificates", label: "Certificats", icon: BadgeCheck },
-      { to: "/documents", label: "Documents", icon: FileText },
       { to: "/payments", label: "Paiements", icon: CreditCard },
     ],
   },
