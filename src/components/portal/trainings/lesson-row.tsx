@@ -50,7 +50,7 @@ export function LessonRow({ lesson, locked, onOpen }: LessonRowProps) {
           </div>
         </div>
         <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
-          {lesson.durationMinutes != null ? `${lesson.durationMinutes} min` : "—"}
+          {lesson.durationMinutes != null ? `${lesson.durationMinutes} min` : "-"}
         </span>
       </button>
     </li>

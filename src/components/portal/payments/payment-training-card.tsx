@@ -62,9 +62,9 @@ export function PaymentTrainingCard({ item }: { item: APITrainingPaymentItem }) 
             <p className="text-xs text-muted-foreground">
               Seuil d'accès : <strong className="text-foreground">{formatFCFA(item.accessMinAmount)}</strong>
               {item.accessUnlocked
-                ? " — atteint."
+                ? " - atteint."
                 : missingForAccess > 0
-                  ? ` — il manque ${formatFCFA(missingForAccess)}.`
+                  ? ` - il manque ${formatFCFA(missingForAccess)}.`
                   : "."}
             </p>
           </div>

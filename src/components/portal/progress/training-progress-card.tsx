@@ -13,8 +13,8 @@ import { trainingEnrollmentStatusMap, trainingPaymentStatusMap } from "@/data/tr
 import { useEnrollmentCertificate } from "@/stores/useCertificatesStore";
 import type { APIProgressItem, APIProgressLessonsCount } from "@/data/progress";
 
-/** "7/10", ou "—" tant que la formation n'a aucune leçon publiée */
-const lessonsLabel = (l: APIProgressLessonsCount) => (l.total === 0 ? "—" : `${l.completed}/${l.total}`);
+/** "7/10", ou "-" tant que la formation n'a aucune leçon publiée */
+const lessonsLabel = (l: APIProgressLessonsCount) => (l.total === 0 ? "-" : `${l.completed}/${l.total}`);
 
 export function TrainingProgressCard({ item }: { item: APIProgressItem }) {
   const { attendance } = item;
@@ -50,14 +50,14 @@ export function TrainingProgressCard({ item }: { item: APIProgressItem }) {
           <Metric label="Leçons obligatoires" value={lessonsLabel(item.mandatoryLessons)} />
           <Metric
             label="Assiduité"
-            value={attendance.ratio == null ? "—" : `${attendance.ratio}%`}
+            value={attendance.ratio == null ? "-" : `${attendance.ratio}%`}
             hint={
               attendance.sessionsMarked > 0
                 ? `${attendance.sessionsPresent}/${attendance.sessionsMarked} séances`
                 : "Aucune séance pointée"
             }
           />
-          <Metric label="Score moyen" value={item.averageScore == null ? "—" : `${item.averageScore}%`} />
+          <Metric label="Score moyen" value={item.averageScore == null ? "-" : `${item.averageScore}%`} />
         </dl>
 
         <div className="space-y-2 border-t border-border pt-3">

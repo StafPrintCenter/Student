@@ -24,7 +24,7 @@ export function QuizAttemptsHistory({ quizId }: { quizId: string }) {
         <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <Trophy className="h-3.5 w-3.5" />
           Meilleur score :{" "}
-          <strong className="text-foreground">{bestScore != null ? `${bestScore}%` : "—"}</strong>
+          <strong className="text-foreground">{bestScore != null ? `${bestScore}%` : "-"}</strong>
         </span>
       </div>
 
@@ -50,7 +50,7 @@ export function QuizAttemptsHistory({ quizId }: { quizId: string }) {
                   </p>
                 </div>
                 <div className="flex shrink-0 items-center gap-3">
-                  <span className="tabular-nums font-semibold">{a.score != null ? `${a.score}%` : "—"}</span>
+                  <span className="tabular-nums font-semibold">{a.score != null ? `${a.score}%` : "-"}</span>
                   <Badge variant="outline" className={cn("font-medium", config.className)}>
                     {config.label}
                   </Badge>

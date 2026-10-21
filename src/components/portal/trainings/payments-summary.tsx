@@ -34,9 +34,9 @@ export function PaymentsSummary({ summary }: { summary: APITrainingPaymentsSumma
       <p className="text-xs text-muted-foreground">
         Seuil pour débloquer le contenu : <strong className="text-foreground">{formatFCFA(summary.accessMinAmount)}</strong>
         {summary.accessUnlocked
-          ? " — atteint."
+          ? " - atteint."
           : missingForAccess > 0
-            ? ` — il vous manque ${formatFCFA(missingForAccess)}.`
+            ? ` - il vous manque ${formatFCFA(missingForAccess)}.`
             : "."}
       </p>
     </div>

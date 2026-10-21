@@ -66,7 +66,7 @@ export function useTrainingsCatalog(params: TrainingsCatalogParams = {}) {
   };
 }
 
-/* ---- Détail public — route /trainings/public/$id, pour toute formation du catalogue ---- */
+/* ---- Détail public - route /trainings/public/$id, pour toute formation du catalogue ---- */
 
 async function fetchPublicDetail(id: string): Promise<APIPublicTrainingDetail | null> {
   const response = await studentFetch(`/api/public/trainings/catalogs/${id}`);
@@ -87,7 +87,7 @@ export function usePublicTrainingDetail(id: string | undefined) {
   return { item: query.data ?? null, isLoading: query.isLoading, isError: query.isError, refetch: query.refetch };
 }
 
-/* ---- Détail privé — route /trainings/$id, uniquement pour une formation où l'étudiant est inscrit ---- */
+/* ---- Détail privé - route /trainings/$id, uniquement pour une formation où l'étudiant est inscrit ---- */
 
 async function fetchTrainingById(id: string): Promise<APIStudentTrainingDetailResponse | null> {
   const response = await studentFetch(`/api/student/trainings/catalogs/${id}`);

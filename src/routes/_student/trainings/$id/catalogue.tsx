@@ -72,7 +72,7 @@ function PublicTrainingDetail() {
       </Button>
 
       <Card className="overflow-hidden">
-        {/* Bande de couleur — même style que les cards du catalogue */}
+        {/* Bande de couleur - même style que les cards du catalogue */}
         <div
           className="h-24"
           style={{

@@ -6,7 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import { StatCard } from "@/components/portal/progress/stat-card";
 import type { APIProgressStats } from "@/data/progress";
 
-const percent = (value: number | null) => (value == null ? "—" : `${value}%`);
+const percent = (value: number | null) => (value == null ? "-" : `${value}%`);
 
 export function ProgressStats({ stats }: { stats: APIProgressStats }) {
   return (

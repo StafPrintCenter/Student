@@ -12,8 +12,8 @@ export const lessonProgressStatusMap: Record<LessonProgressStatus, { label: stri
 
 /**
  * Payload de POST /api/student/lessons/{lessonId}/progress
- * — "video" : watched_seconds requis
- * — "reading" : completed optionnel (true par défaut côté backend)
+ * - "video" : watched_seconds requis
+ * - "reading" : completed optionnel (true par défaut côté backend)
  */
 export type LessonProgressPayload =
   | { watched_seconds: number; completed?: never }

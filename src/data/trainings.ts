@@ -144,7 +144,7 @@ export type APIPublicTrainingProgramSection = {
 };
 
 /**
- * Détail public d'une formation — accessible sans être inscrit
+ * Détail public d'une formation - accessible sans être inscrit
  * GET /api/v1/public/trainings/catalogs/{id}
  */
 export type APIPublicTrainingDetail = APIPublicTrainingCatalogItem & {

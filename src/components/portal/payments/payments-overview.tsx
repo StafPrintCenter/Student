@@ -35,7 +35,7 @@ export function PaymentsOverview({ summary }: { summary: APIPaymentsOverview }) 
         <StatCard
           icon={CalendarCheck}
           label="Dernier paiement"
-          value={summary.lastPaymentAt ? format(new Date(summary.lastPaymentAt), "d MMM yyyy", { locale: fr }) : "—"}
+          value={summary.lastPaymentAt ? format(new Date(summary.lastPaymentAt), "d MMM yyyy", { locale: fr }) : "-"}
           hint={summary.lastPaymentAt ? `à ${format(new Date(summary.lastPaymentAt), "HH:mm")}` : "Aucun paiement enregistré"}
         />
       </div>
