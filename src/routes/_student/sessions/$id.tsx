@@ -60,7 +60,7 @@ function SessionDetail() {
       <BackButton />
 
       <div className="overflow-hidden rounded-2xl border border-border bg-card">
-        <div className="h-2 bg-gradient-to-r from-primary to-primary/30" />
+        <div className="h-2 bg-linear-to-r from-primary to-primary/30" />
         <div className="flex flex-col gap-5 p-6 sm:flex-row sm:items-start md:p-8">
           <SessionDateBlock startsAt={session.startsAt} size="lg" />
           <div className="min-w-0 space-y-3">
