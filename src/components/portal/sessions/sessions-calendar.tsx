@@ -1,134 +1,74 @@
 import { useMemo, useState } from "react";
-import {
-  addMonths,
-  eachDayOfInterval,
-  endOfMonth,
-  endOfWeek,
-  format,
-  startOfMonth,
-  startOfWeek,
-  subMonths,
-} from "date-fns";
-import { fr } from "date-fns/locale";
-import { CalendarX, ChevronLeft, ChevronRight } from "lucide-react";
+import { endOfMonth, endOfWeek, isSameDay, isSameMonth, startOfMonth, startOfWeek } from "date-fns";
 
-import { EmptyState } from "@/components/portal/empty-state";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { CalendarDayPanel } from "@/components/portal/sessions/calendar-day-panel";
-import { CalendarGrid, dayKey } from "@/components/portal/sessions/calendar-grid";
-import { cn } from "@/lib/utils";
+import { SelectedDayCard } from "@/components/portal/sessions/selected-day-card";
+import { sessionDayKey } from "@/components/portal/sessions/session-format";
+import { SessionsMonthPicker } from "@/components/portal/sessions/sessions-month-picker";
+import { UpcomingSessionsCard } from "@/components/portal/sessions/upcoming-sessions-card";
 import { useSessionsList } from "@/stores/useSessionsStore";
-import type { APIStudentSession } from "@/data/sessions";
 
-export function SessionsCalendar() {
+export function SessionsCalendar({ onShowList }: { onShowList?: () => void }) {
   const [month, setMonth] = useState(() => startOfMonth(new Date()));
-  const [selectedDay, setSelectedDay] = useState<string | null>(() => dayKey(new Date()));
+  // Aujourd'hui est sélectionné d'entrée : ses sessions s'affichent à droite
+  const [selected, setSelected] = useState<Date | undefined>(() => new Date());
 
-  // On charge toute la grille affichée (de lundi à dimanche), jours des mois voisins compris
-  const gridStart = startOfWeek(startOfMonth(month), { weekStartsOn: 1 });
-  const gridEnd = endOfWeek(endOfMonth(month), { weekStartsOn: 1 });
-  const days = eachDayOfInterval({ start: gridStart, end: gridEnd });
+  // On charge toute la grille affichée (lundi → dimanche), jours des mois voisins compris
+  const from = sessionDayKey(startOfWeek(startOfMonth(month), { weekStartsOn: 1 }));
+  const to = sessionDayKey(endOfWeek(endOfMonth(month), { weekStartsOn: 1 }));
+  const { items, isLoading, isError, refetch } = useSessionsList({ from, to });
 
-  const { items, isLoading, isFetching, isError, refetch } = useSessionsList({
-    from: dayKey(gridStart),
-    to: dayKey(gridEnd),
-  });
+  // Jours marqués : une session à confirmer l'emporte sur les autres (un seul point par jour)
+  const { toConfirmDays, otherDays } = useMemo(() => {
+    const needsAnswer = (s: (typeof items)[number]) => s.isUpcoming && !s.myResponse;
+    const toConfirmKeys = new Set(items.filter(needsAnswer).map((s) => sessionDayKey(new Date(s.startsAt))));
 
-  const sessionsByDay = useMemo(() => {
-    const map = new Map<string, APIStudentSession[]>();
-    for (const s of items) {
-      const key = dayKey(new Date(s.startsAt));
-      map.set(key, [...(map.get(key) ?? []), s]);
-    }
-    for (const list of map.values()) {
-      list.sort((a, b) => new Date(a.startsAt).getTime() - new Date(b.startsAt).getTime());
-    }
-    return map;
+    return {
+      toConfirmDays: items.filter((s) => toConfirmKeys.has(sessionDayKey(new Date(s.startsAt)))).map((s) => new Date(s.startsAt)),
+      otherDays: items.filter((s) => !toConfirmKeys.has(sessionDayKey(new Date(s.startsAt)))).map((s) => new Date(s.startsAt)),
+    };
   }, [items]);
 
-  const goTo = (next: Date) => {
-    setMonth(startOfMonth(next));
-    setSelectedDay(null);
+  const daySessions = useMemo(() => {
+    if (!selected) return [];
+    return items
+      .filter((s) => isSameDay(new Date(s.startsAt), selected))
+      .sort((a, b) => new Date(a.startsAt).getTime() - new Date(b.startsAt).getTime());
+  }, [items, selected]);
+
+  const goToMonth = (next: Date) => {
+    const target = startOfMonth(next);
+    setMonth(target);
+    // Les sessions du jour sélectionné viennent de la fenêtre chargée : on ne garde que « aujourd'hui » dans le mois courant
+    setSelected(isSameMonth(target, new Date()) ? new Date() : undefined);
   };
 
   const goToday = () => {
     setMonth(startOfMonth(new Date()));
-    setSelectedDay(dayKey(new Date()));
+    setSelected(new Date());
   };
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="font-display text-lg font-semibold capitalize">{format(month, "MMMM yyyy", { locale: fr })}</h2>
-        <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline" onClick={goToday}>
-            Aujourd'hui
-          </Button>
-          <Button
-            size="icon"
-            variant="outline"
-            className="h-8 w-8"
-            aria-label="Mois précédent"
-            onClick={() => goTo(subMonths(month, 1))}
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button
-            size="icon"
-            variant="outline"
-            className="h-8 w-8"
-            aria-label="Mois suivant"
-            onClick={() => goTo(addMonths(month, 1))}
-          >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
+    <div className="grid gap-6 lg:grid-cols-[auto_1fr]">
+      <SessionsMonthPicker
+        month={month}
+        onMonthChange={goToMonth}
+        selected={selected}
+        onSelect={setSelected}
+        toConfirmDays={toConfirmDays}
+        otherDays={otherDays}
+        onToday={goToday}
+      />
 
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
-        <Legend dotClass="bg-success" label="Confirmée" />
-        <Legend dotClass="bg-warning" label="À confirmer" />
-        <Legend dotClass="bg-destructive" label="Déclinée" />
+      <div className="min-w-0 space-y-6">
+        <SelectedDayCard
+          day={selected}
+          sessions={daySessions}
+          isLoading={isLoading}
+          isError={isError}
+          onRetry={() => refetch()}
+        />
+        <UpcomingSessionsCard onShowList={onShowList} />
       </div>
-
-      {isLoading ? (
-        <Skeleton className="h-96 w-full" />
-      ) : isError ? (
-        <div className="space-y-4">
-          <EmptyState
-            icon={CalendarX}
-            title="Impossible de charger le calendrier"
-            description="Vérifiez votre connexion, puis réessayez."
-          />
-          <div className="flex justify-center">
-            <Button size="sm" variant="outline" onClick={() => refetch()}>
-              Réessayer
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className={cn("transition-opacity", isFetching && "opacity-60")}>
-            <CalendarGrid
-              days={days}
-              month={month}
-              sessionsByDay={sessionsByDay}
-              selectedDay={selectedDay}
-              onSelectDay={setSelectedDay}
-            />
-          </div>
-          <CalendarDayPanel day={selectedDay} sessions={selectedDay ? (sessionsByDay.get(selectedDay) ?? []) : []} />
-        </>
-      )}
     </div>
-  );
-}
-
-function Legend({ dotClass, label }: { dotClass: string; label: string }) {
-  return (
-    <span className="inline-flex items-center gap-1.5">
-      <span className={cn("h-2 w-2 rounded-full", dotClass)} /> {label}
-    </span>
   );
 }

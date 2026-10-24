@@ -35,7 +35,7 @@ function SessionsPage() {
           <SessionsList />
         </TabsContent>
         <TabsContent value="calendar" className="mt-6">
-          <SessionsCalendar />
+          <SessionsCalendar onShowList={() => setTab("list")} />
         </TabsContent>
       </Tabs>
     </div>
