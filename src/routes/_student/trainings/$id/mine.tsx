@@ -12,6 +12,7 @@ import { LockedAccessAlert } from "@/components/portal/trainings/locked-access-a
 import { TrainingHero } from "@/components/portal/trainings/training-hero";
 import { TrainingObjectivesCard } from "@/components/portal/trainings/training-objectives-card";
 import { TrainingProgramCard } from "@/components/portal/trainings/training-program-card";
+import { TrainingSessionsCard } from "@/components/portal/sessions/training-sessions-card";
 import { useStudentTrainingDetail } from "@/stores/useTrainingsStore";
 
 export const Route = createFileRoute("/_student/trainings/$id/mine")({
@@ -66,6 +67,7 @@ function TrainingDetail() {
           {/* Formation terminée : annonce du certificat */}
           {enrollment.progress >= 100 && <CertificateAvailableBanner enrollmentId={enrollment.id} />}
           {contentLocked && <LockedAccessAlert minRatioPercent={accessMinRatioPercent} />}
+          <TrainingSessionsCard trainingId={training.id} />
           <TrainingObjectivesCard objectives={training.objectives} />
           <TrainingProgramCard modules={modules} contentLocked={contentLocked} />
         </div>
