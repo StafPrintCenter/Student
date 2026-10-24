@@ -14,7 +14,6 @@ import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as StudentRouteImport } from './routes/_student'
 import { Route as AuthInviteRouteImport } from './routes/_auth/invite'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
-import { Route as StudentCalendarRouteImport } from './routes/_student/calendar'
 import { Route as StudentCommunityRouteImport } from './routes/_student/community'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
 import { Route as StudentProfilRouteImport } from './routes/_student/profil'
@@ -54,11 +53,6 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => AuthRoute,
-} as any)
-const StudentCalendarRoute = StudentCalendarRouteImport.update({
-  id: '/calendar',
-  path: '/calendar',
-  getParentRoute: () => StudentRoute,
 } as any)
 const StudentCommunityRoute = StudentCommunityRouteImport.update({
   id: '/community',
@@ -150,7 +144,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
-  '/calendar': typeof StudentCalendarRoute
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/profil': typeof StudentProfilRoute
@@ -172,7 +165,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
-  '/calendar': typeof StudentCalendarRoute
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/profil': typeof StudentProfilRoute
@@ -197,7 +189,6 @@ export interface FileRoutesById {
   '/_student': typeof StudentRouteWithChildren
   '/_auth/invite': typeof AuthInviteRoute
   '/_auth/login': typeof AuthLoginRoute
-  '/_student/calendar': typeof StudentCalendarRoute
   '/_student/community': typeof StudentCommunityRoute
   '/_student/dashboard': typeof StudentDashboardRoute
   '/_student/profil': typeof StudentProfilRoute
@@ -221,7 +212,6 @@ export interface FileRouteTypes {
     | '/'
     | '/invite'
     | '/login'
-    | '/calendar'
     | '/community'
     | '/dashboard'
     | '/profil'
@@ -243,7 +233,6 @@ export interface FileRouteTypes {
     | '/'
     | '/invite'
     | '/login'
-    | '/calendar'
     | '/community'
     | '/dashboard'
     | '/profil'
@@ -267,7 +256,6 @@ export interface FileRouteTypes {
     | '/_student'
     | '/_auth/invite'
     | '/_auth/login'
-    | '/_student/calendar'
     | '/_student/community'
     | '/_student/dashboard'
     | '/_student/profil'
@@ -328,13 +316,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/login'
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRoute
-    }
-    '/_student/calendar': {
-      id: '/_student/calendar'
-      path: '/calendar'
-      fullPath: '/calendar'
-      preLoaderRoute: typeof StudentCalendarRouteImport
-      parentRoute: typeof StudentRoute
     }
     '/_student/community': {
       id: '/_student/community'
@@ -464,7 +445,6 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface StudentRouteChildren {
-  StudentCalendarRoute: typeof StudentCalendarRoute
   StudentCommunityRoute: typeof StudentCommunityRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
   StudentProfilRoute: typeof StudentProfilRoute
@@ -484,7 +464,6 @@ interface StudentRouteChildren {
 }
 
 const StudentRouteChildren: StudentRouteChildren = {
-  StudentCalendarRoute: StudentCalendarRoute,
   StudentCommunityRoute: StudentCommunityRoute,
   StudentDashboardRoute: StudentDashboardRoute,
   StudentProfilRoute: StudentProfilRoute,

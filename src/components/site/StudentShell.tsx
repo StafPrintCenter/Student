@@ -36,7 +36,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { to: "/trainings", label: "Formations", icon: GraduationCap },
       { to: "/progress", label: "Progression", icon: LineChart },
-      { to: "/calendar", label: "Calendrier", icon: Calendar },
+      { to: "/sessions", label: "Sessions", icon: Calendar },
     ],
   },
   {
