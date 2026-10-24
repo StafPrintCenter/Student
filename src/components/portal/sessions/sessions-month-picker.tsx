@@ -7,26 +7,24 @@ import { cn } from "@/lib/utils";
 
 // Point sous le numéro du jour
 const DOT =
-  "relative after:absolute after:bottom-1 after:left-1/2 after:h-1 after:w-1 after:-translate-x-1/2 after:rounded-full";
+  "relative after:absolute after:bottom-0.5 after:left-1/2 after:h-1.5 after:w-1.5 after:-translate-x-1/2 after:rounded-full";
 
-// Un jour ne porte qu'un seul de ces repères (priorité : à confirmer > à venir > passée)
+// Un jour ne porte qu'un seul point (priorité : à confirmer > à venir > passée).
+// "à confirmer" retombe sur --amber tant que --warning n'est pas défini dans le CSS.
 const MARKS = {
   toConfirm: {
     label: "À confirmer",
-    day: `${DOT} rounded-md ring-1 ring-inset ring-warning/70 after:bg-warning`,
-    frame: "ring-1 ring-inset ring-warning/70",
-    dot: "bg-warning",
+    day: `${DOT} after:bg-[var(--warning,var(--amber))]`,
+    dot: "bg-[var(--warning,var(--amber))]",
   },
   upcoming: {
     label: "Session à venir",
-    day: `${DOT} rounded-md ring-1 ring-inset ring-primary/50 after:bg-primary`,
-    frame: "ring-1 ring-inset ring-primary/50",
-    dot: "bg-primary",
+    day: `${DOT} after:bg-info`,
+    dot: "bg-info",
   },
   past: {
     label: "Session passée",
     day: `${DOT} after:bg-muted-foreground/50`,
-    frame: "",
     dot: "bg-muted-foreground/50",
   },
 } as const;
@@ -95,9 +93,7 @@ export function SessionsMonthPicker({
 function LegendItem({ mark }: { mark: (typeof MARKS)[keyof typeof MARKS] }) {
   return (
     <span className="flex items-center gap-2">
-      <span className={cn("relative h-4 w-4 rounded-md", mark.frame)}>
-        <span className={cn("absolute bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full", mark.dot)} />
-      </span>
+      <span className={cn("h-2 w-2 rounded-full", mark.dot)} />
       {mark.label}
     </span>
   );
