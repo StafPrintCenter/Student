@@ -15,6 +15,21 @@ export type APIProgressAttendance = {
   sessionsPresent: number;
 };
 
+/** Compteurs des réponses aux sessions */
+export type APIProgressSessionsStats = {
+  total: number;
+  confirmed: number;
+  declined: number;
+  noResponse: number;
+  /** Sessions à venir sans réponse de l'étudiant */
+  upcomingNoResponse: number;
+};
+
+export type APIProgressItemSessions = APIProgressSessionsStats & {
+  /** Sessions à venir (toutes réponses confondues) */
+  upcoming: number;
+};
+
 export type APIProgressStats = {
   trainingsCount: number;
   inProgressCount: number;
@@ -24,6 +39,7 @@ export type APIProgressStats = {
   averageAttendance: number | null;
   averageScore: number | null;
   lessons: APIProgressLessonsCount;
+  sessions: APIProgressSessionsStats;
   finance: {
     totalDue: number;
     totalPaid: number;
@@ -44,6 +60,7 @@ export type APIProgressItem = {
   lessons: APIProgressLessonsCount;
   mandatoryLessons: APIProgressLessonsCount;
   attendance: APIProgressAttendance;
+  sessions: APIProgressItemSessions;
   averageScore: number | null;
   lastActivityAt: string | null;
   paymentStatus: TrainingPaymentStatus;

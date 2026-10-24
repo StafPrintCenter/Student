@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { FinanceCard } from "@/components/portal/progress/finance-card";
 import { ProgressSkeleton } from "@/components/portal/progress/progress-skeleton";
 import { ProgressStats } from "@/components/portal/progress/progress-stats";
+import { SessionsOverviewCard } from "@/components/portal/progress/sessions-overview-card";
 import { TrainingProgressCard } from "@/components/portal/progress/training-progress-card";
 import { useStudentProgress } from "@/stores/useProgressStore";
 
@@ -55,7 +56,11 @@ function ProgressPage() {
       ) : (
         <>
           <ProgressStats stats={stats} />
-          <FinanceCard finance={stats.finance} />
+
+          <div className="grid gap-4 lg:grid-cols-2">
+            <FinanceCard finance={stats.finance} />
+            <SessionsOverviewCard sessions={stats.sessions} />
+          </div>
 
           <section className="space-y-3">
             <h2 className="font-display text-lg font-semibold">Détail par formation</h2>

@@ -12,12 +12,13 @@ import { certificateEligibilityStatusMap } from "@/data/certificates";
 import { trainingEnrollmentStatusMap, trainingPaymentStatusMap } from "@/data/trainings";
 import { useEnrollmentCertificate } from "@/stores/useCertificatesStore";
 import type { APIProgressItem, APIProgressLessonsCount } from "@/data/progress";
+import { cn } from "@/lib/utils"
 
 /** "7/10", ou "-" tant que la formation n'a aucune leçon publiée */
 const lessonsLabel = (l: APIProgressLessonsCount) => (l.total === 0 ? "-" : `${l.completed}/${l.total}`);
 
 export function TrainingProgressCard({ item }: { item: APIProgressItem }) {
-  const { attendance } = item;
+  const { attendance, sessions } = item;
   const hasCertificate = item.certificateStatus === "issued" || item.certificateStatus === "downloaded";
 
   return (
@@ -50,14 +51,29 @@ export function TrainingProgressCard({ item }: { item: APIProgressItem }) {
           <Metric label="Leçons obligatoires" value={lessonsLabel(item.mandatoryLessons)} />
           <Metric
             label="Assiduité"
-            value={attendance.ratio == null ? "-" : `${attendance.ratio}%`}
+            value={attendance.ratio == null ? "—" : `${attendance.ratio}%`}
             hint={
               attendance.sessionsMarked > 0
                 ? `${attendance.sessionsPresent}/${attendance.sessionsMarked} séances`
                 : "Aucune séance pointée"
             }
           />
-          <Metric label="Score moyen" value={item.averageScore == null ? "-" : `${item.averageScore}%`} />
+          <Metric label="Score moyen" value={item.averageScore == null ? "—" : `${item.averageScore}%`} />
+          <Metric
+            label="Sessions confirmées"
+            value={sessions.total === 0 ? "—" : `${sessions.confirmed}/${sessions.total}`}
+            hint={
+              sessions.total === 0
+                ? "Aucune session"
+                : `${sessions.declined} déclinée${sessions.declined > 1 ? "s" : ""} · ${sessions.noResponse} sans réponse`
+            }
+          />
+          <Metric
+            label="Sessions à venir"
+            value={String(sessions.upcoming)}
+            hint={sessions.upcomingNoResponse > 0 ? `${sessions.upcomingNoResponse} à confirmer` : undefined}
+            hintClassName="text-warning"
+          />
         </dl>
 
         <div className="space-y-2 border-t border-border pt-3">
@@ -89,12 +105,23 @@ export function TrainingProgressCard({ item }: { item: APIProgressItem }) {
   );
 }
 
-function Metric({ label, value, hint }: { label: string; value: string; hint?: string }) {
+// 3. remplace la fonction Metric (import à ajouter : import { cn } from "@/lib/utils";)
+function Metric({
+  label,
+  value,
+  hint,
+  hintClassName,
+}: {
+  label: string;
+  value: string;
+  hint?: string;
+  hintClassName?: string;
+}) {
   return (
     <div className="min-w-0">
       <dt className="text-xs text-muted-foreground">{label}</dt>
       <dd className="font-semibold tabular-nums">{value}</dd>
-      {hint && <p className="text-[11px] text-muted-foreground">{hint}</p>}
+      {hint && <p className={cn("text-[11px] text-muted-foreground", hintClassName)}>{hint}</p>}
     </div>
   );
 }
@@ -107,7 +134,12 @@ function TrainingCertificateButton({ enrollmentId }: { enrollmentId: string }) {
   const { data, isLoading } = useEnrollmentCertificate(enrollmentId);
 
   if (isLoading) {
-    return <Skeleton className="h-8 w-32" />;
+    return (
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Skeleton className="h-36 w-full" />
+        <Skeleton className="h-36 w-full" />
+      </div>
+    );
   }
 
   const certificate = data?.certificate;
