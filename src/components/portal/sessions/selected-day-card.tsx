@@ -19,7 +19,7 @@ export function SelectedDayCard({ day, sessions, isLoading, isError, onRetry }: 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base capitalize">{day ? format(day, "EEEE d MMMM AAAA", { locale: fr }) : ""}</CardTitle>
+        <CardTitle className="text-base capitalize">{day ? format(day, "EEEE d MMMM yyyy", { locale: fr }) : ""}</CardTitle>
       </CardHeader>
       <CardContent>
         {!day ? (
