@@ -18,13 +18,22 @@ export function SessionsCalendar({ onShowList }: { onShowList?: () => void }) {
   const { items, isLoading, isError, refetch } = useSessionsList({ from, to });
 
   // Jours marqués : une session à confirmer l'emporte sur les autres (un seul point par jour)
-  const { toConfirmDays, otherDays } = useMemo(() => {
-    const needsAnswer = (s: (typeof items)[number]) => s.isUpcoming && !s.myResponse;
-    const toConfirmKeys = new Set(items.filter(needsAnswer).map((s) => sessionDayKey(new Date(s.startsAt))));
+  const { toConfirmDays, upcomingDays, pastDays } = useMemo(() => {
+    const byDay = new Map<string, { date: Date; rank: number }>();
 
+    for (const s of items) {
+      const date = new Date(s.startsAt);
+      const key = sessionDayKey(date);
+      const rank = s.isUpcoming ? (s.myResponse ? 1 : 2) : 0;
+      const current = byDay.get(key);
+      if (!current || rank > current.rank) byDay.set(key, { date, rank });
+    }
+
+    const days = [...byDay.values()];
     return {
-      toConfirmDays: items.filter((s) => toConfirmKeys.has(sessionDayKey(new Date(s.startsAt)))).map((s) => new Date(s.startsAt)),
-      otherDays: items.filter((s) => !toConfirmKeys.has(sessionDayKey(new Date(s.startsAt)))).map((s) => new Date(s.startsAt)),
+      toConfirmDays: days.filter((d) => d.rank === 2).map((d) => d.date),
+      upcomingDays: days.filter((d) => d.rank === 1).map((d) => d.date),
+      pastDays: days.filter((d) => d.rank === 0).map((d) => d.date),
     };
   }, [items]);
 
@@ -55,7 +64,8 @@ export function SessionsCalendar({ onShowList }: { onShowList?: () => void }) {
         selected={selected}
         onSelect={setSelected}
         toConfirmDays={toConfirmDays}
-        otherDays={otherDays}
+        upcomingDays={upcomingDays}
+        pastDays={pastDays}
         onToday={goToday}
       />
 
