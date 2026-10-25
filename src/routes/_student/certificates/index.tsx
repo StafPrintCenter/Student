@@ -4,7 +4,7 @@ import { z } from "zod";
 import { Award } from "lucide-react";
 import { toast } from "sonner";
 import { PageHeader } from "@/components/site";
-import { EmptyState } from "@/components/portal/empty-state";
+import { EmptyState } from "@/components/portal/EmptyState";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CertificateCard } from "@/components/portal/certificates/certificate-card";
 import { VerifyCertificateDialog } from "@/components/portal/certificates/verify-certificate-dialog";

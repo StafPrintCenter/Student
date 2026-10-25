@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, GraduationCap } from "lucide-react";
 
-import { EmptyState } from "@/components/portal/empty-state";
+import { EmptyState } from "@/components/portal/EmptyState";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";

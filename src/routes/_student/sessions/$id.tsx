@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, CalendarX, Clock, Hourglass } from "lucide-react";
 
-import { EmptyState } from "@/components/portal/empty-state";
+import { EmptyState } from "@/components/portal/EmptyState";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";

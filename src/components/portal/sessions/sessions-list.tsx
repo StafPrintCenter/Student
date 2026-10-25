@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CalendarX, ChevronLeft, ChevronRight } from "lucide-react";
 
-import { EmptyState } from "@/components/portal/empty-state";
+import { EmptyState } from "@/components/portal/EmptyState";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SessionCard } from "@/components/portal/sessions/session-card";

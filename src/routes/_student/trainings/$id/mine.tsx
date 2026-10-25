@@ -3,7 +3,7 @@ import { ArrowLeft, Lock } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { EmptyState } from "@/components/portal/empty-state";
+import { EmptyState } from "@/components/portal/EmptyState";
 import { CertificateAvailableBanner } from "@/components/portal/certificates/certificate-available-banner";
 import { EnrollmentStatusCard } from "@/components/portal/trainings/enrollment-status-card";
 import { FinancialStatusCard } from "@/components/portal/trainings/financial-status-card";

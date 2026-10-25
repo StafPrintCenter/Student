@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CreditCard } from "lucide-react";
 import { PageHeader } from "@/components/site";
-import { EmptyState } from "@/components/portal/empty-state";
+import { EmptyState } from "@/components/portal/EmptyState";
 import { Button } from "@/components/ui/button";
 import { PaymentTrainingCard } from "@/components/portal/payments/payment-training-card";
 import { PaymentsOverview } from "@/components/portal/payments/payments-overview";
