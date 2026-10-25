@@ -2,8 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHeader } from "@/components/portal/page-header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MyEnrollments } from "@/components/pages/trainings/home/my-enrollments";
-import { Catalog } from "@/components/pages/trainings/home/catalog";
+import { MyEnrollments, Catalog } from "@/components/pages/trainings/home";
 
 export const Route = createFileRoute("/_student/trainings/")({
   head: () => ({
