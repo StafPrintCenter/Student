@@ -8,18 +8,18 @@ import { NotFoundComponent, ErrorComponent } from "@/components/errors";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => {
-    const title = `Student Portal | ${SITE.name}`;
-    const description = `Portail étudiant sécurisé de ${SITE.name} : inscrivez-vous aux formations, suivez votre progression, payez en ligne et téléchargez vos certificats.`;
+    const PAGE_TITLE = `${SITE.tool} - Apprendre et progresser | ${SITE.name}`;
+    const PAGE_DESC = `Apprenez à votre rythme avec ${SITE.name}. Retrouvez vos cours, suivez votre progression, pratiquez vos compétences et valorisez votre parcours.`;
 
     return {
       meta: [
         { charSet: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { title },
-        { name: "description", content: description },
+        { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=5" },
+        { title: PAGE_TITLE },
+        { name: "description", content: PAGE_DESC },
         { name: "author", content: SITE.name },
-        { property: "og:title", content: title },
-        { property: "og:description", content: description },
+        { property: "og:title", content: PAGE_TITLE },
+        { property: "og:description", content: PAGE_DESC },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
