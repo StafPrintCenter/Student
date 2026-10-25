@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, CalendarX } from "lucide-react";
-
-import { EmptyState } from "@/components/shared/EmptyState";
+import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { OtherSessionsList } from "@/components/portal/sessions/other-sessions-list";

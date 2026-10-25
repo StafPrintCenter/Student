@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LineChart } from "lucide-react";
 import { PageHeader } from "@/components/site";
-import { EmptyState } from "@/components/shared/EmptyState";
+import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { FinanceCard } from "@/components/portal/progress/finance-card";
 import { ProgressSkeleton } from "@/components/portal/progress/progress-skeleton";
