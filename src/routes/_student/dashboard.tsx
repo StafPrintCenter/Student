@@ -1,12 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { ActionsRequiredCard } from "@/components/portal/dashboard/actions-required-card";
-import { CurrentTrainingsCard } from "@/components/portal/dashboard/current-trainings-card";
-import { DashboardHeader } from "@/components/portal/dashboard/dashboard-header";
-import { DashboardSessionsCard } from "@/components/portal/dashboard/dashboard-sessions-card";
-import { DashboardStats } from "@/components/portal/dashboard/dashboard-stats";
-import { PaymentsOverviewCard } from "@/components/portal/dashboard/payments-overview-card";
-import { RecentNotificationsCard } from "@/components/portal/dashboard/recent-notifications-card";
+import {
+  ActionsRequiredCard,
+  CurrentTrainingsCard,
+  DashboardHeader,
+  DashboardSessionsCard,
+  DashboardStats,
+  PaymentsOverviewCard,
+  RecentNotificationsCard,
+} from "@/components/pages/dashboard";
 
 export const Route = createFileRoute("/_student/dashboard")({
   head: () => ({

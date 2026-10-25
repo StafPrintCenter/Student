@@ -6,12 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { NotificationItem } from "@/components/pages/notifications/shared";
-import { useMarkAsRead, useNotificationsList } from "@/stores/useNotificationsStore";
+import { useNotificationsList } from "@/stores/useNotificationsStore";
 
 export function RecentNotificationsCard() {
   const navigate = useNavigate();
   const { items, meta, isLoading, isError } = useNotificationsList({ page: 1, perPage: 5 });
-  const markAsRead = useMarkAsRead();
   const unread = meta?.unreadTotal ?? 0;
 
   return (
@@ -45,9 +44,7 @@ export function RecentNotificationsCard() {
               <NotificationItem
                 key={n.id}
                 notification={n}
-                isMarking={markAsRead.isPending && markAsRead.variables === n.id}
-                onMarkRead={() => markAsRead.mutate(n.id)}
-                onOpen={() => navigate({ to: "/notifications/$id", params: { id: n.id } })}
+                onClick={() => navigate({ to: "/notifications/$id", params: { id: n.id } })}
               />
             ))}
           </ul>
