@@ -7,7 +7,7 @@ import {
   MC_NIB,
   MC_PEN,
   MC_SP,
-} from "./logoPaths";
+} from "./Logo/Paths";
 
 /** Texte affiché sous le logo quand aucun `text` n'est fourni. */
 export const LOGO_LOADER_DEFAULT_TEXT = "Chargement…";
