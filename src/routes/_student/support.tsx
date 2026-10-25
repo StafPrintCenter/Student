@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Plus, MessageSquare } from "lucide-react";
 
-import { PageHeader } from "@/components/portal/page-header";
+import { PageHeader } from "@/components/site/page-header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

@@ -3,7 +3,7 @@ import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
-import { PageHeader } from "@/components/portal/page-header";
+import { PageHeader } from "@/components/site/page-header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

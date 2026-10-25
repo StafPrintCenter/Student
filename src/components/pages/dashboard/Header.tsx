@@ -3,7 +3,7 @@ import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import { CalendarDays, Play } from "lucide-react";
 
-import { PageHeader } from "@/components/portal/page-header";
+import { PageHeader } from "@/components/site/page-header";
 import { Button } from "@/components/ui/button";
 import { isActiveEnrollment } from "./Utils";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
