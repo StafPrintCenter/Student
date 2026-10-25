@@ -13,7 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { TicketBadge } from "@/components/portal/status-badges";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { EmptyState } from "@/components/portal/EmptyState";
+import { EmptyState } from "@/components/shared/EmptyState";
 import { supportApi } from "@/lib/api";
 import type { SupportTicket } from "@/lib/api/types";
 

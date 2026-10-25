@@ -1,6 +1,6 @@
 import { GraduationCap } from "lucide-react";
 
-import { EmptyState } from "@/components/portal/EmptyState";
+import { EmptyState } from "@/components/shared/EmptyState";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EnrollmentCard } from "@/components/portal/trainings/enrollment-card";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
