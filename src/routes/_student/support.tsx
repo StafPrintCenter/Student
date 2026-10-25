@@ -5,17 +5,14 @@ import { toast } from "sonner";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Plus, MessageSquare } from "lucide-react";
-
-import { PageHeader } from "@/components/site/PageHeader";
+import { PageHeader } from "@/components/site";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { TicketBadge } from "@/components/portal/status-badges";
-import {
-  Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { EmptyState } from "@/components/portal/empty-state";
 import { supportApi } from "@/lib/api";
 import type { SupportTicket } from "@/lib/api/types";
