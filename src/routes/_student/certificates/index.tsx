@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { z } from "zod";
 import { Award } from "lucide-react";
 import { toast } from "sonner";
-import { PageHeader } from "@/components/site";
+import { PageHeader } from "@/components/shared";
 import { EmptyState } from "@/components/shared";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CertificateCard } from "@/components/portal/certificates/certificate-card";

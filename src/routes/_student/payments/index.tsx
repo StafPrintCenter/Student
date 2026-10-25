@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CreditCard } from "lucide-react";
-import { PageHeader } from "@/components/site";
+import { PageHeader } from "@/components/shared";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { PaymentTrainingCard } from "@/components/portal/payments/payment-training-card";

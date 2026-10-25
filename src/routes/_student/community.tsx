@@ -5,7 +5,7 @@ import { Heart, MessageCircle, Plus, Users, Sparkles, Filter } from "lucide-reac
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import { toast } from "sonner";
-import { PageHeader } from "@/components/site";
+import { PageHeader } from "@/components/shared";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
