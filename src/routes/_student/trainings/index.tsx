@@ -3,12 +3,17 @@ import { useState } from "react";
 import { PageHeader } from "@/components/site";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MyEnrollments, Catalog } from "@/components/pages/trainings/home";
+import { SITE } from "@/data/site";
+
+const PAGE_TITLE = `Mes formations - ${SITE.tool} | ${SITE.name}`;
+const PAGE_DESC = `Toutes vos formations et le catalogue disponible sur ${SITE.tool} de ${SITE.name}.`;
 
 export const Route = createFileRoute("/_student/trainings/")({
   head: () => ({
     meta: [
-      { title: "Mes formations - STAF Student Portal" },
-      { name: "description", content: "Toutes vos formations et le catalogue disponible." },
+      { title: PAGE_TITLE },
+      { name: "description", content: PAGE_DESC },
+      { name: "robots", content: "noindex" },
     ],
   }),
   component: TrainingsPage,
