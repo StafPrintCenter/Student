@@ -1,5 +1,5 @@
 /**
- * Tracés vectoriels des logos STAF PRINT CENTER (générés à partir de BASE-MC.png et BASE-DC.png).
+ * Tracés vectoriels des logos STAF PRINT CENTER.
  * Ne pas modifier à la main : ces données alimentent <LogoLoader />.
  *
  * MC : monogramme « SP » (viewBox 1080 × 1080, encre dans x 35-1034 / y 98-971)
