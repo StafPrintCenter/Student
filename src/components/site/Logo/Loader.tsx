@@ -1,47 +1,23 @@
 import { useId, type CSSProperties } from "react";
-import {
-  DC_CENTER,
-  DC_MONOGRAM_TRANSFORM,
-  DC_TEXT,
-  MC_CENTERLINE,
-  MC_NIB,
-  MC_PEN,
-  MC_SP,
-} from "./Paths";
+import { DC_CENTER, DC_MONOGRAM_TRANSFORM, DC_TEXT, MC_CENTERLINE, MC_NIB, MC_PEN, MC_SP } from "./Paths";
 
-/** Texte affiché sous le logo quand aucun `text` n'est fourni. */
 export const LOGO_LOADER_DEFAULT_TEXT = "Chargement…";
-
 export type LogoLoaderVariant = "mc" | "dc";
 
 export interface LogoLoaderProps {
-  /** "mc" = monogramme SP seul · "dc" = logo horizontal « SP + STAF PRINT CENTER ». Défaut : "mc". */
   variant?: LogoLoaderVariant;
-  /** Largeur du logo : nombre = px, ou toute valeur CSS ("12rem", "40%"). Défaut : 144 (mc) / 300 (dc). */
   size?: number | string;
-  /** Joue l'animation d'écriture. `false` = logo fixe. Défaut : true. */
   animated?: boolean;
-  /** Rejoue l'animation en boucle (fondu de sortie entre deux cycles). `false` = une seule fois. Défaut : true. */
   loop?: boolean;
-  /** Durée d'un cycle complet, en secondes. Défaut : 4.5. */
   duration?: number;
-  /** Affiche le texte sous le logo. Défaut : true. */
   showText?: boolean;
-  /** Texte sous le logo. Défaut : LOGO_LOADER_DEFAULT_TEXT. */
   text?: string;
-  /** Occupe tout l'écran (min-h-screen, centré, fond du thème). Défaut : false. */
   fullScreen?: boolean;
-  /** Ombre portée du logo, comme sur les fichiers d'origine. Défaut : true. */
   shadow?: boolean;
-  /** Bleu nuit du logo. Défaut : #1b1464. */
   inkColor?: string;
-  /** Brun de la plume. Défaut : #754c24. */
   nibColor?: string;
-  /** Noir du mot « CENTER » (variante dc). Défaut : #000. */
   centerColor?: string;
-  /** Classes du conteneur. */
   className?: string;
-  /** Classes du texte. */
   textClassName?: string;
 }
 
