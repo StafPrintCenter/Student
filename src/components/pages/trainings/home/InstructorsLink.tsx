@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { UserRound } from "lucide-react";
-import { InstructorsDialog } from "./instructorsDialog";
+import { InstructorsDialog } from "./InstructorsDialog";
 import { summarizeInstructors, type APITrainingInstructor } from "@/data/trainings";
 
 /** Nom du formateur (+ n autres) ; au clic, ouvre le modal avec tous les formateurs */
