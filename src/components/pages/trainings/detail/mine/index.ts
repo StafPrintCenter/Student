@@ -1,3 +1,3 @@
-export { CertificateAvailableBanner } from "./CertificateAvailableBanner";
-export { EnrollmentStatusCard } from "./EnrollmentStatusCard";
+export { CertificateAvailableBanner } from "./CertificateBanner";
+export { EnrollmentStatusCard } from "./EnrollmentStatus";
 
