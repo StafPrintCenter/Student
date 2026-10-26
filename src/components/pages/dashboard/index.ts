@@ -1,7 +1,7 @@
-export { ActionsRequiredCard } from "./ActionsRequiredCard";
-export { CurrentTrainingsCard } from "./CurrentTrainingsCard";
+export { ActionsRequiredCard } from "./ActionsRequired";
+export { CurrentTrainingsCard } from "./CurrentTrainings";
 export { DashboardHeader } from "./Header";
 export { DashboardSessionsCard } from "./SessionsCard";
 export { DashboardStats } from "./Stats";
-export { PaymentsOverviewCard } from "./PaymentsRverviewCard";
-export { RecentNotificationsCard } from "./RecentNotificationsCard";
+export { PaymentsOverviewCard } from "./PaymentsRverview";
+export { RecentNotificationsCard } from "./RecentNotifications";
