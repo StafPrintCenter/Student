@@ -43,7 +43,6 @@ function StudentLayout() {
         text="Vérification de votre session…"
       />
     );
-
   }
 
   return (
