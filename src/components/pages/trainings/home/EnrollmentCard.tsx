@@ -6,7 +6,7 @@ import { ArrowRight, Calendar, Clock, MapPin, Users, CircleEuro } from "lucide-r
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { AccessBadge } from "@/components/portal/trainings/access-badge";
+import { AccessBadge } from "@/components/portal/trainings/AccessBadge";
 import { InstructorsLink } from "@/components/portal/trainings/instructors-link";
 import { StatusBadge } from "@/components/portal/trainings/status-badge";
 import { formatFCFA } from "@/lib/format";
