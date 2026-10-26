@@ -13,7 +13,7 @@ interface TrainingProgramCardProps {
   contentLocked: boolean;
 }
 
-export function TrainingProgramCard({ modules, contentLocked }: TrainingProgramCardProps) {
+export function TrainingMineProgramCard({ modules, contentLocked }: TrainingProgramCardProps) {
   const [activeLesson, setActiveLesson] = useState<APIStudentTrainingLesson | null>(null);
 
   const totalLessons = modules.reduce((sum, m) => sum + m.lessonsCount, 0);
