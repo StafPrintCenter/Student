@@ -3,9 +3,9 @@ import { toast } from "sonner";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChaptersList } from "@/components/portal/lesson/lesson-blocks";
-import { LessonBody } from "@/components/pages/trainings/detail/mine/Lesson";
-import { LessonHeader } from "@/components/pages/trainings/detail/mine/Lesson/Header";
-import { LessonNavigation } from "@/components/portal/lesson/lesson-navigation";
+import { LessonHeader, LessonBody, LessonNavigation } from "@/components/pages/trainings/detail/mine/Lesson";
+import { } from "@/components/pages/trainings/detail/mine/Lesson/Header";
+import { } from "@/components/pages/trainings/detail/mine/Lesson/Navigation";
 import { LessonProgressInfo } from "@/components/portal/lesson/lesson-progress-info";
 import { LessonError, LessonLockedNotice, LessonSkeleton } from "@/components/portal/lesson/lesson-states";
 import type { APILessonLink, LessonProgressPayload } from "@/data/lesson";
