@@ -1,5 +1,5 @@
 export { CatalogCard } from "./CatalogCard";
 export { CatalogTab } from "./CatalogTab";
 export { EnrollmentCard } from "./EnrollmentCard";
-export { EnrollmentsTab } from "./EnrollmentsTab";
+export { EnrollmentTab } from "./EnrollmentTab";
 export { InstructorsLink } from "./InstructorsLink";
