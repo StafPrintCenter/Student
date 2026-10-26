@@ -3,7 +3,7 @@ import { toast } from "sonner";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChaptersList } from "@/components/portal/lesson/lesson-blocks";
-import { LessonBody } from "@/components/pages/trainings/detail/mine/Lesson/Body";
+import { LessonBody } from "@/components/pages/trainings/detail/mine/Lesson";
 import { LessonHeader } from "@/components/portal/lesson/lesson-header";
 import { LessonNavigation } from "@/components/portal/lesson/lesson-navigation";
 import { LessonProgressInfo } from "@/components/portal/lesson/lesson-progress-info";
