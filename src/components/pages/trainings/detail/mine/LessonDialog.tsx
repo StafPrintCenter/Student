@@ -5,8 +5,6 @@ import { ChaptersList } from "@/components/portal/lesson/lesson-blocks";
 import { LessonHeader, LessonBody, LessonNavigation, LessonProgressInfo, LessonError, LessonLockedNotice, LessonSkeleton, isFilePreviewOpen, isInsideFilePreview } from "@/components/pages/trainings/detail/mine/Lesson";
 import type { APILessonLink, LessonProgressPayload } from "@/data/lesson";
 import { useLessonDetail, useMarkLessonProgress } from "@/stores/useLessonStore";
-
-// Ré-exporté pour ne casser aucun import existant
 export { kindIcons } from "@/components/portal/lesson/lesson-kind-icons";
 
 interface LessonDialogProps {
