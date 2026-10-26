@@ -3,11 +3,11 @@ import { toast } from "sonner";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChaptersList } from "@/components/portal/lesson/lesson-blocks";
-import { LessonHeader, LessonBody, LessonNavigation, LessonProgressInfo } from "@/components/pages/trainings/detail/mine/Lesson";
+import { LessonHeader, LessonBody, LessonNavigation, LessonProgressInfo, LessonError, LessonLockedNotice, LessonSkeleton } from "@/components/pages/trainings/detail/mine/Lesson";
 import { } from "@/components/pages/trainings/detail/mine/Lesson/Header";
 import { } from "@/components/pages/trainings/detail/mine/Lesson/Navigation";
 import { } from "@/components/pages/trainings/detail/mine/Lesson/ProgressInfo";
-import { LessonError, LessonLockedNotice, LessonSkeleton } from "@/components/portal/lesson/lesson-states";
+import { } from "@/components/pages/trainings/detail/mine/Lesson/States";
 import type { APILessonLink, LessonProgressPayload } from "@/data/lesson";
 import { useLessonDetail, useMarkLessonProgress } from "@/stores/useLessonStore";
 import { isFilePreviewOpen, isInsideFilePreview } from "@/components/portal/lesson/file-preview-portal";
