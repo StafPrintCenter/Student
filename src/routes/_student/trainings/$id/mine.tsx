@@ -3,10 +3,10 @@ import { ArrowLeft, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/shared";
-import { CertificateAvailableBanner } from "@/components/pages/trainings/detail/mine";
-import { EnrollmentStatusCard } from "@/components/pages/trainings/detail/mine/EnrollmentStatus";
-import { FinancialStatusCard } from "@/components/portal/trainings/financial-status-card";
-import { InstructorsCard } from "@/components/portal/trainings/instructors-card";
+import { CertificateAvailableBanner, EnrollmentStatusCard, FinancialStatusCard, InstructorsCard } from "@/components/pages/trainings/detail/mine";
+
+import { } from "@/components/pages/trainings/detail/mine/FinancialStatus";
+import { } from "@/components/pages/trainings/detail/mine/InstructorsCard";
 import { LockedAccessAlert } from "@/components/portal/trainings/locked-access-alert";
 import { TrainingHero } from "@/components/portal/trainings/training-hero";
 import { TrainingObjectivesCard } from "@/components/portal/trainings/training-objectives-card";
