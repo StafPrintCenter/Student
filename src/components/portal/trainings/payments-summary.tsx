@@ -1,5 +1,5 @@
 import { Progress } from "@/components/ui/progress";
-import { AccessBadge } from "@/components/shared/AccessBadge";
+import { AccessBadge } from "@/components/shared";
 import { StatusBadge } from "@/components/portal/trainings/status-badge";
 import { formatFCFA } from "@/lib/format";
 import { trainingPaymentStatusMap } from "@/data/trainings";
