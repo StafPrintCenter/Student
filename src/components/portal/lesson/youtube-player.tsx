@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { ContentBlock } from "@/components/portal/lesson/lesson-blocks";
+import { ContentBlock } from "@/components/pages/trainings/detail/mine/Lesson/lesson-blocks";
 import { loadYoutubeIframeApi, type YoutubePlayerInstance } from "@/components/portal/lesson/video-utils";
 import type { APILessonDetail, LessonProgressPayload } from "@/data/lesson";
 
