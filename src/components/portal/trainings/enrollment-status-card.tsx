@@ -1,9 +1,8 @@
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { StatusBadge } from "@/components/shared/StatusBadge";
+import { StatusBadge } from "@/components/shared";
 import { trainingEnrollmentStatusMap, type APIStudentTrainingEnrollmentInfo } from "@/data/trainings";
 
 export function EnrollmentStatusCard({ enrollment }: { enrollment: APIStudentTrainingEnrollmentInfo }) {

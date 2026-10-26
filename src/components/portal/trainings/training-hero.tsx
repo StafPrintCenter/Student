@@ -3,13 +3,8 @@ import { fr } from "date-fns/locale";
 import { Calendar, Clock, MapPin, Users, CircleEuro } from "lucide-react";
 import { formatFCFA } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
-import { AccessBadge } from "@/components/shared";
-import { StatusBadge } from "@/components/shared/StatusBadge";
-import {
-  trainingEnrollmentStatusMap,
-  type APIStudentTrainingDetail,
-  type APIStudentTrainingEnrollmentInfo,
-} from "@/data/trainings";
+import { AccessBadge, StatusBadge } from "@/components/shared";
+import { trainingEnrollmentStatusMap, type APIStudentTrainingDetail, type APIStudentTrainingEnrollmentInfo } from "@/data/trainings";
 
 interface TrainingHeroProps {
   training: APIStudentTrainingDetail;

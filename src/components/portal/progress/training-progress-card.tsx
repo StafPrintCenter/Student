@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
-import { StatusBadge } from "@/components/shared/StatusBadge";
+import { StatusBadge } from "@/components/shared";
 import { certificateEligibilityStatusMap } from "@/data/certificates";
 import { trainingEnrollmentStatusMap, trainingPaymentStatusMap } from "@/data/trainings";
 import { useEnrollmentCertificate } from "@/stores/useCertificatesStore";
