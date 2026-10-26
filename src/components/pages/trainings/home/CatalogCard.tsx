@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { Loader2, Users } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -10,9 +9,7 @@ import type { APIPublicTrainingCatalogItem } from "@/data/trainings";
 interface CatalogCardProps {
   training: APIPublicTrainingCatalogItem;
   already: boolean;
-  /** Une souscription est en cours (toutes cartes confondues) : tous les boutons sont désactivés */
   busy: boolean;
-  /** La souscription en cours concerne cette carte : affiche le loader */
   submitting: boolean;
   onSubscribe: () => void;
 }

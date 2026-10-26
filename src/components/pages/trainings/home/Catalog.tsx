@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { CatalogCard } from "@/components/portal/trainings/CatalogCard";
+import { CatalogCard } from "@/components/pages/trainings/home/CatalogCard";
 import { useStudentTrainingsList, useTrainingsCatalog, useSubscribeToTraining } from "@/stores/useTrainingsStore";
 import type { APIPublicTrainingCatalogItem } from "@/data/trainings";
 
