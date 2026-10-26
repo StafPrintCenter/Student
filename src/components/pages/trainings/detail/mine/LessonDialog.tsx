@@ -4,7 +4,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { LessonHeader, LessonBody, LessonNavigation, LessonProgressInfo, LessonError, LessonLockedNotice, LessonSkeleton, isFilePreviewOpen, isInsideFilePreview, ChaptersList } from "@/components/pages/trainings/detail/mine/Lesson";
 import type { APILessonLink, LessonProgressPayload } from "@/data/lesson";
 import { useLessonDetail, useMarkLessonProgress } from "@/stores/useLessonStore";
-export { kindIcons } from "@/components/portal/lesson/lesson-kind-icons";
+export { kindIcons } from "@/components/pages/trainings/detail/mine/Lesson/lesson-kind-icons";
 
 interface LessonDialogProps {
   /** Seuls l'id et le titre sont nécessaires : le contenu est chargé depuis le détail de la leçon */
