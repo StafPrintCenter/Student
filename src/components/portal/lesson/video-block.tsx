@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { Video } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { ContentBlock, EmptyLessonContent, ExternalVideoLink } from "@/components/pages/trainings/detail/mine/Lesson/lesson-blocks";
+import { ContentBlock, EmptyLessonContent, ExternalVideoLink } from "@/components/pages/trainings/detail/mine/Lesson/Blocks";
 import { YoutubePlayer } from "@/components/portal/lesson/youtube-player";
 import { extractYoutubeVideoId, isDirectVideoFile } from "@/components/portal/lesson/video-utils";
 import type { APILessonDetail, LessonProgressPayload } from "@/data/lesson";
