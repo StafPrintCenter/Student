@@ -1,7 +1,7 @@
 import { CheckCircle2, Target } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export function TrainingObjectivesCard({ objectives }: { objectives: string[] }) {
+export function TrainingMineObjectivesCard({ objectives }: { objectives: string[] }) {
   return (
     <Card>
       <CardHeader>

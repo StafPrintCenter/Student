@@ -3,8 +3,7 @@ import { ArrowLeft, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/shared";
-import { CertificateAvailableBanner, EnrollmentStatusCard, FinancialStatusCard, InstructorsCard, LockedAccessAlert, TrainingMineHero } from "@/components/pages/trainings/detail/mine";
-import { TrainingObjectivesCard } from "@/components/portal/trainings/training-objectives-card";
+import { CertificateAvailableBanner, EnrollmentStatusCard, FinancialStatusCard, InstructorsCard, LockedAccessAlert, TrainingMineHero, TrainingMineObjectivesCard } from "@/components/pages/trainings/detail/mine";
 import { TrainingProgramCard } from "@/components/portal/trainings/training-program-card";
 import { TrainingSessionsCard } from "@/components/portal/sessions/training-sessions-card";
 import { useStudentTrainingDetail } from "@/stores/useTrainingsStore";
@@ -66,7 +65,7 @@ function TrainingDetail() {
           {enrollment.progress >= 100 && <CertificateAvailableBanner enrollmentId={enrollment.id} />}
           {contentLocked && <LockedAccessAlert minRatioPercent={accessMinRatioPercent} />}
           <TrainingSessionsCard trainingId={training.id} />
-          <TrainingObjectivesCard objectives={training.objectives} />
+          <TrainingMineObjectivesCard objectives={training.objectives} />
           <TrainingProgramCard modules={modules} contentLocked={contentLocked} />
         </div>
 
