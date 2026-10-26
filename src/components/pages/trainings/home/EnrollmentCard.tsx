@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { AccessBadge } from "@/components/shared";
 import { InstructorsLink } from "@/components/pages/trainings/home";
-import { StatusBadge } from "@/components/portal/trainings/StatusBadge";
+import { StatusBadge } from "@/components/shared/StatusBadge";
 import { formatFCFA } from "@/lib/format";
 import {
   trainingEnrollmentStatusMap,

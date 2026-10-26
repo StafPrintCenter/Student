@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { StatusBadge } from "@/components/portal/trainings/StatusBadge";
+import { StatusBadge } from "@/components/shared/StatusBadge";
 import { lessonProgressStatusMap, type APILessonDetail } from "@/data/lesson";
 import { lessonKindLabels } from "@/data/trainings";
 

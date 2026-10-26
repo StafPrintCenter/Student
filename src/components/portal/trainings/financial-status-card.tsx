@@ -4,7 +4,7 @@ import { CreditCard, Percent, Receipt, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PaymentsDialog } from "@/components/portal/trainings/payments-dialog";
-import { StatusBadge } from "@/components/portal/trainings/StatusBadge";
+import { StatusBadge } from "@/components/shared/StatusBadge";
 import { cn } from "@/lib/utils";
 import { formatFCFA } from "@/lib/format";
 import { trainingPaymentStatusMap, type APIStudentTrainingDetail, type APIStudentTrainingEnrollmentInfo } from "@/data/trainings";

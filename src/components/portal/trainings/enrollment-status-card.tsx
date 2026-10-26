@@ -3,7 +3,7 @@ import { fr } from "date-fns/locale";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { StatusBadge } from "@/components/portal/trainings/StatusBadge";
+import { StatusBadge } from "@/components/shared/StatusBadge";
 import { trainingEnrollmentStatusMap, type APIStudentTrainingEnrollmentInfo } from "@/data/trainings";
 
 export function EnrollmentStatusCard({ enrollment }: { enrollment: APIStudentTrainingEnrollmentInfo }) {
