@@ -7,7 +7,7 @@ import { Receipt } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { AccessBadge } from "@/components/portal/trainings/AccessBadge";
+import { AccessBadge } from "@/components/shared/AccessBadge";
 import { PaymentsDialog } from "@/components/portal/trainings/payments-dialog";
 import { StatusBadge } from "@/components/portal/trainings/status-badge";
 import { cn } from "@/lib/utils";

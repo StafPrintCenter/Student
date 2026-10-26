@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 import { Progress } from "@/components/ui/progress";
-import { AccessBadge } from "@/components/portal/trainings/AccessBadge";
+import { AccessBadge } from "@/components/shared/AccessBadge";
 import { StatusBadge } from "@/components/portal/trainings/status-badge";
 import {
   summarizeInstructors,
