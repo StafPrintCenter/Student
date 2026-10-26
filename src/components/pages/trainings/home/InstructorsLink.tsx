@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { UserRound } from "lucide-react";
-
 import { InstructorsDialog } from "@/components/portal/trainings/instructors-dialog";
 import { summarizeInstructors, type APITrainingInstructor } from "@/data/trainings";
 
