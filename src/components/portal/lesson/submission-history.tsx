@@ -2,9 +2,8 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { MessageSquare, Paperclip } from "lucide-react";
-
 import { FilePreviewPortal } from "@/components/portal/lesson/file-preview-portal";
-import { StatusBadge } from "@/components/shared/StatusBadge";
+import { StatusBadge } from "@/components/shared";
 import { resolveStorageUrl } from "@/lib/file-url";
 import { submissionStatusMap, type APILessonSubmission } from "@/data/lesson";
 

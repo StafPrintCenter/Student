@@ -5,15 +5,10 @@ import { ArrowRight, Calendar, Clock, MapPin, Users, CircleEuro } from "lucide-r
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { AccessBadge } from "@/components/shared";
+import { AccessBadge, StatusBadge } from "@/components/shared";
 import { InstructorsLink } from "@/components/pages/trainings/home";
-import { StatusBadge } from "@/components/shared/StatusBadge";
 import { formatFCFA } from "@/lib/format";
-import {
-  trainingEnrollmentStatusMap,
-  trainingPaymentStatusMap,
-  type APIStudentTrainingEnrollment,
-} from "@/data/trainings";
+import { trainingEnrollmentStatusMap, trainingPaymentStatusMap, type APIStudentTrainingEnrollment } from "@/data/trainings";
 
 export function EnrollmentCard({ enrollment: e }: { enrollment: APIStudentTrainingEnrollment }) {
   return (

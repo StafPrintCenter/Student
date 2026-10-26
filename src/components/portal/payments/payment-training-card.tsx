@@ -3,13 +3,12 @@ import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Receipt } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { AccessBadge } from "@/components/shared";
 import { PaymentsDialog } from "@/components/portal/trainings/payments-dialog";
-import { StatusBadge } from "@/components/shared/StatusBadge";
+import { StatusBadge } from "@/components/shared";
 import { cn } from "@/lib/utils";
 import { formatFCFA } from "@/lib/format";
 import { trainingEnrollmentStatusMap, trainingPaymentStatusMap } from "@/data/trainings";

@@ -1,13 +1,7 @@
 import { Link } from "@tanstack/react-router";
-
 import { Progress } from "@/components/ui/progress";
-import { AccessBadge } from "@/components/shared";
-import { StatusBadge } from "@/components/shared/StatusBadge";
-import {
-  summarizeInstructors,
-  trainingEnrollmentStatusMap,
-  type APIStudentTrainingEnrollment,
-} from "@/data/trainings";
+import { AccessBadge, StatusBadge } from "@/components/shared";
+import { summarizeInstructors, trainingEnrollmentStatusMap, type APIStudentTrainingEnrollment } from "@/data/trainings";
 
 export function CurrentTrainingRow({ enrollment: e }: { enrollment: APIStudentTrainingEnrollment }) {
   return (
