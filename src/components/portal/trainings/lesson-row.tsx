@@ -1,7 +1,7 @@
 import { CheckCircle2, Circle, CircleDot, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/shared";
-import { kindIcons } from "@/components/pages/trainings/detail/mine/Lesson/lesson-kind-icons";
+import { KindIcons } from "@/components/pages/trainings/detail/mine/Lesson";
 import { lessonProgressStatusMap, submissionStatusMap } from "@/data/lesson";
 import { lessonKindLabels, type APIStudentTrainingLesson } from "@/data/trainings";
 
@@ -68,6 +68,6 @@ function RowIcon({
   if (locked) return <Lock className="h-4 w-4 shrink-0 text-muted-foreground" />;
   if (status === "completed") return <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />;
   if (status === "in_progress") return <CircleDot className="h-4 w-4 shrink-0 text-warning" />;
-  const Icon = kindIcons[kind] ?? Circle;
+  const Icon = KindIcons[kind] ?? Circle;
   return <Icon className="h-4 w-4 shrink-0 text-primary" />;
 }

@@ -1,6 +1,6 @@
 import { BookOpen, ClipboardList, Sparkles, Trophy, Video } from "lucide-react";
 
-export const kindIcons: Record<string, typeof Video> = {
+export const KindIcons: Record<string, typeof Video> = {
   video: Video,
   reading: BookOpen,
   quiz: Trophy,
