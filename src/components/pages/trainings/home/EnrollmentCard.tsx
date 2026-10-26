@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { AccessBadge } from "@/components/shared";
-import { InstructorsLink } from "@/components/portal/trainings/InstructorsLink";
+import { InstructorsLink } from "@/components/pages/trainings/home/InstructorsLink";
 import { StatusBadge } from "@/components/portal/trainings/status-badge";
 import { formatFCFA } from "@/lib/format";
 import {
