@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LineChart } from "lucide-react";
-import { PageHeader } from "@/components/shared";
+import { PageHeader } from "@/components/site";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { FinanceCard } from "@/components/portal/progress/finance-card";

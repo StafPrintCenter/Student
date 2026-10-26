@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { PageHeader } from "@/components/shared";
+import { PageHeader } from "@/components/site";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SessionsCalendar } from "@/components/portal/sessions/sessions-calendar";
 import { SessionsList } from "@/components/portal/sessions/sessions-list";
