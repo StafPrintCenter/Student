@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/shared";
 import { CertificateAvailableBanner, EnrollmentStatusCard, FinancialStatusCard, InstructorsCard, LockedAccessAlert } from "@/components/pages/trainings/detail/mine";
-import { TrainingHero } from "@/components/portal/trainings/training-hero";
+import { TrainingHero } from "@/components/pages/trainings/detail/mine/training-hero";
 import { TrainingObjectivesCard } from "@/components/portal/trainings/training-objectives-card";
 import { TrainingProgramCard } from "@/components/portal/trainings/training-program-card";
 import { TrainingSessionsCard } from "@/components/portal/sessions/training-sessions-card";
