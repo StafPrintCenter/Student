@@ -4,7 +4,7 @@ import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { CurrentTrainingRow } from "./CurrentTrainingRow";
+import { CurrentTrainingRow } from "./TrainingRow";
 import { isActiveEnrollment } from "./Utils";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
 

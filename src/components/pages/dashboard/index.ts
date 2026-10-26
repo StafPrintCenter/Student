@@ -1,5 +1,6 @@
 export { ActionsRequiredCard } from "./ActionsRequired";
-export { CurrentTrainingsCard } from "./CurrentTrainings";
+import { CurrentTrainingRow } from "./TrainingRow";
+export { CurrentTrainingsCard } from "./TrainingsCard";
 export { DashboardHeader } from "./Header";
 export { DashboardSessionsCard } from "./SessionsCard";
 export { DashboardStats } from "./Stats";
