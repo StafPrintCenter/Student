@@ -19,7 +19,8 @@ export function EnrollmentCard({ enrollment: e }: { enrollment: APIStudentTraini
             <p className="text-xs text-muted-foreground">
               {e.theme} · {e.level}
             </p>
-            {/* Route privée : réservée aux formations où l'étudiant est inscrit */}
+
+
             <Link
               to="/trainings/$id/mine"
               params={{ id: e.trainingId }}
