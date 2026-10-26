@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BookOpen } from "lucide-react";
-
 import { Accordion } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
