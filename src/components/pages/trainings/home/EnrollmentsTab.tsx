@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { EnrollmentCard } from "./EnrollmentCard";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
 
-export function MyEnrollments() {
+export function EnrollmentsTab() {
   const { items, isLoading } = useStudentTrainingsList();
 
   if (isLoading) {

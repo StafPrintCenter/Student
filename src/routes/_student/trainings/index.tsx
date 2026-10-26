@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHeader } from "@/components/site";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MyEnrollments, Catalog } from "@/components/pages/trainings/home";
+import { EnrollmentsTab, CatalogTab } from "@/components/pages/trainings/home";
 import { SITE } from "@/data/site";
 
 const PAGE_TITLE = `Mes formations - ${SITE.tool} | ${SITE.name}`;
@@ -35,10 +35,10 @@ function TrainingsPage() {
           <TabsTrigger value="catalog">Catalogue</TabsTrigger>
         </TabsList>
         <TabsContent value="mine" className="mt-6">
-          <MyEnrollments />
+          <EnrollmentsTab />
         </TabsContent>
         <TabsContent value="catalog" className="mt-6">
-          <Catalog />
+          <CatalogTab />
         </TabsContent>
       </Tabs>
     </div>

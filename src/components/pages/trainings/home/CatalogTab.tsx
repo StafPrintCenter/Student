@@ -6,7 +6,7 @@ import { CatalogCard } from "@/components/pages/trainings/home/CatalogCard";
 import { useStudentTrainingsList, useTrainingsCatalog, useSubscribeToTraining } from "@/stores/useTrainingsStore";
 import type { APIPublicTrainingCatalogItem } from "@/data/trainings";
 
-export function Catalog() {
+export function CatalogTab() {
   const [search, setSearch] = useState("");
   const { items, isLoading } = useTrainingsCatalog({ perPage: 12, search: search || undefined });
   const { items: myEnrollments } = useStudentTrainingsList();
