@@ -3,8 +3,7 @@ import { ArrowLeft, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/shared";
-import { CertificateAvailableBanner, EnrollmentStatusCard, FinancialStatusCard, InstructorsCard, LockedAccessAlert } from "@/components/pages/trainings/detail/mine";
-import { TrainingHero } from "@/components/pages/trainings/detail/mine/training-hero";
+import { CertificateAvailableBanner, EnrollmentStatusCard, FinancialStatusCard, InstructorsCard, LockedAccessAlert, TrainingMineHero } from "@/components/pages/trainings/detail/mine";
 import { TrainingObjectivesCard } from "@/components/portal/trainings/training-objectives-card";
 import { TrainingProgramCard } from "@/components/portal/trainings/training-program-card";
 import { TrainingSessionsCard } from "@/components/portal/sessions/training-sessions-card";
@@ -55,7 +54,11 @@ function TrainingDetail() {
   return (
     <div className="space-y-6">
       <BackButton />
-      <TrainingHero training={training} enrollment={enrollment} contentLocked={contentLocked} />
+      <TrainingMineHero
+        training={training}
+        enrollment={enrollment}
+        contentLocked={contentLocked}
+      />
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">

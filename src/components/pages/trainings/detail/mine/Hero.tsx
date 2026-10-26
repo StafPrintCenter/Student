@@ -12,7 +12,7 @@ interface TrainingHeroProps {
   contentLocked: boolean;
 }
 
-export function TrainingHero({ training, enrollment, contentLocked }: TrainingHeroProps) {
+export function TrainingMineHero({ training, enrollment, contentLocked }: TrainingHeroProps) {
   return (
     <div className="overflow-hidden rounded-2xl border border-border">
       <div
