@@ -1,7 +1,7 @@
 import { ClipboardList } from "lucide-react";
 
 import { SubmissionForm } from "@/components/portal/submission-form";
-import { ContentBlock, ExternalVideoLink } from "@/components/pages/trainings/detail/mine/Lesson/Blocks";
+import { ContentBlock, ExternalVideoLink } from "@/components/pages/trainings/detail/mine/Lesson";
 import { SubmissionHistory } from "@/components/portal/lesson/submission-history";
 import type { APILessonDetail } from "@/data/lesson";
 
