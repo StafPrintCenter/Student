@@ -1,7 +1,7 @@
 import { GraduationCap } from "lucide-react";
 import { EmptyState } from "@/components/shared";
 import { Skeleton } from "@/components/ui/skeleton";
-import { EnrollmentCard } from "@/components/portal/trainings/EnrollmentCard";
+import { EnrollmentCard } from "./EnrollmentCard";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
 
 export function MyEnrollments() {
