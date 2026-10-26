@@ -4,7 +4,6 @@ import { StatusBadge } from "@/components/shared";
 import { lessonProgressStatusMap, type APILessonDetail } from "@/data/lesson";
 import { lessonKindLabels } from "@/data/trainings";
 
-/** `lesson` est null tant que le détail charge : seul le titre est alors affiché */
 export function LessonHeader({ title, lesson }: { title: string; lesson: APILessonDetail | null }) {
   return (
     <DialogHeader>
