@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { AccessBadge } from "@/components/shared";
 import { PaymentsDialog } from "@/components/portal/trainings/payments-dialog";
-import { StatusBadge } from "@/components/portal/trainings/status-badge";
+import { StatusBadge } from "@/components/portal/trainings/StatusBadge";
 import { cn } from "@/lib/utils";
 import { formatFCFA } from "@/lib/format";
 import { trainingEnrollmentStatusMap, trainingPaymentStatusMap } from "@/data/trainings";

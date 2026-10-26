@@ -4,7 +4,7 @@ import { fr } from "date-fns/locale";
 import { MessageSquare, Paperclip } from "lucide-react";
 
 import { FilePreviewPortal } from "@/components/portal/lesson/file-preview-portal";
-import { StatusBadge } from "@/components/portal/trainings/status-badge";
+import { StatusBadge } from "@/components/portal/trainings/StatusBadge";
 import { resolveStorageUrl } from "@/lib/file-url";
 import { submissionStatusMap, type APILessonSubmission } from "@/data/lesson";
 

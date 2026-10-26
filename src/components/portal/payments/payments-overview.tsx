@@ -4,7 +4,7 @@ import { Banknote, CalendarCheck, Hourglass, Wallet } from "lucide-react";
 
 import { Progress } from "@/components/ui/progress";
 import { StatCard } from "@/components/portal/progress/stat-card";
-import { StatusBadge } from "@/components/portal/trainings/status-badge";
+import { StatusBadge } from "@/components/portal/trainings/StatusBadge";
 import { formatFCFA } from "@/lib/format";
 import { trainingPaymentStatusMap, type TrainingPaymentStatus } from "@/data/trainings";
 import type { APIPaymentsOverview } from "@/data/payments";

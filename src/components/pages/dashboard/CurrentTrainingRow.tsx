@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 import { Progress } from "@/components/ui/progress";
 import { AccessBadge } from "@/components/shared";
-import { StatusBadge } from "@/components/portal/trainings/status-badge";
+import { StatusBadge } from "@/components/portal/trainings/StatusBadge";
 import {
   summarizeInstructors,
   trainingEnrollmentStatusMap,

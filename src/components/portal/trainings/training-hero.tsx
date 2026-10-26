@@ -4,7 +4,7 @@ import { Calendar, Clock, MapPin, Users, CircleEuro } from "lucide-react";
 import { formatFCFA } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
 import { AccessBadge } from "@/components/shared";
-import { StatusBadge } from "@/components/portal/trainings/status-badge";
+import { StatusBadge } from "@/components/portal/trainings/StatusBadge";
 import {
   trainingEnrollmentStatusMap,
   type APIStudentTrainingDetail,
