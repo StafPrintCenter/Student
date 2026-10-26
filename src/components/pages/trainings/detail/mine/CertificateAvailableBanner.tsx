@@ -8,10 +8,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useEnrollmentCertificate } from "@/stores/useCertificatesStore";
 
-/**
- * Affiché quand la formation est terminée à 100 %.
- * Le lien ouvre /certificates avec le modal du certificat déjà ouvert (?certificateId=...).
- */
 export function CertificateAvailableBanner({ enrollmentId }: { enrollmentId: string }) {
   const { data, isLoading } = useEnrollmentCertificate(enrollmentId);
 
