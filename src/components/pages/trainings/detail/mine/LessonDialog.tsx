@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { toast } from "sonner";
-
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChaptersList } from "@/components/portal/lesson/lesson-blocks";
-import { LessonHeader, LessonBody, LessonNavigation, LessonProgressInfo, LessonError, LessonLockedNotice, LessonSkeleton } from "@/components/pages/trainings/detail/mine/Lesson";
+import { LessonHeader, LessonBody, LessonNavigation, LessonProgressInfo, LessonError, LessonLockedNotice, LessonSkeleton, isFilePreviewOpen, isInsideFilePreview } from "@/components/pages/trainings/detail/mine/Lesson";
 import type { APILessonLink, LessonProgressPayload } from "@/data/lesson";
 import { useLessonDetail, useMarkLessonProgress } from "@/stores/useLessonStore";
-import { isFilePreviewOpen, isInsideFilePreview } from "@/components/pages/trainings/detail/mine/Lesson/FilePreview";
 
 // Ré-exporté pour ne casser aucun import existant
 export { kindIcons } from "@/components/portal/lesson/lesson-kind-icons";
