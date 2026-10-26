@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { InstructorList } from "@/components/pages/trainings/shared/instructor-list";
+import { InstructorList } from "@/components/pages/trainings/shared";
 import type { APITrainingInstructor } from "@/data/trainings";
 
 interface InstructorsDialogProps {

@@ -1,6 +1,6 @@
 import { UserRound } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { InstructorList } from "@/components/pages/trainings/shared/instructor-list";
+import { InstructorList } from "@/components/pages/trainings/shared";
 import type { APITrainingInstructor } from "@/data/trainings";
 
 export function InstructorsCard({ instructors }: { instructors: APITrainingInstructor[] }) {
