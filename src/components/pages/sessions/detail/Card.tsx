@@ -4,7 +4,7 @@ import { Calendar, Clock, GraduationCap, Hourglass, MapPin, UserRound, Video } f
 import type { LucideIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SessionPlace } from "@/components/portal/sessions/session-place";
-import { formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/portal/sessions/session-format";
+import { formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/pages/sessions/shared/Format";
 import type { APIStudentSession } from "@/data/sessions";
 
 export function SessionDetailsCard({ session }: { session: APIStudentSession }) {

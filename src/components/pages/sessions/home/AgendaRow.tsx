@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ChevronRight, MapPin, Video } from "lucide-react";
 import { SessionDateBlock } from "@/components/pages/sessions/shared/DateBlock";
 import { SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
-import { formatSessionTimeRange, sessionPlaceLabel } from "@/components/portal/sessions/session-format";
+import { formatSessionTimeRange, sessionPlaceLabel } from "@/components/pages/sessions/shared/Format";
 import type { APIStudentSession } from "@/data/sessions";
 
 interface SessionAgendaRowProps {

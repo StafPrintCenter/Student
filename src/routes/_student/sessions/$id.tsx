@@ -8,7 +8,7 @@ import { SessionDateBlock } from "@/components/pages/sessions/shared/DateBlock";
 import { SessionModalityBadge, SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
 import { SessionDetailsCard } from "@/components/pages/sessions/detail/Card";
 import { SessionResponseCard } from "@/components/pages/sessions/detail/ResponseCard";
-import { formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/portal/sessions/session-format";
+import { formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/pages/sessions/shared/Format";
 import { useSessionDetail } from "@/stores/useSessionsStore";
 
 export const Route = createFileRoute("/_student/sessions/$id")({

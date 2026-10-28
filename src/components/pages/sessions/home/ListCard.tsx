@@ -6,7 +6,7 @@ import { SessionDateBlock } from "@/components/pages/sessions/shared/DateBlock";
 import { SessionModalityBadge, SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
 import { SessionPlace } from "@/components/portal/sessions/session-place";
 import { SessionRespondButtons } from "@/components/pages/sessions/shared/RespondButtons";
-import { formatSessionDuration, formatSessionTimeRange } from "@/components/portal/sessions/session-format";
+import { formatSessionDuration, formatSessionTimeRange } from "@/components/pages/sessions/shared/Format";
 import type { APIStudentSession } from "@/data/sessions";
 
 interface SessionListCardProps {

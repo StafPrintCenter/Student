@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
 import { SessionDateBlock } from "@/components/pages/sessions/shared/DateBlock";
-import { formatSessionTimeRange, sessionPlaceLabel } from "@/components/portal/sessions/session-format";
+import { formatSessionTimeRange, sessionPlaceLabel } from "@/components/pages/sessions/shared/Format";
 import type { APIStudentSession } from "@/data/sessions";
 
 export function DashboardSessionRow({ session }: { session: APIStudentSession }) {
