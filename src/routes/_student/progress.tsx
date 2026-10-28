@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/button";
 import { ProgressFinanceCard } from "@/components/pages/progress/FinanceCard";
 import { ProgressSkeleton } from "@/components/pages/progress/Skeleton";
 import { ProgressStats } from "@/components/pages/progress/Stats";
-import { SessionsOverviewCard } from "@/components/pages/progress/sessions-overview-card";
-import { TrainingProgressCard } from "@/components/pages/progress/training-progress-card";
+import { SessionsOverviewCard } from "@/components/pages/progress/SessionsOverview";
+import { TrainingProgressCard } from "@/components/pages/progress/ProgressCard";
 import { useStudentProgress } from "@/stores/useProgressStore";
 
-export const Route = createFileRoute("/_student/progress/")({
+export const Route = createFileRoute("/_student/progress")({
   head: () => ({
     meta: [
       { title: "Ma progression - STAF Student Portal" },
