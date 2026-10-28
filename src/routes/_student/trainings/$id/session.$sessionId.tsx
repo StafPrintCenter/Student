@@ -7,11 +7,14 @@ import { OtherSessionsList } from "@/components/pages/sessions/detail/OtherList"
 import { SessionTicket } from "@/components/pages/trainings/detail/session/Ticket";
 import { useTrainingSessionDetail } from "@/stores/useSessionsStore";
 import { useStudentTrainingDetail } from "@/stores/useTrainingsStore";
+import { SITE } from "@/data/site";
+import { useDynamicPageMetadata } from "@/hooks/useDynamicPageMetadata";
 
 export const Route = createFileRoute("/_student/trainings/$id/session/$sessionId")({
   head: () => ({
     meta: [
-      { title: "Session de formation - STAF Student Portal" },
+      { title: `${SITE.tool} - Détail d'une session de formation | ${SITE.name}` },
+      { name: "description", content: `Consultez les informations pratiques de votre session et retrouvez le détail de votre formation chez ${SITE.name}.` },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -23,6 +26,12 @@ function TrainingSessionDetail() {
   const { item: session, isLoading } = useTrainingSessionDetail(id, sessionId);
   // Déjà en cache quand on vient de la page de la formation : sert uniquement à la couleur
   const { item: training } = useStudentTrainingDetail(id);
+  useDynamicPageMetadata(
+    session ? `${SITE.tool} - ${session.title} | ${SITE.name}` : undefined,
+    session
+      ? `Retrouvez les informations pratiques de la session « ${session.title} »${training?.data.title ? ` de la formation ${training.data.title}` : ""}.`
+      : undefined,
+  );
 
   const back = (
     <Button asChild variant="ghost" size="sm" className="-ml-2">
