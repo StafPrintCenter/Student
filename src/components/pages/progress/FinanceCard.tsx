@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { formatFCFA } from "@/lib/format";
 import type { APIProgressStats } from "@/data/progress";
 
-export function FinanceCard({ finance }: { finance: APIProgressStats["finance"] }) {
+export function ProgressFinanceCard({ finance }: { finance: APIProgressStats["finance"] }) {
   const paidPercent =
     finance.totalDue > 0 ? Math.min(100, Math.round((finance.totalPaid / finance.totalDue) * 100)) : 0;
 

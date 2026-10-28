@@ -3,11 +3,11 @@ import { LineChart } from "lucide-react";
 import { PageHeader } from "@/components/site";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
-import { FinanceCard } from "@/components/pages/progress/finance-card";
-import { ProgressSkeleton } from "@/components/portal/progress/progress-skeleton";
-import { ProgressStats } from "@/components/portal/progress/progress-stats";
-import { SessionsOverviewCard } from "@/components/portal/progress/sessions-overview-card";
-import { TrainingProgressCard } from "@/components/portal/progress/training-progress-card";
+import { ProgressFinanceCard } from "@/components/pages/progress/FinanceCard";
+import { ProgressSkeleton } from "@/components/pages/progress/Skeleton";
+import { ProgressStats } from "@/components/pages/progress/Stats";
+import { SessionsOverviewCard } from "@/components/pages/progress/sessions-overview-card";
+import { TrainingProgressCard } from "@/components/pages/progress/training-progress-card";
 import { useStudentProgress } from "@/stores/useProgressStore";
 
 export const Route = createFileRoute("/_student/progress/")({
@@ -57,7 +57,7 @@ function ProgressPage() {
           <ProgressStats stats={stats} />
 
           <div className="grid gap-4 lg:grid-cols-2">
-            <FinanceCard finance={stats.finance} />
+            <ProgressFinanceCard finance={stats.finance} />
             <SessionsOverviewCard sessions={stats.sessions} />
           </div>
 

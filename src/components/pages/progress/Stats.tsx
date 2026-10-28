@@ -2,7 +2,7 @@ import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import { BadgeCheck, BookOpen, CalendarCheck, GraduationCap, Trophy, TrendingUp } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { StatCard } from "@/components/pages/progress/stat-card";
+import { StatCard } from "@/components/pages/progress/StatCard";
 import type { APIProgressStats } from "@/data/progress";
 
 const percent = (value: number | null) => (value == null ? "-" : `${value}%`);
