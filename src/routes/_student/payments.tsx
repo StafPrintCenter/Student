@@ -5,12 +5,13 @@ import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { PaymentTrainingCard, PaymentsOverview, PaymentsSkeleton } from "@/components/pages/payments/Base";
 import { usePaymentsSummary } from "@/stores/usePaymentsStore";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/_student/payments")({
   head: () => ({
     meta: [
-      { title: "Mes paiements - STAF Student Portal" },
-      { name: "description", content: "Vos règlements, le reste à payer et l'accès au contenu de chaque formation." },
+      { title: `${SITE.tool} - Mes paiements de formation | ${SITE.name}` },
+      { name: "description", content: "Consultez vos règlements, le solde restant et les conditions d'accès au contenu de vos formations." },
     ],
   }),
   component: PaymentsPage,
