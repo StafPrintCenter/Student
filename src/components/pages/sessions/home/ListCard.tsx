@@ -11,7 +11,6 @@ import type { APIStudentSession } from "@/data/sessions";
 
 interface SessionListCardProps {
   session: APIStudentSession;
-  /** Sans description (utilisé dans le panneau du calendrier) */
   compact?: boolean;
 }
 
