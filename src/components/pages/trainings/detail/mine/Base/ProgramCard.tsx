@@ -3,7 +3,7 @@ import { BookOpen } from "lucide-react";
 import { Accordion } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { LessonDialog } from "@/components/pages/trainings/detail/mine";
+import { LessonDialog } from "@/components/pages/trainings/detail/mine/Base";
 import { ModuleItem } from "@/components/portal/trainings/module-item";
 import type { APIStudentTrainingLesson, APIStudentTrainingModule } from "@/data/trainings";
 
