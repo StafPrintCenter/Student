@@ -9,13 +9,13 @@ import { SessionRespondButtons } from "@/components/portal/sessions/session-resp
 import { formatSessionDuration, formatSessionTimeRange } from "@/components/portal/sessions/session-format";
 import type { APIStudentSession } from "@/data/sessions";
 
-interface SessionCardProps {
+interface SessionListCardProps {
   session: APIStudentSession;
   /** Sans description (utilisé dans le panneau du calendrier) */
   compact?: boolean;
 }
 
-export function SessionCard({ session, compact }: SessionCardProps) {
+export function SessionListCard({ session, compact }: SessionListCardProps) {
   return (
     <Card>
       <CardContent className="flex gap-4 p-4">

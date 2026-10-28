@@ -3,7 +3,7 @@ import { CalendarX, ChevronLeft, ChevronRight } from "lucide-react";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SessionCard } from "@/components/pages/temp/session-card";
+import { SessionListCard } from "@/components/pages/temp/ListCard";
 import { SessionsFiltersBar, type SessionsFilters } from "@/components/portal/sessions/sessions-filters";
 import { cn } from "@/lib/utils";
 import { useDebouncedValue } from "@/lib/use-debounced-value";
@@ -73,7 +73,7 @@ export function SessionsList() {
           )}
           <div className={cn("space-y-3 transition-opacity", isFetching && "opacity-60")}>
             {items.map((session) => (
-              <SessionCard key={session.id} session={session} />
+              <SessionListCard key={session.id} session={session} />
             ))}
           </div>
         </>
