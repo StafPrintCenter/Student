@@ -10,15 +10,16 @@ import { CertificateCard, VerifyCertificateDialog } from "@/components/pages/cer
 import { resolveStorageUrl } from "@/lib/file-url";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
 import { useDownloadCertificate, useEnrollmentCertificates } from "@/stores/useCertificatesStore";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/_student/certificates")({
   validateSearch: z.object({ certificateId: z.string().optional() }),
   head: () => ({
     meta: [
-      { title: "Mes certificats - STAF Student Portal" },
+      { title: `${SITE.tool} - Mes certificats de formation | ${SITE.name}` },
       {
         name: "description",
-        content: "Vos certificats de formation, consultation, téléchargement et vérification.",
+        content: `Consultez, téléchargez et faites vérifier les certificats obtenus à l'issue de vos formations chez ${SITE.name}.`,
       },
     ],
   }),
