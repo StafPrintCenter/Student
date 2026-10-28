@@ -5,6 +5,9 @@ import { StudentShell } from "@/components/site/StudentShell";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 
 export const Route = createFileRoute("/_student")({
+  head: () => ({
+    meta: [{ name: "robots", content: "noindex, nofollow" }],
+  }),
   component: StudentLayout,
 });
 
