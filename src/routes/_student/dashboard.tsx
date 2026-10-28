@@ -7,8 +7,6 @@ export const Route = createFileRoute("/_student/dashboard")({
     meta: [
       { title: `${SITE.tool} - Tableau de bord et suivi de formation | ${SITE.name}` },
       { name: "description", content: `Retrouvez vos formations, suivez votre progression, réalisez vos exercices et consultez vos résultats depuis votre espace apprenant ${SITE.name}.` },
-      { property: "og:title", content: `${SITE.tool} - Tableau de bord et suivi de formation | ${SITE.name}` },
-      { property: "og:description", content: `Accédez à vos cours, suivez vos progrès et gérez votre parcours de formation depuis votre espace apprenant ${SITE.name}.` },
     ],
   }),
   component: Dashboard,
