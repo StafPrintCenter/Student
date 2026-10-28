@@ -5,10 +5,10 @@ import { SITE } from "@/data/site";
 export const Route = createFileRoute("/_student/dashboard")({
   head: () => ({
     meta: [
-      { title: `${SITE.tool} - Tableau de bord | ${SITE.name}` },
-      { name: "description", content: "Consultez vos formations, les progrès des apprenants, les travaux à corriger et vos prochaines sessions." },
-      { property: "og:title", content: `${SITE.tool} - Tableau de bord | ${SITE.name}` },
-      { property: "og:description", content: "Retrouvez vos priorités pédagogiques et l'activité de vos formations." },
+      { title: `${SITE.tool} - Tableau de bord et suivi de formation | ${SITE.name}` },
+      { name: "description", content: `Retrouvez vos formations, suivez votre progression, réalisez vos exercices et consultez vos résultats depuis votre espace apprenant ${SITE.name}.` },
+      { property: "og:title", content: `${SITE.tool} - Tableau de bord et suivi de formation | ${SITE.name}` },
+      { property: "og:description", content: `Accédez à vos cours, suivez vos progrès et gérez votre parcours de formation depuis votre espace apprenant ${SITE.name}.` },
     ],
   }),
   component: Dashboard,
