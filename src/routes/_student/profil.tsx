@@ -11,14 +11,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { studentApi } from "@/lib/api";
 import type { Student } from "@/lib/api/types";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/_student/profil")({
   head: () => ({
     meta: [
-      { title: "Profil - STAF Student Portal" },
-      { name: "description", content: "Gérez vos informations personnelles et votre sécurité." },
-      { property: "og:title", content: "Profil - STAF" },
-      { property: "og:description", content: "Informations personnelles et sécurité." },
+      { title: `${SITE.tool} - Mon profil | ${SITE.name}` },
+      { name: "description", content: "Consultez et mettez à jour les informations de votre compte formateur et vos préférences." },
     ],
   }),
   component: () => {
