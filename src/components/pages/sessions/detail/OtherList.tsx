@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { TrainingSessionRow } from "@/components/pages/trainings/detail/session/shared/Row";
+import { TrainingSessionRow } from "@/components/pages/sessions/shared/Row";
 import { sortSessionsForDisplay } from "@/data/sessions";
 import { useTrainingSessions } from "@/stores/useSessionsStore";
 
