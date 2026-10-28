@@ -8,8 +8,8 @@ import { NotFoundComponent, ErrorComponent } from "@/components/errors";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => {
-    const PAGE_TITLE = `${SITE.tool} - Apprenez, pratiquez et développez vos compétences | ${SITE.name}`;
-    const PAGE_DESC = `Développez vos compétences avec ${SITE.name}. Accédez à vos cours, pratiquez à votre rythme et progressez vers vos objectifs professionnels.`;
+    const PAGE_TITLE = `${SITE.tool} - Formez-vous et progressez à votre rythme | ${SITE.name}`;
+    const PAGE_DESC = `Suivez vos formations, retrouvez vos sessions et développez vos compétences à votre rythme avec ${SITE.name}.`;
 
     return {
       meta: [
