@@ -13,7 +13,7 @@ import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
 const PER_PAGE = 12;
 const DEFAULT_FILTERS: SessionsFilters = { query: "", modality: "", trainingId: "", upcomingOnly: true };
 
-export function SessionsList() {
+export function SessionsListItem() {
   const [filters, setFilters] = useState<SessionsFilters>(DEFAULT_FILTERS);
   const debouncedQuery = useDebouncedValue(filters.query.trim());
   const { items: enrollments } = useStudentTrainingsList();

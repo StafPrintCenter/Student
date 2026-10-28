@@ -3,7 +3,7 @@ import { useState } from "react";
 import { PageHeader } from "@/components/site";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SessionsCalendar } from "@/components/pages/sessions/home/Calendar";
-import { SessionsList } from "@/components/pages/temp/sessions-list";
+import { SessionsListItem } from "@/components/pages/temp/ListItem";
 
 export const Route = createFileRoute("/_student/sessions/")({
   head: () => ({
@@ -31,7 +31,7 @@ function SessionsPage() {
           <TabsTrigger value="calendar">Vue calendrier</TabsTrigger>
         </TabsList>
         <TabsContent value="list" className="mt-6">
-          <SessionsList />
+          <SessionsListItem />
         </TabsContent>
         <TabsContent value="calendar" className="mt-6">
           <SessionsCalendar onShowList={() => setTab("list")} />
