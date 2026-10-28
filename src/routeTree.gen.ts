@@ -18,7 +18,6 @@ import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as StudentCommunityRouteImport } from './routes/_student/community'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
 import { Route as StudentProfilRouteImport } from './routes/_student/profil'
-import { Route as StudentSupportRouteImport } from './routes/_student/support'
 import { Route as StudentCertificatesIndexRouteImport } from './routes/_student/certificates/index'
 import { Route as StudentNotificationsIndexRouteImport } from './routes/_student/notifications/index'
 import { Route as StudentNotificationsIdRouteImport } from './routes/_student/notifications/$id'
@@ -73,11 +72,6 @@ const StudentDashboardRoute = StudentDashboardRouteImport.update({
 const StudentProfilRoute = StudentProfilRouteImport.update({
   id: '/profil',
   path: '/profil',
-  getParentRoute: () => StudentRoute,
-} as any)
-const StudentSupportRoute = StudentSupportRouteImport.update({
-  id: '/support',
-  path: '/support',
   getParentRoute: () => StudentRoute,
 } as any)
 const StudentCertificatesIndexRoute =
@@ -154,7 +148,6 @@ export interface FileRoutesByFullPath {
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/profil': typeof StudentProfilRoute
-  '/support': typeof StudentSupportRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
@@ -176,7 +169,6 @@ export interface FileRoutesByTo {
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/profil': typeof StudentProfilRoute
-  '/support': typeof StudentSupportRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
@@ -201,7 +193,6 @@ export interface FileRoutesById {
   '/_student/community': typeof StudentCommunityRoute
   '/_student/dashboard': typeof StudentDashboardRoute
   '/_student/profil': typeof StudentProfilRoute
-  '/_student/support': typeof StudentSupportRoute
   '/_student/notifications/$id': typeof StudentNotificationsIdRoute
   '/_student/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/_student/sessions/$id': typeof StudentSessionsIdRoute
@@ -225,7 +216,6 @@ export interface FileRouteTypes {
     | '/community'
     | '/dashboard'
     | '/profil'
-    | '/support'
     | '/notifications/$id'
     | '/notifications/preferences'
     | '/sessions/$id'
@@ -247,7 +237,6 @@ export interface FileRouteTypes {
     | '/community'
     | '/dashboard'
     | '/profil'
-    | '/support'
     | '/notifications/$id'
     | '/notifications/preferences'
     | '/sessions/$id'
@@ -271,7 +260,6 @@ export interface FileRouteTypes {
     | '/_student/community'
     | '/_student/dashboard'
     | '/_student/profil'
-    | '/_student/support'
     | '/_student/notifications/$id'
     | '/_student/notifications/preferences'
     | '/_student/sessions/$id'
@@ -356,13 +344,6 @@ declare module '@tanstack/react-router' {
       path: '/profil'
       fullPath: '/profil'
       preLoaderRoute: typeof StudentProfilRouteImport
-      parentRoute: typeof StudentRoute
-    }
-    '/_student/support': {
-      id: '/_student/support'
-      path: '/support'
-      fullPath: '/support'
-      preLoaderRoute: typeof StudentSupportRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/certificates/': {
@@ -468,7 +449,6 @@ interface StudentRouteChildren {
   StudentCommunityRoute: typeof StudentCommunityRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
   StudentProfilRoute: typeof StudentProfilRoute
-  StudentSupportRoute: typeof StudentSupportRoute
   StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
   StudentNotificationsPreferencesRoute: typeof StudentNotificationsPreferencesRoute
   StudentSessionsIdRoute: typeof StudentSessionsIdRoute
@@ -487,7 +467,6 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentCommunityRoute: StudentCommunityRoute,
   StudentDashboardRoute: StudentDashboardRoute,
   StudentProfilRoute: StudentProfilRoute,
-  StudentSupportRoute: StudentSupportRoute,
   StudentNotificationsIdRoute: StudentNotificationsIdRoute,
   StudentNotificationsPreferencesRoute: StudentNotificationsPreferencesRoute,
   StudentSessionsIdRoute: StudentSessionsIdRoute,

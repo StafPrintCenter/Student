@@ -50,7 +50,6 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Échanges",
     items: [
       { to: "/community", label: "Communauté", icon: Users2 },
-      { to: "/support", label: "Support", icon: LifeBuoy },
     ],
   },
 ];
