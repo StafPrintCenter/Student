@@ -6,13 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SessionDateBlock } from "@/components/portal/sessions/session-date-block";
 import { SessionModalityBadge, SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
-import { SessionDetailsCard } from "@/components/portal/sessions/session-details-card";
+import { SessionDetailsCard } from "@/components/pages/sessions/detail/Card";
 import { SessionResponseCard } from "@/components/pages/sessions/detail/ResponseCard";
-import {
-  formatSessionDay,
-  formatSessionDuration,
-  formatSessionTimeRange,
-} from "@/components/portal/sessions/session-format";
+import { formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/portal/sessions/session-format";
 import { useSessionDetail } from "@/stores/useSessionsStore";
 
 export const Route = createFileRoute("/_student/sessions/$id")({
