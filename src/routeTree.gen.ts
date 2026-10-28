@@ -29,7 +29,7 @@ import { Route as StudentSessionsIdRouteImport } from './routes/_student/session
 import { Route as StudentTrainingsIndexRouteImport } from './routes/_student/trainings/index'
 import { Route as StudentTrainingsIdCatalogueRouteImport } from './routes/_student/trainings/$id/catalogue'
 import { Route as StudentTrainingsIdMineRouteImport } from './routes/_student/trainings/$id/mine'
-import { Route as StudentTrainingsIdSessionsSessionIdRouteImport } from './routes/_student/trainings/$id/sessions/$sessionId'
+import { Route as StudentTrainingsIdSessionsSessionIdRouteImport } from './routes/_student/trainings/$id/sessions.$sessionId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
