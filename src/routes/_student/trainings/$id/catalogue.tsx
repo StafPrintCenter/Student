@@ -16,6 +16,8 @@ import {
   useStudentTrainingsList,
   useSubscribeToTraining,
 } from "@/stores/useTrainingsStore";
+import { SITE } from "@/data/site";
+import { useDynamicPageMetadata } from "@/hooks/useDynamicPageMetadata";
 
 function formatFCFA(amount: number) {
   return `${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(amount)} FCFA`;
@@ -24,8 +26,8 @@ function formatFCFA(amount: number) {
 export const Route = createFileRoute("/_student/trainings/$id/catalogue")({
   head: () => ({
     meta: [
-      { title: "Formation - Catalogue - STAF Student Portal" },
-      { name: "description", content: "Fiche détaillée de la formation et inscription." },
+      { title: `${SITE.tool} - Détail d'une formation | ${SITE.name}` },
+      { name: "description", content: `Découvrez le programme, les objectifs et les modalités d'inscription aux formations de ${SITE.name}.` },
     ],
   }),
   component: PublicTrainingDetail,
@@ -36,6 +38,10 @@ function PublicTrainingDetail() {
   const qc = useQueryClient();
 
   const { item: training, isLoading } = usePublicTrainingDetail(id);
+  useDynamicPageMetadata(
+    training ? `${SITE.tool} - ${training.title} | ${SITE.name}` : undefined,
+    training?.short,
+  );
   const { items: myEnrollments } = useStudentTrainingsList();
   const isEnrolled = useMemo(() => myEnrollments.some((e) => e.trainingId === id), [myEnrollments, id]);
 
