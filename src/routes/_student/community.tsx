@@ -16,14 +16,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Skeleton } from "@/components/ui/skeleton";
 import { communityApi, trainingApi } from "@/lib/api";
 import { cn } from "@/lib/utils";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/_student/community")({
   head: () => ({
     meta: [
-      { title: "Communauté - STAF Student Portal" },
-      { name: "description", content: "Échangez avec les apprenants et les formateurs STAF." },
-      { property: "og:title", content: "Communauté - STAF" },
-      { property: "og:description", content: "Discussions, entraide et annonces des formateurs." },
+      { title: `${SITE.tool} - Communauté des apprenants | ${SITE.name}` },
+      { name: "description", content: `Échangez avec les apprenants et les formateurs ${SITE.name}, posez vos questions et partagez vos idées.` },
+      { property: "og:title", content: `${SITE.tool} - Communauté des apprenants | ${SITE.name}` },
+      { property: "og:description", content: `Discussions, entraide et annonces des formateurs de ${SITE.name}.` },
     ],
   }),
   component: CommunityPage,
