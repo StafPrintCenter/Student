@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
-import { SessionDateBlock } from "@/components/pages/sessions/home/session-date-block";
+import { SessionDateBlock } from "@/components/pages/sessions/shared/session-date-block";
 import { SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
 import { formatSessionTimeRange } from "@/components/portal/sessions/session-format";
 import { sessionModalityLabels, type APIStudentSession } from "@/data/sessions";

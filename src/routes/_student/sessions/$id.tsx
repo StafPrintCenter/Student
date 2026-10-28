@@ -4,7 +4,7 @@ import { EmptyState } from "@/components/shared";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SessionDateBlock } from "@/components/pages/sessions/home/session-date-block";
+import { SessionDateBlock } from "@/components/pages/sessions/shared/session-date-block";
 import { SessionModalityBadge, SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
 import { SessionDetailsCard } from "@/components/pages/sessions/detail/Card";
 import { SessionResponseCard } from "@/components/pages/sessions/detail/ResponseCard";
