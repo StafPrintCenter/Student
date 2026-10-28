@@ -4,7 +4,7 @@ import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { OtherSessionsList } from "@/components/pages/sessions/detail/OtherList";
-import { SessionTicket } from "@/components/pages/trainings/detail/session/session-ticket";
+import { SessionTicket } from "@/components/pages/trainings/detail/session/Ticket";
 import { useTrainingSessionDetail } from "@/stores/useSessionsStore";
 import { useStudentTrainingDetail } from "@/stores/useTrainingsStore";
 
