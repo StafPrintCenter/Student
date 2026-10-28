@@ -13,7 +13,7 @@ export function TrainingSessionRow({ trainingId, session }: { trainingId: string
   return (
     <li>
       <Link
-        to="/trainings/$id/sessions/$sessionId"
+        to="/trainings/$id/session/$sessionId"
         params={{ id: trainingId, sessionId: session.id }}
         className="-mx-2 flex items-center gap-3 rounded-md px-2 py-2.5 transition-colors hover:bg-muted/40"
       >
