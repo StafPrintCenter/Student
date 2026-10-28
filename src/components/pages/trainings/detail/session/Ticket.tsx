@@ -2,7 +2,7 @@ import { Clock, Hourglass, UserRound } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { SessionModalityBadge, SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
-import { SessionPlace } from "@/components/portal/sessions/session-place";
+import { SessionPlace } from "@/components/pages/sessions/shared/Place";
 import { SessionRespondButtons } from "@/components/pages/sessions/shared/RespondButtons";
 import { formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/pages/sessions/shared/Format";
 import type { APIStudentSession } from "@/data/sessions";
