@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SessionDateBlock } from "@/components/portal/sessions/session-date-block";
-import { SessionModalityBadge, SessionResponseBadge } from "@/components/portal/sessions/session-badges";
+import { SessionModalityBadge, SessionResponseBadge } from "@/components/pages/sessions/home/Badges";
 import { SessionDetailsCard } from "@/components/portal/sessions/session-details-card";
 import { SessionResponseCard } from "@/components/portal/sessions/session-response-card";
 import {

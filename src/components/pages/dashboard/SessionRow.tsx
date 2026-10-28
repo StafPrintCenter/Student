@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { SessionResponseBadge } from "@/components/portal/sessions/session-badges";
+import { SessionResponseBadge } from "@/components/pages/sessions/home/Badges";
 import { SessionDateBlock } from "@/components/portal/sessions/session-date-block";
 import { formatSessionTimeRange, sessionPlaceLabel } from "@/components/portal/sessions/session-format";
 import type { APIStudentSession } from "@/data/sessions";

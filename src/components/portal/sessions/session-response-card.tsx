@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { SessionResponseBadge } from "@/components/portal/sessions/session-badges";
+import { SessionResponseBadge } from "@/components/pages/sessions/home/Badges";
 import { SessionRespondButtons } from "@/components/portal/sessions/session-respond-buttons";
 import type { APIStudentSession } from "@/data/sessions";
 
