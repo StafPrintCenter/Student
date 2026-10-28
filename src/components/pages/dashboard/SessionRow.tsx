@@ -10,7 +10,7 @@ export function DashboardSessionRow({ session }: { session: APIStudentSession })
   return (
     <li>
       <Link
-        to="/sessions/$id"
+        to="/session/$id"
         params={{ id: session.id }}
         className="-mx-2 flex items-start gap-3 rounded-md px-2 py-2.5 transition-colors hover:bg-muted/40"
       >

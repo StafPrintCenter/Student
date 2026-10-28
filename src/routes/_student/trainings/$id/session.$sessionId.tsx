@@ -8,7 +8,7 @@ import { SessionTicket } from "@/components/pages/trainings/detail/session/sessi
 import { useTrainingSessionDetail } from "@/stores/useSessionsStore";
 import { useStudentTrainingDetail } from "@/stores/useTrainingsStore";
 
-export const Route = createFileRoute("/_student/trainings/$id/sessions/$sessionId")({
+export const Route = createFileRoute("/_student/trainings/$id/session/$sessionId")({
   head: () => ({
     meta: [
       { title: "Session de formation - STAF Student Portal" },

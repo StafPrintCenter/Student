@@ -25,7 +25,7 @@ export function SessionCard({ session, compact }: SessionCardProps) {
           <div className="flex flex-wrap items-start justify-between gap-2">
             <div className="min-w-0">
               <Link
-                to="/sessions/$id"
+                to="/session/$id"
                 params={{ id: session.id }}
                 className="block truncate font-medium hover:underline"
               >

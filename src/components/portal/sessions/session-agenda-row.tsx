@@ -18,7 +18,7 @@ export function SessionAgendaRow({ session, lead }: SessionAgendaRowProps) {
   return (
     <li>
       <Link
-        to="/sessions/$id"
+        to="/session/$id"
         params={{ id: session.id }}
         className="-mx-2 flex items-center gap-3 rounded-md px-2 py-3 transition-colors hover:bg-muted/40"
       >
