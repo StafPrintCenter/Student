@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHeader } from "@/components/site";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { SessionsCalendar } from "@/components/pages/temp/sessions-calendar";
+import { SessionsCalendar } from "@/components/pages/sessions/home/Calendar";
 import { SessionsList } from "@/components/portal/sessions/sessions-list";
 
 export const Route = createFileRoute("/_student/sessions/")({
