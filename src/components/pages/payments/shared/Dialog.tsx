@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PaymentList } from "@/components/pages/payments/shared/List";
-import { PaymentsSummary } from "@/components/portal/trainings/payments-summary";
+import { PaymentList, PaymentsSummary } from "@/components/pages/payments/shared";
 import { useTrainingPayments } from "@/stores/usePaymentsStore";
 
 export function PaymentsDialog({ trainingId, onClose }: { trainingId: string; onClose: () => void }) {
