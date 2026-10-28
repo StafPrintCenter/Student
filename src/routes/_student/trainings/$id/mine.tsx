@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/shared";
 import { CertificateAvailableBanner, EnrollmentStatusCard, FinancialStatusCard, InstructorsCard, LockedAccessAlert, TrainingMineHero, TrainingMineObjectivesCard, TrainingMineProgramCard } from "@/components/pages/trainings/detail/mine/Base";
-import { TrainingSessionsCard } from "@/components/portal/sessions/training-sessions-card";
+import { TrainingSessionsCard } from "@/components/pages/trainings/detail/mine/Base/SessionsCard";
 import { useStudentTrainingDetail } from "@/stores/useTrainingsStore";
 
 export const Route = createFileRoute("/_student/trainings/$id/mine")({
