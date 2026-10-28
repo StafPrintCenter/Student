@@ -7,10 +7,15 @@ import { CATEGORY_META } from "@/data/notifications";
 import { useNotificationDetail, useDeleteNotification } from "@/stores/useNotificationsStore";
 import { ConfirmDelete } from "@/components/site/StudentBits";
 import { NotificationDetailCard, NotificationTechnicalDetails } from "@/components/pages/notifications/detail";
+import { SITE } from "@/data/site";
+import { useDynamicPageMetadata } from "@/hooks/useDynamicPageMetadata";
 
 export const Route = createFileRoute("/_student/notifications/$id")({
   head: () => ({
-    meta: [{ title: "Notification - Apprenant" }, { name: "robots", content: "noindex" }],
+    meta: [
+      { title: `${SITE.tool} - Détail d'une notification | ${SITE.name}` },
+      { name: "description", content: "Consultez le détail et le contenu de cette notification de votre espace apprenant." },
+    ],
   }),
   component: NotificationDetail,
 });
