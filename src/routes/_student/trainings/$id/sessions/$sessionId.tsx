@@ -3,7 +3,7 @@ import { ArrowLeft, CalendarX } from "lucide-react";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { OtherSessionsList } from "@/components/portal/sessions/other-sessions-list";
+import { OtherSessionsList } from "@/components/pages/sessions/detail/OtherList";
 import { SessionTicket } from "@/components/portal/sessions/session-ticket";
 import { useTrainingSessionDetail } from "@/stores/useSessionsStore";
 import { useStudentTrainingDetail } from "@/stores/useTrainingsStore";
