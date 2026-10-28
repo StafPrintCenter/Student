@@ -3,7 +3,7 @@ import { fr } from "date-fns/locale";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
-import { SessionRespondButtons } from "@/components/temp/session-respond-buttons";
+import { SessionRespondButtons } from "@/components/pages/sessions/shared/RespondButtons";
 import type { APIStudentSession } from "@/data/sessions";
 
 export function SessionResponseCard({ session }: { session: APIStudentSession }) {
