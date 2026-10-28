@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { learningApi } from "@/lib/api";
 import type { Lesson } from "@/lib/api/types";
 import { cn } from "@/lib/utils";
-import { QuestionBlock } from "./exercise-runner";
+import { QuestionBlock } from "../temp/exercise-runner";
 
 interface Props {
   training_uuid: string;
