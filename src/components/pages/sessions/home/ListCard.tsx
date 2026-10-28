@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Clock, UserRound } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { SessionDateBlock } from "@/components/portal/sessions/session-date-block";
+import { SessionDateBlock } from "@/components/pages/sessions/home/session-date-block";
 import { SessionModalityBadge, SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
 import { SessionPlace } from "@/components/portal/sessions/session-place";
 import { SessionRespondButtons } from "@/components/pages/sessions/shared/RespondButtons";
