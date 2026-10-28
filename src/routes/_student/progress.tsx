@@ -3,11 +3,7 @@ import { LineChart } from "lucide-react";
 import { PageHeader } from "@/components/site";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
-import { ProgressFinanceCard } from "@/components/pages/progress/FinanceCard";
-import { ProgressSkeleton } from "@/components/pages/progress/Skeleton";
-import { ProgressStats } from "@/components/pages/progress/Stats";
-import { SessionsOverviewCard } from "@/components/pages/progress/SessionsOverview";
-import { TrainingProgressCard } from "@/components/pages/progress/ProgressCard";
+import { ProgressFinanceCard, ProgressSkeleton, ProgressStats, SessionsOverviewCard, TrainingProgressCard } from "@/components/pages/progress";
 import { useStudentProgress } from "@/stores/useProgressStore";
 
 export const Route = createFileRoute("/_student/progress")({
