@@ -7,11 +7,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { SessionDateBlock, SessionModalityBadge, SessionResponseBadge, formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/pages/sessions/shared";
 import { SessionDetailsCard, SessionResponseCard } from "@/components/pages/sessions/detail";
 import { useSessionDetail } from "@/stores/useSessionsStore";
+import { SITE } from "@/data/site";
+import { useDynamicPageMetadata } from "@/hooks/useDynamicPageMetadata";
 
 export const Route = createFileRoute("/_student/sessions/$id")({
   head: () => ({
     meta: [
-      { title: "Session - STAF Student Portal" },
+      { title: `${SITE.tool} - Détail d'une session | ${SITE.name}` },
+      { name: "description", content: `Consultez les horaires, le lieu et les informations pratiques de votre session de formation chez ${SITE.name}.` },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -31,6 +34,10 @@ function BackButton() {
 function SessionDetail() {
   const { id } = Route.useParams();
   const { item: session, isLoading } = useSessionDetail(id);
+  useDynamicPageMetadata(
+    session ? `${SITE.tool} - ${session.title} | ${SITE.name}` : undefined,
+    session ? `Retrouvez les horaires et les informations de la session de formation « ${session.title} » chez ${SITE.name}.` : undefined,
+  );
 
   if (isLoading) return <Skeleton className="h-96 w-full" />;
 
