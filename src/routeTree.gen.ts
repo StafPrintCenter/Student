@@ -15,10 +15,10 @@ import { Route as StudentRouteImport } from './routes/_student'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthInviteRouteImport } from './routes/_auth/invite'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as StudentCertificatesRouteImport } from './routes/_student/certificates'
 import { Route as StudentCommunityRouteImport } from './routes/_student/community'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
 import { Route as StudentProfilRouteImport } from './routes/_student/profil'
-import { Route as StudentCertificatesIndexRouteImport } from './routes/_student/certificates/index'
 import { Route as StudentNotificationsIndexRouteImport } from './routes/_student/notifications/index'
 import { Route as StudentNotificationsIdRouteImport } from './routes/_student/notifications/$id'
 import { Route as StudentNotificationsPreferencesRouteImport } from './routes/_student/notifications/preferences'
@@ -59,6 +59,11 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AuthRoute,
 } as any)
+const StudentCertificatesRoute = StudentCertificatesRouteImport.update({
+  id: '/certificates',
+  path: '/certificates',
+  getParentRoute: () => StudentRoute,
+} as any)
 const StudentCommunityRoute = StudentCommunityRouteImport.update({
   id: '/community',
   path: '/community',
@@ -74,12 +79,6 @@ const StudentProfilRoute = StudentProfilRouteImport.update({
   path: '/profil',
   getParentRoute: () => StudentRoute,
 } as any)
-const StudentCertificatesIndexRoute =
-  StudentCertificatesIndexRouteImport.update({
-    id: '/certificates/',
-    path: '/certificates/',
-    getParentRoute: () => StudentRoute,
-  } as any)
 const StudentNotificationsIndexRoute =
   StudentNotificationsIndexRouteImport.update({
     id: '/notifications/',
@@ -145,13 +144,13 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
+  '/certificates': typeof StudentCertificatesRoute
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/profil': typeof StudentProfilRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
-  '/certificates/': typeof StudentCertificatesIndexRoute
   '/notifications/': typeof StudentNotificationsIndexRoute
   '/payments/': typeof StudentPaymentsIndexRoute
   '/progress/': typeof StudentProgressIndexRoute
@@ -166,13 +165,13 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
+  '/certificates': typeof StudentCertificatesRoute
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/profil': typeof StudentProfilRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
-  '/certificates': typeof StudentCertificatesIndexRoute
   '/notifications': typeof StudentNotificationsIndexRoute
   '/payments': typeof StudentPaymentsIndexRoute
   '/progress': typeof StudentProgressIndexRoute
@@ -190,13 +189,13 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_auth/invite': typeof AuthInviteRoute
   '/_auth/login': typeof AuthLoginRoute
+  '/_student/certificates': typeof StudentCertificatesRoute
   '/_student/community': typeof StudentCommunityRoute
   '/_student/dashboard': typeof StudentDashboardRoute
   '/_student/profil': typeof StudentProfilRoute
   '/_student/notifications/$id': typeof StudentNotificationsIdRoute
   '/_student/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/_student/sessions/$id': typeof StudentSessionsIdRoute
-  '/_student/certificates/': typeof StudentCertificatesIndexRoute
   '/_student/notifications/': typeof StudentNotificationsIndexRoute
   '/_student/payments/': typeof StudentPaymentsIndexRoute
   '/_student/progress/': typeof StudentProgressIndexRoute
@@ -213,13 +212,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/invite'
     | '/login'
+    | '/certificates'
     | '/community'
     | '/dashboard'
     | '/profil'
     | '/notifications/$id'
     | '/notifications/preferences'
     | '/sessions/$id'
-    | '/certificates/'
     | '/notifications/'
     | '/payments/'
     | '/progress/'
@@ -234,13 +233,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/invite'
     | '/login'
+    | '/certificates'
     | '/community'
     | '/dashboard'
     | '/profil'
     | '/notifications/$id'
     | '/notifications/preferences'
     | '/sessions/$id'
-    | '/certificates'
     | '/notifications'
     | '/payments'
     | '/progress'
@@ -257,13 +256,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/_auth/invite'
     | '/_auth/login'
+    | '/_student/certificates'
     | '/_student/community'
     | '/_student/dashboard'
     | '/_student/profil'
     | '/_student/notifications/$id'
     | '/_student/notifications/preferences'
     | '/_student/sessions/$id'
-    | '/_student/certificates/'
     | '/_student/notifications/'
     | '/_student/payments/'
     | '/_student/progress/'
@@ -325,6 +324,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_student/certificates': {
+      id: '/_student/certificates'
+      path: '/certificates'
+      fullPath: '/certificates'
+      preLoaderRoute: typeof StudentCertificatesRouteImport
+      parentRoute: typeof StudentRoute
+    }
     '/_student/community': {
       id: '/_student/community'
       path: '/community'
@@ -344,13 +350,6 @@ declare module '@tanstack/react-router' {
       path: '/profil'
       fullPath: '/profil'
       preLoaderRoute: typeof StudentProfilRouteImport
-      parentRoute: typeof StudentRoute
-    }
-    '/_student/certificates/': {
-      id: '/_student/certificates/'
-      path: '/certificates'
-      fullPath: '/certificates/'
-      preLoaderRoute: typeof StudentCertificatesIndexRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/notifications/': {
@@ -446,13 +445,13 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface StudentRouteChildren {
+  StudentCertificatesRoute: typeof StudentCertificatesRoute
   StudentCommunityRoute: typeof StudentCommunityRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
   StudentProfilRoute: typeof StudentProfilRoute
   StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
   StudentNotificationsPreferencesRoute: typeof StudentNotificationsPreferencesRoute
   StudentSessionsIdRoute: typeof StudentSessionsIdRoute
-  StudentCertificatesIndexRoute: typeof StudentCertificatesIndexRoute
   StudentNotificationsIndexRoute: typeof StudentNotificationsIndexRoute
   StudentPaymentsIndexRoute: typeof StudentPaymentsIndexRoute
   StudentProgressIndexRoute: typeof StudentProgressIndexRoute
@@ -464,13 +463,13 @@ interface StudentRouteChildren {
 }
 
 const StudentRouteChildren: StudentRouteChildren = {
+  StudentCertificatesRoute: StudentCertificatesRoute,
   StudentCommunityRoute: StudentCommunityRoute,
   StudentDashboardRoute: StudentDashboardRoute,
   StudentProfilRoute: StudentProfilRoute,
   StudentNotificationsIdRoute: StudentNotificationsIdRoute,
   StudentNotificationsPreferencesRoute: StudentNotificationsPreferencesRoute,
   StudentSessionsIdRoute: StudentSessionsIdRoute,
-  StudentCertificatesIndexRoute: StudentCertificatesIndexRoute,
   StudentNotificationsIndexRoute: StudentNotificationsIndexRoute,
   StudentPaymentsIndexRoute: StudentPaymentsIndexRoute,
   StudentProgressIndexRoute: StudentProgressIndexRoute,

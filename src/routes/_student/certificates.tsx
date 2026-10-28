@@ -11,7 +11,7 @@ import { resolveStorageUrl } from "@/lib/file-url";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
 import { useDownloadCertificate, useEnrollmentCertificates } from "@/stores/useCertificatesStore";
 
-export const Route = createFileRoute("/_student/certificates/")({
+export const Route = createFileRoute("/_student/certificates")({
   validateSearch: z.object({ certificateId: z.string().optional() }),
   head: () => ({
     meta: [
