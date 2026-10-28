@@ -4,7 +4,7 @@ import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SessionListCard } from "@/components/pages/sessions/home/ListCard";
-import { SessionsFiltersBar, type SessionsFilters } from "@/components/portal/sessions/sessions-filters";
+import { SessionsFiltersBar, type SessionsFilters } from "@/components/pages/sessions/home/Filters";
 import { cn } from "@/lib/utils";
 import { useDebouncedValue } from "@/lib/use-debounced-value";
 import { useSessionsList } from "@/stores/useSessionsStore";
