@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { PageHeader, FilePreviewModal } from "@/components/site";
 import { EmptyState } from "@/components/shared";
 import { Skeleton } from "@/components/ui/skeleton";
-import { CertificateCard } from "@/components/portal/certificates/certificate-card";
+import { CertificateCard } from "@/components/pages/certificates/certificate-card";
 import { VerifyCertificateDialog } from "@/components/portal/certificates/verify-certificate-dialog";
 import { resolveStorageUrl } from "@/lib/file-url";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
