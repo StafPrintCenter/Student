@@ -1,3 +1,3 @@
-export { PaymentTrainingCard } from "./Card";
-export { PaymentsOverview } from "./Overview";
-export { PaymentsSkeleton } from "./Skeleton";
+export { PaymentTrainingCard } from "./Base/Card";
+export { PaymentsOverview } from "./Base/Overview";
+export { PaymentsSkeleton } from "./Base/Skeleton";
