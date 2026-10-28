@@ -3,7 +3,7 @@ import { LineChart } from "lucide-react";
 import { PageHeader } from "@/components/site";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
-import { FinanceCard } from "@/components/portal/progress/finance-card";
+import { FinanceCard } from "@/components/pages/progress/finance-card";
 import { ProgressSkeleton } from "@/components/portal/progress/progress-skeleton";
 import { ProgressStats } from "@/components/portal/progress/progress-stats";
 import { SessionsOverviewCard } from "@/components/portal/progress/sessions-overview-card";

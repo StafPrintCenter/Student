@@ -3,7 +3,7 @@ import { BadgeCheck, BookOpen, CalendarCheck, LineChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
-import { StatCard } from "@/components/portal/progress/stat-card";
+import { StatCard } from "@/components/pages/progress/stat-card";
 import { useStudentProgress } from "@/stores/useProgressStore";
 
 const plural = (n: number, word: string) => `${n} ${word}${n > 1 ? "s" : ""}`;

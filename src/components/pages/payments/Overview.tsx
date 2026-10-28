@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Banknote, CalendarCheck, Hourglass, Wallet } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { StatCard } from "@/components/portal/progress/stat-card";
+import { StatCard } from "@/components/pages/progress/stat-card";
 import { StatusBadge } from "@/components/shared";
 import { formatFCFA } from "@/lib/format";
 import { trainingPaymentStatusMap, type TrainingPaymentStatus } from "@/data/trainings";
