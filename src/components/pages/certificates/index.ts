@@ -1,2 +1,2 @@
-export { CertificateCard } from "./certificate-card";
+export { CertificateCard } from "./Card";
 
