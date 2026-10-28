@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CreditCard, Percent, Receipt, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { PaymentsDialog } from "@/components/portal/trainings/payments-dialog";
+import { PaymentsDialog } from "@/components/pages/payments/shared/payments-dialog";
 import { StatusBadge } from "@/components/shared";
 import { cn } from "@/lib/utils";
 import { formatFCFA } from "@/lib/format";

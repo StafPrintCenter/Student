@@ -1,19 +1,16 @@
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Receipt } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { formatFCFA } from "@/lib/format";
 import { PAYMENTS_DISPLAY_LIMIT, paymentMethodLabels, type APITrainingPayment } from "@/data/payments";
 
 interface PaymentListProps {
   payments: APITrainingPayment[];
-  /** Nombre total de paiements de l'étudiant sur cette formation */
   totalCount: number;
 }
 
 export function PaymentList({ payments, totalCount }: PaymentListProps) {
-  // Les paiements arrivent du plus récent au plus ancien : on garde les derniers
   const shown = payments.slice(0, PAYMENTS_DISPLAY_LIMIT);
 
   return (
