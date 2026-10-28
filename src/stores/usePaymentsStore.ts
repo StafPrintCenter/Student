@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
+import { parseApiError } from "@/lib/api-error";
 import type { APIPaymentsSummaryResponse, APITrainingPaymentsSummary } from "@/data/payments";
 
 const resourceKey = "training-payments";
@@ -8,7 +9,7 @@ const resourceKey = "training-payments";
 
 async function fetchPaymentsSummary(): Promise<APIPaymentsSummaryResponse> {
   const response = await studentFetch(`/api/student/trainings/payments/summary`);
-  if (!response.ok) throw new Error("Erreur lors de la récupération de vos paiements");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération de vos paiements.");
   return response.json();
 }
 
@@ -34,7 +35,7 @@ export function usePaymentsSummary() {
 async function fetchTrainingPayments(trainingId: string): Promise<APITrainingPaymentsSummary | null> {
   const response = await studentFetch(`/api/student/trainings/payments/${trainingId}/detail`);
   if (response.status === 404 || response.status === 403) return null;
-  if (!response.ok) throw new Error("Erreur lors de la récupération des paiements");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération des paiements.");
   const json: { data: APITrainingPaymentsSummary } = await response.json();
   return json.data;
 }

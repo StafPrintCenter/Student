@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
+import { parseApiError } from "@/lib/api-error";
 import type {
   APILessonDetail,
   APILessonProgressResult,
@@ -28,10 +29,7 @@ function buildFormData(payload: Record<string, unknown>): FormData {
 async function fetchLessonDetail(lessonId: string): Promise<APILessonDetail | null> {
   const response = await studentFetch(`/api/student/trainings/lessons/${lessonId}`);
   if (response.status === 404) return null;
-  if (!response.ok) {
-    const body = await response.json().catch(() => null);
-    throw new Error(body?.message || "Erreur lors de la récupération de la leçon");
-  }
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération de la leçon.");
   const json: { data: APILessonDetail } = await response.json();
   return json.data;
 }
@@ -58,7 +56,7 @@ async function markLessonProgress(lessonId: string, payload: LessonProgressPaylo
     method: "POST",
     body: buildFormData(payload as Record<string, unknown>),
   });
-  if (!response.ok) throw new Error("Erreur lors de la mise à jour de la progression");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la mise à jour de la progression.");
   const json: { data: APILessonProgressResult } = await response.json();
   return json.data;
 }
@@ -85,11 +83,7 @@ async function createSubmission(lessonId: string, payload: SubmissionPayload): P
     method: "POST",
     body: fd,
   });
-  if (!response.ok) {
-    const errorBody = await response.json().catch(() => null);
-    const firstError = errorBody?.errors ? Object.values(errorBody.errors).flat()[0] : null;
-    throw new Error(errorBody?.message || (firstError as string) || "Erreur lors du dépôt du travail");
-  }
+  if (!response.ok) throw await parseApiError(response, "Erreur lors du dépôt du travail.");
   const json: { data: APISubmissionResult } = await response.json();
   return json.data;
 }

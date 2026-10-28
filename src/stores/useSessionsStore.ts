@@ -1,5 +1,6 @@
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
+import { parseApiError } from "@/lib/api-error";
 import type {
   APISessionResponseResult,
   APISessionsListResponse,
@@ -11,12 +12,6 @@ import type {
 const resourceKey = "sessions";
 
 type TrainingSessionsParams = Omit<SessionsListParams, "trainingId">;
-
-async function toError(response: Response, fallback: string): Promise<Error> {
-  const body = await response.json().catch(() => null);
-  const firstError = body?.errors ? (Object.values(body.errors).flat()[0] as string | undefined) : undefined;
-  return new Error(body?.message || firstError || fallback);
-}
 
 function buildQuery(params: SessionsListParams): string {
   const qp = new URLSearchParams();
@@ -31,7 +26,7 @@ function buildQuery(params: SessionsListParams): string {
 
 async function fetchSessions(params: SessionsListParams = {}): Promise<APISessionsListResponse> {
   const response = await studentFetch(`/api/student/trainings/sessions/list?${buildQuery(params)}`);
-  if (!response.ok) throw await toError(response, "Erreur lors de la récupération des sessions");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération des sessions.");
   return response.json();
 }
 
@@ -60,7 +55,7 @@ export function useSessionsList(params: SessionsListParams = {}) {
 async function fetchSessionById(id: string): Promise<APIStudentSession | null> {
   const response = await studentFetch(`/api/student/trainings/sessions/${id}`);
   if (response.status === 404 || response.status === 403) return null;
-  if (!response.ok) throw await toError(response, "Erreur lors de la récupération de la session");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération de la session.");
   const json: { data: APIStudentSession } = await response.json();
   return json.data;
 }
@@ -83,7 +78,7 @@ async function fetchTrainingSessions(
   params: TrainingSessionsParams = {}
 ): Promise<APISessionsListResponse> {
   const response = await studentFetch(`/api/student/trainings/${trainingId}/sessions/list?${buildQuery(params)}`);
-  if (!response.ok) throw await toError(response, "Erreur lors de la récupération des sessions de la formation");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération des sessions de la formation.");
   return response.json();
 }
 
@@ -110,7 +105,7 @@ export function useTrainingSessions(trainingId: string | undefined, params: Trai
 async function fetchTrainingSession(trainingId: string, sessionId: string): Promise<APIStudentSession | null> {
   const response = await studentFetch(`/api/student/trainings/${trainingId}/sessions/${sessionId}`);
   if (response.status === 404 || response.status === 403) return null;
-  if (!response.ok) throw await toError(response, "Erreur lors de la récupération de la session");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération de la session.");
   const json: { data: APIStudentSession } = await response.json();
   return json.data;
 }
@@ -136,7 +131,7 @@ async function respondToSession(sessionId: string, answer: SessionResponse): Pro
     method: "PUT",
     body: fd,
   });
-  if (!response.ok) throw await toError(response, "Erreur lors de l'enregistrement de votre réponse");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de l'enregistrement de votre réponse.");
   const json: { data: APISessionResponseResult } = await response.json();
   return json.data;
 }

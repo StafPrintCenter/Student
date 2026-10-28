@@ -1,5 +1,6 @@
 import { useMutation, useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
+import { parseApiError } from "@/lib/api-error";
 import type {
   APICertificateDownloadResult,
   APICertificateVerifyResult,
@@ -13,7 +14,7 @@ const resourceKey = "certificates";
 async function fetchEnrollmentCertificate(enrollmentId: string): Promise<APIEnrollmentCertificateResponse | null> {
   const response = await studentFetch(`/api/student/trainings/enrollments/${enrollmentId}/certificate`);
   if (response.status === 404) return null;
-  if (!response.ok) throw new Error("Erreur lors de la récupération du certificat");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération du certificat.");
   return response.json();
 }
 
@@ -58,7 +59,7 @@ async function downloadCertificate(certificateId: string): Promise<APICertificat
   const response = await studentFetch(`/api/student/trainings/certificates/${certificateId}/download`, {
     method: "POST",
   });
-  if (!response.ok) throw new Error("Erreur lors du téléchargement du certificat");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors du téléchargement du certificat.");
   return response.json();
 }
 
@@ -78,7 +79,7 @@ export function useDownloadCertificate() {
 async function verifyCertificate(number: string): Promise<APICertificateVerifyResult> {
   const response = await studentFetch(`/api/public/trainings/certificates/verify/${encodeURIComponent(number)}`);
   if (response.status === 404) return { valid: false };
-  if (!response.ok) throw new Error("Erreur lors de la vérification du certificat");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la vérification du certificat.");
   return response.json();
 }
 

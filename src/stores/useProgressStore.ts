@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
+import { parseApiError } from "@/lib/api-error";
 import type { APIProgressResponse } from "@/data/progress";
 
 async function fetchProgress(): Promise<APIProgressResponse> {
   const response = await studentFetch(`/api/student/trainings/progress/list`);
-  if (!response.ok) throw new Error("Erreur lors de la récupération de votre progression");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération de votre progression.");
   return response.json();
 }
 

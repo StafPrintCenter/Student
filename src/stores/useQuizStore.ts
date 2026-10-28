@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
+import { parseApiError } from "@/lib/api-error";
 import type {
   APIQuizAttemptsResponse,
   APIQuizStartResult,
@@ -19,8 +20,8 @@ export class QuizApiError extends Error {
 }
 
 async function toQuizError(response: Response, fallback: string): Promise<QuizApiError> {
-  const body = await response.json().catch(() => null);
-  return new QuizApiError(body?.message || fallback, response.status);
+  const error = await parseApiError(response, fallback);
+  return new QuizApiError(error.message, response.status);
 }
 
 /* ---- Historique des tentatives ---- */

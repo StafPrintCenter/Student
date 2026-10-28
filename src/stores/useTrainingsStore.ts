@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
+import { parseApiError } from "@/lib/api-error";
 import type { APIStudentTrainingEnrollment, APIStudentTrainingDetailResponse, APIPublicTrainingCatalogItem, APIPublicTrainingDetail } from "@/data/trainings";
 
 const resourceKey = "trainings";
@@ -20,7 +21,7 @@ export interface TrainingsCatalogParams {
 
 async function fetchTrainings(): Promise<APIStudentTrainingEnrollment[]> {
   const response = await studentFetch(`/api/student/trainings/catalogs/list`);
-  if (!response.ok) throw new Error("Erreur lors de la récupération de vos formations");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération de vos formations.");
   const json: { data: APIStudentTrainingEnrollment[] } = await response.json();
   return json.data;
 }
@@ -45,7 +46,7 @@ async function fetchCatalog(params: TrainingsCatalogParams = {}): Promise<Catalo
   if (params.search) qp.append("search", params.search);
 
   const response = await studentFetch(`/api/public/trainings/catalogs/list?${qp.toString()}`);
-  if (!response.ok) throw new Error("Erreur lors de la récupération du catalogue");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération du catalogue.");
   return response.json();
 }
 
@@ -71,7 +72,7 @@ export function useTrainingsCatalog(params: TrainingsCatalogParams = {}) {
 async function fetchPublicDetail(id: string): Promise<APIPublicTrainingDetail | null> {
   const response = await studentFetch(`/api/public/trainings/catalogs/${id}`);
   if (response.status === 404) return null;
-  if (!response.ok) throw new Error("Erreur lors de la récupération de la formation");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération de la formation.");
   const json: { data: APIPublicTrainingDetail } = await response.json();
   return json.data;
 }
@@ -93,7 +94,7 @@ async function fetchTrainingById(id: string): Promise<APIStudentTrainingDetailRe
   const response = await studentFetch(`/api/student/trainings/catalogs/${id}`);
 
   if (response.status === 404 || response.status === 403) return null;
-  if (!response.ok) throw new Error("Erreur lors de la récupération de la formation");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération de la formation.");
   return response.json();
 }
 
@@ -112,7 +113,7 @@ export function useStudentTrainingDetail(id: string | undefined) {
 
 async function subscribeTraining(id: string): Promise<void> {
   const response = await studentFetch(`/api/student/trainings/catalogs/${id}/subscribe`, { method: "POST" });
-  if (!response.ok) throw new Error("Erreur lors de la souscription à la formation");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la souscription à la formation.");
 }
 
 export const subscribeToTraining = subscribeTraining;
