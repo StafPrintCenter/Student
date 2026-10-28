@@ -1,6 +1,5 @@
 import { Check, Loader2, X } from "lucide-react";
 import { toast } from "sonner";
-
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { SessionResponse } from "@/data/sessions";

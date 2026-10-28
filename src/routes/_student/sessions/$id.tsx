@@ -4,11 +4,8 @@ import { EmptyState } from "@/components/shared";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SessionDateBlock } from "@/components/pages/sessions/shared/DateBlock";
-import { SessionModalityBadge, SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
-import { SessionDetailsCard } from "@/components/pages/sessions/detail/Card";
-import { SessionResponseCard } from "@/components/pages/sessions/detail/ResponseCard";
-import { formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/pages/sessions/shared/Format";
+import { SessionDateBlock, SessionModalityBadge, SessionResponseBadge, formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/pages/sessions/shared";
+import { SessionDetailsCard, SessionResponseCard } from "@/components/pages/sessions/detail";
 import { useSessionDetail } from "@/stores/useSessionsStore";
 
 export const Route = createFileRoute("/_student/sessions/$id")({

@@ -1,9 +1,7 @@
 import { useMemo, useState } from "react";
 import { endOfMonth, endOfWeek, isSameDay, isSameMonth, startOfMonth, startOfWeek } from "date-fns";
-import { SelectedDayCard } from "@/components/pages/sessions/home/DayCard";
+import { SelectedDayCard, SessionsMonthPicker, UpcomingSessionsCard } from "@/components/pages/sessions/home";
 import { sessionDayKey } from "@/components/pages/sessions/shared/Format";
-import { SessionsMonthPicker } from "@/components/pages/sessions/home/MonthPicker";
-import { UpcomingSessionsCard } from "@/components/pages/sessions/home/UpcomingCard";
 import { useSessionsList } from "@/stores/useSessionsStore";
 
 export function SessionsCalendar({ onShowList }: { onShowList?: () => void }) {

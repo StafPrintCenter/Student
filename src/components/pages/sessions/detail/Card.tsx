@@ -3,8 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Calendar, Clock, GraduationCap, Hourglass, MapPin, UserRound, Video } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { SessionPlace } from "@/components/pages/sessions/shared/Place";
-import { formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/pages/sessions/shared/Format";
+import { SessionPlace, formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/pages/sessions/shared";
 import type { APIStudentSession } from "@/data/sessions";
 
 export function SessionDetailsCard({ session }: { session: APIStudentSession }) {

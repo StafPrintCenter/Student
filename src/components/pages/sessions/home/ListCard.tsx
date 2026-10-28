@@ -2,11 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Clock, UserRound } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { SessionDateBlock } from "@/components/pages/sessions/shared/DateBlock";
-import { SessionModalityBadge, SessionResponseBadge } from "@/components/pages/sessions/shared/Badges";
-import { SessionPlace } from "@/components/pages/sessions/shared/Place";
-import { SessionRespondButtons } from "@/components/pages/sessions/shared/RespondButtons";
-import { formatSessionDuration, formatSessionTimeRange } from "@/components/pages/sessions/shared/Format";
+import { SessionDateBlock, SessionModalityBadge, SessionResponseBadge, SessionPlace, SessionRespondButtons, formatSessionDuration, formatSessionTimeRange } from "@/components/pages/sessions/shared";
 import type { APIStudentSession } from "@/data/sessions";
 
 interface SessionListCardProps {
