@@ -10,7 +10,6 @@ const DOT =
   "relative after:absolute after:bottom-0.5 after:left-1/2 after:h-1.5 after:w-1.5 after:-translate-x-1/2 after:rounded-full";
 
 // Un jour ne porte qu'un seul point (priorité : à confirmer > à venir > passée).
-// "à confirmer" retombe sur --amber tant que --warning n'est pas défini dans le CSS.
 const MARKS = {
   toConfirm: {
     label: "À confirmer",
@@ -34,11 +33,8 @@ interface SessionsMonthPickerProps {
   onMonthChange: (month: Date) => void;
   selected: Date | undefined;
   onSelect: (day: Date | undefined) => void;
-  /** Jours avec au moins une session à venir sans réponse */
   toConfirmDays: Date[];
-  /** Autres jours avec une session à venir */
   upcomingDays: Date[];
-  /** Jours où il n'y a que des sessions passées */
   pastDays: Date[];
   onToday: () => void;
 }

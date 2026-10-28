@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { endOfMonth, endOfWeek, isSameDay, isSameMonth, startOfMonth, startOfWeek } from "date-fns";
 import { SelectedDayCard } from "@/components/pages/sessions/home/DayCard";
 import { sessionDayKey } from "@/components/portal/sessions/session-format";
-import { SessionsMonthPicker } from "@/components/portal/sessions/sessions-month-picker";
+import { SessionsMonthPicker } from "@/components/pages/sessions/home/MonthPicker";
 import { UpcomingSessionsCard } from "@/components/pages/sessions/home/UpcomingCard";
 import { useSessionsList } from "@/stores/useSessionsStore";
 
