@@ -1,21 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  ActionsRequiredCard,
-  CurrentTrainingsCard,
-  DashboardHeader,
-  DashboardSessionsCard,
-  DashboardStats,
-  PaymentsOverviewCard,
-  RecentNotificationsCard,
-} from "@/components/pages/dashboard";
+import { ActionsRequiredCard, CurrentTrainingsCard, DashboardHeader, DashboardSessionsCard, DashboardStats, PaymentsOverviewCard, RecentNotificationsCard } from "@/components/pages/dashboard";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/_student/dashboard")({
   head: () => ({
     meta: [
-      { title: "Tableau de bord - STAF Student Portal" },
-      { name: "description", content: "Vue d'ensemble de votre parcours d'apprentissage." },
-      { property: "og:title", content: "Tableau de bord - STAF" },
-      { property: "og:description", content: "Progression, règlements, sessions et certificats." },
+      { title: `${SITE.tool} - Tableau de bord | ${SITE.name}` },
+      { name: "description", content: "Consultez vos formations, les progrès des apprenants, les travaux à corriger et vos prochaines sessions." },
+      { property: "og:title", content: `${SITE.tool} - Tableau de bord | ${SITE.name}` },
+      { property: "og:description", content: "Retrouvez vos priorités pédagogiques et l'activité de vos formations." },
     ],
   }),
   component: Dashboard,
