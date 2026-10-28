@@ -5,12 +5,13 @@ import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { ProgressFinanceCard, ProgressSkeleton, ProgressStats, SessionsOverviewCard, TrainingProgressCard } from "@/components/pages/progress";
 import { useStudentProgress } from "@/stores/useProgressStore";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/_student/progress")({
   head: () => ({
     meta: [
-      { title: "Ma progression - STAF Student Portal" },
-      { name: "description", content: "Votre avancement, votre assiduité et vos résultats sur chaque formation." },
+      { title: `${SITE.tool} - Ma progression | ${SITE.name}` },
+      { name: "description", content: "Suivez votre avancement, votre assiduité et vos résultats pour chacune de vos formations." },
     ],
   }),
   component: ProgressPage,
