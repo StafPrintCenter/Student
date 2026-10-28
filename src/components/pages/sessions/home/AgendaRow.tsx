@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronRight, MapPin, Video } from "lucide-react";
-
 import { SessionDateBlock } from "@/components/portal/sessions/session-date-block";
 import { SessionResponseBadge } from "@/components/portal/sessions/session-badges";
 import { formatSessionTimeRange, sessionPlaceLabel } from "@/components/portal/sessions/session-format";
@@ -8,7 +7,6 @@ import type { APIStudentSession } from "@/data/sessions";
 
 interface SessionAgendaRowProps {
   session: APIStudentSession;
-  /** "icon" : jour sélectionné (l'heure suffit) ; "date" : agenda à venir (le jour compte) */
   lead: "icon" | "date";
 }
 

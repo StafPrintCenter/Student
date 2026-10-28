@@ -1,15 +1,13 @@
 import { useMemo, useState } from "react";
 import { endOfMonth, endOfWeek, isSameDay, isSameMonth, startOfMonth, startOfWeek } from "date-fns";
-
 import { SelectedDayCard } from "@/components/pages/sessions/home/DayCard";
 import { sessionDayKey } from "@/components/portal/sessions/session-format";
 import { SessionsMonthPicker } from "@/components/portal/sessions/sessions-month-picker";
-import { UpcomingSessionsCard } from "@/components/portal/sessions/upcoming-sessions-card";
+import { UpcomingSessionsCard } from "@/components/pages/sessions/home/UpcomingCard";
 import { useSessionsList } from "@/stores/useSessionsStore";
 
 export function SessionsCalendar({ onShowList }: { onShowList?: () => void }) {
   const [month, setMonth] = useState(() => startOfMonth(new Date()));
-  // Aujourd'hui est sélectionné d'entrée : ses sessions s'affichent à droite
   const [selected, setSelected] = useState<Date | undefined>(() => new Date());
 
   // On charge toute la grille affichée (lundi → dimanche), jours des mois voisins compris
@@ -47,7 +45,6 @@ export function SessionsCalendar({ onShowList }: { onShowList?: () => void }) {
   const goToMonth = (next: Date) => {
     const target = startOfMonth(next);
     setMonth(target);
-    // Les sessions du jour sélectionné viennent de la fenêtre chargée : on ne garde que « aujourd'hui » dans le mois courant
     setSelected(isSameMonth(target, new Date()) ? new Date() : undefined);
   };
 

@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SessionAgendaRow } from "@/components/portal/sessions/session-agenda-row";
+import { SessionAgendaRow } from "@/components/pages/sessions/home/AgendaRow";
 import { sortSessionsForDisplay } from "@/data/sessions";
 import { useSessionsList } from "@/stores/useSessionsStore";
 
