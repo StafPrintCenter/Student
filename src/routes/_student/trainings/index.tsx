@@ -5,8 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EnrollmentTab, CatalogTab } from "@/components/pages/trainings/home";
 import { SITE } from "@/data/site";
 
-const PAGE_TITLE = `Mes formations - ${SITE.tool} | ${SITE.name}`;
-const PAGE_DESC = `Toutes vos formations et le catalogue disponible sur ${SITE.tool} de ${SITE.name}.`;
+const PAGE_TITLE = `${SITE.tool} - Mes formations et le catalogue | ${SITE.name}`;
+const PAGE_DESC = `Suivez vos formations en cours et découvrez les nouvelles formations disponibles chez ${SITE.name}.`;
 
 export const Route = createFileRoute("/_student/trainings/")({
   head: () => ({
