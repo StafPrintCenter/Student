@@ -6,12 +6,14 @@ import { EmptyState } from "@/components/shared";
 import { CertificateAvailableBanner, EnrollmentStatusCard, FinancialStatusCard, InstructorsCard, LockedAccessAlert, TrainingMineHero, TrainingMineObjectivesCard, TrainingMineProgramCard } from "@/components/pages/trainings/detail/mine/Base";
 import { TrainingSessionsCard } from "@/components/pages/trainings/detail/mine/Base/SessionsCard";
 import { useStudentTrainingDetail } from "@/stores/useTrainingsStore";
+import { SITE } from "@/data/site";
+import { useDynamicPageMetadata } from "@/hooks/useDynamicPageMetadata";
 
 export const Route = createFileRoute("/_student/trainings/$id/mine")({
   head: () => ({
     meta: [
-      { title: "Formation - STAF Student Portal" },
-      { name: "description", content: "Détail de votre formation, programme, paiement et progression." },
+      { title: `${SITE.tool} - Détail de ma formation | ${SITE.name}` },
+      { name: "description", content: `Retrouvez le programme, vos sessions, votre progression et les informations de paiement de votre formation chez ${SITE.name}.` },
     ],
   }),
   component: TrainingDetail,
@@ -30,6 +32,13 @@ function BackButton() {
 function TrainingDetail() {
   const { id } = Route.useParams();
   const { item: response, isLoading } = useStudentTrainingDetail(id);
+  const trainingTitle = response?.data.title;
+  useDynamicPageMetadata(
+    trainingTitle ? `${SITE.tool} - ${trainingTitle} | ${SITE.name}` : undefined,
+    trainingTitle
+      ? `Suivez votre progression, vos sessions et le programme de la formation ${trainingTitle} chez ${SITE.name}.`
+      : undefined,
+  );
 
   if (isLoading) return <Skeleton className="h-96 w-full" />;
 
