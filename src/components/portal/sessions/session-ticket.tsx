@@ -4,16 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SessionModalityBadge, SessionResponseBadge } from "@/components/portal/sessions/session-badges";
 import { SessionPlace } from "@/components/portal/sessions/session-place";
 import { SessionRespondButtons } from "@/components/portal/sessions/session-respond-buttons";
-import {
-  formatSessionDay,
-  formatSessionDuration,
-  formatSessionTimeRange,
-} from "@/components/portal/sessions/session-format";
+import { formatSessionDay, formatSessionDuration, formatSessionTimeRange } from "@/components/portal/sessions/session-format";
 import type { APIStudentSession } from "@/data/sessions";
 
 interface SessionTicketProps {
   session: APIStudentSession;
-  /** Couleur de la formation (bande du haut) */
   accentColor?: string;
 }
 
