@@ -3,9 +3,7 @@ import { CreditCard } from "lucide-react";
 import { PageHeader } from "@/components/site";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
-import { PaymentTrainingCard } from "@/components/pages/payments/Card";
-import { PaymentsOverview } from "@/components/pages/payments/Overview";
-import { PaymentsSkeleton } from "@/components/pages/payments/Skeleton";
+import { PaymentTrainingCard, PaymentsOverview, PaymentsSkeleton } from "@/components/pages/payments";
 import { usePaymentsSummary } from "@/stores/usePaymentsStore";
 
 export const Route = createFileRoute("/_student/payments")({
