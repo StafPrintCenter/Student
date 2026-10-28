@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { CheckCircle2, Loader2, RefreshCw, ShieldAlert, XCircle } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";

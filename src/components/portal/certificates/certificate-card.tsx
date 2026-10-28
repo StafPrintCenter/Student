@@ -2,7 +2,6 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Award, Calendar, Eye, Hash, ShieldCheck } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

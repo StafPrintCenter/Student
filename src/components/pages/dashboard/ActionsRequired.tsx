@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { AlertTriangle, CalendarClock, Wallet } from "lucide-react";
-
 import { Card, CardContent } from "@/components/ui/card";
 import { isPayableEnrollment } from "./Utils";
 import { formatFCFA } from "@/lib/format";
