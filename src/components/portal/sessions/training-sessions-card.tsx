@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { TrainingSessionRow } from "@/components/pages/trainings/detail/session/shared/training-session-row";
+import { TrainingSessionRow } from "@/components/pages/trainings/detail/session/shared/Row";
 import { sortSessionsForDisplay } from "@/data/sessions";
 import { useTrainingSessions } from "@/stores/useSessionsStore";
 
