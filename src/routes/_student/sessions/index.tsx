@@ -4,12 +4,13 @@ import { PageHeader } from "@/components/site";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SessionsListItem, SessionsCalendar } from "@/components/pages/sessions/home";
 import { } from "@/components/pages/sessions/home/ListItem";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/_student/sessions/")({
   head: () => ({
     meta: [
-      { title: "Mes sessions - STAF Student Portal" },
-      { name: "description", content: "Vos sessions de formation, en liste ou dans le calendrier." },
+      { title: `${SITE.tool} - Mes sessions de formation | ${SITE.name}` },
+      { name: "description", content: "Consultez le calendrier de vos sessions de formation et gérez vos réponses aux invitations." },
     ],
   }),
   component: SessionsPage,
