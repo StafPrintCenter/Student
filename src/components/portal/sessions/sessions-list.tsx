@@ -3,7 +3,7 @@ import { CalendarX, ChevronLeft, ChevronRight } from "lucide-react";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SessionCard } from "@/components/portal/sessions/session-card";
+import { SessionCard } from "@/components/pages/temp/session-card";
 import { SessionsFiltersBar, type SessionsFilters } from "@/components/portal/sessions/sessions-filters";
 import { cn } from "@/lib/utils";
 import { useDebouncedValue } from "@/lib/use-debounced-value";
