@@ -8,8 +8,8 @@ import { NotFoundComponent, ErrorComponent } from "@/components/errors";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => {
-    const PAGE_TITLE = `${SITE.tool} - Apprendre et progresser | ${SITE.name}`;
-    const PAGE_DESC = `Apprenez à votre rythme avec ${SITE.name}. Retrouvez vos cours, suivez votre progression, pratiquez vos compétences et valorisez votre parcours.`;
+    const PAGE_TITLE = `${SITE.tool} - Apprenez, pratiquez et développez vos compétences | ${SITE.name}`;
+    const PAGE_DESC = `Développez vos compétences avec ${SITE.name}. Accédez à vos cours, pratiquez à votre rythme et progressez vers vos objectifs professionnels.`;
 
     return {
       meta: [
@@ -18,10 +18,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { title: PAGE_TITLE },
         { name: "description", content: PAGE_DESC },
         { name: "author", content: SITE.name },
+        { property: "og:type", content: "website" },
+        { property: "og:site_name", content: SITE.name },
         { property: "og:title", content: PAGE_TITLE },
         { property: "og:description", content: PAGE_DESC },
-        { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:site", content: "@StafPrintCenter" },
       ],
       links: [
         { rel: "stylesheet", href: appCss },
