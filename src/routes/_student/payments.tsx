@@ -8,7 +8,7 @@ import { PaymentsOverview } from "@/components/pages/payments/Overview";
 import { PaymentsSkeleton } from "@/components/pages/payments/Skeleton";
 import { usePaymentsSummary } from "@/stores/usePaymentsStore";
 
-export const Route = createFileRoute("/_student/payments/")({
+export const Route = createFileRoute("/_student/payments")({
   head: () => ({
     meta: [
       { title: "Mes paiements - STAF Student Portal" },

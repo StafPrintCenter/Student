@@ -18,11 +18,11 @@ import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as StudentCertificatesRouteImport } from './routes/_student/certificates'
 import { Route as StudentCommunityRouteImport } from './routes/_student/community'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
+import { Route as StudentPaymentsRouteImport } from './routes/_student/payments'
 import { Route as StudentProfilRouteImport } from './routes/_student/profil'
 import { Route as StudentNotificationsIndexRouteImport } from './routes/_student/notifications/index'
 import { Route as StudentNotificationsIdRouteImport } from './routes/_student/notifications/$id'
 import { Route as StudentNotificationsPreferencesRouteImport } from './routes/_student/notifications/preferences'
-import { Route as StudentPaymentsIndexRouteImport } from './routes/_student/payments/index'
 import { Route as StudentProgressIndexRouteImport } from './routes/_student/progress/index'
 import { Route as StudentSessionsIndexRouteImport } from './routes/_student/sessions/index'
 import { Route as StudentSessionsIdRouteImport } from './routes/_student/sessions/$id'
@@ -74,6 +74,11 @@ const StudentDashboardRoute = StudentDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentPaymentsRoute = StudentPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => StudentRoute,
+} as any)
 const StudentProfilRoute = StudentProfilRouteImport.update({
   id: '/profil',
   path: '/profil',
@@ -96,11 +101,6 @@ const StudentNotificationsPreferencesRoute =
     path: '/notifications/preferences',
     getParentRoute: () => StudentRoute,
   } as any)
-const StudentPaymentsIndexRoute = StudentPaymentsIndexRouteImport.update({
-  id: '/payments/',
-  path: '/payments/',
-  getParentRoute: () => StudentRoute,
-} as any)
 const StudentProgressIndexRoute = StudentProgressIndexRouteImport.update({
   id: '/progress/',
   path: '/progress/',
@@ -147,12 +147,12 @@ export interface FileRoutesByFullPath {
   '/certificates': typeof StudentCertificatesRoute
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
+  '/payments': typeof StudentPaymentsRoute
   '/profil': typeof StudentProfilRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
   '/notifications/': typeof StudentNotificationsIndexRoute
-  '/payments/': typeof StudentPaymentsIndexRoute
   '/progress/': typeof StudentProgressIndexRoute
   '/sessions/': typeof StudentSessionsIndexRoute
   '/trainings/': typeof StudentTrainingsIndexRoute
@@ -168,12 +168,12 @@ export interface FileRoutesByTo {
   '/certificates': typeof StudentCertificatesRoute
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
+  '/payments': typeof StudentPaymentsRoute
   '/profil': typeof StudentProfilRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
   '/notifications': typeof StudentNotificationsIndexRoute
-  '/payments': typeof StudentPaymentsIndexRoute
   '/progress': typeof StudentProgressIndexRoute
   '/sessions': typeof StudentSessionsIndexRoute
   '/trainings': typeof StudentTrainingsIndexRoute
@@ -192,12 +192,12 @@ export interface FileRoutesById {
   '/_student/certificates': typeof StudentCertificatesRoute
   '/_student/community': typeof StudentCommunityRoute
   '/_student/dashboard': typeof StudentDashboardRoute
+  '/_student/payments': typeof StudentPaymentsRoute
   '/_student/profil': typeof StudentProfilRoute
   '/_student/notifications/$id': typeof StudentNotificationsIdRoute
   '/_student/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/_student/sessions/$id': typeof StudentSessionsIdRoute
   '/_student/notifications/': typeof StudentNotificationsIndexRoute
-  '/_student/payments/': typeof StudentPaymentsIndexRoute
   '/_student/progress/': typeof StudentProgressIndexRoute
   '/_student/sessions/': typeof StudentSessionsIndexRoute
   '/_student/trainings/': typeof StudentTrainingsIndexRoute
@@ -215,12 +215,12 @@ export interface FileRouteTypes {
     | '/certificates'
     | '/community'
     | '/dashboard'
+    | '/payments'
     | '/profil'
     | '/notifications/$id'
     | '/notifications/preferences'
     | '/sessions/$id'
     | '/notifications/'
-    | '/payments/'
     | '/progress/'
     | '/sessions/'
     | '/trainings/'
@@ -236,12 +236,12 @@ export interface FileRouteTypes {
     | '/certificates'
     | '/community'
     | '/dashboard'
+    | '/payments'
     | '/profil'
     | '/notifications/$id'
     | '/notifications/preferences'
     | '/sessions/$id'
     | '/notifications'
-    | '/payments'
     | '/progress'
     | '/sessions'
     | '/trainings'
@@ -259,12 +259,12 @@ export interface FileRouteTypes {
     | '/_student/certificates'
     | '/_student/community'
     | '/_student/dashboard'
+    | '/_student/payments'
     | '/_student/profil'
     | '/_student/notifications/$id'
     | '/_student/notifications/preferences'
     | '/_student/sessions/$id'
     | '/_student/notifications/'
-    | '/_student/payments/'
     | '/_student/progress/'
     | '/_student/sessions/'
     | '/_student/trainings/'
@@ -345,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentDashboardRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/_student/payments': {
+      id: '/_student/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof StudentPaymentsRouteImport
+      parentRoute: typeof StudentRoute
+    }
     '/_student/profil': {
       id: '/_student/profil'
       path: '/profil'
@@ -371,13 +378,6 @@ declare module '@tanstack/react-router' {
       path: '/notifications/preferences'
       fullPath: '/notifications/preferences'
       preLoaderRoute: typeof StudentNotificationsPreferencesRouteImport
-      parentRoute: typeof StudentRoute
-    }
-    '/_student/payments/': {
-      id: '/_student/payments/'
-      path: '/payments'
-      fullPath: '/payments/'
-      preLoaderRoute: typeof StudentPaymentsIndexRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/progress/': {
@@ -448,12 +448,12 @@ interface StudentRouteChildren {
   StudentCertificatesRoute: typeof StudentCertificatesRoute
   StudentCommunityRoute: typeof StudentCommunityRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
+  StudentPaymentsRoute: typeof StudentPaymentsRoute
   StudentProfilRoute: typeof StudentProfilRoute
   StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
   StudentNotificationsPreferencesRoute: typeof StudentNotificationsPreferencesRoute
   StudentSessionsIdRoute: typeof StudentSessionsIdRoute
   StudentNotificationsIndexRoute: typeof StudentNotificationsIndexRoute
-  StudentPaymentsIndexRoute: typeof StudentPaymentsIndexRoute
   StudentProgressIndexRoute: typeof StudentProgressIndexRoute
   StudentSessionsIndexRoute: typeof StudentSessionsIndexRoute
   StudentTrainingsIndexRoute: typeof StudentTrainingsIndexRoute
@@ -466,12 +466,12 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentCertificatesRoute: StudentCertificatesRoute,
   StudentCommunityRoute: StudentCommunityRoute,
   StudentDashboardRoute: StudentDashboardRoute,
+  StudentPaymentsRoute: StudentPaymentsRoute,
   StudentProfilRoute: StudentProfilRoute,
   StudentNotificationsIdRoute: StudentNotificationsIdRoute,
   StudentNotificationsPreferencesRoute: StudentNotificationsPreferencesRoute,
   StudentSessionsIdRoute: StudentSessionsIdRoute,
   StudentNotificationsIndexRoute: StudentNotificationsIndexRoute,
-  StudentPaymentsIndexRoute: StudentPaymentsIndexRoute,
   StudentProgressIndexRoute: StudentProgressIndexRoute,
   StudentSessionsIndexRoute: StudentSessionsIndexRoute,
   StudentTrainingsIndexRoute: StudentTrainingsIndexRoute,
