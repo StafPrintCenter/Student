@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { studentFetch } from "@/lib/api-url";
+import { studentFetch } from "@/lib/api/resolve-url";
 import { parseApiError } from "@/lib/api/error";
 import type { APIProgressResponse } from "@/data/progress";
 
