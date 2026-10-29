@@ -3,8 +3,8 @@ import { BookOpen } from "lucide-react";
 import { Accordion } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { LessonDialog } from "@/components/pages/trainings/detail/mine/Base";
-import { ModuleItem } from "@/components/pages/trainings/detail/mine/Content/ModuleItem";
+import { LessonDialog } from "@/components/pages/trainings/detail/mine/base";
+import { ModuleItem } from "@/components/pages/trainings/detail/mine/content/ModuleItem";
 import type { APIStudentTrainingLesson, APIStudentTrainingModule } from "@/data/trainings";
 
 interface TrainingProgramCardProps {

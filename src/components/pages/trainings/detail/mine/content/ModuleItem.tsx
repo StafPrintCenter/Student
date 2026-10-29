@@ -2,7 +2,7 @@ import { CheckCircle2 } from "lucide-react";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { LessonRow } from "@/components/pages/trainings/detail/mine/contet/LessonRow";
+import { LessonRow } from "@/components/pages/trainings/detail/mine/content/LessonRow";
 import type { APIStudentTrainingLesson, APIStudentTrainingModule } from "@/data/trainings";
 
 interface ModuleItemProps {
