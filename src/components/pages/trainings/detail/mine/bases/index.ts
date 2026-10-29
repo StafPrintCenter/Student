@@ -7,3 +7,4 @@ export { LessonDialog } from "./LessonDialog";
 export { LockedAccessAlert } from "./LockedAccess";
 export { TrainingMineObjectivesCard } from "./ObjectivesCard";
 export { TrainingMineProgramCard } from "./ProgramCard";
+export { TrainingSessionsCard } from "./SessionsCard";
