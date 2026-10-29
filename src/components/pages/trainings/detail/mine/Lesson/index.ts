@@ -1,4 +1,4 @@
-export { ContentBlock, ExternalVideoLink, ChaptersList, EmptyLessonContent } from "./Blocks";
+export { ContentBlock, ExternalVideoLink, ChaptersList, EmptyLessonContent } from "../content/Blocks";
 export { LessonBody } from "./Body";
 export { isInsideFilePreview, isFilePreviewOpen, FilePreviewPortal } from "./FilePreview";
 export { LessonHeader } from "./Header";
