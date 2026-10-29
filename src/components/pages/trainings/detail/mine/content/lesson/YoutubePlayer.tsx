@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-
-import { ContentBlock } from "@/components/pages/trainings/detail/mine/Lesson";
-import { loadYoutubeIframeApi, type YoutubePlayerInstance } from "@/components/portal/lesson/video-utils";
+import { ContentBlock } from "./Blocks";
+import { loadYoutubeIframeApi, type YoutubePlayerInstance } from "./video-utils";
 import type { APILessonDetail, LessonProgressPayload } from "@/data/lesson";
 
 interface YoutubePlayerProps {
   videoId: string;
   lesson: APILessonDetail;
-  /** Absent quand la progression n'est pas suivie (leçon déjà terminée ou marquage indisponible) */
   onReportProgress?: (payload: LessonProgressPayload) => void;
 }
 

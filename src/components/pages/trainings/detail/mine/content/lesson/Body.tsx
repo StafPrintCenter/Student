@@ -1,10 +1,10 @@
 import { CheckCircle2, ClipboardList } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { QuizRunner } from "../quiz";
-import { ContentBlock, EmptyLessonContent, ExternalVideoLink } from "./Blocks";
-import { SubmissionBlock } from "./SubmissionBlock";
-import { VideoBlock } from "./VideoBlock";
+import {
+  ContentBlock, EmptyLessonContent, ExternalVideoLink,
+  SubmissionBlock, VideoBlock
+} from "./";
 import type { APILessonDetail, LessonProgressPayload } from "@/data/lesson";
 
 interface LessonBodyProps {
