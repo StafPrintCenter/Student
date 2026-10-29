@@ -224,6 +224,8 @@ export function StudentShell({ children }: { children?: React.ReactNode }) {
     navigate({ to: "/login" });
   };
 
+  const displayName = user?.name && user.name !== "undefined undefined" ? user.name : "Apprenant";
+
   return (
     <SidebarProvider>
       <StudentSidebarContent
