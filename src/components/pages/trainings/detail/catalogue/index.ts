@@ -3,5 +3,5 @@ export { CertificationCard } from "./Certification";
 export { EnrollmentCard } from "./Enrollment";
 export { ObjectivesCard } from "./Objectives";
 export { ProgramCard } from "./Program";
-export { TrainingCatalogueDetail } from "./TrainingCatalogueDetail";
+export { TrainingCatalogueDetail } from "./Detail";
 export { TrainingHero } from "./Hero";
