@@ -3,7 +3,7 @@ import { CreditCard } from "lucide-react";
 import { PageHeader } from "@/components/site";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
-import { PaymentTrainingCard, PaymentsOverview, PaymentsSkeleton } from "@/components/pages/payments/Base";
+import { PaymentTrainingCard, PaymentsOverview, PaymentsSkeleton } from "@/components/pages/payments/base";
 import { usePaymentsSummary } from "@/stores/usePaymentsStore";
 import { SITE } from "@/data/site";
 
