@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ContentBlock } from "./Blocks";
-import { loadYoutubeIframeApi, type YoutubePlayerInstance } from "./video-utils";
+import { ContentBlock, loadYoutubeIframeApi, type YoutubePlayerInstance } from "./";
 import type { APILessonDetail, LessonProgressPayload } from "@/data/lesson";
 
 interface YoutubePlayerProps {

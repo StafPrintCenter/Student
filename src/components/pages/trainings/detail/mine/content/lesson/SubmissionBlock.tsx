@@ -1,6 +1,5 @@
 import { ClipboardList } from "lucide-react";
-import { ContentBlock, ExternalVideoLink } from "./Blocks";
-import { SubmissionForm, SubmissionHistory } from "./";
+import { ContentBlock, ExternalVideoLink, SubmissionForm, SubmissionHistory } from "./";
 import type { APILessonDetail } from "@/data/lesson";
 
 /** Leçons exercise / assignment / project : consigne, dépôts déjà faits, puis formulaire si un dépôt est possible */

@@ -1,4 +1,4 @@
-/* ---- YouTube IFrame API : chargement global partagé ---- */
+/* ---- YouTube IFrame API ---- */
 
 export interface YoutubePlayerInstance {
   getCurrentTime(): number;

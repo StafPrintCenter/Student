@@ -11,3 +11,4 @@ export { SubmissionForm } from "./SubmissionForm";
 export { SubmissionHistory } from "./SubmissionHistory";
 export { VideoBlock } from "./VideoBlock";
 export { YoutubePlayer } from "./YoutubePlayer";
+export { loadYoutubeIframeApi, extractYoutubeVideoId, isDirectVideoFile, type YoutubePlayerInstance } from "./video-utils";
