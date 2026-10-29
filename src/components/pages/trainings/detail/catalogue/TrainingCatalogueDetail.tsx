@@ -1,9 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AudienceCard } from "./AudienceCard";
-import { CertificationCard } from "./CertificationCard";
-import { EnrollmentCard } from "./EnrollmentCard";
+import { AudienceCard, CertificationCard, EnrollmentCard } from "./";
 import { ObjectivesCard } from "./ObjectivesCard";
 import { ProgramCard } from "./ProgramCard";
 import { TrainingHero } from "./TrainingHero";
