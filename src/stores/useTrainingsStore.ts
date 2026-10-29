@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
-import { parseApiError } from "@/lib/api-error";
+import { parseApiError } from "@/lib/api/error";
 import type { APIStudentTrainingEnrollment, APIStudentTrainingDetailResponse, APIPublicTrainingCatalogItem, APIPublicTrainingDetail } from "@/data/trainings";
 
 const resourceKey = "trainings";
