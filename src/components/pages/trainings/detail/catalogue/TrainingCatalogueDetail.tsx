@@ -1,10 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AudienceCard, CertificationCard, EnrollmentCard } from "./";
-import { ObjectivesCard } from "./ObjectivesCard";
-import { ProgramCard } from "./ProgramCard";
-import { TrainingHero } from "./TrainingHero";
+import { AudienceCard, CertificationCard, EnrollmentCard, ObjectivesCard, ProgramCard, TrainingHero } from "./";
 import type { APIPublicTrainingDetail } from "@/data/trainings";
 
 interface TrainingCatalogueDetailProps {
