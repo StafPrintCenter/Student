@@ -1,7 +1,7 @@
 import { CheckCircle2, Circle, CircleDot, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/shared";
-import { KindIcons } from "@/components/pages/trainings/detail/mine/Lesson";
+import { KindIcons } from "./lesson/Icons";
 import { lessonProgressStatusMap, submissionStatusMap } from "@/data/lesson";
 import { lessonKindLabels, type APIStudentTrainingLesson } from "@/data/trainings";
 

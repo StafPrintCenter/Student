@@ -1,10 +1,8 @@
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { Send } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-import { QuizTimer, useCountdown } from "@/components/portal/quiz/quiz-timer";
-import { QuizQuestionCard } from "@/components/portal/quiz/quiz-question-card";
+import { QuizTimer, useCountdown, QuizQuestionCard } from "./";
 import { QuizApiError, useSubmitQuizAttempt } from "@/stores/useQuizStore";
 import type { APIQuizStartResult, APIQuizSubmitResult, QuizAnswers } from "@/data/quiz";
 

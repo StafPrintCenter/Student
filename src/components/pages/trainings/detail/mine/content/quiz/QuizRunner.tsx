@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { Play, Loader2 } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { QuizAttemptsHistory } from "@/components/portal/quiz/quiz-attempts-history";
-import { QuizSession } from "@/components/portal/quiz/quiz-session";
-import { QuizResult } from "@/components/portal/quiz/quiz-result";
+import { QuizAttemptsHistory, QuizSession, QuizResult } from "./";
 import { useStartQuiz } from "@/stores/useQuizStore";
 import { quizModeLabels, type APIQuiz, type APIQuizStartResult, type APIQuizSubmitResult } from "@/data/quiz";
 
@@ -26,7 +23,6 @@ export function QuizRunner({ quizId }: { quizId: string }) {
   const handleStart = () => {
     startMutation.mutate(quizId, {
       onSuccess: (start) => setPhase({ kind: "taking", start }),
-      // le message du backend (tentatives max atteintes, quiz indisponible...) est affiché tel quel
       onError: (err) => toast.error(err instanceof Error ? err.message : "Impossible de démarrer le quiz"),
     });
   };
