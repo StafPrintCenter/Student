@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { LessonHeader, LessonBody, LessonNavigation, LessonProgressInfo, LessonError, LessonLockedNotice, LessonSkeleton, isFilePreviewOpen, isInsideFilePreview, ChaptersList } from "@/components/pages/trainings/detail/mine/Lesson";
+import { LessonHeader, LessonBody, LessonNavigation, LessonProgressInfo, LessonError, LessonLockedNotice, LessonSkeleton, isFilePreviewOpen, isInsideFilePreview, ChaptersList } from "@/components/pages/trainings/detail/mine/content/lesson";
 import type { APILessonLink, LessonProgressPayload } from "@/data/lesson";
 import { useLessonDetail, useMarkLessonProgress } from "@/stores/useLessonStore";
 
 interface LessonDialogProps {
-  /** Seuls l'id et le titre sont nécessaires : le contenu est chargé depuis le détail de la leçon */
   lesson: { id: string; title: string };
   onClose: () => void;
 }
