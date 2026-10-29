@@ -1,17 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import { BookOpen, UserCircle, LogOut } from "lucide-react";
-import { useInstructorAuth } from "@/hooks/useInstructorAuth";
+import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
-import { SocialLinks } from "@/components/site";
+import { SocialLinks } from "@/components/site/SocialLinks";
 import { docsUrl, navItemClass } from "./config";
 
-export function InstructorSidebarFooter({
+export function StudentSidebarFooter({
   user,
   pathname,
   onNavClick,
   onDisconnectClick,
 }: {
-  user: ReturnType<typeof useInstructorAuth>["user"];
+  user: ReturnType<typeof useStudentAuth>["user"];
   pathname: string;
   onNavClick: () => void;
   onDisconnectClick: () => void;

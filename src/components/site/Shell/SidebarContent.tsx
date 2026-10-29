@@ -1,15 +1,15 @@
-import { useInstructorAuth } from "@/hooks/useInstructorAuth";
+import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { Sidebar, useSidebar } from "@/components/ui/sidebar";
-import { InstructorHeaderBrand } from "./HeaderBrand";
-import { InstructorSidebarNav } from "./SidebarNav";
-import { InstructorSidebarFooter } from "./SidebarFooter";
+import { StudentHeaderBrand } from "./HeaderBrand";
+import { StudentSidebarNav } from "./SidebarNav";
+import { StudentSidebarFooter } from "./SidebarFooter";
 
-export function InstructorSidebarContent({
+export function StudentSidebarContent({
   user,
   pathname,
   onDisconnectClick,
 }: {
-  user: ReturnType<typeof useInstructorAuth>["user"];
+  user: ReturnType<typeof useStudentAuth>["user"];
   pathname: string;
   onDisconnectClick: () => void;
 }) {
@@ -18,9 +18,9 @@ export function InstructorSidebarContent({
 
   return (
     <Sidebar collapsible="icon" className="border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
-      <InstructorHeaderBrand onNavClick={handleNavClick} />
-      <InstructorSidebarNav pathname={pathname} onNavClick={handleNavClick} />
-      <InstructorSidebarFooter
+      <StudentHeaderBrand onNavClick={handleNavClick} />
+      <StudentSidebarNav pathname={pathname} onNavClick={handleNavClick} />
+      <StudentSidebarFooter
         user={user}
         pathname={pathname}
         onNavClick={handleNavClick}

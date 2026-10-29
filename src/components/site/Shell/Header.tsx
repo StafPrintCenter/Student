@@ -1,21 +1,21 @@
 import { BookOpen } from "lucide-react";
-import { useInstructorAuth } from "@/hooks/useInstructorAuth";
+import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { NotificationBell } from "@/components/pages/notifications/shared";
 import { docsUrl } from "./config";
-import { InstructorUserDropdown } from "./UserDropdown";
+import { StudentUserDropdown } from "./UserDropdown";
 
-export function InstructorHeader({
+export function StudentHeader({
   user,
   onDisconnectClick,
 }: {
-  user: ReturnType<typeof useInstructorAuth>["user"];
+  user: ReturnType<typeof useStudentAuth>["user"];
   onDisconnectClick: () => void;
 }) {
   return (
     <header className="flex items-center gap-3 bg-card/80 backdrop-blur border-b px-5 h-14 shrink-0">
       <SidebarTrigger />
-      <div className="font-display font-semibold text-sm">Formateur</div>
+      <div className="font-display font-semibold text-sm">Étudiant</div>
 
       <div className="ml-auto flex items-center gap-3">
         <NotificationBell />
@@ -29,7 +29,7 @@ export function InstructorHeader({
           <span className="hidden sm:inline">Documentation</span>
         </a>
 
-        <InstructorUserDropdown user={user} onDisconnectClick={onDisconnectClick} />
+        <StudentUserDropdown user={user} onDisconnectClick={onDisconnectClick} />
       </div>
     </header>
   );

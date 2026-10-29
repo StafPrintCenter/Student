@@ -1,13 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { UserCircle, Bell, ChevronDown, LogOut } from "lucide-react";
-import { useInstructorAuth } from "@/hooks/useInstructorAuth";
+import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
-export function InstructorUserDropdown({ user, onDisconnectClick, }: {
-  user: ReturnType<typeof useInstructorAuth>["user"];
+export function StudentUserDropdown({ user, onDisconnectClick, }: {
+  user: ReturnType<typeof useStudentAuth>["user"];
   onDisconnectClick: () => void;
 }) {
-  const displayName = user?.name && user.name !== "undefined undefined" ? user.name : "Formateur";
+  const displayName = user?.name && user.name !== "undefined undefined" ? user.name : "Apprenant";
 
   return (
     <DropdownMenu>

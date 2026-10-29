@@ -1,7 +1,7 @@
-import { LayoutDashboard, BookOpen, Users, ClipboardCheck, CalendarDays, Users2, Bell, Send } from "lucide-react";
+import { LayoutDashboard, GraduationCap, Users2, LineChart, BadgeCheck, Calendar, Bell, CreditCard } from "lucide-react";
 import { SITE_LINK } from "@/data/site";
 
-export const docsUrl = `${SITE_LINK.docsUrl}/docs/instructor/index`;
+export const docsUrl = `${SITE_LINK.docsUrl}/docs/student/index`;
 
 export type NavItem = {
   to: string;
@@ -22,13 +22,18 @@ export const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    label: "Pilotage",
+    label: "Session",
     items: [
-      { to: "/trainings", label: "Mes formations", icon: BookOpen },
-      { to: "/students", label: "Apprenants", icon: Users },
-      { to: "/submissions", label: "Soumission", icon: Send },
-      { to: "/corrections", label: "Corrections", icon: ClipboardCheck },
-      { to: "/sessions", label: "Sessions", icon: CalendarDays },
+      { to: "/trainings", label: "Formations", icon: GraduationCap },
+      { to: "/progress", label: "Progression", icon: LineChart },
+      { to: "/sessions", label: "Sessions", icon: Calendar },
+    ],
+  },
+  {
+    label: "Librairie",
+    items: [
+      { to: "/certificates", label: "Certificats", icon: BadgeCheck },
+      { to: "/payments", label: "Paiements", icon: CreditCard },
     ],
   },
   {
