@@ -4,7 +4,7 @@ import { fr } from "date-fns/locale";
 import { MessageSquare, Paperclip } from "lucide-react";
 import { FilePreviewPortal } from "./FilePreview";
 import { StatusBadge } from "@/components/shared";
-import { resolveStorageUrl } from "@/lib/file-url";
+import { resolveStorageUrl } from "@/lib/api/file";
 import { submissionStatusMap, type APILessonSubmission } from "@/data/lesson";
 
 const formatDateTime = (iso: string) => format(new Date(iso), "d MMM yyyy 'à' HH:mm", { locale: fr });

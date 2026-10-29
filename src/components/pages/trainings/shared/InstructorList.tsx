@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { resolveStorageUrl } from "@/lib/file-url";
+import { resolveStorageUrl } from "@/lib/api/file";
 import { sortInstructors, trainingInstructorRoleLabels, type APITrainingInstructor } from "@/data/trainings";
 
 function initialsOf(name: string) {

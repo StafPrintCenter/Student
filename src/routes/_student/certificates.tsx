@@ -7,7 +7,7 @@ import { PageHeader, FilePreviewModal } from "@/components/site";
 import { EmptyState } from "@/components/shared";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CertificateCard, VerifyCertificateDialog } from "@/components/pages/certificates";
-import { resolveStorageUrl } from "@/lib/file-url";
+import { resolveStorageUrl } from "@/lib/api/file";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
 import { useDownloadCertificate, useEnrollmentCertificates } from "@/stores/useCertificatesStore";
 import { SITE } from "@/data/site";
