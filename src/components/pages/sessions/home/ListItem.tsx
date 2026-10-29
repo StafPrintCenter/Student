@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SessionListCard, SessionsFiltersBar, type SessionsFilters } from "@/components/pages/sessions/home";
 import { cn } from "@/lib/utils";
-import { useDebouncedValue } from "@/lib/use-debounced-value";
+import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import { useSessionsList } from "@/stores/useSessionsStore";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
 
