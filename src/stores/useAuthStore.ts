@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api-url";
+import { parseApiError } from "@/lib/api-error";
 import type { APIStudentUser, APIStudentLoginResponse, StudentInviteVerifyResponse } from "@/data/auth";
 
 export class StudentAuthApiError extends Error { }
@@ -11,7 +12,8 @@ export async function loginStudent(email: string, password: string): Promise<API
 
   const response = await studentFetch(`/api/student/auth/login`, { method: "POST", body: formData });
   if (!response.ok) {
-    throw new StudentAuthApiError("Email ou mot de passe incorrect.");
+    const error = await parseApiError(response, "Email ou mot de passe incorrect.");
+    throw new StudentAuthApiError(error.message);
   }
 
   return response.json();
@@ -25,14 +27,18 @@ export async function fetchStudentMe(): Promise<APIStudentUser | null> {
   const response = await studentFetch(`/api/student/auth/me`);
   if (response.status === 401) return null;
   if (!response.ok) {
-    throw new StudentAuthApiError("Erreur lors de la vérification de la session.");
+    const error = await parseApiError(response, "Erreur lors de la vérification de la session.");
+    throw new StudentAuthApiError(error.message);
   }
   const body = await response.json();
   return body?.data ?? body?.student ?? body;
 }
 
 export async function logoutStudent(): Promise<void> {
-  await studentFetch(`/api/student/auth/logout`, { method: "POST" });
+  const response = await studentFetch(`/api/student/auth/logout`, { method: "POST" });
+  if (!response.ok) {
+    throw await parseApiError(response, "Erreur lors de la déconnexion.");
+  }
 }
 
 function buildInviteQuery(params: { student: string; expires: string; signature: string }) {
@@ -51,12 +57,11 @@ export async function verifyStudentInvite(params: {
   const response = await studentFetch(
     `/api/student/auth/invite-accept?${buildInviteQuery(params)}`
   );
-  const body = await response.json().catch(() => null);
   if (!response.ok) {
-    throw new StudentAuthApiError(
-      body?.message || "Ce lien d'invitation est invalide ou a expiré."
-    );
+    const error = await parseApiError(response, "Ce lien d'invitation est invalide ou a expiré.");
+    throw new StudentAuthApiError(error.message);
   }
+  const body = await response.json();
   return body.data as StudentInviteVerifyResponse;
 }
 
@@ -76,12 +81,11 @@ export async function acceptStudentInvite(params: {
       body: fd,
     }
   );
-  const body = await response.json().catch(() => null);
   if (!response.ok) {
-    throw new StudentAuthApiError(
-      body?.message || "Ce lien d'invitation est invalide ou a expiré."
-    );
+    const error = await parseApiError(response, "Ce lien d'invitation est invalide ou a expiré.");
+    throw new StudentAuthApiError(error.message);
   }
+  const body = await response.json();
   return body as { message: string };
 }
 
