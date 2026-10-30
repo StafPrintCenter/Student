@@ -19,7 +19,7 @@ import { Route as StudentCertificatesRouteImport } from './routes/_student/certi
 import { Route as StudentCommunityRouteImport } from './routes/_student/community'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
 import { Route as StudentPaymentsRouteImport } from './routes/_student/payments'
-import { Route as StudentProfilRouteImport } from './routes/_student/profil'
+import { Route as StudentProfileRouteImport } from './routes/_student/profile'
 import { Route as StudentProgressRouteImport } from './routes/_student/progress'
 import { Route as StudentNotificationsIndexRouteImport } from './routes/_student/notifications/index'
 import { Route as StudentNotificationsIdRouteImport } from './routes/_student/notifications/$id'
@@ -79,9 +79,9 @@ const StudentPaymentsRoute = StudentPaymentsRouteImport.update({
   path: '/payments',
   getParentRoute: () => StudentRoute,
 } as any)
-const StudentProfilRoute = StudentProfilRouteImport.update({
-  id: '/profil',
-  path: '/profil',
+const StudentProfileRoute = StudentProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => StudentRoute,
 } as any)
 const StudentProgressRoute = StudentProgressRouteImport.update({
@@ -148,7 +148,7 @@ export interface FileRoutesByFullPath {
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/payments': typeof StudentPaymentsRoute
-  '/profil': typeof StudentProfilRoute
+  '/profile': typeof StudentProfileRoute
   '/progress': typeof StudentProgressRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
@@ -169,7 +169,7 @@ export interface FileRoutesByTo {
   '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/payments': typeof StudentPaymentsRoute
-  '/profil': typeof StudentProfilRoute
+  '/profile': typeof StudentProfileRoute
   '/progress': typeof StudentProgressRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
@@ -193,7 +193,7 @@ export interface FileRoutesById {
   '/_student/community': typeof StudentCommunityRoute
   '/_student/dashboard': typeof StudentDashboardRoute
   '/_student/payments': typeof StudentPaymentsRoute
-  '/_student/profil': typeof StudentProfilRoute
+  '/_student/profile': typeof StudentProfileRoute
   '/_student/progress': typeof StudentProgressRoute
   '/_student/notifications/$id': typeof StudentNotificationsIdRoute
   '/_student/notifications/preferences': typeof StudentNotificationsPreferencesRoute
@@ -216,7 +216,7 @@ export interface FileRouteTypes {
     | '/community'
     | '/dashboard'
     | '/payments'
-    | '/profil'
+    | '/profile'
     | '/progress'
     | '/notifications/$id'
     | '/notifications/preferences'
@@ -237,7 +237,7 @@ export interface FileRouteTypes {
     | '/community'
     | '/dashboard'
     | '/payments'
-    | '/profil'
+    | '/profile'
     | '/progress'
     | '/notifications/$id'
     | '/notifications/preferences'
@@ -260,7 +260,7 @@ export interface FileRouteTypes {
     | '/_student/community'
     | '/_student/dashboard'
     | '/_student/payments'
-    | '/_student/profil'
+    | '/_student/profile'
     | '/_student/progress'
     | '/_student/notifications/$id'
     | '/_student/notifications/preferences'
@@ -352,11 +352,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentPaymentsRouteImport
       parentRoute: typeof StudentRoute
     }
-    '/_student/profil': {
-      id: '/_student/profil'
-      path: '/profil'
-      fullPath: '/profil'
-      preLoaderRoute: typeof StudentProfilRouteImport
+    '/_student/profile': {
+      id: '/_student/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof StudentProfileRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/progress': {
@@ -449,7 +449,7 @@ interface StudentRouteChildren {
   StudentCommunityRoute: typeof StudentCommunityRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
   StudentPaymentsRoute: typeof StudentPaymentsRoute
-  StudentProfilRoute: typeof StudentProfilRoute
+  StudentProfileRoute: typeof StudentProfileRoute
   StudentProgressRoute: typeof StudentProgressRoute
   StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
   StudentNotificationsPreferencesRoute: typeof StudentNotificationsPreferencesRoute
@@ -467,7 +467,7 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentCommunityRoute: StudentCommunityRoute,
   StudentDashboardRoute: StudentDashboardRoute,
   StudentPaymentsRoute: StudentPaymentsRoute,
-  StudentProfilRoute: StudentProfilRoute,
+  StudentProfileRoute: StudentProfileRoute,
   StudentProgressRoute: StudentProgressRoute,
   StudentNotificationsIdRoute: StudentNotificationsIdRoute,
   StudentNotificationsPreferencesRoute: StudentNotificationsPreferencesRoute,
