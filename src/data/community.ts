@@ -1,0 +1,169 @@
+/** Aligné sur App\Enums\CommunityPostType */
+export type CommunityPostType = "discussion" | "question" | "resource" | "announcement";
+
+export const communityPostTypeMap: Record<CommunityPostType, { label: string; className: string }> = {
+  discussion: { label: "Discussion", className: "bg-muted text-muted-foreground border-border" },
+  question: { label: "Question", className: "bg-info/15 text-info border-info/40" },
+  resource: { label: "Ressource", className: "bg-emerald/15 text-emerald border-emerald/40" },
+  announcement: { label: "Annonce", className: "bg-amber/15 text-amber border-amber/40" },
+};
+
+/** Un apprenant ne peut pas publier d'annonce (403 côté backend) */
+export const STUDENT_POST_TYPES: CommunityPostType[] = ["discussion", "question", "resource"];
+
+/** Aligné sur App\Enums\CommunityContentStatus */
+export type CommunityContentStatus = "published" | "hidden";
+
+export type CommunityAuthorRole = "admin" | "instructor" | "student";
+
+export const communityAuthorRoleMap: Record<CommunityAuthorRole, { label: string; className: string }> = {
+  admin: { label: "Admin", className: "bg-destructive/10 text-destructive border-destructive/40" },
+  instructor: { label: "Formateur", className: "bg-primary/10 text-primary border-primary/40" },
+  student: { label: "Apprenant", className: "bg-muted text-muted-foreground border-border" },
+};
+
+export type CommunitySort = "recent" | "popular" | "active";
+
+export const communitySortLabels: Record<CommunitySort, string> = {
+  recent: "Plus récentes",
+  popular: "Plus populaires",
+  active: "Activité récente",
+};
+
+export type CommunityScope = "general" | "training";
+
+/** Limites de validation du backend */
+export const COMMUNITY_LIMITS = {
+  titleMin: 3,
+  titleMax: 200,
+  bodyMin: 3,
+  bodyMax: 10000,
+  maxTags: 5,
+  maxAttachments: 4,
+  maxFileBytes: 5 * 1024 * 1024,
+  allowedExtensions: ["jpg", "jpeg", "png", "webp", "gif", "pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "zip"] as string[],
+};
+
+/* ---- Lecture ---- */
+
+export type APICommunityCategory = {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  color: string;
+  sortOrder: number;
+  isActive: boolean;
+  postsCount: number | null;
+};
+
+export type APICommunityCategoryRef = { id: string; name: string; slug: string; color: string };
+export type APICommunityTrainingRef = { id: string; title: string };
+
+export type APICommunityAuthor = {
+  id: string;
+  name: string;
+  photo: string | null;
+  role: CommunityAuthorRole;
+};
+
+export type APICommunityPermissions = {
+  canEdit: boolean;
+  canDelete: boolean;
+  canModerate: boolean;
+  canHide: boolean;
+  canLock: boolean;
+  canComment: boolean;
+  canReact: boolean;
+  canReport: boolean;
+};
+
+export type APICommunityAttachment = {
+  name: string;
+  url: string;
+  mime: string;
+  size: number;
+};
+
+/** Publication telle que renvoyée par la liste (sans le contenu complet) */
+export type APICommunityPostListItem = {
+  id: string;
+  title: string;
+  type: CommunityPostType;
+  excerpt: string;
+  tags: string[] | null;
+  scope: CommunityScope;
+  category: APICommunityCategoryRef;
+  training: APICommunityTrainingRef | null;
+  author: APICommunityAuthor;
+  isMine: boolean;
+  status: CommunityContentStatus;
+  isPinned: boolean;
+  isLocked: boolean;
+  bestAnswerId: string | null;
+  commentsCount: number;
+  reactionsTotal: number;
+  reactions: Record<string, number>;
+  myReaction: string | null;
+  viewsCount: number;
+  attachmentsCount: number;
+  createdAt: string;
+  editedAt: string | null;
+  permissions: APICommunityPermissions;
+  hiddenReason: string | null;
+  hiddenAt: string | null;
+};
+
+/** GET /api/community/posts/{id} : ajoute le contenu complet et les pièces jointes */
+export type APICommunityPostDetail = APICommunityPostListItem & {
+  body: string;
+  attachments: APICommunityAttachment[];
+};
+
+export type APICommunityPostsMeta = {
+  currentPage: number;
+  lastPage: number;
+  perPage: number;
+  total: number;
+};
+
+export type APICommunityPostsListResponse = {
+  data: APICommunityPostListItem[];
+  meta: APICommunityPostsMeta;
+};
+
+/* ---- Écriture ---- */
+
+/** POST /api/community/posts/create : trainingId vide = communauté générale */
+export interface CommunityPostCreatePayload {
+  title: string;
+  body: string;
+  categoryId: string;
+  trainingId?: string;
+  type?: CommunityPostType;
+  tags?: string[];
+  attachments?: File[];
+}
+
+/** PUT /api/community/posts/{id} : seuls les champs fournis sont modifiés (formation et fichiers ne changent pas) */
+export interface CommunityPostUpdatePayload {
+  title?: string;
+  body?: string;
+  categoryId?: string;
+  type?: CommunityPostType;
+  tags?: string[];
+}
+
+/** Paramètres de GET /api/community/posts/list */
+export interface CommunityPostsListParams {
+  page?: number;
+  perPage?: number;
+  scope?: CommunityScope;
+  trainingId?: string;
+  categoryId?: string;
+  type?: CommunityPostType;
+  mine?: boolean;
+  unanswered?: boolean;
+  query?: string;
+  sort?: CommunitySort;
+}
