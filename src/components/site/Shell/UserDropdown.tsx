@@ -1,14 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import { UserCircle, ChevronDown, LogOut } from "lucide-react";
-import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { USER_DROPDOWN_ITEMS } from "./config";
 
-export function StudentUserDropdown({ user, onDisconnectClick }: {
-  user: ReturnType<typeof useStudentAuth>["user"];
+type UserDropdownProps = {
+  user: { name?: string | null; email?: string | null } | null;
   onDisconnectClick: () => void;
-}) {
-  const displayName = user?.name && user.name !== "undefined undefined" ? user.name : "Apprenant";
+  defaultRoleName?: string;
+};
+
+export function UserDropdown({ user, onDisconnectClick, defaultRoleName = "Utilisateur" }: UserDropdownProps) {
+  const displayName = user?.name && user.name !== "undefined undefined" ? user.name : defaultRoleName;
 
   return (
     <DropdownMenu>
