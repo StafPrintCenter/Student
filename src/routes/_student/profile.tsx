@@ -13,7 +13,7 @@ import { studentApi } from "@/lib/api";
 import type { Student } from "@/lib/api/types";
 import { SITE } from "@/data/site";
 
-export const Route = createFileRoute("/_student/profil")({
+export const Route = createFileRoute("/_student/profile")({
   head: () => ({
     meta: [
       { title: `${SITE.tool} - Mon profil | ${SITE.name}` },
