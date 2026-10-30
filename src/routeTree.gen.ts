@@ -16,11 +16,12 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthInviteRouteImport } from './routes/_auth/invite'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as StudentCertificatesRouteImport } from './routes/_student/certificates'
-import { Route as StudentCommunityRouteImport } from './routes/_student/community'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
 import { Route as StudentPaymentsRouteImport } from './routes/_student/payments'
 import { Route as StudentProfileRouteImport } from './routes/_student/profile'
 import { Route as StudentProgressRouteImport } from './routes/_student/progress'
+import { Route as StudentCommunityIndexRouteImport } from './routes/_student/community/index'
+import { Route as StudentCommunityIdRouteImport } from './routes/_student/community/$id'
 import { Route as StudentNotificationsIndexRouteImport } from './routes/_student/notifications/index'
 import { Route as StudentNotificationsIdRouteImport } from './routes/_student/notifications/$id'
 import { Route as StudentNotificationsPreferencesRouteImport } from './routes/_student/notifications/preferences'
@@ -64,11 +65,6 @@ const StudentCertificatesRoute = StudentCertificatesRouteImport.update({
   path: '/certificates',
   getParentRoute: () => StudentRoute,
 } as any)
-const StudentCommunityRoute = StudentCommunityRouteImport.update({
-  id: '/community',
-  path: '/community',
-  getParentRoute: () => StudentRoute,
-} as any)
 const StudentDashboardRoute = StudentDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -87,6 +83,16 @@ const StudentProfileRoute = StudentProfileRouteImport.update({
 const StudentProgressRoute = StudentProgressRouteImport.update({
   id: '/progress',
   path: '/progress',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentCommunityIndexRoute = StudentCommunityIndexRouteImport.update({
+  id: '/community/',
+  path: '/community/',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentCommunityIdRoute = StudentCommunityIdRouteImport.update({
+  id: '/community/$id',
+  path: '/community/$id',
   getParentRoute: () => StudentRoute,
 } as any)
 const StudentNotificationsIndexRoute =
@@ -145,14 +151,15 @@ export interface FileRoutesByFullPath {
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
   '/certificates': typeof StudentCertificatesRoute
-  '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/payments': typeof StudentPaymentsRoute
   '/profile': typeof StudentProfileRoute
   '/progress': typeof StudentProgressRoute
+  '/community/$id': typeof StudentCommunityIdRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
+  '/community/': typeof StudentCommunityIndexRoute
   '/notifications/': typeof StudentNotificationsIndexRoute
   '/sessions/': typeof StudentSessionsIndexRoute
   '/trainings/': typeof StudentTrainingsIndexRoute
@@ -166,14 +173,15 @@ export interface FileRoutesByTo {
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
   '/certificates': typeof StudentCertificatesRoute
-  '/community': typeof StudentCommunityRoute
   '/dashboard': typeof StudentDashboardRoute
   '/payments': typeof StudentPaymentsRoute
   '/profile': typeof StudentProfileRoute
   '/progress': typeof StudentProgressRoute
+  '/community/$id': typeof StudentCommunityIdRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
+  '/community': typeof StudentCommunityIndexRoute
   '/notifications': typeof StudentNotificationsIndexRoute
   '/sessions': typeof StudentSessionsIndexRoute
   '/trainings': typeof StudentTrainingsIndexRoute
@@ -190,14 +198,15 @@ export interface FileRoutesById {
   '/_auth/invite': typeof AuthInviteRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_student/certificates': typeof StudentCertificatesRoute
-  '/_student/community': typeof StudentCommunityRoute
   '/_student/dashboard': typeof StudentDashboardRoute
   '/_student/payments': typeof StudentPaymentsRoute
   '/_student/profile': typeof StudentProfileRoute
   '/_student/progress': typeof StudentProgressRoute
+  '/_student/community/$id': typeof StudentCommunityIdRoute
   '/_student/notifications/$id': typeof StudentNotificationsIdRoute
   '/_student/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/_student/sessions/$id': typeof StudentSessionsIdRoute
+  '/_student/community/': typeof StudentCommunityIndexRoute
   '/_student/notifications/': typeof StudentNotificationsIndexRoute
   '/_student/sessions/': typeof StudentSessionsIndexRoute
   '/_student/trainings/': typeof StudentTrainingsIndexRoute
@@ -213,14 +222,15 @@ export interface FileRouteTypes {
     | '/invite'
     | '/login'
     | '/certificates'
-    | '/community'
     | '/dashboard'
     | '/payments'
     | '/profile'
     | '/progress'
+    | '/community/$id'
     | '/notifications/$id'
     | '/notifications/preferences'
     | '/sessions/$id'
+    | '/community/'
     | '/notifications/'
     | '/sessions/'
     | '/trainings/'
@@ -234,14 +244,15 @@ export interface FileRouteTypes {
     | '/invite'
     | '/login'
     | '/certificates'
-    | '/community'
     | '/dashboard'
     | '/payments'
     | '/profile'
     | '/progress'
+    | '/community/$id'
     | '/notifications/$id'
     | '/notifications/preferences'
     | '/sessions/$id'
+    | '/community'
     | '/notifications'
     | '/sessions'
     | '/trainings'
@@ -257,14 +268,15 @@ export interface FileRouteTypes {
     | '/_auth/invite'
     | '/_auth/login'
     | '/_student/certificates'
-    | '/_student/community'
     | '/_student/dashboard'
     | '/_student/payments'
     | '/_student/profile'
     | '/_student/progress'
+    | '/_student/community/$id'
     | '/_student/notifications/$id'
     | '/_student/notifications/preferences'
     | '/_student/sessions/$id'
+    | '/_student/community/'
     | '/_student/notifications/'
     | '/_student/sessions/'
     | '/_student/trainings/'
@@ -331,13 +343,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentCertificatesRouteImport
       parentRoute: typeof StudentRoute
     }
-    '/_student/community': {
-      id: '/_student/community'
-      path: '/community'
-      fullPath: '/community'
-      preLoaderRoute: typeof StudentCommunityRouteImport
-      parentRoute: typeof StudentRoute
-    }
     '/_student/dashboard': {
       id: '/_student/dashboard'
       path: '/dashboard'
@@ -364,6 +369,20 @@ declare module '@tanstack/react-router' {
       path: '/progress'
       fullPath: '/progress'
       preLoaderRoute: typeof StudentProgressRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/community/': {
+      id: '/_student/community/'
+      path: '/community'
+      fullPath: '/community/'
+      preLoaderRoute: typeof StudentCommunityIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/community/$id': {
+      id: '/_student/community/$id'
+      path: '/community/$id'
+      fullPath: '/community/$id'
+      preLoaderRoute: typeof StudentCommunityIdRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/notifications/': {
@@ -446,14 +465,15 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface StudentRouteChildren {
   StudentCertificatesRoute: typeof StudentCertificatesRoute
-  StudentCommunityRoute: typeof StudentCommunityRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
   StudentPaymentsRoute: typeof StudentPaymentsRoute
   StudentProfileRoute: typeof StudentProfileRoute
   StudentProgressRoute: typeof StudentProgressRoute
+  StudentCommunityIdRoute: typeof StudentCommunityIdRoute
   StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
   StudentNotificationsPreferencesRoute: typeof StudentNotificationsPreferencesRoute
   StudentSessionsIdRoute: typeof StudentSessionsIdRoute
+  StudentCommunityIndexRoute: typeof StudentCommunityIndexRoute
   StudentNotificationsIndexRoute: typeof StudentNotificationsIndexRoute
   StudentSessionsIndexRoute: typeof StudentSessionsIndexRoute
   StudentTrainingsIndexRoute: typeof StudentTrainingsIndexRoute
@@ -464,14 +484,15 @@ interface StudentRouteChildren {
 
 const StudentRouteChildren: StudentRouteChildren = {
   StudentCertificatesRoute: StudentCertificatesRoute,
-  StudentCommunityRoute: StudentCommunityRoute,
   StudentDashboardRoute: StudentDashboardRoute,
   StudentPaymentsRoute: StudentPaymentsRoute,
   StudentProfileRoute: StudentProfileRoute,
   StudentProgressRoute: StudentProgressRoute,
+  StudentCommunityIdRoute: StudentCommunityIdRoute,
   StudentNotificationsIdRoute: StudentNotificationsIdRoute,
   StudentNotificationsPreferencesRoute: StudentNotificationsPreferencesRoute,
   StudentSessionsIdRoute: StudentSessionsIdRoute,
+  StudentCommunityIndexRoute: StudentCommunityIndexRoute,
   StudentNotificationsIndexRoute: StudentNotificationsIndexRoute,
   StudentSessionsIndexRoute: StudentSessionsIndexRoute,
   StudentTrainingsIndexRoute: StudentTrainingsIndexRoute,
