@@ -1,4 +1,4 @@
-import { LayoutDashboard, GraduationCap, Users2, LineChart, BadgeCheck, Calendar, Bell, CreditCard } from "lucide-react";
+import { LayoutDashboard, GraduationCap, Users2, LineChart, BadgeCheck, Calendar, Bell, CreditCard, UserCircle } from "lucide-react";
 import { SITE_LINK } from "@/data/site";
 
 export const docsUrl = `${SITE_LINK.docsUrl}/docs/student/index`;
@@ -48,3 +48,9 @@ export const navItemClass =
   "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground " +
   "data-[active=true]:bg-sidebar-primary data-[active=true]:text-sidebar-primary-foreground " +
   "data-[active=true]:hover:bg-sidebar-primary data-[active=true]:hover:text-sidebar-primary-foreground";
+
+// Liens du dropdown utilisateur
+export const USER_DROPDOWN_ITEMS = [
+  { to: "/profil", label: "Mon profil", icon: UserCircle },
+  { to: "/notifications", label: "Notifications", icon: Bell },
+] as const;
