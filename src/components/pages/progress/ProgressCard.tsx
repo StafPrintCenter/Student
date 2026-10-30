@@ -34,7 +34,10 @@ export function TrainingProgressCard({ item }: { item: APIProgressItem }) {
               {item.trainingTitle}
             </Link>
           </div>
-          <StatusBadge status={item.status} map={trainingEnrollmentStatusMap} />
+          <StatusBadge
+            status={item.status}
+            map={trainingEnrollmentStatusMap}
+          />
         </div>
 
         <div>
@@ -50,17 +53,17 @@ export function TrainingProgressCard({ item }: { item: APIProgressItem }) {
           <Metric label="Leçons obligatoires" value={lessonsLabel(item.mandatoryLessons)} />
           <Metric
             label="Assiduité"
-            value={attendance.ratio == null ? "—" : `${attendance.ratio}%`}
+            value={attendance.ratio == null ? "-" : `${attendance.ratio}%`}
             hint={
               attendance.sessionsMarked > 0
                 ? `${attendance.sessionsPresent}/${attendance.sessionsMarked} séances`
                 : "Aucune séance pointée"
             }
           />
-          <Metric label="Score moyen" value={item.averageScore == null ? "—" : `${item.averageScore}%`} />
+          <Metric label="Score moyen" value={item.averageScore == null ? "-" : `${item.averageScore}%`} />
           <Metric
             label="Sessions confirmées"
-            value={sessions.total === 0 ? "—" : `${sessions.confirmed}/${sessions.total}`}
+            value={sessions.total === 0 ? "-" : `${sessions.confirmed}/${sessions.total}`}
             hint={
               sessions.total === 0
                 ? "Aucune session"

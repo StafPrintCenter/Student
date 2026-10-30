@@ -26,8 +26,16 @@ export function ProgressStats({ stats }: { stats: APIProgressStats }) {
           value={`${stats.lessons.completed}/${stats.lessons.total}`}
           hint={`${stats.lessons.remaining} restante${stats.lessons.remaining > 1 ? "s" : ""}`}
         />
-        <StatCard icon={CalendarCheck} label="Assiduité moyenne" value={percent(stats.averageAttendance)} />
-        <StatCard icon={Trophy} label="Score moyen" value={percent(stats.averageScore)} />
+        <StatCard
+          icon={CalendarCheck}
+          label="Assiduité moyenne"
+          value={percent(stats.averageAttendance)}
+        />
+        <StatCard
+          icon={Trophy}
+          label="Score moyen"
+          value={percent(stats.averageScore)}
+        />
         <StatCard
           icon={BadgeCheck}
           label="Certificats"
