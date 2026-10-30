@@ -3,13 +3,13 @@ import { UserCircle, ChevronDown, LogOut } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { USER_DROPDOWN_ITEMS } from "./config";
 
-type UserDropdownProps = {
+type StudentDropdownProps = {
   user: { name?: string | null; email?: string | null } | null;
   onDisconnectClick: () => void;
   defaultRoleName?: string;
 };
 
-export function UserDropdown({ user, onDisconnectClick, defaultRoleName = "Utilisateur" }: UserDropdownProps) {
+export function StudentUserDropdown({ user, onDisconnectClick, defaultRoleName = "Apprenant" }: StudentDropdownProps) {
   const displayName = user?.name && user.name !== "undefined undefined" ? user.name : defaultRoleName;
 
   return (
