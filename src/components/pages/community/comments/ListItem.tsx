@@ -16,13 +16,14 @@ interface CommentsListProps {
   canComment: boolean;
   sort: CommunityCommentSort;
   authorRole: CommunityAuthorRole | "";
+  initialPage?: number;
   onDelete: (comment: APICommunityComment) => void;
 }
 
-export function CommentsList({ postId, canComment, sort, authorRole, onDelete }: CommentsListProps) {
+export function CommentsList({ postId, canComment, sort, authorRole, initialPage = 1, onDelete }: CommentsListProps) {
   // La page repart de 1 dès que le tri ou le filtre change
   const signature = `${sort}|${authorRole}`;
-  const [pageState, setPageState] = useState({ signature, page: 1 });
+  const [pageState, setPageState] = useState({ signature, page: initialPage });
   const page = pageState.signature === signature ? pageState.page : 1;
   const setPage = (next: number) => setPageState({ signature, page: next });
 
