@@ -1,13 +1,15 @@
-import type { CommunityPostsListParams, CommunityPostType, CommunitySort } from "@/data/community";
+import type { CommunityAuthorRole, CommunityContentStatus, CommunityPostsListParams, CommunityPostType, CommunitySort } from "@/data/community";
 
 export interface CommunityFilters {
   query: string;
   categoryId: string;
-  /** "" (partout) | "general" | "training" (toutes mes formations) | "t:<trainingId>" */
   place: string;
   type: CommunityPostType | "";
+  authorRole: CommunityAuthorRole | "";
+  status: CommunityContentStatus | "";
   sort: CommunitySort;
   mine: boolean;
+  pinned: boolean;
   unanswered: boolean;
 }
 
@@ -16,8 +18,11 @@ export const DEFAULT_COMMUNITY_FILTERS: CommunityFilters = {
   categoryId: "",
   place: "",
   type: "",
+  authorRole: "",
+  status: "",
   sort: "recent",
   mine: false,
+  pinned: false,
   unanswered: false,
 };
 
@@ -45,8 +50,11 @@ export function toListParams(
     scope: filters.place === "general" || filters.place === "training" ? filters.place : undefined,
     trainingId: trainingIdFromPlace(filters.place) || undefined,
     type: filters.type || undefined,
+    authorRole: filters.authorRole || undefined,
+    status: filters.status || undefined,
     sort: filters.sort,
     mine: filters.mine || undefined,
+    pinned: filters.pinned || undefined,
     unanswered: filters.unanswered || undefined,
   };
 }
