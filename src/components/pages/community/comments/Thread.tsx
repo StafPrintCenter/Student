@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { CommentItem } from "./Item";
 import { CommentReplies } from "./Replies";
 import { NewCommentForm } from "./NewForm";
+import { useCommentFocus } from "@/components/pages/community/shared";
 import { cn } from "@/lib/utils";
 import type { APICommunityComment } from "@/data/community";
 
@@ -17,7 +17,12 @@ interface CommentThreadProps {
 
 /** Un commentaire de premier niveau et son fil de réponses (2 niveaux au maximum) */
 export function CommentThread({ postId, comment, canComment, onDelete }: CommentThreadProps) {
-  const [expanded, setExpanded] = useState(false);
+  const focus = useCommentFocus();
+
+  const focusedReplyPage =
+    focus && focus.rootId === comment.id && focus.commentId !== comment.id ? focus.replyPage : null;
+  const [expanded, setExpanded] = useState(focusedReplyPage !== null);
+
   // Commentaire auquel la réponse en cours s'adresse (le racine ou l'une de ses réponses)
   const [replyTarget, setReplyTarget] = useState<APICommunityComment | null>(null);
 
@@ -37,7 +42,7 @@ export function CommentThread({ postId, comment, canComment, onDelete }: Comment
         <Button
           size="sm"
           variant="ghost"
-          className="ml-[3.25rem] h-7 px-2 text-xs"
+          className="ml-13 h-7 px-2 text-xs"
           aria-expanded={expanded}
           onClick={() => setExpanded((v) => !v)}
         >
@@ -49,7 +54,13 @@ export function CommentThread({ postId, comment, canComment, onDelete }: Comment
       {(showReplies || replyTarget) && (
         <div className="ml-4 space-y-4 border-l pl-4 sm:ml-6 sm:pl-5">
           {showReplies && (
-            <CommentReplies commentId={comment.id} canReply={canComment} onReply={setReplyTarget} onDelete={onDelete} />
+            <CommentReplies
+              commentId={comment.id}
+              initialPage={focusedReplyPage ?? 1}
+              canReply={canComment}
+              onReply={setReplyTarget}
+              onDelete={onDelete}
+            />
           )}
 
           {replyTarget && (

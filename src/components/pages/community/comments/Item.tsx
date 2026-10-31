@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CornerDownRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CommentActions } from "./Actions";
 import { CommentFlagBadges } from "./Badges";
 import { EditCommentForm } from "./EditForm";
-import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, MineBadge } from "@/components/pages/community/shared";
+import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, MineBadge, useCommentFocus } from "@/components/pages/community/shared";
 import type { APICommunityComment } from "@/data/community";
 
 interface CommentItemProps {
@@ -18,12 +18,32 @@ interface CommentItemProps {
 export function CommentItem({ comment, canReply, isReply = false, onReply, onDelete }: CommentItemProps) {
   const [editing, setEditing] = useState(false);
   const hidden = comment.status === "hidden";
+  const focus = useCommentFocus();
+  const isTarget = focus?.commentId === comment.id;
+  const highlighted = isTarget && !!focus?.active;
+  const ref = useRef<HTMLDivElement>(null);
 
   // Une réponse au commentaire racine n'a pas besoin de mention : il est affiché juste au-dessus
   const mention = comment.replyTo && comment.replyTo.commentId !== comment.parentId ? comment.replyTo : null;
 
+  useEffect(() => {
+    if (!isTarget || !focus?.active) return;
+    focus.onShown();
+    const timer = setTimeout(() => ref.current?.scrollIntoView({ behavior: "smooth", block: "center" }), 150);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTarget]);
+
   return (
-    <div className={cn("flex gap-3", hidden && "opacity-80")}>
+    <div
+      ref={ref}
+      id={`comment-${comment.id}`}
+      className={cn(
+        "-mx-2 -my-1 flex gap-3 rounded-lg px-2 py-1 transition-[background-color,box-shadow] duration-500",
+        hidden && "opacity-80",
+        highlighted && "bg-primary/10 ring-2 ring-primary/40"
+      )}
+    >
       <CommunityAvatar name={comment.author.name} photo={comment.author.photo} size={isReply ? "sm" : "md"} />
 
       <div className="min-w-0 flex-1 space-y-1.5">

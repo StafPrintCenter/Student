@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { z } from "zod";
 import { ArrowLeft, MessagesSquare } from "lucide-react";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,8 @@ import { SITE } from "@/data/site";
 import { useDynamicPageMetadata } from "@/hooks/useDynamicPageMetadata";
 
 export const Route = createFileRoute("/_student/community/$id")({
+  validateSearch: z.object({ comment: z.string().optional() }),
+
   head: () => ({
     meta: [
       { title: `${SITE.tool} - Détail d'une Publication | ${SITE.name}` },
@@ -34,6 +37,7 @@ function BackButton() {
 
 function CommunityPostPage() {
   const { id } = Route.useParams();
+  const { comment } = Route.useSearch();
   const navigate = useNavigate();
   const { item: post, isLoading } = useCommunityPostDetail(id);
   useDynamicPageMetadata(
@@ -67,7 +71,7 @@ function CommunityPostPage() {
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="space-y-8 lg:col-span-2">
           <PostDetailCard post={post} onEdit={() => setEditing(true)} onDelete={() => setDeleting(true)} />
-          <CommentsSection post={post} />
+          <CommentsSection key={comment ?? "none"} post={post} targetCommentId={comment} />
         </div>
         <PostInfoCard post={post} />
       </div>
