@@ -8,7 +8,7 @@ export {
   PostFlagBadges,
   PostTypeBadge,
 } from "./post-badges";
-export { PostFormFields } from "./post-form-fields";
+export { PostFormFields } from "../../pages/community/shared/post-form-fields";
 export { PostStats, PostTags, TrainingBadge } from "./post-meta";
 export { TagsInput } from "./tags-input";
 export { fullDate, formatFileSize, initialsOf, timeAgo } from "./community-format";
