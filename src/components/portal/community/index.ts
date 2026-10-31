@@ -1,4 +1,4 @@
-export { AttachmentsPicker } from "./attachments-picker";
+export { AttachmentsPicker } from "../../pages/community/detail/AttachmentsPicker";
 export { CommunityAvatar } from "../../pages/community/shared/Avatar";
 export { NativeSelect } from "./native-select";
 export { PostAttachments } from "./post-attachments";
