@@ -3,9 +3,8 @@ import { Loader2, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { AttachmentsPicker } from "@/components/pages/community/detail";
-import { PostFormFields } from "@/components/pages/community/shared";
+import { PostFormFields, TagsInput } from "@/components/pages/community/shared";
 import { hasUpdates, postFormSchema, toUpdatePayload, type PostFormValues } from "@/components/pages/community/home";
-import { TagsInput } from "@/components/portal/community/tags-input";
 import { COMMUNITY_LIMITS, type APICommunityCategory } from "@/data/community";
 
 interface PostFormProps {
