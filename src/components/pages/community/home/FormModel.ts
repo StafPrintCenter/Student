@@ -1,11 +1,5 @@
 import { z } from "zod";
-import {
-  COMMUNITY_LIMITS,
-  type APICommunityPostDetail,
-  type CommunityPostCreatePayload,
-  type CommunityPostType,
-  type CommunityPostUpdatePayload,
-} from "@/data/community";
+import { COMMUNITY_LIMITS, type APICommunityPostDetail, type CommunityPostCreatePayload, type CommunityPostType, type CommunityPostUpdatePayload } from "@/data/community";
 
 const { titleMin, titleMax, bodyMin, bodyMax, maxTags } = COMMUNITY_LIMITS;
 

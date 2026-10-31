@@ -2,9 +2,8 @@ import { useMemo } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PostForm } from "@/components/pages/community/shared/PostForm";
-import { PostFormDialog } from "@/components/pages/community/shared/FormDialog";
-import { toUpdatePayload, valuesFromPost } from "@/components/pages/community/home/FormModel";
+import { PostForm, PostFormDialog } from "@/components/pages/community/shared";
+import { toUpdatePayload, valuesFromPost } from "@/components/pages/community/home";
 import { useCommunityCategories } from "@/stores/useCommunityCategoriesStore";
 import { useCommunityPostDetail, useUpdateCommunityPost } from "@/stores/useCommunityPostsStore";
 

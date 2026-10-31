@@ -1,8 +1,7 @@
 import { RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FilterToggle } from "@/components/pages/community/home";
 import { NativeSelect } from "@/components/pages/community/shared";
-import { hasActiveFilters, TRAINING_PLACE_PREFIX, SearchBox, type CommunityFilters } from "@/components/pages/community/home";
+import { FilterToggle, hasActiveFilters, TRAINING_PLACE_PREFIX, SearchBox, type CommunityFilters } from "@/components/pages/community/home";
 import { communityAuthorRoleMap, communityContentStatusLabels, communityPostTypeMap, communitySortLabels, type CommunityAuthorRole, type CommunityContentStatus, type CommunityPostType, type CommunitySort } from "@/data/community";
 
 interface CommunityFiltersBarProps {
