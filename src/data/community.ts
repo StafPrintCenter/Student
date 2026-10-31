@@ -14,6 +14,11 @@ export const STUDENT_POST_TYPES: CommunityPostType[] = ["discussion", "question"
 /** Aligné sur App\Enums\CommunityContentStatus */
 export type CommunityContentStatus = "published" | "hidden";
 
+export const communityContentStatusLabels: Record<CommunityContentStatus, string> = {
+  published: "Publiées",
+  hidden: "Masquées",
+};
+
 export type CommunityAuthorRole = "admin" | "instructor" | "student";
 
 export const communityAuthorRoleMap: Record<CommunityAuthorRole, { label: string; className: string }> = {
@@ -162,6 +167,9 @@ export interface CommunityPostsListParams {
   trainingId?: string;
   categoryId?: string;
   type?: CommunityPostType;
+  authorRole?: CommunityAuthorRole;
+  pinned?: boolean;
+  status?: CommunityContentStatus;
   mine?: boolean;
   unanswered?: boolean;
   query?: string;
