@@ -1,6 +1,6 @@
 import { EyeOff } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { fullDate } from "@/components/pages/community/shared/Format";
+import { fullDate } from "@/components/pages/community/shared";
 
 interface HiddenPostAlertProps {
   reason: string | null;

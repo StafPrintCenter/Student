@@ -2,10 +2,9 @@ import { Pencil, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CommunityAvatar } from "@/components/pages/community/shared";
-import { fullDate, timeAgo } from "@/components/pages/community/shared/Format";
+import { CommunityAvatar, fullDate, timeAgo } from "@/components/pages/community/shared";
 import { PostAttachments } from "@/components/portal/community/post-attachments";
-import { AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge } from "@/components/portal/community/post-badges";
+import { AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge } from "@/components/shared/post-badges";
 import { PostTags, TrainingBadge } from "@/components/portal/community/post-meta";
 import type { APICommunityPostDetail } from "@/data/community";
 
