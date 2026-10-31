@@ -1,22 +1,9 @@
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api/resolve-url";
 import { parseApiError } from "@/lib/api/error";
-import type {
-  APICommunityPostDetail,
-  APICommunityPostsListResponse,
-  CommunityPostCreatePayload,
-  CommunityPostsListParams,
-  CommunityPostUpdatePayload,
-} from "@/data/community";
+import type { APICommunityPostDetail, APICommunityPostsListResponse, CommunityPostCreatePayload, CommunityPostsListParams, CommunityPostUpdatePayload } from "@/data/community";
 
 const postsKey = ["community", "posts"] as const;
-
-/** Première erreur de validation si elle existe (le message global est trop générique), sinon le message du backend */
-async function toError(response: Response, fallback: string): Promise<Error> {
-  const body = await response.json().catch(() => null);
-  const firstError = body?.errors ? (Object.values(body.errors).flat()[0] as string | undefined) : undefined;
-  return new Error(firstError || body?.message || fallback);
-}
 
 function buildQuery(params: CommunityPostsListParams): string {
   const qp = new URLSearchParams();
@@ -31,7 +18,7 @@ function buildQuery(params: CommunityPostsListParams): string {
 
 async function fetchPosts(params: CommunityPostsListParams = {}): Promise<APICommunityPostsListResponse> {
   const response = await studentFetch(`/api/community/posts/list?${buildQuery(params)}`);
-  if (!response.ok) throw await toError(response, "Erreur lors de la récupération des publications");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération des publications");
   return response.json();
 }
 
@@ -61,7 +48,7 @@ async function fetchPostById(id: string): Promise<APICommunityPostDetail | null>
   const response = await studentFetch(`/api/community/posts/${id}`);
   // 403 = formation dont l'étudiant n'est pas membre, 404 = publication inexistante
   if (response.status === 404 || response.status === 403) return null;
-  if (!response.ok) throw await toError(response, "Erreur lors de la récupération de la publication");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la récupération de la publication");
   const json: { data: APICommunityPostDetail } = await response.json();
   return json.data;
 }
@@ -90,7 +77,7 @@ async function createPost(payload: CommunityPostCreatePayload): Promise<APICommu
   payload.attachments?.forEach((file) => fd.append("attachments[]", file));
 
   const response = await studentFetch(`/api/community/posts/create`, { method: "POST", body: fd });
-  if (!response.ok) throw await toError(response, "Erreur lors de la publication");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la publication");
   const json: { data: APICommunityPostDetail } = await response.json();
   return json.data;
 }
@@ -117,7 +104,7 @@ async function updatePost(id: string, payload: CommunityPostUpdatePayload): Prom
   if (payload.tags !== undefined) fd.append("tags", payload.tags.length ? payload.tags.join(",") : "[]");
 
   const response = await studentFetch(`/api/community/posts/${id}`, { method: "PUT", body: fd });
-  if (!response.ok) throw await toError(response, "Erreur lors de la modification de la publication");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la modification de la publication");
   const json: { data: APICommunityPostDetail } = await response.json();
   return json.data;
 }
@@ -138,7 +125,7 @@ export function useUpdateCommunityPost() {
 async function deletePost(id: string, reason?: string): Promise<void> {
   const suffix = reason?.trim() ? `?reason=${encodeURIComponent(reason.trim())}` : "";
   const response = await studentFetch(`/api/community/posts/${id}${suffix}`, { method: "DELETE" });
-  if (!response.ok && response.status !== 204) throw await toError(response, "Erreur lors de la suppression");
+  if (!response.ok && response.status !== 204) throw await parseApiError(response, "Erreur lors de la suppression");
 }
 
 export const deleteStudentCommunityPost = deletePost;
