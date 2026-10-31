@@ -1,6 +1,5 @@
 import { Pencil, Reply, ThumbsUp, Trash2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { APICommunityComment } from "@/data/community";

@@ -1,6 +1,5 @@
 import { useState } from "react";
-
-import { PaginationBar } from "@/components/pages/community/home";
+import { PaginationBar } from "@/components/pages/community/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CommentItem } from "./Item";

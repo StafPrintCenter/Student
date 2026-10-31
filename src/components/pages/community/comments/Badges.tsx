@@ -1,5 +1,4 @@
 import { CheckCircle2, EyeOff } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import type { APICommunityComment } from "@/data/community";
 

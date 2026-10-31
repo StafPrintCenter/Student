@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { CornerDownRight } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 import { CommentActions } from "./Actions";
 import { CommentFlagBadges } from "./Badges";
-import { EditCommentForm } from "./edit-comment-form";
+import { EditCommentForm } from "./EditForm";
 import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge } from "@/components/pages/community/shared";
 import type { APICommunityComment } from "@/data/community";
 
@@ -48,7 +47,7 @@ export function CommentItem({ comment, canReply, isReply = false, onReply, onDel
         ) : (
           <>
             {/* Texte brut : seuls les retours à la ligne sont conservés */}
-            <p className="whitespace-pre-wrap break-words text-sm leading-relaxed">{comment.body}</p>
+            <p className="whitespace-pre-wrap wrap-break-word text-sm leading-relaxed">{comment.body}</p>
 
             {hidden && (
               <p className="rounded-md bg-destructive/5 p-2 text-xs text-destructive">
