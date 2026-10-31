@@ -1,4 +1,4 @@
-import { Eye, GraduationCap, MessageSquare, Paperclip, ThumbsUp } from "lucide-react";
+import { Eye, GraduationCap, MessageSquare, Paperclip, SmilePlus } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -36,7 +36,7 @@ type Stat = { icon: LucideIcon; value: number; label: string; highlight?: boolea
 export function PostStats({ post }: { post: StatsPost }) {
   const stats: Stat[] = [
     { icon: MessageSquare, value: post.commentsCount, label: "commentaires" },
-    { icon: ThumbsUp, value: post.reactionsTotal, label: "réactions", highlight: !!post.myReaction },
+    { icon: SmilePlus, value: post.reactionsTotal, label: "réactions", highlight: !!post.myReaction },
     { icon: Eye, value: post.viewsCount, label: "vues" },
   ];
   if (post.attachmentsCount > 0) {
