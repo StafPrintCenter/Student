@@ -2,17 +2,9 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { COMMENTS_PER_PAGE, REPLIES_PER_PAGE, CommentFocusProvider, useCommentFocusState } from "@/components/pages/community/shared";
-import { CommentComposerCard } from "./ComposerCard";
-import { CommentsList } from "./ListItem";
-import { CommentsToolbar } from "./Toolbar";
-import { DeleteCommentDialog } from "./DeleteDialog";
+import { CommentComposerCard, CommentsList, CommentsToolbar, DeleteCommentDialog } from "./";
 import { useCommentLocator } from "@/stores/useCommunityCommentLocatorStore";
-import type {
-  APICommunityComment,
-  APICommunityPostDetail,
-  CommunityAuthorRole,
-  CommunityCommentSort,
-} from "@/data/community";
+import type { APICommunityComment, APICommunityPostDetail, CommunityAuthorRole, CommunityCommentSort } from "@/data/community";
 
 interface CommentsSectionProps {
   post: APICommunityPostDetail;
