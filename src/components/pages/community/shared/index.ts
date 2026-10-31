@@ -8,3 +8,4 @@ export { fullDate, formatFileSize, initialsOf, timeAgo } from "./Format";
 export { AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge } from "./PostBadges";
 export { TagsInput } from "./TagsInput";
 export { NativeSelect } from "./NativeSelect";
+export { PostStats, PostTags, TrainingBadge } from "./PostMeta";

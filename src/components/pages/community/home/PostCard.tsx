@@ -3,8 +3,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge } from "@/components/pages/community/shared";
-import { PostStats, PostTags, TrainingBadge } from "@/components/portal/community/post-meta";
+import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, PostStats, PostTags, TrainingBadge } from "@/components/pages/community/shared";
 import type { APICommunityPostListItem } from "@/data/community";
 
 interface PostCardProps {

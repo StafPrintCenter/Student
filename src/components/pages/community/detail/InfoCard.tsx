@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { fullDate, CategoryBadge } from "@/components/pages/community/shared";
-import { PostStats } from "@/components/portal/community/post-meta";
+import { fullDate, CategoryBadge, PostStats } from "@/components/pages/community/shared";
 import type { APICommunityPostDetail } from "@/data/community";
 
 export function PostInfoCard({ post }: { post: APICommunityPostDetail }) {
