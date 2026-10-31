@@ -2,7 +2,7 @@ import { Pencil, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CommunityAvatar } from "@/components/pages/community/shared/Avatar";
+import { CommunityAvatar } from "@/components/pages/community/shared";
 import { fullDate, timeAgo } from "@/components/portal/community/community-format";
 import { PostAttachments } from "@/components/portal/community/post-attachments";
 import { AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge } from "@/components/portal/community/post-badges";
