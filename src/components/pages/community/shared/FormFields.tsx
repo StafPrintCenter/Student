@@ -1,8 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { NativeSelect } from "@/components/portal/community/native-select";
-import type { PostFormValues } from "@/components/pages/community/home/FormModel";
+import { NativeSelect } from "@/components/pages/community/shared";
+import type { PostFormValues } from "@/components/pages/community/home";
 import { COMMUNITY_LIMITS, communityPostTypeMap, STUDENT_POST_TYPES, type APICommunityCategory, type CommunityPostType } from "@/data/community";
 
 interface PostFormFieldsProps {
