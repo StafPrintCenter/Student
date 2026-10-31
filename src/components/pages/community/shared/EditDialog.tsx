@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PostForm } from "@/components/pages/community/shared/PostForm";
 import { PostFormDialog } from "@/components/pages/community/shared/FormDialog";
-import { toUpdatePayload, valuesFromPost } from "@/components/portal/community/post-form-model";
+import { toUpdatePayload, valuesFromPost } from "@/components/pages/community/home/FormModel";
 import { useCommunityCategories } from "@/stores/useCommunityCategoriesStore";
 import { useCommunityPostDetail, useUpdateCommunityPost } from "@/stores/useCommunityPostsStore";
 

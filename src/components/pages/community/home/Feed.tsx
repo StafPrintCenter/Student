@@ -3,7 +3,7 @@ import { MessagesSquare, Plus } from "lucide-react";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PostCard } from "@/components/portal/community/post-card";
+import { PostCard } from "@/components/pages/community/home";
 import { hasActiveFilters, toListParams, PaginationBar, type CommunityFilters } from "@/components/pages/community/home";
 import { cn } from "@/lib/utils";
 import { useCommunityPostsList } from "@/stores/useCommunityPostsStore";

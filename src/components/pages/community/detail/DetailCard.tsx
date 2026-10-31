@@ -2,7 +2,7 @@ import { Pencil, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CommunityAvatar } from "@/components/portal/community/community-avatar";
+import { CommunityAvatar } from "@/components/pages/community/shared/Avatar";
 import { fullDate, timeAgo } from "@/components/portal/community/community-format";
 import { PostAttachments } from "@/components/portal/community/post-attachments";
 import { AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge } from "@/components/portal/community/post-badges";
@@ -62,7 +62,7 @@ export function PostDetailCard({ post, onEdit, onDelete }: PostDetailCardProps) 
         </div>
 
         {/* Le contenu est du texte brut : seuls les retours à la ligne sont conservés */}
-        <p className="whitespace-pre-wrap break-words text-sm leading-relaxed">{post.body}</p>
+        <p className="whitespace-pre-wrap wrap-break-word text-sm leading-relaxed">{post.body}</p>
 
         {tags.length > 0 && <PostTags tags={tags} />}
         <PostAttachments attachments={post.attachments ?? []} />

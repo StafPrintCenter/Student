@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { AttachmentsPicker } from "@/components/portal/community/attachments-picker";
 import { PostFormFields } from "@/components/portal/community/post-form-fields";
-import { hasUpdates, postFormSchema, toUpdatePayload, type PostFormValues } from "@/components/portal/community/post-form-model";
+import { hasUpdates, postFormSchema, toUpdatePayload, type PostFormValues } from "@/components/pages/community/home/FormModel";
 import { TagsInput } from "@/components/portal/community/tags-input";
 import { COMMUNITY_LIMITS, type APICommunityCategory } from "@/data/community";
 

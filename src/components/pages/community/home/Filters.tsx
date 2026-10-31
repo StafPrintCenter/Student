@@ -2,12 +2,11 @@ import { RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FilterToggle } from "@/components/pages/community/home/FilterToggle";
 import { NativeSelect } from "@/components/portal/community/native-select";
-import { hasActiveFilters, TRAINING_PLACE_PREFIX, type CommunityFilters } from "@/components/pages/community/home/FiltersModel";
+import { hasActiveFilters, TRAINING_PLACE_PREFIX, SearchBox, type CommunityFilters } from "@/components/pages/community/home";
 import {
   communityAuthorRoleMap, communityContentStatusLabels, communityPostTypeMap, communitySortLabels,
   type CommunityAuthorRole, type CommunityContentStatus, type CommunityPostType, type CommunitySort,
 } from "@/data/community";
-import { SearchBox } from "@/components/portal/search-box";
 
 interface CommunityFiltersBarProps {
   filters: CommunityFilters;
