@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api/resolve-url";
-import { parseApiError } from "@/lib/api/error";
 import type { APICommunityCategory } from "@/data/community";
 
 async function fetchCommunityCategories(): Promise<APICommunityCategory[]> {
