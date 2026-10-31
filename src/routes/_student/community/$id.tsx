@@ -5,15 +5,16 @@ import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DeletePostDialog, EditPostDialog, } from "@/components/pages/community/shared";
-import { HiddenPostAlert } from "@/components/portal/community/hidden-post-alert";
-import { PostDetailCard } from "@/components/portal/community/post-detail-card";
-import { PostInfoCard } from "@/components/portal/community/post-info-card";
+import { HiddenPostAlert, PostDetailCard, PostInfoCard } from "@/components/pages/community/detail";
 import { useCommunityPostDetail } from "@/stores/useCommunityPostsStore";
+import { SITE } from "@/data/site";
+import { useDynamicPageMetadata } from "@/hooks/useDynamicPageMetadata";
 
 export const Route = createFileRoute("/_student/community/$id")({
   head: () => ({
     meta: [
-      { title: "Publication - STAF Student Portal" },
+      { title: `${SITE.tool} - Détail d'une Publication | ${SITE.name}` },
+      { name: "description", content: `Consultez les détails d'une publication dans votre communauté.` },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -34,6 +35,10 @@ function CommunityPostPage() {
   const { id } = Route.useParams();
   const navigate = useNavigate();
   const { item: post, isLoading } = useCommunityPostDetail(id);
+  useDynamicPageMetadata(
+    post ? `${SITE.tool} - ${post.title} | ${SITE.name}` : undefined,
+    post ? `Retrouvez les détails de la publication « ${post.title} ».` : undefined,
+  );
   const [editing, setEditing] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
