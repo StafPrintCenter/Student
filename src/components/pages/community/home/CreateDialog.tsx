@@ -1,6 +1,6 @@
 import { toast } from "sonner";
-import { PostForm } from "@/components/portal/community/post-form";
-import { PostFormDialog } from "@/components/portal/community/post-form-dialog";
+import { PostForm } from "@/components/pages/community/shared/PostForm";
+import { PostFormDialog } from "@/components/pages/community/shared/FormDialog";
 import { emptyPostValues, toCreatePayload } from "@/components/portal/community/post-form-model";
 import { useCommunityCategories } from "@/stores/useCommunityCategoriesStore";
 import { useCreateCommunityPost } from "@/stores/useCommunityPostsStore";

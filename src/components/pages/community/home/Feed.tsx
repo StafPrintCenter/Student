@@ -6,7 +6,7 @@ import { PaginationBar } from "@/components/portal/pagination-bar";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PostCard } from "@/components/portal/community/post-card";
-import { hasActiveFilters, toListParams, type CommunityFilters } from "@/components/portal/community/filters-model";
+import { hasActiveFilters, toListParams, type CommunityFilters } from "@/components/pages/community/home/FiltersModel";
 import { cn } from "@/lib/utils";
 import { useCommunityPostsList } from "@/stores/useCommunityPostsStore";
 import type { APICommunityPostListItem } from "@/data/community";
