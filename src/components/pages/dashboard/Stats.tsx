@@ -51,7 +51,7 @@ export function DashboardStats() {
       <StatCard
         icon={CalendarCheck}
         label="Assiduité"
-        value={stats.averageAttendance == null ? "—" : `${stats.averageAttendance}%`}
+        value={stats.averageAttendance == null ? "-" : `${stats.averageAttendance}%`}
         hint="Taux de présence moyen"
       />
       <StatCard
