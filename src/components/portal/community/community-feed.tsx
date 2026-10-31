@@ -25,7 +25,7 @@ export function CommunityFeed({ filters, onCreate, onEdit, onDelete }: Community
   const debouncedQuery = useDebouncedValue(filters.query.trim());
 
   // La page repart de 1 dès qu'un filtre change, sans effet ni requête superflue
-  const signature = [debouncedQuery, filters.categoryId, filters.place, filters.type, filters.sort, filters.mine, filters.unanswered].join("|");
+  const signature = JSON.stringify(toListParams(filters, debouncedQuery, 1, PER_PAGE));
   const [pageState, setPageState] = useState({ signature, page: 1 });
   const page = pageState.signature === signature ? pageState.page : 1;
   const setPage = (next: number) => setPageState({ signature, page: next });
