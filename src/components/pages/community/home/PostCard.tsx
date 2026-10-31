@@ -3,7 +3,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, PostStats, PostTags, TrainingBadge } from "@/components/pages/community/shared";
+import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, PostStats, PostTags, TrainingBadge, MineBadge } from "@/components/pages/community/shared";
 import type { APICommunityPostListItem } from "@/data/community";
 
 interface PostCardProps {
@@ -25,6 +25,7 @@ export function PostCard({ post, onEdit, onDelete }: PostCardProps) {
         <div className="min-w-0 flex-1 space-y-2">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
             <span className="font-medium text-foreground">{post.author.name}</span>
+            {post.isMine && <MineBadge />}
             <AuthorRoleBadge role={post.author.role} />
             <span title={fullDate(post.createdAt)}>{timeAgo(post.createdAt)}</span>
             {post.editedAt && <span title={fullDate(post.editedAt)}>· modifiée</span>}

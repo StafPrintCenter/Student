@@ -31,6 +31,14 @@ export function CategoryBadge({ category }: { category: APICommunityCategoryRef 
   );
 }
 
+export function MineBadge() {
+  return (
+    <Badge variant="outline" className="border-transparent bg-primary text-[10px] font-medium text-primary-foreground">
+      Vous
+    </Badge>
+  );
+}
+
 type FlagsPost = Pick<APICommunityPostListItem, "isPinned" | "isLocked" | "status" | "bestAnswerId" | "type">;
 
 /** Épinglée, verrouillée, masquée, résolue */

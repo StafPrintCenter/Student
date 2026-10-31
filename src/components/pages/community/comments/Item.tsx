@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { CommentActions } from "./Actions";
 import { CommentFlagBadges } from "./Badges";
 import { EditCommentForm } from "./EditForm";
-import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge } from "@/components/pages/community/shared";
+import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, MineBadge } from "@/components/pages/community/shared";
 import type { APICommunityComment } from "@/data/community";
 
 interface CommentItemProps {
@@ -29,6 +29,7 @@ export function CommentItem({ comment, canReply, isReply = false, onReply, onDel
       <div className="min-w-0 flex-1 space-y-1.5">
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
           <span className="text-sm font-medium text-foreground">{comment.author.name}</span>
+          {comment.isMine && <MineBadge />}
           <AuthorRoleBadge role={comment.author.role} />
           <CommentFlagBadges comment={comment} />
           <span title={fullDate(comment.createdAt)}>{timeAgo(comment.createdAt)}</span>

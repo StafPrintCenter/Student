@@ -1,6 +1,5 @@
 import { Eye, GraduationCap, MessageSquare, Paperclip, SmilePlus } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { APICommunityPostListItem, APICommunityTrainingRef } from "@/data/community";

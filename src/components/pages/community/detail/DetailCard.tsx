@@ -1,7 +1,7 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, PostTags, TrainingBadge } from "@/components/pages/community/shared";
+import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, PostTags, TrainingBadge, MineBadge } from "@/components/pages/community/shared";
 import { PostAttachments } from "@/components/pages/community/detail";
 import type { APICommunityPostDetail } from "@/data/community";
 
@@ -48,6 +48,7 @@ export function PostDetailCard({ post, onEdit, onDelete }: PostDetailCardProps) 
           <div className="min-w-0 space-y-0.5 text-sm">
             <p className="flex flex-wrap items-center gap-2">
               <span className="font-medium">{post.author.name}</span>
+              {post.isMine && <MineBadge />}
               <AuthorRoleBadge role={post.author.role} />
             </p>
             <p className="text-xs text-muted-foreground">

@@ -4,6 +4,7 @@ import { ArrowLeft, MessagesSquare } from "lucide-react";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { CommentsSection } from "@/components/pages/community/comments/Section";
 import { DeletePostDialog, EditPostDialog, } from "@/components/pages/community/shared";
 import { HiddenPostAlert, PostDetailCard, PostInfoCard } from "@/components/pages/community/detail";
 import { useCommunityPostDetail } from "@/stores/useCommunityPostsStore";
@@ -64,8 +65,9 @@ function CommunityPostPage() {
       {post.status === "hidden" && <HiddenPostAlert reason={post.hiddenReason} hiddenAt={post.hiddenAt} />}
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+        <div className="space-y-8 lg:col-span-2">
           <PostDetailCard post={post} onEdit={() => setEditing(true)} onDelete={() => setDeleting(true)} />
+          <CommentsSection post={post} />
         </div>
         <PostInfoCard post={post} />
       </div>
