@@ -175,3 +175,84 @@ export interface CommunityPostsListParams {
   query?: string;
   sort?: CommunitySort;
 }
+
+/* ---- Commentaires ---- */
+
+export type CommunityCommentSort = "oldest" | "recent" | "popular";
+
+export const communityCommentSortLabels: Record<CommunityCommentSort, string> = {
+  oldest: "Plus anciens",
+  recent: "Plus récents",
+  popular: "Plus populaires",
+};
+
+/** Limites de validation du backend */
+export const COMMUNITY_COMMENT_LIMITS = { bodyMin: 1, bodyMax: 5000 };
+
+/** Présent sur une réponse : à qui elle s'adresse */
+export type APICommunityCommentReplyTo = {
+  commentId: string;
+  authorId: string;
+  authorName: string;
+  authorRole: CommunityAuthorRole;
+};
+
+export type APICommunityCommentPermissions = {
+  canEdit: boolean;
+  canDelete: boolean;
+  canHide: boolean;
+  canReply: boolean;
+  canReact: boolean;
+  canReport: boolean;
+};
+
+export type APICommunityComment = {
+  id: string;
+  postId: string;
+  parentId: string | null;
+  body: string;
+  author: APICommunityAuthor;
+  isPostAuthor: boolean;
+  isBestAnswer: boolean;
+  isMine: boolean;
+  status: CommunityContentStatus;
+  replyTo: APICommunityCommentReplyTo | null;
+  repliesCount: number;
+  reactionsTotal: number;
+  reactions: Record<string, number>;
+  myReaction: string | null;
+  createdAt: string;
+  editedAt: string | null;
+  permissions: APICommunityCommentPermissions;
+  hiddenReason?: string | null;
+  hiddenAt?: string | null;
+};
+
+export type APICommunityCommentsMeta = {
+  currentPage: number;
+  lastPage: number;
+  perPage: number;
+  total: number;
+};
+
+export type APICommunityCommentsListResponse = {
+  data: APICommunityComment[];
+  meta: APICommunityCommentsMeta;
+};
+
+/** Paramètres de GET /api/community/posts/{postId}/comments/list */
+export type CommunityCommentsListParams = {
+  page?: number;
+  perPage?: number;
+  sort?: CommunityCommentSort;
+  authorRole?: CommunityAuthorRole;
+};
+
+/** Paramètres de GET /api/community/comments/{id}/replies (toujours du plus ancien au plus récent) */
+export type CommunityRepliesListParams = Pick<CommunityCommentsListParams, "page" | "perPage">;
+
+/** POST /api/community/posts/{postId}/comments/create : parentId = commentaire auquel on répond */
+export type CommunityCommentCreatePayload = {
+  body: string;
+  parentId?: string;
+};
