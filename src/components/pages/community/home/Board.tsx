@@ -3,9 +3,12 @@ import { Plus } from "lucide-react";
 import { PageHeader } from "@/components/site";
 import { Button } from "@/components/ui/button";
 import {
-  CategorySidebar, CommunityFeed, CommunityFiltersBar, CreatePostDialog, DeletePostDialog, EditPostDialog,
+  CommunityFeed, CommunityFiltersBar, CreatePostDialog, DeletePostDialog, EditPostDialog,
   DEFAULT_COMMUNITY_FILTERS, trainingIdFromPlace, type CommunityFilters
 } from "@/components/portal/community";
+import {
+  CategorySidebar,
+} from "./";
 import { useCommunityCategories } from "@/stores/useCommunityCategoriesStore";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
 import type { APICommunityPostListItem } from "@/data/community";

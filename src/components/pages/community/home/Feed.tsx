@@ -8,7 +8,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { PostCard } from "@/components/portal/community/post-card";
 import { hasActiveFilters, toListParams, type CommunityFilters } from "@/components/portal/community/filters-model";
 import { cn } from "@/lib/utils";
-import { useDebouncedValue } from "@/hooks/useDebouncedValue";
 import { useCommunityPostsList } from "@/stores/useCommunityPostsStore";
 import type { APICommunityPostListItem } from "@/data/community";
 
@@ -22,16 +21,16 @@ interface CommunityFeedProps {
 }
 
 export function CommunityFeed({ filters, onCreate, onEdit, onDelete }: CommunityFeedProps) {
-  const debouncedQuery = useDebouncedValue(filters.query.trim());
+  const query = filters.query.trim();
 
   // La page repart de 1 dès qu'un filtre change, sans effet ni requête superflue
-  const signature = JSON.stringify(toListParams(filters, debouncedQuery, 1, PER_PAGE));
+  const signature = JSON.stringify(toListParams(filters, query, 1, PER_PAGE));
   const [pageState, setPageState] = useState({ signature, page: 1 });
   const page = pageState.signature === signature ? pageState.page : 1;
   const setPage = (next: number) => setPageState({ signature, page: next });
 
   const { items, meta, isLoading, isFetching, isError, refetch } = useCommunityPostsList(
-    toListParams(filters, debouncedQuery, page, PER_PAGE)
+    toListParams(filters, query, page, PER_PAGE)
   );
 
   if (isLoading) {
@@ -67,7 +66,9 @@ export function CommunityFeed({ filters, onCreate, onEdit, onDelete }: Community
       <EmptyState
         icon={MessagesSquare}
         title={filtered ? "Aucune publication ne correspond" : "Aucune publication pour le moment"}
-        description={filtered ? "Modifiez vos filtres pour élargir la recherche." : "Lancez la conversation avec votre première publication."}
+        description={
+          filtered ? "Modifiez vos filtres pour élargir la recherche." : "Lancez la conversation avec votre première publication."
+        }
         action={
           <Button onClick={onCreate}>
             <Plus className="mr-1.5 h-4 w-4" /> Publier
@@ -82,6 +83,12 @@ export function CommunityFeed({ filters, onCreate, onEdit, onDelete }: Community
       {meta && (
         <p className="text-xs text-muted-foreground">
           {meta.total} publication{meta.total > 1 ? "s" : ""}
+          {query && (
+            <>
+              {" "}
+              pour « <span className="font-medium text-foreground">{query}</span> »
+            </>
+          )}
         </p>
       )}
 
