@@ -2,9 +2,8 @@ import { Pencil, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CommunityAvatar, fullDate, timeAgo } from "@/components/pages/community/shared";
+import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge } from "@/components/pages/community/shared";
 import { PostAttachments } from "@/components/portal/community/post-attachments";
-import { AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge } from "@/components/shared/PostBadges";
 import { PostTags, TrainingBadge } from "@/components/portal/community/post-meta";
 import type { APICommunityPostDetail } from "@/data/community";
 

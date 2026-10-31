@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { fullDate } from "@/components/pages/community/shared";
-import { CategoryBadge } from "@/components/shared/PostBadges";
+import { fullDate, CategoryBadge } from "@/components/pages/community/shared";
 import { PostStats } from "@/components/portal/community/post-meta";
 import type { APICommunityPostDetail } from "@/data/community";
 
