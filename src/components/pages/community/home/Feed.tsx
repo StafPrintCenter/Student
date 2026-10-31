@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { MessagesSquare, Plus } from "lucide-react";
-
 import { EmptyState } from "@/components/shared";
-import { PaginationBar } from "@/components/portal/pagination-bar";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PostCard } from "@/components/portal/community/post-card";
-import { hasActiveFilters, toListParams, type CommunityFilters } from "@/components/pages/community/home/FiltersModel";
+import { hasActiveFilters, toListParams, PaginationBar, type CommunityFilters } from "@/components/pages/community/home";
 import { cn } from "@/lib/utils";
 import { useCommunityPostsList } from "@/stores/useCommunityPostsStore";
 import type { APICommunityPostListItem } from "@/data/community";

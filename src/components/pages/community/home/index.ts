@@ -7,3 +7,5 @@ export { DEFAULT_COMMUNITY_FILTERS, TRAINING_PLACE_PREFIX, hasActiveFilters, toL
 export { FilterToggle } from "./FilterToggle";
 export { emptyPostValues, hasUpdates, postFormSchema, toCreatePayload, toUpdatePayload, valuesFromPost, type PostFormValues } from "./FormModel";
 export { SearchBox } from "./SearchBox";
+export { PaginationBar } from "./PaginationBar";
+export { PostCard } from "./PostCard";
