@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { resolveStorageUrl } from "@/lib/api/file";
-import { initialsOf } from "@/components/portal/community/community-format";
+import { initialsOf } from "@/components/pages/community/shared/Format";
 
 const sizes = { sm: "h-8 w-8 text-xs", md: "h-10 w-10 text-sm" } as const;
 

@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Download, Eye, File as FileIcon, FileArchive, FileText, Image as ImageIcon, Paperclip } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { FilePreviewModal } from "@/components/site/FilePreviewModal";
-import { formatFileSize } from "@/components/portal/community/community-format";
+import { formatFileSize } from "@/components/pages/community/shared/Format";
 import { resolveStorageUrl } from "@/lib/api/file";
 import type { APICommunityAttachment } from "@/data/community";
 

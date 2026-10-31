@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { CommunityAvatar } from "@/components/pages/community/shared";
-import { fullDate, timeAgo } from "@/components/portal/community/community-format";
+import { fullDate, timeAgo } from "@/components/pages/community/shared/Format";
 import { AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge } from "@/components/portal/community/post-badges";
 import { PostStats, PostTags, TrainingBadge } from "@/components/portal/community/post-meta";
 import type { APICommunityPostListItem } from "@/data/community";
