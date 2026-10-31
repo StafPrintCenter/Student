@@ -1,19 +1,11 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
-
 import { PageHeader } from "@/components/site";
 import { Button } from "@/components/ui/button";
-import { CategorySidebar } from "@/components/portal/community/category-sidebar";
-import { CommunityFeed } from "@/components/portal/community/community-feed";
-import { CommunityFiltersBar } from "@/components/portal/community/community-filters";
-import { CreatePostDialog } from "@/components/portal/community/create-post-dialog";
-import { DeletePostDialog } from "@/components/portal/community/delete-post-dialog";
-import { EditPostDialog } from "@/components/portal/community/edit-post-dialog";
 import {
-  DEFAULT_COMMUNITY_FILTERS,
-  trainingIdFromPlace,
-  type CommunityFilters,
-} from "@/components/portal/community/filters-model";
+  CategorySidebar, CommunityFeed, CommunityFiltersBar, CreatePostDialog, DeletePostDialog, EditPostDialog,
+  DEFAULT_COMMUNITY_FILTERS, trainingIdFromPlace, type CommunityFilters
+} from "@/components/portal/community";
 import { useCommunityCategories } from "@/stores/useCommunityCategoriesStore";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
 import type { APICommunityPostListItem } from "@/data/community";

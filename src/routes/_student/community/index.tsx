@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CommunityBoard } from "@/components/portal/community/community-board";
+import { CommunityBoard } from "@/components/pages/community/home";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/_student/community/")({
   head: () => ({
     meta: [
-      { title: "Communauté - STAF Student Portal" },
+      { title: `${SITE.tool} - Communauté | ${SITE.name}` },
       { name: "description", content: "Échangez avec les autres apprenants et vos formateurs." },
     ],
   }),
