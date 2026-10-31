@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from "react";
 import { FileUp, Paperclip, X } from "lucide-react";
-import { formatFileSize } from "@/components/pages/community/shared/Format";
+import { formatFileSize } from "@/components/pages/community/shared";
 import { COMMUNITY_LIMITS } from "@/data/community";
 
 interface AttachmentsPickerProps {
