@@ -1,11 +1,6 @@
 export { AttachmentsPicker } from "./attachments-picker";
 
 export { CommunityAvatar } from "./community-avatar";
-export { CommunityFeed } from "../../pages/community/home/Feed";
-export { CommunityFiltersBar } from "../../pages/community/home/Filters";
-export { CreatePostDialog } from "../../pages/community/home/CreateDialog";
-export { DeletePostDialog } from "../../pages/community/shared/DeleteDialog";
-export { EditPostDialog } from "../../pages/community/shared/EditDialog";
 export { FilterToggle } from "./filter-toggle";
 export { HiddenPostAlert } from "./hidden-post-alert";
 export { NativeSelect } from "./native-select";

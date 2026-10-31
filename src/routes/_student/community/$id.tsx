@@ -1,12 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, MessagesSquare } from "lucide-react";
-
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DeletePostDialog } from "@/components/pages/community/shared/DeleteDialog";
-import { EditPostDialog } from "@/components/pages/community/shared/EditDialog";
+import { DeletePostDialog, EditPostDialog, } from "@/components/pages/community/shared";
 import { HiddenPostAlert } from "@/components/portal/community/hidden-post-alert";
 import { PostDetailCard } from "@/components/portal/community/post-detail-card";
 import { PostInfoCard } from "@/components/portal/community/post-info-card";
