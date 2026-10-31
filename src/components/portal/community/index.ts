@@ -9,7 +9,6 @@ export {
   PostFlagBadges,
   PostTypeBadge,
 } from "./post-badges";
-export { PostCard } from "./post-card";
 export { PostDetailCard } from "./post-detail-card";
 export { PostFormFields } from "./post-form-fields";
 export { PostInfoCard } from "./post-info-card";
