@@ -1,6 +1,5 @@
 import { useState, type ChangeEvent } from "react";
 import { FileUp, Paperclip, X } from "lucide-react";
-
 import { formatFileSize } from "@/components/portal/community/community-format";
 import { COMMUNITY_LIMITS } from "@/data/community";
 

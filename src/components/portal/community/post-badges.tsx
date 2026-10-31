@@ -1,15 +1,7 @@
 import { CheckCircle2, EyeOff, Lock, Pin } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import {
-  communityAuthorRoleMap,
-  communityPostTypeMap,
-  type APICommunityCategoryRef,
-  type APICommunityPostListItem,
-  type CommunityAuthorRole,
-  type CommunityPostType,
-} from "@/data/community";
+import { communityAuthorRoleMap, communityPostTypeMap, type APICommunityCategoryRef, type APICommunityPostListItem, type CommunityAuthorRole, type CommunityPostType } from "@/data/community";
 
 export function PostTypeBadge({ type }: { type: CommunityPostType }) {
   const config = communityPostTypeMap[type] ?? { label: type, className: "bg-muted text-muted-foreground border-border" };
