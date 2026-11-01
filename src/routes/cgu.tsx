@@ -1,6 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Printer, ScrollText, AlertTriangle, GraduationCap, ShieldCheck, Handshake, Award, Database, Mail, ArrowLeft } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { SITE } from "@/data/site";
+
+const PAGE_TITLE = `${SITE.tool} - Conditions Générales d'Utilisation | ${SITE.name}`
+const PAGE_DESC = `CGU de la plateforme d'apprentissage ${SITE.name} : accès au service, conditions financières (acompte de 25 %), propriété intellectuelle, assiduité, certificats et données personnelles (APDP).}`
 
 export const Route = createFileRoute("/cgu")({
   head: () => ({
