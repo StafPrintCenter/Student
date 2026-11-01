@@ -6,8 +6,8 @@ import { PostAttachments } from "@/components/pages/community/detail";
 import { ReactionControl } from "@/components/pages/community/content/reactions/Control";
 import type { APICommunityPostDetail } from "@/data/community";
 // 1. imports
-import { PostModerationBar } from "@/components/pages/community/content/moderation/post-moderation-bar";
-import { ReportAction } from "@/components/pages/community/content/moderation/report-action";
+import { PostModerationBar } from "@/components/pages/community/content/moderation/PostModerationBar";
+import { ReportAction } from "@/components/pages/community/content/moderation/ReportAction";
 
 interface PostDetailCardProps {
   post: APICommunityPostDetail;

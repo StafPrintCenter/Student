@@ -1,8 +1,7 @@
 import { CheckCircle2, Pencil, Reply, Trash2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CommentModerationAction } from "@/components/pages/community/content/moderation/CommentAction";
-import { ReportAction } from "@/components/pages/community/content/moderation/report-action";
+import { CommentModerationAction, ReportAction } from "../moderation";
 import { ReactionControl } from "../reactions/Control";
 import { cn } from "@/lib/utils";
 import type { APICommunityComment } from "@/data/community";

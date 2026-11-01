@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { HideReasonDialog } from "./hide-reason-dialog";
+import { HideReasonDialog } from "./HideReason";
 import {
   communityCommentModerationMessages,
   type APICommunityComment,

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Flag } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-import { ReportDialog } from "./report-dialog";
+import { ReportDialog } from "./ReportDialog";
 import { cn } from "@/lib/utils";
 import type { CommunityContentTarget } from "@/data/community";
 import { useIsContentReported } from "@/stores/useReportedContentStore";

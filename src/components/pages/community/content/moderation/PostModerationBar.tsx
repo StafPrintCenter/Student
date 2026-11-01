@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Eye, EyeOff, Loader2, Lock, Pin, PinOff, Unlock } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { toast } from "sonner";
-
 import { Button } from "@/components/ui/button";
-import { HideReasonDialog } from "./hide-reason-dialog";
+import { HideReasonDialog } from "./HideReason";
 import {
   communityPostModerationMessages,
   type APICommunityPostDetail,
