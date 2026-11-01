@@ -1,6 +1,6 @@
-export { FilterChip } from "../../reactions/FilterChip";
+export { FilterChip } from "./FilterChip";
 export { ReactionControl } from "./Control";
-export { ReactionPicker } from "../../reactions/Picker";
-export { ReactionSummary } from "../../reactions/Summary";
+export { ReactionPicker } from "./Picker";
+export { ReactionSummary } from "./Summary";
 export { ReactionsDialog } from "./Dialog";
-export { ReactionsList } from "../../reactions/List";
+export { ReactionsList } from "./List";
