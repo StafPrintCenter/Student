@@ -26,7 +26,7 @@ export function ReactionPicker({ value, display, disabled, onSelect }: ReactionP
             disabled={disabled}
             onClick={() => onSelect(type)}
             className={cn(
-              "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-colors hover:bg-muted/60 disabled:pointer-events-none disabled:opacity-60",
+              "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-colors hover:bg-muted/60 disabled:pointer-events-none disabled:opacity-60 cursor-pointer",
               active ? "border-primary bg-primary/10 font-medium text-primary" : "border-border"
             )}
           >

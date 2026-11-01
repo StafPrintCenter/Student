@@ -1,11 +1,8 @@
 import { useState } from "react";
 import { SmilePlus } from "lucide-react";
 import { toast } from "sonner";
-
 import { Button } from "@/components/ui/button";
-import { ReactionPicker } from "@/components/pages/community/reactions/reaction-picker";
-import { ReactionSummary } from "@/components/pages/community/reactions/reaction-summary";
-import { ReactionsDialog } from "@/components/pages/community/reactions/reactions-dialog";
+import { ReactionPicker, ReactionSummary, ReactionsDialog } from ".";
 import { cn } from "@/lib/utils";
 import { getReactionConfig, type CommunityReactionTarget, type CommunityReactionType } from "@/data/community";
 import { useRemoveCommunityReaction, useSetCommunityReaction } from "@/stores/useCommunityReactionsStore";
