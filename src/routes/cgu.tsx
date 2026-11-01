@@ -10,17 +10,9 @@ export const Route = createFileRoute("/cgu")({
   head: () => ({
     meta: [
       { title: "Conditions Générales d'Utilisation — STAF Print Center" },
-      {
-        name: "description",
-        content:
-          "CGU de la plateforme d'apprentissage STAF Print Center : accès au service, conditions financières (acompte de 25 %), propriété intellectuelle, assiduité, certificats et données personnelles (APDP).",
-      },
-      { property: "og:title", content: "Conditions Générales d'Utilisation — STAF Print Center" },
-      {
-        property: "og:description",
-        content:
-          "Les règles qui encadrent votre compte, vos paiements, vos formations, vos certificats et vos données sur le portail apprenant STAF Print Center.",
-      },
+      { name: "description", content: PAGE_DESC, },
+      { property: "og:title", content: PAGE_TITLE },
+      { property: "og:description", content: PAGE_DESC, },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
