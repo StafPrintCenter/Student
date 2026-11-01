@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, PostTags, TrainingBadge, MineBadge } from "@/components/pages/community/shared";
 import { PostAttachments } from "@/components/pages/community/detail";
+import { ReactionControl } from "@/components/pages/community/reactions/Control";
 import type { APICommunityPostDetail } from "@/data/community";
 
 interface PostDetailCardProps {
@@ -62,6 +63,17 @@ export function PostDetailCard({ post, onEdit, onDelete }: PostDetailCardProps) 
         <p className="whitespace-pre-wrap wrap-break-word text-sm leading-relaxed">{post.body}</p>
 
         {tags.length > 0 && <PostTags tags={tags} />}
+
+        <ReactionControl
+          variant="bar"
+          className="border-t pt-4"
+          target={{ kind: "post", id: post.id }}
+          myReaction={post.myReaction}
+          reactions={post.reactions}
+          reactionsTotal={post.reactionsTotal}
+          canReact={post.permissions.canReact}
+        />
+
         <PostAttachments attachments={post.attachments ?? []} />
       </CardContent>
     </Card>
