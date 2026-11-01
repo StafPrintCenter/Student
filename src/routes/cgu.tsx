@@ -9,7 +9,7 @@ const PAGE_DESC = `CGU de la plateforme d'apprentissage ${SITE.name} : accès au
 export const Route = createFileRoute("/cgu")({
   head: () => ({
     meta: [
-      { title: "Conditions Générales d'Utilisation — STAF Print Center" },
+      { title: PAGE_TITLE },
       { name: "description", content: PAGE_DESC, },
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC, },
