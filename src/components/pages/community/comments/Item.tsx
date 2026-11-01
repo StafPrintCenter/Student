@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { CornerDownRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CommentActions, CommentFlagBadges, EditCommentForm } from "./";
+import { CommentActions, CommentFlagBadges, EditCommentForm, useCommentsContext, MarkBestAnswerDialog } from "./";
 import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, MineBadge, useCommentFocus } from "@/components/pages/community/shared";
-import { useCommentsContext, MarkBestAnswerDialog } from "@/components/pages/community/comments";
 import type { APICommunityComment } from "@/data/community";
 
 interface CommentItemProps {
