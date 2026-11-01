@@ -59,6 +59,14 @@ function LoginPage() {
         <a href={`${SITE_LINK.landingUrl}/trainings`} className="font-medium text-foreground underline underline-offset-4">
           Souscrire à une formation
         </a>
+
+        <p className="mt-6 text-center text-[11px] leading-relaxed text-muted-foreground">
+          En vous connectant, vous acceptez les{" "}
+          <Link to="/cgu" className="text-primary hover:underline">
+            Conditions Générales d'Utilisation
+          </Link>
+          .
+        </p>
       </span>
     ),
   });
