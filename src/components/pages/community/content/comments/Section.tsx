@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { COMMENTS_PER_PAGE, REPLIES_PER_PAGE, CommentFocusProvider, useCommentFocusState } from "@/components/pages/community/shared";
 import { CommentsContextProvider } from "@/components/pages/community/content/comments/Context";
-import { CommentComposerCard, CommentsList, CommentsToolbar, DeleteCommentDialog } from "../content/comments";
+import { CommentComposerCard, CommentsList, CommentsToolbar, DeleteCommentDialog } from ".";
 import { useCommentLocator } from "@/stores/useCommunityCommentLocatorStore";
 import type { APICommunityComment, APICommunityPostDetail, CommunityAuthorRole, CommunityCommentSort } from "@/data/community";
 

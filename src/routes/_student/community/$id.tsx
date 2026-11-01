@@ -5,7 +5,7 @@ import { ArrowLeft, MessagesSquare } from "lucide-react";
 import { EmptyState } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { CommentsSection } from "@/components/pages/community/comments/Section";
+import { CommentsSection } from "@/components/pages/community/content/comments/Section";
 import { DeletePostDialog, EditPostDialog, } from "@/components/pages/community/shared";
 import { HiddenPostAlert, PostDetailCard, PostInfoCard } from "@/components/pages/community/detail";
 import { useCommunityPostDetail } from "@/stores/useCommunityPostsStore";

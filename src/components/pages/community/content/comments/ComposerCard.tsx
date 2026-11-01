@@ -1,6 +1,6 @@
 import { Lock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { NewCommentForm } from "../../comments/NewForm";
+import { NewCommentForm } from "./NewForm";
 import type { APICommunityPostDetail } from "@/data/community";
 
 interface CommentComposerCardProps {
