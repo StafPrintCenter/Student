@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CommentItem, CommentReplies, NewCommentForm } from "./";
+import { CommentItem, CommentReplies, NewCommentForm } from ".";
 import { useCommentFocus } from "@/components/pages/community/shared";
 import { cn } from "@/lib/utils";
 import type { APICommunityComment } from "@/data/community";
