@@ -1,6 +1,8 @@
 import { CheckCircle2, Pencil, Reply, Trash2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CommentModerationAction } from "@/components/pages/community/content/moderation/CommentAction";
+import { ReportAction } from "@/components/pages/community/content/moderation/report-action";
 import { ReactionControl } from "../reactions/Control";
 import { cn } from "@/lib/utils";
 import type { APICommunityComment } from "@/data/community";
@@ -42,6 +44,8 @@ export function CommentActions({
       {canMarkBest && <ActionButton icon={CheckCircle2} label="Meilleure réponse" tone="success" onClick={onMarkBest} />}
       {permissions.canEdit && <ActionButton icon={Pencil} label="Modifier" onClick={onEdit} />}
       {permissions.canDelete && <ActionButton icon={Trash2} label="Supprimer" tone="destructive" onClick={onDelete} />}
+      {permissions.canReport && <ReportAction compact target={{ kind: "comment", id: comment.id }} noun="ce commentaire" />}
+      <CommentModerationAction comment={comment} />
     </div>
   );
 }

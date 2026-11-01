@@ -5,6 +5,9 @@ import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, Pos
 import { PostAttachments } from "@/components/pages/community/detail";
 import { ReactionControl } from "@/components/pages/community/content/reactions/Control";
 import type { APICommunityPostDetail } from "@/data/community";
+// 1. imports
+import { PostModerationBar } from "@/components/pages/community/content/moderation/post-moderation-bar";
+import { ReportAction } from "@/components/pages/community/content/moderation/report-action";
 
 interface PostDetailCardProps {
   post: APICommunityPostDetail;
@@ -14,7 +17,7 @@ interface PostDetailCardProps {
 
 export function PostDetailCard({ post, onEdit, onDelete }: PostDetailCardProps) {
   const tags = post.tags ?? [];
-  const { canEdit, canDelete } = post.permissions;
+  const { canEdit, canDelete, canReport } = post.permissions;
 
   return (
     <Card>
@@ -28,7 +31,7 @@ export function PostDetailCard({ post, onEdit, onDelete }: PostDetailCardProps) 
 
         <div className="flex items-start justify-between gap-3">
           <h1 className="font-display text-2xl leading-tight md:text-3xl">{post.title}</h1>
-          {(canEdit || canDelete) && (
+          {(canEdit || canDelete || canReport) && (
             <div className="flex shrink-0 gap-1">
               {canEdit && (
                 <Button size="sm" variant="outline" onClick={onEdit}>
@@ -40,6 +43,7 @@ export function PostDetailCard({ post, onEdit, onDelete }: PostDetailCardProps) 
                   <Trash2 className="mr-1.5 h-3.5 w-3.5" /> Supprimer
                 </Button>
               )}
+              {canReport && <ReportAction target={{ kind: "post", id: post.id }} noun="cette publication" />}
             </div>
           )}
         </div>
@@ -63,6 +67,8 @@ export function PostDetailCard({ post, onEdit, onDelete }: PostDetailCardProps) 
         <p className="whitespace-pre-wrap wrap-break-word text-sm leading-relaxed">{post.body}</p>
 
         {tags.length > 0 && <PostTags tags={tags} />}
+
+        <PostModerationBar post={post} />
 
         <ReactionControl
           variant="bar"

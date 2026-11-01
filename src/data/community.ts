@@ -311,3 +311,65 @@ export type CommunityReactionsListParams = {
   /** Rôle de la personne qui a réagi */
   role?: CommunityAuthorRole;
 };
+
+/* ---- Signalements ---- */
+
+/** Aligné sur App\Enums\CommunityReportReason (backend) */
+export type CommunityReportReason = "spam" | "harassment" | "inappropriate" | "misinformation" | "off_topic" | "other";
+
+export const communityReportReasonMap: Record<CommunityReportReason, { label: string; description: string }> = {
+  spam: { label: "Spam ou publicité", description: "Contenu promotionnel, répétitif ou sans intérêt." },
+  harassment: { label: "Harcèlement", description: "Insultes, intimidation ou menaces envers un membre." },
+  inappropriate: { label: "Contenu inapproprié", description: "Contenu choquant ou non adapté à la communauté." },
+  misinformation: { label: "Désinformation", description: "Informations fausses ou trompeuses." },
+  off_topic: { label: "Hors sujet", description: "Sans rapport avec la catégorie ou la formation." },
+  other: { label: "Autre", description: "Un autre motif, à préciser ci-dessous." },
+};
+
+export const COMMUNITY_REPORT_REASONS = Object.keys(communityReportReasonMap) as CommunityReportReason[];
+
+/** Limites de validation du backend */
+export const COMMUNITY_REPORT_LIMITS = { detailsMax: 1000 };
+
+/** Aligné sur App\Enums\CommunityReportLevel / CommunityReportStatus (backend) */
+export type CommunityReportLevel = "instructor" | "admin";
+export type CommunityReportStatus = "pending" | "resolved" | "dismissed";
+
+/** Publication ou commentaire visé par un signalement */
+export type CommunityContentTarget = { kind: "post" | "comment"; id: string };
+
+/** POST /api/community/{posts|comments}/{id}/report : `details` est obligatoire si reason = other */
+export type CommunityReportPayload = {
+  reason: CommunityReportReason;
+  details?: string;
+};
+
+export type APICommunityReportResult = {
+  id: string;
+  /** Qui traite le signalement : les formateurs de la formation ou l'administration */
+  level: CommunityReportLevel;
+  status: CommunityReportStatus;
+  message: string;
+};
+
+/* ---- Modération ---- */
+
+export type CommunityPostModerationAction = "pin" | "unpin" | "lock" | "unlock" | "hide" | "unhide";
+export type CommunityCommentModerationAction = "hide" | "unhide";
+
+/** Limite du motif de masquage (obligatoire pour « hide ») */
+export const COMMUNITY_MODERATION_LIMITS = { reasonMax: 1000 };
+
+export const communityPostModerationMessages: Record<CommunityPostModerationAction, string> = {
+  pin: "Publication épinglée.",
+  unpin: "Publication désépinglée.",
+  lock: "Commentaires fermés.",
+  unlock: "Commentaires rouverts.",
+  hide: "Publication masquée.",
+  unhide: "Publication rétablie.",
+};
+
+export const communityCommentModerationMessages: Record<CommunityCommentModerationAction, string> = {
+  hide: "Commentaire masqué.",
+  unhide: "Commentaire rétabli.",
+};
