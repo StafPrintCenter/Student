@@ -42,7 +42,7 @@ async function locateComment(
   let page = 1;
   let lastPage = 1;
   do {
-    const res = await fetchStudentCommunityComments(postId, { page, perPage: SCAN_PER_PAGE, sort: "oldest" });
+    const res = await fetchStudentCommunityComments(postId, { page, perPage: SCAN_PER_PAGE, sort: "recent" });
     roots.push(...res.data);
     lastPage = res.meta.lastPage;
     page += 1;

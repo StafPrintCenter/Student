@@ -256,3 +256,58 @@ export type CommunityCommentCreatePayload = {
   body: string;
   parentId?: string;
 };
+
+/* ---- Réactions ---- */
+
+/** Aligné sur App\Enums\CommunityReactionType (backend) */
+export type CommunityReactionType = "like" | "love" | "celebrate" | "support" | "insightful" | "funny";
+
+export const communityReactionMap: Record<CommunityReactionType, { label: string; emoji: string }> = {
+  like: { label: "J'aime", emoji: "👍" },
+  love: { label: "J'adore", emoji: "❤️" },
+  celebrate: { label: "Bravo", emoji: "🎉" },
+  support: { label: "Soutien", emoji: "🤝" },
+  insightful: { label: "Instructif", emoji: "💡" },
+  funny: { label: "Drôle", emoji: "😄" },
+};
+
+export const COMMUNITY_REACTION_TYPES = Object.keys(communityReactionMap) as CommunityReactionType[];
+
+/** Type inconnu du front (ajouté côté backend) : affiché sans casser la page */
+export function getReactionConfig(type: string): { label: string; emoji: string } {
+  return communityReactionMap[type as CommunityReactionType] ?? { label: type, emoji: "👍" };
+}
+
+/** Ce sur quoi on réagit : une publication ou un commentaire */
+export type CommunityReactionTarget = { kind: "post" | "comment"; id: string };
+
+/** État renvoyé après avoir réagi ou retiré sa réaction */
+export type APICommunityReactionState = {
+  myReaction: string | null;
+  reactions: Record<string, number>;
+  reactionsTotal: number;
+};
+
+export type APICommunityReactionItem = {
+  id: string;
+  type: CommunityReactionType;
+  reactedAt: string;
+  user: APICommunityAuthor;
+};
+
+/** GET /api/community/{posts|comments}/{id}/reactions/list */
+export type APICommunityReactionsListResponse = {
+  /** Nombre de réactions par type, indépendant des filtres */
+  summary: Partial<Record<CommunityReactionType, number>>;
+  total: number;
+  data: APICommunityReactionItem[];
+  meta: APICommunityPostsMeta;
+};
+
+export type CommunityReactionsListParams = {
+  page?: number;
+  perPage?: number;
+  type?: CommunityReactionType;
+  /** Rôle de la personne qui a réagi */
+  role?: CommunityAuthorRole;
+};
