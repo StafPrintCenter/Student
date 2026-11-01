@@ -11,4 +11,5 @@ export { CommentsSection } from "./Section";
 export { CommentTextForm } from "./TextForm";
 export { CommentsToolbar } from "./Toolbar";
 export { CommentThread } from "./Thread";
-export { CommentsContextProvider, useCommentsContext, type CommentsContextValue } from "./comments-context";
+export { MarkBestAnswerDialog } from "./mark-best-answer-dialog";
+export { CommentsContextProvider, useCommentsContext, type CommentsContextValue } from "./Context";
