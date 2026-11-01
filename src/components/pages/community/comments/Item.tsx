@@ -3,6 +3,7 @@ import { CornerDownRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CommentActions, CommentFlagBadges, EditCommentForm } from "./";
 import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, MineBadge, useCommentFocus } from "@/components/pages/community/shared";
+import { useCommentsContext, MarkBestAnswerDialog } from "@/components/pages/community/comments";
 import type { APICommunityComment } from "@/data/community";
 
 interface CommentItemProps {
@@ -15,6 +16,9 @@ interface CommentItemProps {
 
 export function CommentItem({ comment, canReply, isReply = false, onReply, onDelete }: CommentItemProps) {
   const [editing, setEditing] = useState(false);
+  const { postId, canMarkBest } = useCommentsContext();
+  const [markingBest, setMarkingBest] = useState(false);
+  const canBeBest = canMarkBest && comment.parentId === null && comment.status === "published" && !comment.isBestAnswer;
   const hidden = comment.status === "hidden";
   const focus = useCommentFocus();
   const isTarget = focus?.commentId === comment.id;
@@ -77,10 +81,14 @@ export function CommentItem({ comment, canReply, isReply = false, onReply, onDel
             <CommentActions
               comment={comment}
               canReply={canReply}
+              canMarkBest={canBeBest}
               onReply={() => onReply(comment)}
+              onMarkBest={() => setMarkingBest(true)}
               onEdit={() => setEditing(true)}
               onDelete={() => onDelete(comment)}
             />
+
+            {markingBest && <MarkBestAnswerDialog postId={postId} comment={comment} onClose={() => setMarkingBest(false)} />}
           </>
         )}
       </div>
