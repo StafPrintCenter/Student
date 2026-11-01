@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as StudentRouteImport } from './routes/_student'
+import { Route as CguRouteImport } from './routes/cgu'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthInviteRouteImport } from './routes/_auth/invite'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
@@ -43,6 +44,11 @@ const AuthRoute = AuthRouteImport.update({
 } as any)
 const StudentRoute = StudentRouteImport.update({
   id: '/_student',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CguRoute = CguRouteImport.update({
+  id: '/cgu',
+  path: '/cgu',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -147,6 +153,7 @@ const StudentTrainingsIdSessionSessionIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cgu': typeof CguRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
@@ -169,6 +176,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cgu': typeof CguRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
@@ -194,6 +202,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/_student': typeof StudentRouteWithChildren
+  '/cgu': typeof CguRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_auth/invite': typeof AuthInviteRoute
   '/_auth/login': typeof AuthLoginRoute
@@ -218,6 +227,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/cgu'
     | '/sitemap.xml'
     | '/invite'
     | '/login'
@@ -240,6 +250,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/cgu'
     | '/sitemap.xml'
     | '/invite'
     | '/login'
@@ -264,6 +275,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_auth'
     | '/_student'
+    | '/cgu'
     | '/sitemap.xml'
     | '/_auth/invite'
     | '/_auth/login'
@@ -289,6 +301,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
   StudentRoute: typeof StudentRouteWithChildren
+  CguRoute: typeof CguRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -313,6 +326,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof StudentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cgu': {
+      id: '/cgu'
+      path: '/cgu'
+      fullPath: '/cgu'
+      preLoaderRoute: typeof CguRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -509,6 +529,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
   StudentRoute: StudentRouteWithChildren,
+  CguRoute: CguRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
