@@ -73,7 +73,7 @@ export function LegalKeyPoints({ items }: { items: { title: string; text: string
     <section className="rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
       <h2 className="font-display text-xl">En bref</h2>
       <p className="mt-1.5 text-sm text-muted-foreground">
-        Six engagements essentiels ; le détail figure dans les articles ci-dessous.
+        Les points essentiels ; le détail figure dans les articles ci-dessous.
       </p>
       <ul className="mt-6 grid gap-x-8 gap-y-5 sm:grid-cols-2">
         {items.map((item, i) => (

@@ -10,13 +10,13 @@ export function CharterPage() {
   return (
     <LegalDocShell
       eyebrow={`Document contractuel - ${SITE.tool}`}
-      title="Charte d'engagement et Conditions Générales d'Utilisation"
-      description={`Ce document fixe les règles d'intervention des formateurs sur ${SITE.tool} de ${SITE.name} : périmètre de chacun, droits sur les contenus, protection des apprenants, exigences de correction, usage de l'assistant IA et suites en cas de manquement. La création ou la poursuite d'un compte formateur vaut acceptation de ces règles.`}
+      title="Conditions Générales d'Utilisation"
+      description={`Ces CGU encadrent l'utilisation du portail d'apprentissage de ${SITE.name} par ses apprenants : accès au service, conditions financières, propriété intellectuelle, assiduité, certificats et protection des données personnelles.`}
       meta={[
         { label: "Version", value: VERSION },
         { label: "Dernière mise à jour", value: UPDATED_AT },
-        { label: "Concerne", value: "Comptes formateurs actifs et demandeurs d'accès" },
-        { label: "Lecture", value: "≈ 8 minutes" },
+        { label: "Concerne", value: "Apprenants et candidats à une formation" },
+        { label: "Lecture", value: "≈ 10 minutes" },
       ]}
       sections={LEGAL_SECTIONS}
     >

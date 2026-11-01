@@ -1,199 +1,189 @@
 import { SITE } from "@/data/site";
 import type { LegalSection } from "@/components/site/LegalDocShell";
 
+const list = (...items: string[]) => items.join(" • ");
+
 export const LEGAL_SECTIONS: LegalSection[] = [
   {
-    id: "statut",
-    title: "Statut et gouvernance",
-    summary: "Vous intervenez sur les formations que l'administration vous assigne.",
-    intro: `La présente charte définit le cadre dans lequel le formateur collabore avec ${SITE.name}, dont l'activité est ${SITE.activity.toLowerCase()} et qui est aussi un centre de formation implanté à ${SITE.city}. Elle s'applique à tout compte formateur actif sur la plateforme, du premier accès jusqu'à la fin de la collaboration.`,
+    id: "objet",
+    title: "Article 1 — Objet et accès au service",
+    summary: "Le compte apprenant donne un accès personnel et sécurisé aux services du portail.",
+    intro: `Les présentes Conditions Générales d'Utilisation (ci-après « CGU ») encadrent l'accès et l'utilisation de la plateforme d'apprentissage en ligne de ${SITE.name}, studio créatif et centre de formation situé à Cotonou (Bénin).`,
     clauses: [
       {
-        label: "Périmètre d'intervention",
-        text: "Le formateur conçoit et anime les formations qui lui sont assignées par l'administration. Il n'ouvre pas de formation de sa propre initiative et n'intervient pas sur une formation qui ne lui est pas confiée.",
+        label: "Objet de la plateforme",
+        text: "Le portail apprenant donne accès, dans un espace unique et sécurisé, aux formations suivies, aux contenus pédagogiques (vidéos, modules, leçons), aux exercices et quiz, aux échanges avec les formateurs, à l'espace communautaire, au suivi de progression, au règlement des frais de formation et au téléchargement des certificats.",
       },
       {
-        label: "Création et tarification réservées",
-        text: "La création globale des formations (existence, intitulé, catalogue, niveau, durée, prérequis) ainsi que leur tarification sont réservées à l'administrateur. Le formateur ne peut ni publier, ni modifier, ni supprimer une formation, ni en changer le prix.",
+        label: "Compte strictement personnel",
+        text: "Les identifiants de connexion (adresse email et mot de passe) sont strictement personnels et confidentiels. Le compte ne peut être ni partagé, ni prêté, ni cédé à un tiers, sous peine de suspension ou de résiliation immédiate, sans préjudice des dommages éventuellement dus.",
       },
       {
-        label: "Contenus pédagogiques",
-        text: "Le formateur gère les modules, les leçons, les ressources et les quiz des formations assignées. Il organise la progression pédagogique et choisit les supports qu'il juge adaptés au niveau du groupe.",
+        label: "Sécurité du compte",
+        text: list(
+          "L'apprenant s'engage à conserver son mot de passe secret et à ne pas le communiquer à quiconque, y compris au personnel de STAF PRINT CENTER.",
+          "Toute connexion suspecte, perte ou vol d'identifiants doit être signalé sans délai au support de la plateforme.",
+          "STAF PRINT CENTER se réserve le droit de suspendre temporairement un compte en cas d'activité anormale ou d'intrusion suspectée, afin de protéger les données de l'apprenant.",
+        ),
       },
       {
-        label: "Validation préalable",
-        text: "Tout contenu mis en ligne est soumis à la validation de l'administration. Il ne devient visible des apprenants qu'après approbation ; en cas de retour pour correction, le formateur ajuste puis représente le contenu en validation.",
+        label: "Disponibilité du service",
+        text: "Des opérations de maintenance peuvent entraîner une interruption temporaire, notamment de l'accès aux vidéos, aux quiz et aux paiements en ligne. Les échéances de paiement et les quiz programmés ne sont pas décalés de fait : en cas d'interruption ayant empêché une action requise, l'apprenant est invité à contacter le support, qui rétablit la situation.",
+      },
+    ],
+  },
+  {
+    id: "financieres",
+    title: "Article 2 — Inscription et conditions financières",
+    summary: "L'accès complet à une formation s'ouvre après le paiement de l'acompte requis.",
+    intro:
+      "L'inscription à une formation et l'accès à son contenu intégral sont encadrés par des règles financières précises, rappelées à chaque étape dans le portail.",
+    clauses: [
+      {
+        label: "Acompte minimum d'ouverture d'accès",
+        text: "L'inscription crée un dossier en attente de règlement initial. Le contenu pédagogique complet d'une formation — modules, leçons, exercices, quiz et travaux soumis au formateur — n'est débloqué qu'après paiement d'un acompte égal au minimum à 25 % (un quart) du prix total de la formation. Avant ce seuil, seul le résumé du programme (objectifs, prérequis, formateur assigné) reste consultable.",
       },
       {
-        label: "Cadre contractuel",
-        text: "Les modalités financières et le statut du formateur (rémunération, volume, durée) sont fixés dans l'accord individuel signé avec le centre. La présente charte en constitue le volet pédagogique et déontologique.",
+        label: "Solde et échéancier",
+        text: "Le solde restant est réglé selon l'échéancier convenu avec l'administration, consultable à tout moment dans l'espace « Paiements » du portail (montant déjà payé, montant restant, prochaine échéance). Tout paiement partiel est imputé au solde du dossier concerné.",
+      },
+      {
+        label: "Suspension pour impayé",
+        text: list(
+          "En cas d'échéance non honorée, un rappel est adressé à l'apprenant via ses notifications.",
+          "À défaut de régularisation, l'accès aux contenus de la formation concernée peut être suspendu jusqu'au règlement : les travaux déjà soumis et les progressions sont conservés et réapparaissent dès la reprise du paiement.",
+          "La suspension pour impayé ne dégage pas l'apprenant de sa dette et n'ouvre droit à aucun remboursement des sommes déjà versées au titre de la formation suspendue.",
+        ),
+      },
+      {
+        label: "Remboursement et abandon",
+        text: "Une demande d'abandon adressée au support avant le débloquage du contenu de la formation ouvre droit au remboursement des sommes versées, hors frais éventuels précisés à l'inscription. Après débloquage du contenu, aucun remboursement n'est acquis : les acomptes et échéances déjà réglées couvrent l'accès effectivement ouvert. La réinscription à une session ultérieure reste possible selon les places disponibles.",
       },
     ],
   },
   {
     id: "propriete",
-    title: "Propriété et droits sur les contenus pédagogiques",
-    summary: "Vous restez l'auteur ; le centre obtient la licence nécessaire pour diffuser.",
-    intro: `Les supports, exercices, études de cas, quiz et ressources élaborés dans ${SITE.tool} sont produits pour les besoins des formations du centre.`,
-    clauses: [
-      {
-        label: "Licence d'exploitation",
-        text: `Le formateur accorde à ${SITE.name} une licence non exclusive, gratuite, mondiale et consentie pour la durée d'exploitation de la plateforme, aux fins de reproduction, diffusion, adaptation (mise à jour, reformulation, traduction, découpage en modules) et d'intégration aux cursus du centre.`,
-      },
-      {
-        label: "Paternité",
-        text: "Le formateur conserve la qualité d'auteur et est mentionné sur les contenus qu'il produit, sauf demande contraire de sa part.",
-      },
-      {
-        label: "Garantie de non-contrefaçon",
-        text: "Le formateur garantit détenir les droits sur les contenus qu'il soumet et qu'il n'est porté atteinte à aucun droit de tiers : droit d'auteur, marque, droit à l'image, secret des affaires.",
-      },
-      {
-        label: "Ressources libres de droits",
-        text: "Les images, polices, icônes, fichiers audio, maquettes et cas clients intégrés aux leçons doivent être libres de droits, placés sous une licence compatible, ou appartenir au centre. Les captures d'écran d'outils tiers sont réalisées à partir de comptes ou de licences autorisés.",
-      },
-      {
-        label: "Documents sensibles",
-        text: "Il est interdit d'intégrer des supports, fichiers clients ou méthodes issus d'un employeur ou d'un client précédent sans autorisation écrite préalable.",
-      },
-      {
-        label: "Après la collaboration",
-        text: "À la fin de la collaboration, la licence consentie se poursuit pour les contenus déjà publiés ; le centre peut les mettre à jour ou les retirer. Le formateur peut demander le retrait d'un contenu qu'il ne souhaite plus voir diffusé sous son nom, sans que cela n'affecte les apprenants déjà inscrits.",
-      },
-    ],
-  },
-  {
-    id: "confidentialite",
-    title: "Confidentialité et protection des apprenants",
-    summary: "Les données des apprenants ne sortent jamais de la plateforme.",
-    intro: `L'accès à ${SITE.tool} donne accès à des informations personnelles : identité et contacts des apprenants, travaux rendus, notes, présences et échanges.`,
-    clauses: [
-      {
-        label: "Confidentialité stricte",
-        text: "Ces informations sont strictement confidentielles et ne peuvent être utilisées que pour la mission pédagogique en cours.",
-      },
-      {
-        label: "Interdiction d'usage externe",
-        text: "Aucune donnée personnelle, aucun travail rendu ni aucune note ne peut être copié, exporté, photographié, stocké sur un compte ou un appareil personnel, ou communiqué en dehors de la plateforme, à quelque fin que ce soit : prospection, portfolio, référence client ou publication.",
-      },
-      {
-        label: "Canaux officiels",
-        text: "Les échanges avec les apprenants se déroulent exclusivement sur les canaux officiels de la plateforme : communauté, messagerie interne et sessions programmées. Il est interdit de collecter ou d'utiliser des adresses personnelles, des numéros privés ou des groupes de messagerie hors plateforme.",
-      },
-      {
-        label: "Compte nominatif",
-        text: "Les identifiants sont personnels et ne sont communiqués à personne. Le formateur verrouille son poste de travail et signale sans délai toute connexion ou accès anormal à son compte.",
-      },
-      {
-        label: "Protection des données",
-        text: "Le formateur respecte la réglementation applicable au Bénin en matière de protection des données à caractère personnel et signale immédiatement toute fuite, perte ou diffusion accidentelle dont il aurait connaissance.",
-      },
-      {
-        label: "Durée de l'obligation",
-        text: "L'obligation de confidentialité survit à la fin de la collaboration, sans limitation de durée.",
-      },
-    ],
-  },
-  {
-    id: "suivi",
-    title: "Obligations de suivi et de correction",
-    summary: "Corrections réactives, notes impartiales, présences tenues.",
+    title: "Article 3 — Propriété intellectuelle",
+    summary: "Les contenus de formation sont protégés et réservés à l'apprentissage individuel.",
     intro:
-      "Le cœur de la mission est le suivi des apprenants : corriger les travaux, répondre aux questions et tenir les sessions annoncées.",
+      "L'ensemble des contenus diffusés sur la plateforme est la propriété exclusive de STAF PRINT CENTER et est protégé par le droit d'auteur béninois et les conventions internationales applicables.",
     clauses: [
       {
-        label: "Réactivité",
-        text: "Le formateur accuse réception des travaux et des questions sous 48 heures ouvrées et rend ses corrections sous 5 jours ouvrés après le rendu, ou dans le délai annoncé au sujet lorsque celui-ci est plus court.",
+        label: "Contenus protégés",
+        text: "Sont notamment protégés : les programmes et supports de formation, les vidéos et chapitrages, les fichiers créatifs et sources, les énoncés d'exercices, les banques de questions des quiz, les grilles d'évaluation et les retours rédigés par les formateurs.",
       },
       {
-        label: "Notation impartiale",
-        text: "La notation applique les critères annoncés à l'avance, sans favoritisme ni discrimination. Toute demande de révision est examinée et motivée par écrit.",
+        label: "Usages interdits",
+        text: list(
+          "Reproduction, enregistrement ou capture d'écran des vidéos, leçons et quiz, par quelque moyen que ce soit.",
+          "Diffusion, partage, revente, mise en ligne ou transmission des contenus à un tiers, même gratuit, même partiellement.",
+          "Utilisation des contenus pour former un public tiers, animer une session concurrente ou constituer un support de formation parallèle.",
+          "Extraction, réutilisation ou contournement du portail pour accéder aux contenus hors de l'application.",
+        ),
       },
       {
-        label: "Feedback constructif",
-        text: "Chaque correction s'accompagne d'un retour écrit argumenté : ce qui est acquis, ce qui doit être repris et la ressource ou l'exercice à consulter pour progresser.",
-      },
-      {
-        label: "Présences et sessions",
-        text: "Le formateur tient les présences de manière assidue, est ponctuel, prévient de tout empêchement dès qu'il le connaît et ne reprogramme une session qu'avec l'accord de l'administration.",
-      },
-      {
-        label: "Intégrité des résultats",
-        text: "Les notes et les tentatives de quiz ne sont pas modifiées rétroactivement sans justification écrite et sans laisser de trace dans l'historique de la plateforme.",
-      },
-      {
-        label: "Signalement",
-        text: "Le formateur signale à l'administration les difficultés durables d'un apprenant (désengagement, blocage) plutôt que de traiter la situation de sa propre initiative hors du cadre défini.",
-      },
-    ],
-    note: "Les délais de 48 heures et de 5 jours ouvrés sont les valeurs actuellement en vigueur ; ils peuvent être ajustés par l'administration, qui en informe les formateurs avant application.",
-  },
-  {
-    id: "assistant-ia",
-    title: `Utilisation de l'assistant IA (${SITE.name} Intelligence)`,
-    summary: "L'assistant propose ; le formateur vérifie, décide et assume.",
-    intro: `L'assistant ${SITE.name} Intelligence est intégré à ${SITE.tool} pour aider à préparer les contenus, les quiz et les retours pédagogiques.`,
-    clauses: [
-      {
-        label: "Outil d'aide et de préparation",
-        text: `${SITE.name} Intelligence peut suggérer un plan de leçon, une reformulation, des questions d'évaluation ou une première trame de retour sur un travail rendu. Il reste un assistant de préparation.`,
-      },
-      {
-        label: "Pleine responsabilité humaine",
-        text: "Le formateur relit, vérifie et valide chaque suggestion. Il reste seul responsable des contenus publiés, des notes attribuées et des retours adressés aux apprenants.",
-      },
-      {
-        label: "Aucune décision automatique",
-        text: "Aucune évaluation, aucune note et aucune décision de validation ne peut être laissée à l'assistant. Les suggestions ne remplacent pas la correction et ne s'imposent jamais à l'apprenant.",
-      },
-      {
-        label: "Données des apprenants",
-        text: "Le formateur ne transmet pas à l'assistant d'informations personnelles ni de travaux permettant d'identifier un apprenant ; il anonymise les extraits qu'il utilise pour préparer un retour.",
-      },
-      {
-        label: "Transparence",
-        text: "Un support largement produit avec l'assistant est signalé à l'administration avant publication. L'assistant ne doit jamais être présenté à l'apprenant comme une correction officielle du centre.",
-      },
-      {
-        label: "Vérification des informations",
-        text: "Les informations factuelles, chiffrées, techniques ou juridiques proposées par l'assistant sont vérifiées par le formateur avant d'être diffusées.",
+        label: "Licence d'usage",
+        text: "L'accès au contenu est concédé à titre personnel, non exclusif et non transférable, pour la durée de l'inscription, aux seules fins d'apprentissage individuel. Toute autre utilisation requiert l'autorisation écrite préalable de STAF PRINT CENTER.",
       },
     ],
   },
   {
-    id: "deontologie",
-    title: "Déontologie, loyauté et résiliation",
-    summary: "Aucun démarchage des apprenants ; accès suspendu en cas de manquement.",
+    id: "engagements",
+    title: "Article 4 — Engagements et assiduité de l'apprenant",
+    summary: "Assiduité, intégrité académique et respect des autres apprenants sont attendus.",
     intro:
-      "La collaboration repose sur la confiance réciproque, la loyauté et le respect des apprenants comme du centre.",
+      "La qualité de l'apprentissage repose sur l'engagement de chacun. En utilisant la plateforme, l'apprenant s'engage aux règles suivantes.",
     clauses: [
       {
-        label: "Non-sollicitation des apprenants",
-        text: "Pendant la session et pendant 12 mois après son terme, le formateur ne sollicite pas directement un apprenant qu'il a suivi pour une prestation privée concurrente, une mission rémunérée hors plateforme ou un transfert vers un autre organisme de formation.",
+        label: "Assiduité et participation",
+        text: "L'apprenant suit les modules et leçons dans l'ordre du programme, réalise les exercices et quiz dans les délais communiqués, et participe aux sessions prévues au calendrier. Une assiduité régulière conditionne la validation de la formation (article 5).",
       },
       {
-        label: "Interdiction de contournement",
-        text: "Les contacts, coordonnées, annuaires et listes constitués grâce à la plateforme ne peuvent être utilisés pour une activité commerciale personnelle.",
+        label: "Intégrité académique",
+        text: list(
+          "Le plagiat est interdit : tout travail soumis au formateur doit être le fruit de l'apprenant lui-même.",
+          "Il est interdit de faire réaliser ses exercices, quiz ou travaux par un tiers, et de recourir à l'usurpation d'identité ou à toute aide non autorisée lors d'un quiz chronométré.",
+          "Le partage de questions, réponses ou captures de quiz avec d'autres apprenants, avant ou après l'épreuve, est prohibé.",
+        ),
       },
       {
-        label: "Conflits d'intérêts",
-        text: "Le formateur déclare à l'administration toute activité susceptible d'entrer en conflit avec celle du centre. Une prestation privée avec un apprenant ne peut être réalisée qu'avec un accord écrit préalable.",
+        label: "Courtoisie dans les espaces communautaires",
+        text: "L'espace communautaire est un lieu d'entraide : les échanges (publications, commentaires, réponses) doivent rester respectueux et constructifs. Sont exclus : propos injurieux ou discriminatoires, harcèlement, publicité non sollicitée, diffusion de contenus illégaux ou de liens malveillants. Tout manquement expose le message à sa suppression et le compte à une suspension temporaire ou définitive des espaces communautaires.",
       },
       {
-        label: "Loyauté et image",
-        text: "Le formateur ne divulgue ni conditions tarifaires internes, ni documents de travail du centre, et ne publie aucun commentaire dénigrant la plateforme, ses équipes ou ses apprenants.",
+        label: "Respect du règlement intérieur",
+        text: "Les présentations présencielles et les échanges avec l'équipe se font dans le respect du règlement intérieur de STAF PRINT CENTER et des personnes. L'apprenant s'engage à fournir des informations exactes lors de son inscription et à tenir son profil à jour.",
+      },
+    ],
+  },
+  {
+    id: "certificats",
+    title: "Article 5 — Délivrance des certificats",
+    summary: "Le certificat dépend de la réussite pédagogique et du règlement intégral.",
+    intro:
+      "Le certificat de fin de formation atteste que l'apprenant a atteint les objectifs pédagogiques du programme suivi.",
+    clauses: [
+      {
+        label: "Conditions de réussite pédagogique",
+        text: list(
+          "Complétion de l'ensemble des modules et leçons de la formation.",
+          "Validation des exercices et travaux par le formateur assigné.",
+          "Score officiel au moins égal au seuil de réussite des quiz de la formation, la meilleure tentative étant retenue.",
+        ),
       },
       {
-        label: "Manquements",
-        text: "Un manquement à la présente charte peut entraîner, selon sa gravité : un rappel à l'ordre écrit, la suspension temporaire de l'accès à certaines fonctions, la suspension d'accès à la plateforme, ou la fin de la collaboration.",
+        label: "Condition financière",
+        text: "Le certificat n'est délivré qu'après règlement intégral du solde de la formation. Un dossier dont le solde n'est pas soldé reste consultable, mais le téléchargement du certificat est bloqué jusqu'à l'apurement complet de la dette.",
       },
       {
-        label: "Procédure",
-        text: "La décision est notifiée par écrit avec ses motifs. Le formateur dispose de 7 jours pour présenter ses explications, sauf risque immédiat pour les apprenants, leurs données ou le centre, auquel cas la suspension peut prendre effet immédiatement.",
+        label: "Remise et validité",
+        text: "Le certificat est émis au nom de l'apprenant, au format électronique, téléchargeable depuis l'espace « Certificats » du portail. Il mentionne la formation suivie et les compétences validées. Toute falsification ou altération du certificat est interdite et expose son auteur aux poursuites prévues par la loi.",
+      },
+    ],
+  },
+  {
+    id: "donnees",
+    title: "Article 6 — Données personnelles et droit à l'image",
+    summary: "Les données sont utilisées pour la formation et protégées selon la réglementation applicable.",
+    intro:
+      "STAF PRINT CENTER traite les données des apprenants dans le respect de la réglementation béninoise applicable en matière de protection des données à caractère personnel, sous le contrôle de l'Autorité de Protection des Données Personnelles (APDP).",
+    clauses: [
+      {
+        label: "Données collectées et finalités",
+        text: "Sont traitées : les données d'identification et de contact (nom, prénom, email, téléphone), les données de suivi pédagogique (progression, tentatives de quiz, travaux soumis, retours de formateur), les données administratives et financières (inscriptions, factures, paiements), ainsi que l'historique de connexion nécessaire à la sécurité du compte. Ces données servent exclusivement à la gestion de la formation, du suivi pédagogique, de la facturation et de la communication relative au service.",
       },
       {
-        label: "Fin de collaboration",
-        text: "À la fin de la collaboration, l'accès est retiré, les supports internes sont restitués ou détruits, et les corrections en cours sont finalisées ou remises à un autre formateur.",
+        label: "Droits de l'apprenant",
+        text: "L'apprenant dispose d'un droit d'accès, de rectification, et peut demander l'exercice de ses autres droits auprès du responsable de traitement via le support de la plateforme ou l'adresse de contact indiquée à l'article 7. Les données de suivi pédagogique sont conservées pendant la durée de la relation d'inscription puis archivées selon les durées légales applicables.",
+      },
+      {
+        label: "Témoignages et publications de travaux",
+        text: "Les témoignages, avis et réalisations (projets, exercices, travaux créatifs) produits par l'apprenant ne sont publiés — sur la plateforme, les réseaux sociaux de STAF PRINT CENTER ou tout support de communication — qu'avec son accord exprès, recueilli au préalable. L'apprenant peut retirer son accord à tout moment : les publications concernées sont retirées dans un délai raisonnable, sans effet rétroactif sur les supports déjà imprimés ou diffusés.",
+      },
+      {
+        label: "Droit à l'image",
+        text: list(
+          "Les photographies et captations réalisées lors des sessions, ateliers et cérémonies de remise de certificats ne sont exploitées qu'avec l'autorisation des personnes concernées.",
+          "L'apprenant peut refuser ou retirer cette autorisation en contactant le support, sans que cela n'affecte son accès aux formations.",
+          "Les mineurs ne sont photographiés ou diffusés qu'avec l'autorisation de leur représentant légal.",
+        ),
+      },
+    ],
+  },
+  {
+    id: "contact",
+    title: "Article 7 — Réclamations et contact",
+    summary: "Le support traite les demandes et les modifications importantes sont notifiées.",
+    intro:
+      "Toute question, réclamation ou demande relative aux présentes CGU peut être adressée via l'espace « Support » du portail ou aux coordonnées de STAF PRINT CENTER à Cotonou (Bénin).",
+    clauses: [
+      {
+        label: "Traitement des réclamations",
+        text: "Les réclamations sont examinées par l'administration de STAF PRINT CENTER, qui répond à l'apprenant dans un délai raisonnable. En cas de désaccord persistant, l'apprenant peut également saisir l'Autorité de Protection des Données Personnelles (APDP) pour toute question relative à ses données.",
+      },
+      {
+        label: "Évolution des CGU",
+        text: "STAF PRINT CENTER peut faire évoluer les présentes CGU pour tenir compte de l'évolution du service ou de la réglementation. La version applicable est celle en vigueur à la date d'utilisation de la plateforme ; les modifications importantes font l'objet d'une notification via les notifications du portail.",
       },
     ],
   },
