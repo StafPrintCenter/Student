@@ -11,3 +11,4 @@ export { CommentsSection } from "./Section";
 export { CommentTextForm } from "./TextForm";
 export { CommentsToolbar } from "./Toolbar";
 export { CommentThread } from "./Thread";
+export { CommentsContextProvider, useCommentsContext, type CommentsContextValue } from "./comments-context";
