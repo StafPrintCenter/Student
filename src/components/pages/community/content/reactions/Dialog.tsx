@@ -3,7 +3,7 @@ import { PaginationBar } from "@/components/pages/community/shared";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
-import { FilterChip, ReactionsList } from "./";
+import { FilterChip, ReactionsList } from ".";
 import { cn } from "@/lib/utils";
 import {
   COMMUNITY_REACTION_TYPES,

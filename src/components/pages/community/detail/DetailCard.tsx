@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, PostTags, TrainingBadge, MineBadge } from "@/components/pages/community/shared";
 import { PostAttachments } from "@/components/pages/community/detail";
-import { ReactionControl } from "@/components/pages/community/reactions/Control";
+import { ReactionControl } from "@/components/pages/community/content/reactions/Control";
 import type { APICommunityPostDetail } from "@/data/community";
 
 interface PostDetailCardProps {
