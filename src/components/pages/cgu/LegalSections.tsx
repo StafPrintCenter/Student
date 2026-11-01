@@ -6,7 +6,7 @@ const list = (...items: string[]) => items.join(" • ");
 export const LEGAL_SECTIONS: LegalSection[] = [
   {
     id: "objet",
-    title: "Article 1 — Objet et accès au service",
+    title: "Article 1 - Objet et accès au service",
     summary: "Le compte apprenant donne un accès personnel et sécurisé aux services du portail.",
     intro: `Les présentes Conditions Générales d'Utilisation (ci-après « CGU ») encadrent l'accès et l'utilisation de la plateforme d'apprentissage en ligne de ${SITE.name}, studio créatif et centre de formation situé à Cotonou (Bénin).`,
     clauses: [
@@ -34,14 +34,14 @@ export const LEGAL_SECTIONS: LegalSection[] = [
   },
   {
     id: "financieres",
-    title: "Article 2 — Inscription et conditions financières",
+    title: "Article 2 - Inscription et conditions financières",
     summary: "L'accès complet à une formation s'ouvre après le paiement de l'acompte requis.",
     intro:
       "L'inscription à une formation et l'accès à son contenu intégral sont encadrés par des règles financières précises, rappelées à chaque étape dans le portail.",
     clauses: [
       {
         label: "Acompte minimum d'ouverture d'accès",
-        text: "L'inscription crée un dossier en attente de règlement initial. Le contenu pédagogique complet d'une formation — modules, leçons, exercices, quiz et travaux soumis au formateur — n'est débloqué qu'après paiement d'un acompte égal au minimum à 25 % (un quart) du prix total de la formation. Avant ce seuil, seul le résumé du programme (objectifs, prérequis, formateur assigné) reste consultable.",
+        text: "L'inscription crée un dossier en attente de règlement initial. Le contenu pédagogique complet d'une formation - modules, leçons, exercices, quiz et travaux soumis au formateur - n'est débloqué qu'après paiement d'un acompte égal au minimum à 25 % (un quart) du prix total de la formation. Avant ce seuil, seul le résumé du programme (objectifs, prérequis, formateur assigné) reste consultable.",
       },
       {
         label: "Solde et échéancier",
@@ -63,7 +63,7 @@ export const LEGAL_SECTIONS: LegalSection[] = [
   },
   {
     id: "propriete",
-    title: "Article 3 — Propriété intellectuelle",
+    title: "Article 3 - Propriété intellectuelle",
     summary: "Les contenus de formation sont protégés et réservés à l'apprentissage individuel.",
     intro:
       "L'ensemble des contenus diffusés sur la plateforme est la propriété exclusive de STAF PRINT CENTER et est protégé par le droit d'auteur béninois et les conventions internationales applicables.",
@@ -89,7 +89,7 @@ export const LEGAL_SECTIONS: LegalSection[] = [
   },
   {
     id: "engagements",
-    title: "Article 4 — Engagements et assiduité de l'apprenant",
+    title: "Article 4 - Engagements et assiduité de l'apprenant",
     summary: "Assiduité, intégrité académique et respect des autres apprenants sont attendus.",
     intro:
       "La qualité de l'apprentissage repose sur l'engagement de chacun. En utilisant la plateforme, l'apprenant s'engage aux règles suivantes.",
@@ -118,7 +118,7 @@ export const LEGAL_SECTIONS: LegalSection[] = [
   },
   {
     id: "certificats",
-    title: "Article 5 — Délivrance des certificats",
+    title: "Article 5 - Délivrance des certificats",
     summary: "Le certificat dépend de la réussite pédagogique et du règlement intégral.",
     intro:
       "Le certificat de fin de formation atteste que l'apprenant a atteint les objectifs pédagogiques du programme suivi.",
@@ -143,7 +143,7 @@ export const LEGAL_SECTIONS: LegalSection[] = [
   },
   {
     id: "donnees",
-    title: "Article 6 — Données personnelles et droit à l'image",
+    title: "Article 6 - Données personnelles et droit à l'image",
     summary: "Les données sont utilisées pour la formation et protégées selon la réglementation applicable.",
     intro:
       "STAF PRINT CENTER traite les données des apprenants dans le respect de la réglementation béninoise applicable en matière de protection des données à caractère personnel, sous le contrôle de l'Autorité de Protection des Données Personnelles (APDP).",
@@ -158,7 +158,7 @@ export const LEGAL_SECTIONS: LegalSection[] = [
       },
       {
         label: "Témoignages et publications de travaux",
-        text: "Les témoignages, avis et réalisations (projets, exercices, travaux créatifs) produits par l'apprenant ne sont publiés — sur la plateforme, les réseaux sociaux de STAF PRINT CENTER ou tout support de communication — qu'avec son accord exprès, recueilli au préalable. L'apprenant peut retirer son accord à tout moment : les publications concernées sont retirées dans un délai raisonnable, sans effet rétroactif sur les supports déjà imprimés ou diffusés.",
+        text: "Les témoignages, avis et réalisations (projets, exercices, travaux créatifs) produits par l'apprenant ne sont publiés - sur la plateforme, les réseaux sociaux de STAF PRINT CENTER ou tout support de communication - qu'avec son accord exprès, recueilli au préalable. L'apprenant peut retirer son accord à tout moment : les publications concernées sont retirées dans un délai raisonnable, sans effet rétroactif sur les supports déjà imprimés ou diffusés.",
       },
       {
         label: "Droit à l'image",
@@ -172,7 +172,7 @@ export const LEGAL_SECTIONS: LegalSection[] = [
   },
   {
     id: "contact",
-    title: "Article 7 — Réclamations et contact",
+    title: "Article 7 - Réclamations et contact",
     summary: "Le support traite les demandes et les modifications importantes sont notifiées.",
     intro:
       "Toute question, réclamation ou demande relative aux présentes CGU peut être adressée via l'espace « Support » du portail ou aux coordonnées de STAF PRINT CENTER à Cotonou (Bénin).",
