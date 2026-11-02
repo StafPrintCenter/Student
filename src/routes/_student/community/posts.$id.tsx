@@ -12,7 +12,7 @@ import { useCommunityPostDetail } from "@/stores/useCommunityPostsStore";
 import { SITE } from "@/data/site";
 import { useDynamicPageMetadata } from "@/hooks/useDynamicPageMetadata";
 
-export const Route = createFileRoute("/_student/community/$id")({
+export const Route = createFileRoute("/_student/community/posts/$id")({
   validateSearch: z.object({ comment: z.string().optional() }),
 
   head: () => ({
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/_student/community/$id")({
 function BackButton() {
   return (
     <Button asChild variant="ghost" size="sm" className="-ml-2">
-      <Link to="/community">
+      <Link to="/community/posts">
         <ArrowLeft className="mr-1 h-4 w-4" /> Retour à la communauté
       </Link>
     </Button>
@@ -81,7 +81,7 @@ function CommunityPostPage() {
         <DeletePostDialog
           post={post}
           onClose={() => setDeleting(false)}
-          onDeleted={() => navigate({ to: "/community" })}
+          onDeleted={() => navigate({ to: "/community/posts" })}
         />
       )}
     </div>

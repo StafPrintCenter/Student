@@ -32,7 +32,7 @@ export function PostCard({ post, onEdit, onDelete }: PostCardProps) {
           </div>
 
           <Link
-            to="/community/$id"
+            to="/community/posts/$id"
             params={{ id: post.id }}
             className="block font-medium leading-snug hover:underline"
           >
