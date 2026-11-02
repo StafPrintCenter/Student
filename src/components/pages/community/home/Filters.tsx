@@ -1,8 +1,29 @@
 import { RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { NativeSelect } from "@/components/pages/community/shared";
-import { FilterToggle, hasActiveFilters, TRAINING_PLACE_PREFIX, SearchBox, type CommunityFilters } from "@/components/pages/community/home";
+import { hasActiveFilters, TRAINING_PLACE_PREFIX, type CommunityFilters } from "./FiltersModel";
+import { SearchBox } from "./SearchBox";
 import { communityAuthorRoleMap, communityContentStatusLabels, communityPostTypeMap, communitySortLabels, type CommunityAuthorRole, type CommunityContentStatus, type CommunityPostType, type CommunitySort } from "@/data/community";
+
+interface FilterToggleProps {
+  id: string;
+  label: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}
+
+function FilterToggle({ id, label, checked, onChange }: FilterToggleProps) {
+  return (
+    <div className="flex items-center gap-2">
+      <Switch id={id} checked={checked} onCheckedChange={onChange} />
+      <Label htmlFor={id} className="cursor-pointer text-sm">
+        {label}
+      </Label>
+    </div>
+  );
+}
 
 interface CommunityFiltersBarProps {
   filters: CommunityFilters;

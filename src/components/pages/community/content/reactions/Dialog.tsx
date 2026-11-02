@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { PaginationBar } from "@/components/pages/community/shared";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
-import { FilterChip, ReactionsList } from ".";
+import { ReactionsList } from "./List";
 import { cn } from "@/lib/utils";
 import {
   COMMUNITY_REACTION_TYPES,
@@ -17,6 +17,22 @@ import { useCommunityReactionsList } from "@/stores/useCommunityReactionsStore";
 
 const PER_PAGE = 12;
 const ROLES = Object.keys(communityAuthorRoleMap) as CommunityAuthorRole[];
+
+function FilterChip({ active, onClick, children }: { active: boolean; onClick: () => void; children: ReactNode }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-colors hover:bg-muted/60",
+        active ? "border-primary bg-primary/10 font-medium text-primary" : "border-border text-muted-foreground"
+      )}
+    >
+      {children}
+    </button>
+  );
+}
 
 interface ReactionsDialogProps {
   target: CommunityReactionTarget;

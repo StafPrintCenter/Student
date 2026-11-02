@@ -1,9 +1,39 @@
 import { useEffect, useRef, useState } from "react";
-import { CornerDownRight } from "lucide-react";
+import { CheckCircle2, CornerDownRight, EyeOff } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { CommentActions, CommentFlagBadges, EditCommentForm, useCommentsContext, MarkBestAnswerDialog } from ".";
+import { CommentActions } from "./Actions";
+import { EditCommentForm } from "./EditForm";
+import { useCommentsContext } from "./Context";
+import { MarkBestAnswerDialog } from "./MarkBestAnswer";
 import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, MineBadge, useCommentFocus } from "@/components/pages/community/shared";
 import type { APICommunityComment } from "@/data/community";
+
+function CommentFlagBadges({
+  comment,
+}: {
+  comment: Pick<APICommunityComment, "isPostAuthor" | "isBestAnswer" | "status">;
+}) {
+  return (
+    <>
+      {comment.isPostAuthor && (
+        <Badge variant="outline" className="border-primary/40 bg-primary/10 text-[10px] text-primary">
+          Auteur
+        </Badge>
+      )}
+      {comment.isBestAnswer && (
+        <Badge variant="outline" className="gap-1 border-emerald/40 bg-emerald/15 text-[10px] text-emerald">
+          <CheckCircle2 className="h-3 w-3" /> Meilleure réponse
+        </Badge>
+      )}
+      {comment.status === "hidden" && (
+        <Badge variant="outline" className="gap-1 border-destructive/40 bg-destructive/10 text-[10px] text-destructive">
+          <EyeOff className="h-3 w-3" /> Masqué
+        </Badge>
+      )}
+    </>
+  );
+}
 
 interface CommentItemProps {
   comment: APICommunityComment;

@@ -1,5 +1,4 @@
 export { CommentActions } from "./Actions";
-export { CommentFlagBadges } from "./Badges";
 export { CommentComposerCard } from "./ComposerCard";
 export { DeleteCommentDialog } from "./DeleteDialog";
 export { EditCommentForm } from "./EditForm";
