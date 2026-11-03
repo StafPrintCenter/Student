@@ -24,7 +24,7 @@ export async function loginStudent(email: string, password: string): Promise<API
  * Retourne null si aucune session valide n'est active (401).
  */
 export async function fetchStudentMe(): Promise<APIStudentUser | null> {
-  const response = await studentFetch(`/api/student/auth/me`);
+  const response = await studentFetch(`/api/student/account/me`);
   if (response.status === 401) return null;
   if (!response.ok) {
     const error = await parseApiError(response, "Erreur lors de la vérification de la session.");
@@ -35,7 +35,7 @@ export async function fetchStudentMe(): Promise<APIStudentUser | null> {
 }
 
 export async function logoutStudent(): Promise<void> {
-  const response = await studentFetch(`/api/student/auth/logout`, { method: "POST" });
+  const response = await studentFetch(`/api/student/account/logout`, { method: "POST" });
   if (!response.ok) {
     throw await parseApiError(response, "Erreur lors de la déconnexion.");
   }
