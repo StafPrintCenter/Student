@@ -108,19 +108,19 @@ export function useCurrentStudent() {
   };
 }
 
-export async function forgotAdminPassword(email: string): Promise<{ message: string }> {
+export async function forgotStudentPassword(email: string): Promise<{ message: string }> {
   const fd = new FormData();
   fd.append("email", email);
 
   const response = await studentFetch(`/api/student/auth/forgot-password`, { method: "POST", body: fd });
   if (!response.ok) {
     const error = await parseApiError(response, "Impossible d'envoyer l'e-mail de réinitialisation.");
-    throw new AdminAuthApiError(error.message);
+    throw new StudentAuthApiError(error.message);
   }
   return (await response.json()) as { message: string };
 }
 
-export async function resetAdminPassword(params: {
+export async function resetStudentPassword(params: {
   email: string;
   token: string;
   password: string;
@@ -135,7 +135,7 @@ export async function resetAdminPassword(params: {
   const response = await studentFetch(`/api/student/auth/reset-password`, { method: "POST", body: fd });
   if (!response.ok) {
     const error = await parseApiError(response, "Ce lien de réinitialisation est invalide ou a expiré.");
-    throw new AdminAuthApiError(error.message);
+    throw new StudentAuthApiError(error.message);
   }
   return (await response.json()) as { message: string };
 }
