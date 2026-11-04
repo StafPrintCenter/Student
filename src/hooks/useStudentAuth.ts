@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { loginStudent, fetchStudentMe, logoutStudent, verifyStudentInvite, acceptStudentInvite, StudentAuthApiError } from "@/stores/useAuthStore";
+import { loginStudent, fetchStudentMe, logoutStudent, verifyStudentInvite, acceptStudentInvite, forgotStudentPassword, resetStudentPassword, StudentAuthApiError } from "@/stores/useAuthStore";
 import type { StudentInviteVerifyResponse } from "@/data/auth";
 
 export interface StudentAuthUser {
@@ -126,6 +126,21 @@ export function useStudentAuth() {
     []
   );
 
+  const forgotPassword = useCallback(
+    async (email: string): Promise<{ message: string }> => forgotStudentPassword(email),
+    [],
+  );
+
+  const resetPassword = useCallback(
+    async (params: {
+      email: string;
+      token: string;
+      password: string;
+      passwordConfirmation: string;
+    }): Promise<{ message: string }> => resetStudentPassword(params),
+    [],
+  );
+
   return {
     user: sharedUser,
     isAuthenticated: !!sharedUser,
@@ -134,5 +149,7 @@ export function useStudentAuth() {
     logout,
     verifyInvite,
     acceptInvite,
+    forgotPassword,
+    resetPassword,
   };
 }
