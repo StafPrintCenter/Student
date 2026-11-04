@@ -52,10 +52,10 @@ function ProfilePage() {
     return Number.isNaN(date.getTime())
       ? "Non renseigné"
       : date.toLocaleDateString("fr-FR", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        });
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
   };
 
   const handleLogout = async () => {
@@ -233,7 +233,7 @@ function ProfileField({
       <p className="text-xs text-muted-foreground">{label}</p>
       <div className="mt-1 flex items-center gap-2 text-sm font-medium">
         {icon}
-        <span className="break-words">{value?.trim() || "Non renseigné"}</span>
+        <span className="wrap-break-word">{value?.trim() || "Non renseigné"}</span>
       </div>
     </div>
   );
