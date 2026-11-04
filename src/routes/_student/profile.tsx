@@ -1,22 +1,13 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
-import {
-  Calendar,
-  CheckCircle2,
-  Clock,
-  LogOut,
-  Mail,
-  MapPin,
-  Phone,
-  Shield,
-  User as UserIcon,
-  XCircle,
-} from "lucide-react";
+import { Calendar, CheckCircle2, Clock, LogOut, Mail, MapPin, Phone, Shield, User as UserIcon, XCircle, Pencil } from "lucide-react";
 import { ConfirmDisconnect } from "@/components/site";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/data/site";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
+import { ProfileEditDialog } from "@/components/pages/profile/ProfileEditDialog";
+import { EmailChangeDialog } from "@/components/pages/profile/EmailChangeDialog";
 
 export const Route = createFileRoute("/_student/profile")({
   head: () => ({
@@ -35,6 +26,8 @@ function ProfilePage() {
   const { user, logout } = useStudentAuth();
   const navigate = useNavigate();
   const [confirmDisconnectOpen, setConfirmDisconnectOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [emailOpen, setEmailOpen] = useState(false);
 
   const fullName =
     user?.fullname ||
@@ -55,10 +48,10 @@ function ProfilePage() {
     return Number.isNaN(date.getTime())
       ? "Non renseigné"
       : date.toLocaleDateString("fr-FR", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        });
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
   };
 
   const handleLogout = async () => {
@@ -104,7 +97,13 @@ function ProfilePage() {
               </div>
             </div>
 
-            <div className="self-start sm:self-auto">
+            <div className="flex flex-wrap gap-2 self-start sm:self-auto">
+              <Button variant="outline" size="sm" onClick={() => setEditOpen(true)}>
+                <Pencil className="mr-1 h-4 w-4" /> Modifier
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => setEmailOpen(true)}>
+                <Mail className="mr-1 h-4 w-4" /> Changer l'e-mail
+              </Button>
               <Button
                 variant="outline"
                 size="sm"
@@ -148,6 +147,10 @@ function ProfilePage() {
                   label="Adresse"
                   value={user?.address}
                   icon={<MapPin className="h-4 w-4 text-muted-foreground" />}
+                />
+                <ProfileField
+                  label="Profession"
+                  value={user?.occupation}
                 />
               </div>
 
@@ -212,6 +215,16 @@ function ProfilePage() {
           </div>
         </div>
       </div>
+
+      <ProfileEditDialog
+        open={editOpen}
+        onOpenChange={setEditOpen}
+      />
+
+      <EmailChangeDialog
+        open={emailOpen}
+        onOpenChange={setEmailOpen}
+      />
 
       <ConfirmDisconnect
         open={confirmDisconnectOpen}

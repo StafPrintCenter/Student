@@ -141,6 +141,12 @@ export function useStudentAuth() {
     [],
   );
 
+  const setUser = useCallback((raw: unknown) => {
+    sharedUser = toStudentAuthUser(raw);
+    sharedReady = true;
+    notify();
+  }, []);
+
   return {
     user: sharedUser,
     isAuthenticated: !!sharedUser,
@@ -151,5 +157,6 @@ export function useStudentAuth() {
     acceptInvite,
     forgotPassword,
     resetPassword,
+    setUser,
   };
 }
