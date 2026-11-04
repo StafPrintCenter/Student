@@ -1,7 +1,20 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { PageHeader } from "@/components/site";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { toast } from "sonner";
+import {
+  Calendar,
+  CheckCircle2,
+  Clock,
+  LogOut,
+  Mail,
+  MapPin,
+  Phone,
+  Shield,
+  User as UserIcon,
+  XCircle,
+} from "lucide-react";
+import { ConfirmDisconnect } from "@/components/site";
+import { Button } from "@/components/ui/button";
 import { SITE } from "@/data/site";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 
@@ -19,66 +32,218 @@ export const Route = createFileRoute("/_student/profile")({
 });
 
 function ProfilePage() {
-  const { user } = useStudentAuth();
-  const initials = `${user?.firstName.charAt(0) ?? ""}${user?.lastName.charAt(0) ?? ""}`
-    .toUpperCase() || "?";
+  const { user, logout } = useStudentAuth();
+  const navigate = useNavigate();
+  const [confirmDisconnectOpen, setConfirmDisconnectOpen] = useState(false);
+
+  const fullName =
+    user?.fullname || user?.name || `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim() || "Étudiant";
+  const initials = fullName
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+
+  const formattedDate = (dateString?: string | null) => {
+    if (!dateString) return "Non renseigné";
+    const date = new Date(dateString);
+    return Number.isNaN(date.getTime())
+      ? "Non renseigné"
+      : date.toLocaleDateString("fr-FR", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        });
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("Déconnecté");
+      navigate({ to: "/login" });
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "La déconnexion a échoué.");
+    }
+  };
 
   return (
-    <div className="space-y-6">
-      <PageHeader
-        eyebrow="Compte"
-        title="Mon profil"
-        description="Les informations associées à votre compte apprenant."
-      />
-      <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-        <Card>
-          <CardContent className="flex flex-col items-center gap-4 p-6 text-center">
-            <Avatar className="h-24 w-24">
-              {user?.photo && <AvatarImage src={user.photo} alt={user.name} />}
-              <AvatarFallback className="bg-primary/15 text-2xl text-primary">
-                {initials}
-              </AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="font-medium">{user?.fullname || user?.name || "Profil apprenant"}</p>
-              <p className="text-xs text-muted-foreground">{user?.email}</p>
+    <>
+      <div className="relative overflow-hidden rounded-2xl border bg-card shadow-sm">
+        <div className="h-32 bg-gradient-hero" />
+        <div className="p-6 pt-0">
+          <div className="-mt-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="flex items-end gap-4">
+              <div className="grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded-2xl border-4 border-card bg-primary font-display text-3xl font-bold text-primary-foreground shadow-sm">
+                {user?.photo ? (
+                  <img src={user.photo} alt={fullName} className="h-full w-full object-cover" />
+                ) : (
+                  initials
+                )}
+              </div>
+              <div className="min-w-0 pb-1">
+                <h2 className="truncate font-display text-2xl font-bold">{fullName}</h2>
+                <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Mail className="h-3.5 w-3.5 text-primary" />
+                    {user?.email || "E-mail non renseigné"}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <UserIcon className="h-3.5 w-3.5 text-primary" />
+                    Apprenant
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <Calendar className="h-3.5 w-3.5 text-primary" />
+                    Inscrit le {formattedDate(user?.createdAt)}
+                  </span>
+                </div>
+              </div>
             </div>
-          </CardContent>
-        </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Informations personnelles</CardTitle>
-          </CardHeader>
-          <CardContent className="grid gap-5 sm:grid-cols-2">
-            <ProfileField label="Prénom" value={user?.firstName} />
-            <ProfileField label="Nom" value={user?.lastName} />
-            <ProfileField label="E-mail" value={user?.email} />
-            <ProfileField label="Téléphone" value={user?.phone} />
-            <ProfileField label="Date de naissance" value={user?.birthDate} />
-            <ProfileField label="Adresse" value={user?.address} />
-            <ProfileField label="Occupation" value={user?.occupation} />
-            <ProfileField label="Biographie" value={user?.bio} className="sm:col-span-2" />
-          </CardContent>
-        </Card>
+            <div className="self-start sm:self-auto">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setConfirmDisconnectOpen(true)}
+                className="text-destructive hover:bg-destructive/10"
+              >
+                <LogOut className="mr-1 h-4 w-4" /> Déconnexion
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <div className="mt-6 grid gap-6 lg:grid-cols-3">
+        <div className="space-y-6 lg:col-span-2">
+          <div className="rounded-2xl border bg-card p-6 shadow-sm">
+            <div className="mb-5 flex items-center gap-2 border-b pb-4">
+              <UserIcon className="h-5 w-5 text-primary" />
+              <h3 className="font-display text-lg font-semibold">Informations personnelles</h3>
+            </div>
+
+            <div className="space-y-6">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <ProfileField label="Prénom" value={user?.firstName} />
+                <ProfileField label="Nom" value={user?.lastName} />
+                <ProfileField
+                  label="Adresse e-mail"
+                  value={user?.email}
+                  icon={<Mail className="h-4 w-4 text-muted-foreground" />}
+                />
+                <ProfileField
+                  label="Téléphone"
+                  value={user?.phone}
+                  icon={<Phone className="h-4 w-4 text-muted-foreground" />}
+                />
+                <ProfileField
+                  label="Date de naissance"
+                  value={user?.birthDate ? formattedDate(user.birthDate) : null}
+                />
+                <ProfileField
+                  label="Adresse"
+                  value={user?.address}
+                  icon={<MapPin className="h-4 w-4 text-muted-foreground" />}
+                />
+              </div>
+
+              <div>
+                <p className="text-xs text-muted-foreground">Biographie / Présentation</p>
+                <div className="mt-1.5 rounded-xl border bg-muted/20 p-4 text-sm leading-relaxed">
+                  {user?.bio?.trim() || (
+                    <span className="italic text-muted-foreground">
+                      Aucune biographie disponible.
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-6 lg:col-span-1">
+          <div className="rounded-2xl border bg-card p-6 shadow-sm">
+            <div className="mb-4 flex items-center gap-2 border-b pb-3">
+              <Shield className="h-4 w-4 text-primary" />
+              <h3 className="font-display text-sm font-semibold">Statut du compte</h3>
+            </div>
+
+            <div className="space-y-4 text-sm">
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground">Rôle</span>
+                <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
+                  Apprenant
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground">État du compte</span>
+                {user?.isBlocked ? (
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-destructive">
+                    <XCircle className="h-3.5 w-3.5" /> Bloqué
+                  </span>
+                ) : user?.isActive ? (
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                    <CheckCircle2 className="h-3.5 w-3.5" /> Actif
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-destructive">
+                    <XCircle className="h-3.5 w-3.5" /> Inactif
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border bg-card p-6 shadow-sm">
+            <div className="mb-4 flex items-center gap-2 border-b pb-3">
+              <Clock className="h-4 w-4 text-primary" />
+              <h3 className="font-display text-sm font-semibold">Dates système</h3>
+            </div>
+
+            <div className="space-y-3 text-xs text-muted-foreground">
+              <DateRow label="Date d'inscription" value={formattedDate(user?.createdAt)} />
+              <DateRow label="Dernière mise à jour" value={formattedDate(user?.updatedAt)} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ConfirmDisconnect
+        open={confirmDisconnectOpen}
+        onOpenChange={setConfirmDisconnectOpen}
+        onConfirm={handleLogout}
+      />
+    </>
   );
 }
 
 function ProfileField({
   label,
   value,
-  className,
+  icon,
 }: {
   label: string;
-  value: string | null | undefined;
-  className?: string;
+  value?: string | null;
+  icon?: React.ReactNode;
 }) {
   return (
-    <div className={`space-y-2 ${className ?? ""}`}>
-      <p className="text-xs uppercase tracking-wider text-muted-foreground">{label}</p>
-      <p className="min-h-5 break-words text-sm">{value?.trim() || "Non renseigné"}</p>
+    <div>
+      <p className="text-xs text-muted-foreground">{label}</p>
+      <div className="mt-1 flex items-center gap-2 text-sm font-medium">
+        {icon}
+        <span className="break-words">{value?.trim() || "Non renseigné"}</span>
+      </div>
+    </div>
+  );
+}
+
+function DateRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between gap-4">
+      <span>{label}</span>
+      <span className="text-right font-medium text-foreground">{value}</span>
     </div>
   );
 }
