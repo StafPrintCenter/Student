@@ -37,7 +37,10 @@ function ProfilePage() {
   const [confirmDisconnectOpen, setConfirmDisconnectOpen] = useState(false);
 
   const fullName =
-    user?.fullname || user?.name || `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim() || "Étudiant";
+    user?.fullname ||
+    user?.name ||
+    `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim() ||
+    "Étudiant";
   const initials = fullName
     .split(/\s+/)
     .filter(Boolean)
@@ -52,10 +55,10 @@ function ProfilePage() {
     return Number.isNaN(date.getTime())
       ? "Non renseigné"
       : date.toLocaleDateString("fr-FR", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      });
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        });
   };
 
   const handleLogout = async () => {
