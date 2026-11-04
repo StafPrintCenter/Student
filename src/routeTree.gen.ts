@@ -17,6 +17,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthForgotPasswordRouteImport } from './routes/_auth/forgot-password'
 import { Route as AuthInviteRouteImport } from './routes/_auth/invite'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as AuthResetPasswordRouteImport } from './routes/_auth/reset-password'
 import { Route as StudentCertificatesRouteImport } from './routes/_student/certificates'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
 import { Route as StudentPaymentsRouteImport } from './routes/_student/payments'
@@ -70,6 +71,11 @@ const AuthInviteRoute = AuthInviteRouteImport.update({
 const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthResetPasswordRoute = AuthResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => AuthRoute,
 } as any)
 const StudentCertificatesRoute = StudentCertificatesRouteImport.update({
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
+  '/reset-password': typeof AuthResetPasswordRoute
   '/certificates': typeof StudentCertificatesRoute
   '/dashboard': typeof StudentDashboardRoute
   '/payments': typeof StudentPaymentsRoute
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/invite': typeof AuthInviteRoute
   '/login': typeof AuthLoginRoute
+  '/reset-password': typeof AuthResetPasswordRoute
   '/certificates': typeof StudentCertificatesRoute
   '/dashboard': typeof StudentDashboardRoute
   '/payments': typeof StudentPaymentsRoute
@@ -216,6 +224,7 @@ export interface FileRoutesById {
   '/_auth/forgot-password': typeof AuthForgotPasswordRoute
   '/_auth/invite': typeof AuthInviteRoute
   '/_auth/login': typeof AuthLoginRoute
+  '/_auth/reset-password': typeof AuthResetPasswordRoute
   '/_student/certificates': typeof StudentCertificatesRoute
   '/_student/dashboard': typeof StudentDashboardRoute
   '/_student/payments': typeof StudentPaymentsRoute
@@ -242,6 +251,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/invite'
     | '/login'
+    | '/reset-password'
     | '/certificates'
     | '/dashboard'
     | '/payments'
@@ -266,6 +276,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/invite'
     | '/login'
+    | '/reset-password'
     | '/certificates'
     | '/dashboard'
     | '/payments'
@@ -292,6 +303,7 @@ export interface FileRouteTypes {
     | '/_auth/forgot-password'
     | '/_auth/invite'
     | '/_auth/login'
+    | '/_auth/reset-password'
     | '/_student/certificates'
     | '/_student/dashboard'
     | '/_student/payments'
@@ -374,6 +386,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/reset-password': {
+      id: '/_auth/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof AuthResetPasswordRouteImport
       parentRoute: typeof AuthRoute
     }
     '/_student/certificates': {
@@ -495,12 +514,14 @@ interface AuthRouteChildren {
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthInviteRoute: typeof AuthInviteRoute
   AuthLoginRoute: typeof AuthLoginRoute
+  AuthResetPasswordRoute: typeof AuthResetPasswordRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthInviteRoute: AuthInviteRoute,
   AuthLoginRoute: AuthLoginRoute,
+  AuthResetPasswordRoute: AuthResetPasswordRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
