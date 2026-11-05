@@ -102,8 +102,9 @@ function StudentInviteAcceptPage() {
     e.preventDefault();
     setError("");
 
-    if (password.length < 8) {
-      setError("Le mot de passe doit contenir au moins 8 caractères.");
+    const passwordError = getPasswordPolicyError(password);
+    if (passwordError) {
+      setError(passwordError);
       return;
     }
     if (password !== confirmPassword) {
@@ -184,6 +185,7 @@ function StudentInviteAcceptPage() {
             )}
           </button>
         </div>
+        <PasswordRequirements value={password} />
       </div>
 
       <div className="space-y-2">
