@@ -11,13 +11,13 @@ import type {
   StudentEmailChangeConfirmPayload,
 } from "@/data/account";
 
-export class StudentAccountApiError extends Error { }
+export class StudentAccountApiError extends Error {}
 
 async function accountRequest<T>(
   path: string,
   method: "POST" | "PUT",
   body: FormData,
-  fallbackMessage: string
+  fallbackMessage: string,
 ): Promise<T> {
   const response = await studentFetch(`/api/student/account/${path}`, { method, body });
   if (!response.ok) {
@@ -27,69 +27,58 @@ async function accountRequest<T>(
   return response.json();
 }
 
-const RESOURCE_KEY = "account";
-
-/** Payload -> FormData : ignore undefined, gère File, booléens ("1"/"0") et null */
-function buildFormData(payload: Record<string, unknown>): FormData {
+export async function updateStudentProfile(
+  payload: StudentProfilePayload,
+): Promise<APIStudentProfile> {
   const fd = new FormData();
-  for (const [key, value] of Object.entries(payload)) {
-    if (value === undefined) continue;
-    if (value instanceof File) {
-      fd.append(key, value);
-    } else if (typeof value === "boolean") {
-      fd.append(key, value ? "1" : "0");
-    } else if (value === null) {
-      // photo null = pas de fichier : on n'envoie rien
-      if (key !== "photo") fd.append(key, "");
-    } else {
-      fd.append(key, String(value));
-    }
-  }
-  return fd;
-}
+  fd.append("firstName", payload.firstName);
+  fd.append("lastName", payload.lastName);
+  if (payload.phone !== undefined) fd.append("phone", payload.phone);
+  if (payload.birthDate !== undefined) fd.append("birthDate", payload.birthDate);
+  if (payload.address !== undefined) fd.append("address", payload.address);
+  if (payload.occupation !== undefined) fd.append("occupation", payload.occupation);
+  fd.append("bio", payload.bio ?? "");
+  fd.append("removePhoto", payload.removePhoto ? "1" : "0");
+  if (payload.photo) fd.append("photo", payload.photo);
 
-export async function updateStudentProfile(payload: StudentProfilePayload): Promise<APIStudentProfile> {
-  const response = await studentFetch(`/api/student/account/profile`, {
-    method: "PUT",
-    body: buildFormData({ ...payload }),
-  });
-  if (!response.ok) {
-    const error = await parseApiError(response, "Erreur lors de la modification du profil.");
-    throw new StudentAccountApiError(error.message);
-  }
-  const json: { data: APIStudentProfile } = await response.json();
+  const json = await accountRequest<{ data: APIStudentProfile }>(
+    "profile",
+    "PUT",
+    fd,
+    "Impossible de modifier le profil.",
+  );
   return json.data;
 }
 
 export async function requestStudentEmailChange(
-  payload: StudentEmailChangeRequestPayload
+  payload: StudentEmailChangeRequestPayload,
 ): Promise<APIStudentEmailChangeRequestResponse> {
-  const response = await studentFetch(`/api/student/account/email/request`, {
-    method: "POST",
-    body: buildFormData({ ...payload }),
-  });
-  if (!response.ok) {
-    const error = await parseApiError(response, "Impossible d'envoyer le code de confirmation.");
-    throw new StudentAccountApiError(error.message);
-  }
-  return response.json();
+  const fd = new FormData();
+  fd.append("newEmail", payload.newEmail);
+  fd.append("password", payload.password);
+
+  return accountRequest<APIStudentEmailChangeRequestResponse>(
+    "email/request",
+    "POST",
+    fd,
+    "Impossible d'envoyer le code de confirmation.",
+  );
 }
 
 export async function confirmStudentEmailChange(
-  payload: StudentEmailChangeConfirmPayload
+  payload: StudentEmailChangeConfirmPayload,
 ): Promise<APIStudentProfile> {
-  const response = await studentFetch(`/api/student/account/email/confirm`, {
-    method: "POST",
-    body: buildFormData({ ...payload }),
-  });
-  if (!response.ok) {
-    const error = await parseApiError(response, "Code invalide ou expiré.");
-    throw new StudentAccountApiError(error.message);
-  }
-  const json: { data: APIStudentProfile } = await response.json();
+  const fd = new FormData();
+  fd.append("code", payload.code);
+
+  const json = await accountRequest<{ data: APIStudentProfile }>(
+    "email/confirm",
+    "POST",
+    fd,
+    "Code invalide ou expiré.",
+  );
   return json.data;
 }
-
 
 export async function changeStudentPassword(
   payload: StudentPasswordChangePayload,
@@ -112,10 +101,7 @@ export function useUpdateStudentProfile() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (payload: StudentProfilePayload) => updateStudentProfile(payload),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: [RESOURCE_KEY] });
-      qc.invalidateQueries({ queryKey: ["current-student"] });
-    },
+    onSuccess: (profile) => qc.setQueryData(["current-student"], profile),
   });
 }
 
@@ -129,10 +115,7 @@ export function useConfirmStudentEmailChange() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (payload: StudentEmailChangeConfirmPayload) => confirmStudentEmailChange(payload),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: [RESOURCE_KEY] });
-      qc.invalidateQueries({ queryKey: ["current-student"] });
-    },
+    onSuccess: (profile) => qc.setQueryData(["current-student"], profile),
   });
 }
 
