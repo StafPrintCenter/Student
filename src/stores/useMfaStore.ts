@@ -9,6 +9,7 @@ import type {
   StudentMfaDefaultPayload,
   StudentMfaTotpConfirmPayload,
   StudentMfaDeleteMethodPayload,
+  StudentMfaEmailMethodPayload,
 } from "@/data/mfa";
 
 export class StudentMfaApiError extends Error { }
@@ -86,6 +87,15 @@ export const deleteStudentMfaMethod = (payload: StudentMfaDeleteMethodPayload) =
     body: buildForm({ password: payload.password }),
   });
 
+export const setStudentMfaEmailMethod = (payload: StudentMfaEmailMethodPayload) =>
+  mfaRequest<APIStudentMfaStatus>("/email", "Impossible de modifier la méthode e-mail.", {
+    method: "PUT",
+    body: buildForm({
+      enabled: payload.enabled ? "1" : "0",
+      password: payload.password,
+    }),
+  });
+
 /* ---------- Hooks ---------- */
 
 export function useStudentMfaStatus() {
@@ -117,6 +127,7 @@ export const useDisableStudentMfa = () => useStatusMutation(disableStudentMfa);
 export const useSetStudentMfaDefault = () => useStatusMutation(setStudentMfaDefault);
 export const useConfirmStudentMfaTotp = () => useStatusMutation(confirmStudentMfaTotp);
 export const useDeleteStudentMfaMethod = () => useStatusMutation(deleteStudentMfaMethod);
+export const useSetStudentMfaEmailMethod = () => useStatusMutation(setStudentMfaEmailMethod);
 
 export function useSetupStudentMfaTotp() {
   return useMutation({ mutationFn: setupStudentMfaTotp });

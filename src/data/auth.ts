@@ -28,6 +28,44 @@ export type APIStudentLoginResponse = {
   token: string;
 };
 
+export type StudentMfaLoginMethod = "email" | "totp" | "recovery";
+
+export interface APIStudentMfaChallengeMethod {
+  type: "email" | "totp";
+  label: string;
+  hint: string | null;
+}
+
+export interface APIStudentMfaChallenge {
+  mfaRequired: true;
+  challengeToken: string;
+  defaultMethod: "email" | "totp";
+  methods: APIStudentMfaChallengeMethod[];
+  recoveryCodesAvailable: boolean;
+  emailCodeSent: boolean;
+  expiresAt: string;
+}
+
+export type APIStudentLoginResult = APIStudentLoginResponse | APIStudentMfaChallenge;
+
+export interface StudentMfaVerifyPayload {
+  challengeToken: string;
+  method: StudentMfaLoginMethod;
+  code: string;
+}
+
+export interface APIStudentMfaEmailResend {
+  emailCodeSent: boolean;
+  hint: string;
+  retryAfter: number;
+}
+
+export function isStudentMfaChallenge(
+  result: APIStudentLoginResult
+): result is APIStudentMfaChallenge {
+  return "mfaRequired" in result && result.mfaRequired === true;
+}
+
 export interface StudentInviteVerifyResponse {
   firstName: string;
   lastName: string;

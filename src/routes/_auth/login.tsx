@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link, useNavigate, useRouter } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, useRouter } from "@tanstack/react-router";
 import { z } from "zod";
 import { toast } from "sonner";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuthShellContent } from "@/components/site/AuthShell";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
+import { LoginCredentialsForm } from "@/components/pages/login/LoginCredentialsForm";
+import { MfaChallengeForm } from "@/components/pages/login/MfaChallengeForm";
+import type { APIStudentMfaChallenge } from "@/data/auth";
 import { SITE, SITE_LINK } from "@/data/site";
 
 export const Route = createFileRoute("/_auth/login")({
@@ -46,22 +45,31 @@ function LoginPage() {
   const destination = getInternalRedirect(redirectTo);
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [challenge, setChallenge] = useState<APIStudentMfaChallenge | null>(null);
 
-  useAuthShellContent({
-    title: "Connexion étudiant",
-    subtitle: "Accédez à vos formations, vos projets et votre suivi.",
-    footer: (
-      <span>
-        Pas encore inscrire ?{" "}
-        <a href={`${SITE_LINK.landingUrl}/trainings`} className="font-medium text-foreground underline underline-offset-4">
-          Souscrire à une formation
-        </a>
-      </span>
-    ),
-  });
+  useAuthShellContent(
+    challenge
+      ? {
+          title: "Vérification en deux étapes",
+          subtitle: "Confirmez votre identité pour terminer la connexion.",
+        }
+      : {
+          title: "Connexion étudiant",
+          subtitle: "Accédez à vos formations, vos projets et votre suivi.",
+          footer: (
+            <span>
+              Pas encore inscrit ?{" "}
+              <a
+                href={`${SITE_LINK.landingUrl}/trainings`}
+                className="font-medium text-foreground underline underline-offset-4"
+              >
+                Souscrire à une formation
+              </a>
+            </span>
+          ),
+        },
+  );
 
   // Redirection automatique si l'étudiant est déjà connecté
   useEffect(() => {
@@ -71,15 +79,17 @@ function LoginPage() {
     }
   }, [ready, isAuthenticated, destination, navigate, router]);
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLogin = async (nextEmail: string, password: string) => {
+    setEmail(nextEmail);
     setLoading(true);
 
     try {
-      await login(email, password);
+      const outcome = await login(nextEmail, password);
+      if (outcome.status === "mfa") {
+        setChallenge(outcome.challenge);
+        return;
+      }
       toast.success("Connexion réussie");
-      if (destination) router.history.push(destination);
-      else navigate({ to: "/dashboard" });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erreur de connexion");
     } finally {
@@ -87,68 +97,15 @@ function LoginPage() {
     }
   };
 
-  return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <div>
-        <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="etudiant@votreadresse.com"
-          autoComplete="email"
-          className="mt-1 bg-card"
-          disabled={loading}
-        />
-      </div>
+  if (challenge) {
+    return (
+      <MfaChallengeForm
+        challenge={challenge}
+        onBack={() => setChallenge(null)}
+        onVerified={() => toast.success("Connexion réussie")}
+      />
+    );
+  }
 
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <Label htmlFor="pw">Mot de passe</Label>
-          <Link to="/forgot-password" className="text-xs text-muted-foreground hover:text-foreground">
-            Mot de passe oublié ?
-          </Link>
-        </div>
-        <div className="relative">
-          <Input
-            id="pw"
-            type={showPassword ? "text" : "password"}
-            className="bg-card pr-10"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••"
-            autoComplete="current-password"
-            disabled={loading}
-            required
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-            aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
-            disabled={loading}
-          >
-            {showPassword ? (
-              <EyeOff className="h-4 w-4 cursor-pointer" />
-            ) : (
-              <Eye className="h-4 w-4 cursor-pointer" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      <Button type="submit" disabled={loading} className="w-full">
-        {loading ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Connexion...
-          </>
-        ) : (
-          "Se connecter"
-        )}
-      </Button>
-    </form>
-  );
+  return <LoginCredentialsForm defaultEmail={email} loading={loading} onSubmit={handleLogin} />;
 }

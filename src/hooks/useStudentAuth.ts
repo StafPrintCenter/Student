@@ -1,6 +1,23 @@
 import { useEffect, useState, useCallback } from "react";
-import { loginStudent, fetchStudentMe, logoutStudent, verifyStudentInvite, acceptStudentInvite, forgotStudentPassword, resetStudentPassword, StudentAuthApiError } from "@/stores/useAuthStore";
-import type { StudentInviteVerifyResponse } from "@/data/auth";
+import {
+  loginStudent,
+  fetchStudentMe,
+  logoutStudent,
+  verifyStudentInvite,
+  acceptStudentInvite,
+  forgotStudentPassword,
+  resetStudentPassword,
+  StudentAuthApiError,
+  sendStudentMfaEmailCode,
+  verifyStudentMfa,
+} from "@/stores/useAuthStore";
+import { isStudentMfaChallenge } from "@/data/auth";
+import type {
+  StudentInviteVerifyResponse,
+  StudentMfaVerifyPayload,
+  APIStudentMfaChallenge,
+  APIStudentMfaEmailResend,
+} from "@/data/auth";
 
 export interface StudentAuthUser {
   id: string;
@@ -73,6 +90,20 @@ async function bootstrap() {
 
 let bootstrapped = false;
 
+export type StudentLoginOutcome =
+  | { status: "authenticated" }
+  | { status: "mfa"; challenge: APIStudentMfaChallenge };
+
+async function completeSession() {
+  const student = await fetchStudentMe();
+  if (!student) {
+    throw new StudentAuthApiError("La session n'a pas pu être établie.");
+  }
+  sharedUser = toStudentAuthUser(student);
+  sharedReady = true;
+  notify();
+}
+
 export function useStudentAuth() {
   const [, forceRender] = useState(0);
 
@@ -90,15 +121,28 @@ export function useStudentAuth() {
     };
   }, []);
 
-  const login = useCallback(async (email: string, password: string) => {
-    await loginStudent(email, password);
-    const student = await fetchStudentMe();
-    if (!student) {
-      throw new StudentAuthApiError("La session n'a pas pu être établie.");
+  const login = useCallback(async (email: string, password: string): Promise<StudentLoginOutcome> => {
+    const result = await loginStudent(email, password);
+    if (isStudentMfaChallenge(result)) {
+      return { status: "mfa", challenge: result };
     }
-    sharedUser = toStudentAuthUser(student);
-    sharedReady = true;
-    notify();
+    await completeSession();
+    return { status: "authenticated" };
+  }, []);
+
+  const verifyMfa = useCallback(async (payload: StudentMfaVerifyPayload): Promise<void> => {
+    await verifyStudentMfa(payload);
+    await completeSession();
+  }, []);
+
+  const sendMfaEmailCode = useCallback(
+    (challengeToken: string): Promise<APIStudentMfaEmailResend> =>
+      sendStudentMfaEmailCode(challengeToken),
+    [],
+  );
+
+  const refresh = useCallback(async () => {
+    await bootstrap();
   }, []);
 
   const logout = useCallback(async () => {
@@ -158,5 +202,8 @@ export function useStudentAuth() {
     forgotPassword,
     resetPassword,
     setUser,
+    verifyMfa,
+    sendMfaEmailCode,
+    refresh,
   };
 }

@@ -1,11 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { studentFetch } from "@/lib/api/resolve-url";
 import { parseApiError } from "@/lib/api/error";
-import type { APIStudentUser, APIStudentLoginResponse, StudentInviteVerifyResponse } from "@/data/auth";
+import type {
+  APIStudentUser,
+  StudentInviteVerifyResponse,
+  APIStudentLoginResult,
+  APIStudentMfaEmailResend,
+  StudentMfaVerifyPayload,
+} from "@/data/auth";
 
 export class StudentAuthApiError extends Error { }
 
-export async function loginStudent(email: string, password: string): Promise<APIStudentLoginResponse> {
+export async function loginStudent(email: string, password: string): Promise<APIStudentLoginResult> {
   const formData = new FormData();
   formData.append("email", email);
   formData.append("password", password);
@@ -138,4 +144,62 @@ export async function resetStudentPassword(params: {
     throw new StudentAuthApiError(error.message);
   }
   return (await response.json()) as { message: string };
+}
+
+export class StudentMfaLoginError extends StudentAuthApiError {
+  constructor(
+    message: string,
+    public readonly status: number,
+    public readonly code?: string,
+    public readonly attemptsLeft?: number,
+    public readonly retryAfter?: number,
+  ) {
+    super(message);
+    this.name = "StudentMfaLoginError";
+  }
+}
+
+async function buildMfaLoginError(
+  response: Response,
+  fallback: string,
+): Promise<StudentMfaLoginError> {
+  const body = await response.json().catch(() => null);
+  return new StudentMfaLoginError(
+    body?.message || fallback,
+    response.status,
+    body?.code,
+    body?.attemptsLeft,
+    body?.retryAfter,
+  );
+}
+
+export async function sendStudentMfaEmailCode(
+  challengeToken: string,
+): Promise<APIStudentMfaEmailResend> {
+  const formData = new FormData();
+  formData.append("challengeToken", challengeToken);
+
+  const response = await studentFetch(`/api/student/auth/mfa/send-email`, {
+    method: "POST",
+    body: formData,
+  });
+  if (!response.ok) {
+    throw await buildMfaLoginError(response, "Impossible d'envoyer le code par e-mail.");
+  }
+  return response.json();
+}
+
+export async function verifyStudentMfa(payload: StudentMfaVerifyPayload): Promise<void> {
+  const formData = new FormData();
+  formData.append("challengeToken", payload.challengeToken);
+  formData.append("method", payload.method);
+  formData.append("code", payload.code);
+
+  const response = await studentFetch(`/api/student/auth/mfa/verify`, {
+    method: "POST",
+    body: formData,
+  });
+  if (!response.ok) {
+    throw await buildMfaLoginError(response, "Code invalide ou expiré.");
+  }
 }
