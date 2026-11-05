@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { PasswordInput } from "@/components/auth/PasswordInput";
+import { PasswordField } from "@/components/site/PasswordField";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { useRequestStudentEmailChange, useConfirmStudentEmailChange } from "@/stores/useAccountStore";
 import type { StudentEmailChangeRequestResponse } from "@/data/account";
@@ -105,12 +105,12 @@ export function EmailChangeDialog({
               {errors.newEmail && <p className="mt-1 text-xs text-destructive">{errors.newEmail}</p>}
             </div>
             <div>
-              <Label htmlFor="email-pw">Mot de passe actuel</Label>
-              <PasswordInput
+              <PasswordField
                 id="email-pw"
+                label="Mot de passe actuel"
                 autoComplete="current-password"
                 value={requestForm.password}
-                onChange={(e) => setRequestForm({ ...requestForm, password: e.target.value })}
+                onChange={(password) => setRequestForm({ ...requestForm, password })}
                 disabled={requestMutation.isPending}
               />
               {errors.password && <p className="mt-1 text-xs text-destructive">{errors.password}</p>}
