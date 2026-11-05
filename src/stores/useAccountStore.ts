@@ -5,11 +5,27 @@ import type {
   APIStudentProfile,
   StudentProfilePayload,
   StudentEmailChangeRequestPayload,
-  StudentEmailChangeRequestResponse,
+  APIStudentEmailChangeRequestResponse,
+  StudentPasswordChangePayload,
+  APIStudentPasswordChangeResponse,
   StudentEmailChangeConfirmPayload,
 } from "@/data/account";
 
 export class StudentAccountApiError extends Error { }
+
+async function accountRequest<T>(
+  path: string,
+  method: "POST" | "PUT",
+  body: FormData,
+  fallbackMessage: string
+): Promise<T> {
+  const response = await studentFetch(`/api/student/account/${path}`, { method, body });
+  if (!response.ok) {
+    const error = await parseApiError(response, fallbackMessage);
+    throw new StudentAccountApiError(error.message);
+  }
+  return response.json();
+}
 
 const RESOURCE_KEY = "account";
 
@@ -47,7 +63,7 @@ export async function updateStudentProfile(payload: StudentProfilePayload): Prom
 
 export async function requestStudentEmailChange(
   payload: StudentEmailChangeRequestPayload
-): Promise<StudentEmailChangeRequestResponse> {
+): Promise<APIStudentEmailChangeRequestResponse> {
   const response = await studentFetch(`/api/student/account/email/request`, {
     method: "POST",
     body: buildFormData({ ...payload }),
@@ -74,6 +90,24 @@ export async function confirmStudentEmailChange(
   return json.data;
 }
 
+
+export async function changeStudentPassword(
+  payload: StudentPasswordChangePayload,
+): Promise<APIStudentPasswordChangeResponse> {
+  const fd = new FormData();
+  fd.append("currentPassword", payload.currentPassword);
+  fd.append("password", payload.password);
+  fd.append("password_confirmation", payload.passwordConfirmation);
+  fd.append("revokeOtherSessions", String(payload.revokeOtherSessions));
+
+  return accountRequest<APIStudentPasswordChangeResponse>(
+    "password",
+    "PUT",
+    fd,
+    "Impossible de modifier le mot de passe.",
+  );
+}
+
 export function useUpdateStudentProfile() {
   const qc = useQueryClient();
   return useMutation({
@@ -98,6 +132,18 @@ export function useConfirmStudentEmailChange() {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: [RESOURCE_KEY] });
       qc.invalidateQueries({ queryKey: ["current-student"] });
+    },
+  });
+}
+
+export function useChangeStudentPassword() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: StudentPasswordChangePayload) => changeStudentPassword(payload),
+    onSuccess: (_response, payload) => {
+      if (payload.revokeOtherSessions) {
+        return qc.invalidateQueries({ queryKey: ["student-sessions"] });
+      }
     },
   });
 }

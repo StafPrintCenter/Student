@@ -19,12 +19,24 @@ export interface StudentEmailChangeRequestPayload {
   password: string;
 }
 
-export interface StudentEmailChangeRequestResponse {
+export interface StudentEmailChangeConfirmPayload {
+  code: string;
+}
+
+export interface StudentPasswordChangePayload {
+  currentPassword: string;
+  password: string;
+  passwordConfirmation: string;
+  revokeOtherSessions: boolean;
+}
+
+export interface APIStudentPasswordChangeResponse {
+  message: string;
+  revokedSessions: number;
+}
+
+export interface APIStudentEmailChangeRequestResponse {
   message: string;
   hint: string;
   expiresInMinutes: number;
-}
-
-export interface StudentEmailChangeConfirmPayload {
-  code: string;
 }

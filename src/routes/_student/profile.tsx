@@ -8,6 +8,7 @@ import { SITE } from "@/data/site";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { ProfileEditDialog } from "@/components/pages/profile/ProfileEditDialog";
 import { EmailChangeDialog } from "@/components/pages/profile/EmailChangeDialog";
+import { ChangePasswordCard } from "@/components/pages/security/ChangePasswordCard";
 
 export const Route = createFileRoute("/_student/profile")({
   head: () => ({
@@ -169,6 +170,8 @@ function ProfilePage() {
         </div>
 
         <div className="space-y-6 lg:col-span-1">
+          <ChangePasswordCard />
+
           <div className="rounded-2xl border bg-card p-6 shadow-sm">
             <div className="mb-4 flex items-center gap-2 border-b pb-3">
               <Shield className="h-4 w-4 text-primary" />
