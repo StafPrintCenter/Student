@@ -20,6 +20,7 @@ import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthResetPasswordRouteImport } from './routes/_auth/reset-password'
 import { Route as StudentCertificatesRouteImport } from './routes/_student/certificates'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
+import { Route as StudentMfaManageRouteImport } from './routes/_student/mfa-manage'
 import { Route as StudentPaymentsRouteImport } from './routes/_student/payments'
 import { Route as StudentProfileRouteImport } from './routes/_student/profile'
 import { Route as StudentProgressRouteImport } from './routes/_student/progress'
@@ -86,6 +87,11 @@ const StudentCertificatesRoute = StudentCertificatesRouteImport.update({
 const StudentDashboardRoute = StudentDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentMfaManageRoute = StudentMfaManageRouteImport.update({
+  id: '/mfa-manage',
+  path: '/mfa-manage',
   getParentRoute: () => StudentRoute,
 } as any)
 const StudentPaymentsRoute = StudentPaymentsRouteImport.update({
@@ -174,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof AuthResetPasswordRoute
   '/certificates': typeof StudentCertificatesRoute
   '/dashboard': typeof StudentDashboardRoute
+  '/mfa-manage': typeof StudentMfaManageRoute
   '/payments': typeof StudentPaymentsRoute
   '/profile': typeof StudentProfileRoute
   '/progress': typeof StudentProgressRoute
@@ -199,6 +206,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof AuthResetPasswordRoute
   '/certificates': typeof StudentCertificatesRoute
   '/dashboard': typeof StudentDashboardRoute
+  '/mfa-manage': typeof StudentMfaManageRoute
   '/payments': typeof StudentPaymentsRoute
   '/profile': typeof StudentProfileRoute
   '/progress': typeof StudentProgressRoute
@@ -227,6 +235,7 @@ export interface FileRoutesById {
   '/_auth/reset-password': typeof AuthResetPasswordRoute
   '/_student/certificates': typeof StudentCertificatesRoute
   '/_student/dashboard': typeof StudentDashboardRoute
+  '/_student/mfa-manage': typeof StudentMfaManageRoute
   '/_student/payments': typeof StudentPaymentsRoute
   '/_student/profile': typeof StudentProfileRoute
   '/_student/progress': typeof StudentProgressRoute
@@ -254,6 +263,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/certificates'
     | '/dashboard'
+    | '/mfa-manage'
     | '/payments'
     | '/profile'
     | '/progress'
@@ -279,6 +289,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/certificates'
     | '/dashboard'
+    | '/mfa-manage'
     | '/payments'
     | '/profile'
     | '/progress'
@@ -306,6 +317,7 @@ export interface FileRouteTypes {
     | '/_auth/reset-password'
     | '/_student/certificates'
     | '/_student/dashboard'
+    | '/_student/mfa-manage'
     | '/_student/payments'
     | '/_student/profile'
     | '/_student/progress'
@@ -407,6 +419,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof StudentDashboardRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/mfa-manage': {
+      id: '/_student/mfa-manage'
+      path: '/mfa-manage'
+      fullPath: '/mfa-manage'
+      preLoaderRoute: typeof StudentMfaManageRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/payments': {
@@ -529,6 +548,7 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 interface StudentRouteChildren {
   StudentCertificatesRoute: typeof StudentCertificatesRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
+  StudentMfaManageRoute: typeof StudentMfaManageRoute
   StudentPaymentsRoute: typeof StudentPaymentsRoute
   StudentProfileRoute: typeof StudentProfileRoute
   StudentProgressRoute: typeof StudentProgressRoute
@@ -548,6 +568,7 @@ interface StudentRouteChildren {
 const StudentRouteChildren: StudentRouteChildren = {
   StudentCertificatesRoute: StudentCertificatesRoute,
   StudentDashboardRoute: StudentDashboardRoute,
+  StudentMfaManageRoute: StudentMfaManageRoute,
   StudentPaymentsRoute: StudentPaymentsRoute,
   StudentProfileRoute: StudentProfileRoute,
   StudentProgressRoute: StudentProgressRoute,

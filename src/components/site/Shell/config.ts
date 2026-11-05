@@ -1,4 +1,4 @@
-import { LayoutDashboard, GraduationCap, Users2, LineChart, BadgeCheck, Calendar, Bell, CreditCard, UserCircle } from "lucide-react";
+import { LayoutDashboard, GraduationCap, Users2, LineChart, BadgeCheck, Calendar, Bell, CreditCard, UserCircle, Shield } from "lucide-react";
 import { SITE_LINK } from "@/data/site";
 
 export const docsUrl = `${SITE_LINK.docsUrl}/docs/student/index`;
@@ -53,4 +53,5 @@ export const navItemClass =
 export const USER_DROPDOWN_ITEMS = [
   { to: "/profile", label: "Mon profil", icon: UserCircle },
   { to: "/notifications", label: "Notifications", icon: Bell },
+  { to: "/mfa-manage", label: "Sécurité du compte", icon: Shield },
 ] as const;
