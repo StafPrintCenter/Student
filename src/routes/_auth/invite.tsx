@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/data/site";
 import type { StudentInviteVerifyResponse } from "@/data/auth";
+import { PasswordRequirements } from "@/components/site/PasswordRequirements";
+import { getPasswordPolicyError } from "@/lib/password-policy";
 
 const searchSchema = z.object({
   student: z.string(),
