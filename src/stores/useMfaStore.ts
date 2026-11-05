@@ -12,7 +12,7 @@ import type {
   StudentMfaEmailMethodPayload,
 } from "@/data/mfa";
 
-export class StudentMfaApiError extends Error { }
+export class StudentMfaApiError extends Error {}
 
 const MFA_KEY = ["student-mfa"] as const;
 const BASE_PATH = "/api/student/account/security/mfa";
@@ -26,7 +26,7 @@ function buildForm(fields: Record<string, string>): FormData {
 async function mfaRequest<T>(
   path: string,
   fallbackMessage: string,
-  init?: { method: "POST" | "PUT" | "DELETE"; body: FormData }
+  init?: { method: "POST" | "PUT" | "DELETE"; body: FormData },
 ): Promise<T> {
   const response = await studentFetch(`${BASE_PATH}${path}`, init);
   if (!response.ok) {
@@ -48,10 +48,14 @@ export const enableStudentMfa = (payload: StudentMfaPasswordPayload) =>
   });
 
 export const disableStudentMfa = (payload: StudentMfaPasswordPayload) =>
-  mfaRequest<APIStudentMfaStatus>("/disable", "Impossible de désactiver la double authentification.", {
-    method: "POST",
-    body: buildForm({ password: payload.password }),
-  });
+  mfaRequest<APIStudentMfaStatus>(
+    "/disable",
+    "Impossible de désactiver la double authentification.",
+    {
+      method: "POST",
+      body: buildForm({ password: payload.password }),
+    },
+  );
 
 export const setStudentMfaDefault = (payload: StudentMfaDefaultPayload) =>
   mfaRequest<APIStudentMfaStatus>("/default", "Impossible de définir la méthode par défaut.", {
@@ -63,7 +67,7 @@ export const regenerateStudentMfaRecoveryCodes = (payload: StudentMfaPasswordPay
   mfaRequest<APIStudentMfaRecoveryCodes>(
     "/recovery-codes/regenerate",
     "Impossible de générer de nouveaux codes de secours.",
-    { method: "POST", body: buildForm({ password: payload.password }) }
+    { method: "POST", body: buildForm({ password: payload.password }) },
   );
 
 export const setupStudentMfaTotp = (payload: StudentMfaPasswordPayload) =>
@@ -82,10 +86,14 @@ export const confirmStudentMfaTotp = (payload: StudentMfaTotpConfirmPayload) =>
   });
 
 export const deleteStudentMfaMethod = (payload: StudentMfaDeleteMethodPayload) =>
-  mfaRequest<APIStudentMfaStatus>(`/methods/${payload.id}`, "Impossible de supprimer cette méthode.", {
-    method: "DELETE",
-    body: buildForm({ password: payload.password }),
-  });
+  mfaRequest<APIStudentMfaStatus>(
+    `/methods/${payload.id}`,
+    "Impossible de supprimer cette méthode.",
+    {
+      method: "DELETE",
+      body: buildForm({ password: payload.password }),
+    },
+  );
 
 export const setStudentMfaEmailMethod = (payload: StudentMfaEmailMethodPayload) =>
   mfaRequest<APIStudentMfaStatus>("/email", "Impossible de modifier la méthode e-mail.", {
@@ -114,7 +122,9 @@ export function useStudentMfaStatus() {
 }
 
 /** Les mutations qui renvoient l'état MFA complet le placent directement dans le cache */
-function useStatusMutation<TPayload>(mutationFn: (payload: TPayload) => Promise<APIStudentMfaStatus>) {
+function useStatusMutation<TPayload>(
+  mutationFn: (payload: TPayload) => Promise<APIStudentMfaStatus>,
+) {
   const qc = useQueryClient();
   return useMutation({
     mutationFn,

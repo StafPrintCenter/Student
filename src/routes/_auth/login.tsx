@@ -14,10 +14,7 @@ export const Route = createFileRoute("/_auth/login")({
   head: () => ({
     meta: [
       { title: `${SITE.tool} - Connexion | ${SITE.name}` },
-      {
-        name: "description",
-        content: `Connectez-vous à votre ${SITE.tool} ${SITE.name} pour suivre vos formations, et soumettre vos travaux.`,
-      },
+      { name: "description", content: `Connectez-vous à votre ${SITE.tool} ${SITE.name} pour suivre vos formations, et soumettre vos travaux.` },
       { property: "og:title", content: `${SITE.tool} - Connexion | ${SITE.name}` },
       { property: "og:description", content: `Connectez-vous à votre ${SITE.tool} ${SITE.name} pour suivre vos formations.` },
     ],
@@ -51,24 +48,24 @@ function LoginPage() {
   useAuthShellContent(
     challenge
       ? {
-          title: "Vérification en deux étapes",
-          subtitle: "Confirmez votre identité pour terminer la connexion.",
-        }
+        title: "Vérification en deux étapes",
+        subtitle: "Confirmez votre identité pour terminer la connexion.",
+      }
       : {
-          title: "Connexion étudiant",
-          subtitle: "Accédez à vos formations, vos projets et votre suivi.",
-          footer: (
-            <span>
-              Pas encore inscrit ?{" "}
-              <a
-                href={`${SITE_LINK.landingUrl}/trainings`}
-                className="font-medium text-foreground underline underline-offset-4"
-              >
-                Souscrire à une formation
-              </a>
-            </span>
-          ),
-        },
+        title: "Connexion étudiant",
+        subtitle: "Accédez à vos formations, vos projets et votre suivi.",
+        footer: (
+          <span>
+            Pas encore inscrit ?{" "}
+            <a
+              href={`${SITE_LINK.landingUrl}/trainings`}
+              className="font-medium text-foreground underline underline-offset-4"
+            >
+              Souscrire à une formation
+            </a>
+          </span>
+        ),
+      },
   );
 
   // Redirection automatique si l'étudiant est déjà connecté
@@ -107,5 +104,11 @@ function LoginPage() {
     );
   }
 
-  return <LoginCredentialsForm defaultEmail={email} loading={loading} onSubmit={handleLogin} />;
+  return (
+    <LoginCredentialsForm
+      defaultEmail={email}
+      loading={loading}
+      onSubmit={handleLogin}
+    />
+  );
 }

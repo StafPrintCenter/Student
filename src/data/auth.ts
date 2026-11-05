@@ -61,7 +61,7 @@ export interface APIStudentMfaEmailResend {
 }
 
 export function isStudentMfaChallenge(
-  result: APIStudentLoginResult
+  result: APIStudentLoginResult,
 ): result is APIStudentMfaChallenge {
   return "mfaRequired" in result && result.mfaRequired === true;
 }

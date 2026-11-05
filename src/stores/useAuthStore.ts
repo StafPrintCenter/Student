@@ -9,14 +9,20 @@ import type {
   StudentMfaVerifyPayload,
 } from "@/data/auth";
 
-export class StudentAuthApiError extends Error { }
+export class StudentAuthApiError extends Error {}
 
-export async function loginStudent(email: string, password: string): Promise<APIStudentLoginResult> {
+export async function loginStudent(
+  email: string,
+  password: string,
+): Promise<APIStudentLoginResult> {
   const formData = new FormData();
   formData.append("email", email);
   formData.append("password", password);
 
-  const response = await studentFetch(`/api/student/auth/login`, { method: "POST", body: formData });
+  const response = await studentFetch(`/api/student/auth/login`, {
+    method: "POST",
+    body: formData,
+  });
   if (!response.ok) {
     const error = await parseApiError(response, "Email ou mot de passe incorrect.");
     throw new StudentAuthApiError(error.message);
@@ -61,7 +67,7 @@ export async function verifyStudentInvite(params: {
   signature: string;
 }): Promise<StudentInviteVerifyResponse> {
   const response = await studentFetch(
-    `/api/student/auth/invite-accept?${buildInviteQuery(params)}`
+    `/api/student/auth/invite-accept?${buildInviteQuery(params)}`,
   );
   if (!response.ok) {
     const error = await parseApiError(response, "Ce lien d'invitation est invalide ou a expiré.");
@@ -85,7 +91,7 @@ export async function acceptStudentInvite(params: {
     {
       method: "POST",
       body: fd,
-    }
+    },
   );
   if (!response.ok) {
     const error = await parseApiError(response, "Ce lien d'invitation est invalide ou a expiré.");
@@ -99,7 +105,11 @@ export async function acceptStudentInvite(params: {
  * Hook pour récupérer l'étudiant actuellement connecté
  */
 export function useCurrentStudent() {
-  const { data: student, isLoading, error } = useQuery({
+  const {
+    data: student,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["current-student"],
     queryFn: fetchStudentMe,
     staleTime: 1000 * 60 * 5, // Met en cache les données pendant 5 minutes
@@ -118,9 +128,15 @@ export async function forgotStudentPassword(email: string): Promise<{ message: s
   const fd = new FormData();
   fd.append("email", email);
 
-  const response = await studentFetch(`/api/student/auth/forgot-password`, { method: "POST", body: fd });
+  const response = await studentFetch(`/api/student/auth/forgot-password`, {
+    method: "POST",
+    body: fd,
+  });
   if (!response.ok) {
-    const error = await parseApiError(response, "Impossible d'envoyer l'e-mail de réinitialisation.");
+    const error = await parseApiError(
+      response,
+      "Impossible d'envoyer l'e-mail de réinitialisation.",
+    );
     throw new StudentAuthApiError(error.message);
   }
   return (await response.json()) as { message: string };
@@ -138,9 +154,15 @@ export async function resetStudentPassword(params: {
   fd.append("password", params.password);
   fd.append("password_confirmation", params.passwordConfirmation);
 
-  const response = await studentFetch(`/api/student/auth/reset-password`, { method: "POST", body: fd });
+  const response = await studentFetch(`/api/student/auth/reset-password`, {
+    method: "POST",
+    body: fd,
+  });
   if (!response.ok) {
-    const error = await parseApiError(response, "Ce lien de réinitialisation est invalide ou a expiré.");
+    const error = await parseApiError(
+      response,
+      "Ce lien de réinitialisation est invalide ou a expiré.",
+    );
     throw new StudentAuthApiError(error.message);
   }
   return (await response.json()) as { message: string };
