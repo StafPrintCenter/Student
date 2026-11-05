@@ -20,10 +20,10 @@ import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthResetPasswordRouteImport } from './routes/_auth/reset-password'
 import { Route as StudentCertificatesRouteImport } from './routes/_student/certificates'
 import { Route as StudentDashboardRouteImport } from './routes/_student/dashboard'
-import { Route as StudentMfaManageRouteImport } from './routes/_student/mfa-manage'
-import { Route as StudentPaymentsRouteImport } from './routes/_student/payments'
+import { Route as StudentPaymentsRouteImport } from '../routes/_student/security.tsx
 import { Route as StudentProfileRouteImport } from './routes/_student/profile'
 import { Route as StudentProgressRouteImport } from './routes/_student/progress'
+import { Route as StudentSecurityRouteImport } from './routes/_student/security'
 import { Route as StudentNotificationsIndexRouteImport } from './routes/_student/notifications/index'
 import { Route as StudentNotificationsIdRouteImport } from './routes/_student/notifications/$id'
 import { Route as StudentNotificationsPreferencesRouteImport } from './routes/_student/notifications/preferences'
@@ -89,11 +89,6 @@ const StudentDashboardRoute = StudentDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => StudentRoute,
 } as any)
-const StudentMfaManageRoute = StudentMfaManageRouteImport.update({
-  id: '/mfa-manage',
-  path: '/mfa-manage',
-  getParentRoute: () => StudentRoute,
-} as any)
 const StudentPaymentsRoute = StudentPaymentsRouteImport.update({
   id: '/payments',
   path: '/payments',
@@ -107,6 +102,11 @@ const StudentProfileRoute = StudentProfileRouteImport.update({
 const StudentProgressRoute = StudentProgressRouteImport.update({
   id: '/progress',
   path: '/progress',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentSecurityRoute = StudentSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
   getParentRoute: () => StudentRoute,
 } as any)
 const StudentNotificationsIndexRoute =
@@ -180,10 +180,10 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof AuthResetPasswordRoute
   '/certificates': typeof StudentCertificatesRoute
   '/dashboard': typeof StudentDashboardRoute
-  '/mfa-manage': typeof StudentMfaManageRoute
   '/payments': typeof StudentPaymentsRoute
   '/profile': typeof StudentProfileRoute
   '/progress': typeof StudentProgressRoute
+  '/security': typeof StudentSecurityRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
@@ -206,10 +206,10 @@ export interface FileRoutesByTo {
   '/reset-password': typeof AuthResetPasswordRoute
   '/certificates': typeof StudentCertificatesRoute
   '/dashboard': typeof StudentDashboardRoute
-  '/mfa-manage': typeof StudentMfaManageRoute
   '/payments': typeof StudentPaymentsRoute
   '/profile': typeof StudentProfileRoute
   '/progress': typeof StudentProgressRoute
+  '/security': typeof StudentSecurityRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
@@ -235,10 +235,10 @@ export interface FileRoutesById {
   '/_auth/reset-password': typeof AuthResetPasswordRoute
   '/_student/certificates': typeof StudentCertificatesRoute
   '/_student/dashboard': typeof StudentDashboardRoute
-  '/_student/mfa-manage': typeof StudentMfaManageRoute
   '/_student/payments': typeof StudentPaymentsRoute
   '/_student/profile': typeof StudentProfileRoute
   '/_student/progress': typeof StudentProgressRoute
+  '/_student/security': typeof StudentSecurityRoute
   '/_student/notifications/$id': typeof StudentNotificationsIdRoute
   '/_student/notifications/preferences': typeof StudentNotificationsPreferencesRoute
   '/_student/sessions/$id': typeof StudentSessionsIdRoute
@@ -254,84 +254,84 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/cgu'
-    | '/sitemap.xml'
-    | '/forgot-password'
-    | '/invite'
-    | '/login'
-    | '/reset-password'
-    | '/certificates'
-    | '/dashboard'
-    | '/mfa-manage'
-    | '/payments'
-    | '/profile'
-    | '/progress'
-    | '/notifications/$id'
-    | '/notifications/preferences'
-    | '/sessions/$id'
-    | '/notifications/'
-    | '/sessions/'
-    | '/trainings/'
-    | '/community/posts/$id'
-    | '/trainings/$id/catalogue'
-    | '/trainings/$id/mine'
-    | '/community/posts/'
-    | '/trainings/$id/session/$sessionId'
+  | '/'
+  | '/cgu'
+  | '/sitemap.xml'
+  | '/forgot-password'
+  | '/invite'
+  | '/login'
+  | '/reset-password'
+  | '/certificates'
+  | '/dashboard'
+  | '/payments'
+  | '/profile'
+  | '/progress'
+  | '/security'
+  | '/notifications/$id'
+  | '/notifications/preferences'
+  | '/sessions/$id'
+  | '/notifications/'
+  | '/sessions/'
+  | '/trainings/'
+  | '/community/posts/$id'
+  | '/trainings/$id/catalogue'
+  | '/trainings/$id/mine'
+  | '/community/posts/'
+  | '/trainings/$id/session/$sessionId'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/cgu'
-    | '/sitemap.xml'
-    | '/forgot-password'
-    | '/invite'
-    | '/login'
-    | '/reset-password'
-    | '/certificates'
-    | '/dashboard'
-    | '/mfa-manage'
-    | '/payments'
-    | '/profile'
-    | '/progress'
-    | '/notifications/$id'
-    | '/notifications/preferences'
-    | '/sessions/$id'
-    | '/notifications'
-    | '/sessions'
-    | '/trainings'
-    | '/community/posts/$id'
-    | '/trainings/$id/catalogue'
-    | '/trainings/$id/mine'
-    | '/community/posts'
-    | '/trainings/$id/session/$sessionId'
+  | '/'
+  | '/cgu'
+  | '/sitemap.xml'
+  | '/forgot-password'
+  | '/invite'
+  | '/login'
+  | '/reset-password'
+  | '/certificates'
+  | '/dashboard'
+  | '/payments'
+  | '/profile'
+  | '/progress'
+  | '/security'
+  | '/notifications/$id'
+  | '/notifications/preferences'
+  | '/sessions/$id'
+  | '/notifications'
+  | '/sessions'
+  | '/trainings'
+  | '/community/posts/$id'
+  | '/trainings/$id/catalogue'
+  | '/trainings/$id/mine'
+  | '/community/posts'
+  | '/trainings/$id/session/$sessionId'
   id:
-    | '__root__'
-    | '/'
-    | '/_auth'
-    | '/_student'
-    | '/cgu'
-    | '/sitemap.xml'
-    | '/_auth/forgot-password'
-    | '/_auth/invite'
-    | '/_auth/login'
-    | '/_auth/reset-password'
-    | '/_student/certificates'
-    | '/_student/dashboard'
-    | '/_student/mfa-manage'
-    | '/_student/payments'
-    | '/_student/profile'
-    | '/_student/progress'
-    | '/_student/notifications/$id'
-    | '/_student/notifications/preferences'
-    | '/_student/sessions/$id'
-    | '/_student/notifications/'
-    | '/_student/sessions/'
-    | '/_student/trainings/'
-    | '/_student/community/posts/$id'
-    | '/_student/trainings/$id/catalogue'
-    | '/_student/trainings/$id/mine'
-    | '/_student/community/posts/'
-    | '/_student/trainings/$id/session/$sessionId'
+  | '__root__'
+  | '/'
+  | '/_auth'
+  | '/_student'
+  | '/cgu'
+  | '/sitemap.xml'
+  | '/_auth/forgot-password'
+  | '/_auth/invite'
+  | '/_auth/login'
+  | '/_auth/reset-password'
+  | '/_student/certificates'
+  | '/_student/dashboard'
+  | '/_student/payments'
+  | '/_student/profile'
+  | '/_student/progress'
+  | '/_student/security'
+  | '/_student/notifications/$id'
+  | '/_student/notifications/preferences'
+  | '/_student/sessions/$id'
+  | '/_student/notifications/'
+  | '/_student/sessions/'
+  | '/_student/trainings/'
+  | '/_student/community/posts/$id'
+  | '/_student/trainings/$id/catalogue'
+  | '/_student/trainings/$id/mine'
+  | '/_student/community/posts/'
+  | '/_student/trainings/$id/session/$sessionId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -421,13 +421,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentDashboardRouteImport
       parentRoute: typeof StudentRoute
     }
-    '/_student/mfa-manage': {
-      id: '/_student/mfa-manage'
-      path: '/mfa-manage'
-      fullPath: '/mfa-manage'
-      preLoaderRoute: typeof StudentMfaManageRouteImport
-      parentRoute: typeof StudentRoute
-    }
     '/_student/payments': {
       id: '/_student/payments'
       path: '/payments'
@@ -447,6 +440,13 @@ declare module '@tanstack/react-router' {
       path: '/progress'
       fullPath: '/progress'
       preLoaderRoute: typeof StudentProgressRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/security': {
+      id: '/_student/security'
+      path: '/security'
+      fullPath: '/security'
+      preLoaderRoute: typeof StudentSecurityRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/notifications/': {
@@ -548,10 +548,10 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 interface StudentRouteChildren {
   StudentCertificatesRoute: typeof StudentCertificatesRoute
   StudentDashboardRoute: typeof StudentDashboardRoute
-  StudentMfaManageRoute: typeof StudentMfaManageRoute
   StudentPaymentsRoute: typeof StudentPaymentsRoute
   StudentProfileRoute: typeof StudentProfileRoute
   StudentProgressRoute: typeof StudentProgressRoute
+  StudentSecurityRoute: typeof StudentSecurityRoute
   StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
   StudentNotificationsPreferencesRoute: typeof StudentNotificationsPreferencesRoute
   StudentSessionsIdRoute: typeof StudentSessionsIdRoute
@@ -568,10 +568,10 @@ interface StudentRouteChildren {
 const StudentRouteChildren: StudentRouteChildren = {
   StudentCertificatesRoute: StudentCertificatesRoute,
   StudentDashboardRoute: StudentDashboardRoute,
-  StudentMfaManageRoute: StudentMfaManageRoute,
   StudentPaymentsRoute: StudentPaymentsRoute,
   StudentProfileRoute: StudentProfileRoute,
   StudentProgressRoute: StudentProgressRoute,
+  StudentSecurityRoute: StudentSecurityRoute,
   StudentNotificationsIdRoute: StudentNotificationsIdRoute,
   StudentNotificationsPreferencesRoute: StudentNotificationsPreferencesRoute,
   StudentSessionsIdRoute: StudentSessionsIdRoute,

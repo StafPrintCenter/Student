@@ -19,6 +19,11 @@ export interface APIStudentMfaStatus {
   recoveryCodesGeneratedAt: string | null;
 }
 
+export interface APIStudentMfaRecoveryCodes {
+  recoveryCodes: string[];
+  recoveryCodesRemaining: number;
+}
+
 export interface APIStudentMfaTotpSetup {
   secret: string;
   otpauthUri: string;
@@ -26,12 +31,6 @@ export interface APIStudentMfaTotpSetup {
   account: string;
 }
 
-export interface APIStudentMfaRecoveryCodes {
-  recoveryCodes: string[];
-  recoveryCodesRemaining: number;
-}
-
-// Écriture : clés telles qu'attendues par l'API
 export interface StudentMfaPasswordPayload {
   password: string;
 }

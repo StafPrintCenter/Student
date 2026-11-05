@@ -7,7 +7,7 @@ import { RecoveryCodesCard } from "@/components/mfa/RecoveryCodesCard";
 import { useStudentMfaStatus } from "@/stores/useMfaStore";
 import { SITE } from "@/data/site";
 
-export const Route = createFileRoute("/_student/mfa-manage")({
+export const Route = createFileRoute("/_student/security")({
   head: () => ({
     meta: [
       { title: `${SITE.tool} - Sécurité du compte | ${SITE.name}` },

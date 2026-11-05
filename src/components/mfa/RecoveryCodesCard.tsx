@@ -1,88 +1,43 @@
-import { useState } from "react";
-import { toast } from "sonner";
-import { Copy, Download, KeyRound } from "lucide-react";
+import { KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
-import { PasswordConfirmDialog } from "@/components/mfa/PasswordConfirmDialog";
-import { useRegenerateStudentRecoveryCodes } from "@/stores/useMfaStore";
-import type { APIStudentMfaStatus } from "@/data/mfa";
 
-export function RecoveryCodesCard({ status }: { status: APIStudentMfaStatus }) {
-  const [confirmOpen, setConfirmOpen] = useState(false);
-  const [codes, setCodes] = useState<string[] | null>(null);
-  const regenerateMutation = useRegenerateStudentRecoveryCodes();
+interface MfaRecoveryCodesCardProps {
+  remaining: number;
+  generatedAt: string | null;
+  onRegenerate: () => void;
+}
 
-  const copy = async () => {
-    if (!codes) return;
-    await navigator.clipboard.writeText(codes.join("\n"));
-    toast.success("Codes copiés");
-  };
-
-  const download = () => {
-    if (!codes) return;
-    const url = URL.createObjectURL(new Blob([codes.join("\n")], { type: "text/plain" }));
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "codes-de-recuperation.txt";
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
+export function MfaRecoveryCodesCard({ remaining, generatedAt, onRegenerate }: MfaRecoveryCodesCardProps) {
   return (
     <div className="rounded-2xl border bg-card p-6 shadow-sm">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <KeyRound className="h-5 w-5 text-primary" />
-          <div>
-            <h3 className="font-display text-lg font-semibold">Codes de récupération</h3>
-            <p className="text-sm text-muted-foreground">
-              {status.recoveryCodesRemaining} code(s) restant(s)
-              {status.recoveryCodesGeneratedAt &&
-                ` · générés le ${new Date(status.recoveryCodesGeneratedAt).toLocaleDateString("fr-FR")}`}
-            </p>
-          </div>
+      <div className="mb-4 flex items-center gap-2 border-b pb-4">
+        <KeyRound className="h-5 w-5 text-primary" />
+        <h3 className="font-display text-lg font-semibold">Codes de secours</h3>
+      </div>
+
+      <p className="text-sm text-muted-foreground">
+        Utilisez-les si vous n'avez plus accès à votre e-mail ou à votre application. Chaque code ne sert qu'une fois.
+      </p>
+
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <div className="text-sm">
+          <span className="font-semibold">{remaining}</span> code{remaining > 1 ? "s" : ""} restant{remaining > 1 ? "s" : ""}
+          {generatedAt && (
+            <span className="ml-2 text-xs text-muted-foreground">
+              · générés le {new Date(generatedAt).toLocaleDateString("fr-FR")}
+            </span>
+          )}
         </div>
-        <Button variant="outline" onClick={() => setConfirmOpen(true)} disabled={!status.enabled}>
-          Générer de nouveaux codes
+        <Button variant="outline" size="sm" onClick={onRegenerate}>
+          {remaining > 0 ? "Régénérer" : "Générer des codes"}
         </Button>
       </div>
 
-      <PasswordConfirmDialog
-        open={confirmOpen}
-        onOpenChange={setConfirmOpen}
-        title="Générer de nouveaux codes"
-        description="Confirmez votre mot de passe pour générer vos codes de récupération."
-        confirmLabel="Générer"
-        isPending={regenerateMutation.isPending}
-        onConfirm={(password) =>
-          regenerateMutation.mutate(
-            { password },
-            {
-              onSuccess: (res) => { setCodes(res.recoveryCodes); setConfirmOpen(false); },
-              onError: (err) => toast.error(err instanceof Error ? err.message : "Erreur"),
-            }
-          )
-        }
-      />
-
-      <Dialog open={!!codes} onOpenChange={(v) => !v && setCodes(null)}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Vos codes de récupération</DialogTitle>
-            <DialogDescription>
-              Conservez-les en lieu sûr : ils ne seront plus affichés après la fermeture de cette fenêtre.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid grid-cols-2 gap-2 rounded-xl border bg-muted/30 p-4">
-            {codes?.map((c) => <code key={c} className="text-sm">{c}</code>)}
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={copy}><Copy className="mr-1 h-4 w-4" /> Copier</Button>
-            <Button variant="outline" onClick={download}><Download className="mr-1 h-4 w-4" /> Télécharger</Button>
-            <Button onClick={() => setCodes(null)}>J'ai noté mes codes</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {remaining > 0 && (
+        <p className="mt-3 text-xs text-muted-foreground">
+          Régénérer les codes invalide immédiatement les anciens.
+        </p>
+      )}
     </div>
   );
 }

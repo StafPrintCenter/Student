@@ -1,30 +1,28 @@
 import { useEffect, useState } from "react";
-import { z } from "zod";
-import { toast } from "sonner";
-import { Copy, Loader2 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
+import { z } from "zod";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { PasswordInput } from "@/components/auth/PasswordInput";
-import { useSetupStudentTotp, useConfirmStudentTotp } from "@/stores/useMfaStore";
+import { Switch } from "@/components/ui/switch";
+import { PasswordField } from "@/components/site/PasswordField";
+import { useSetupStudentMfaTotp, useConfirmStudentMfaTotp } from "@/stores/useMfaStore";
 import type { APIStudentMfaTotpSetup } from "@/data/mfa";
 
-const passwordSchema = z.object({ password: z.string().min(1, "Le mot de passe est requis") });
-const codeSchema = z.object({ code: z.string().trim().regex(/^\d{6}$/, "Le code contient 6 chiffres") });
+const codeSchema = z.string().trim().regex(/^\d{6}$/, "Le code contient 6 chiffres.");
 
-export function TotpSetupDialog({
-  open,
-  onOpenChange,
-}: {
+interface TotpSetupDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-}) {
-  const setupMutation = useSetupStudentTotp();
-  const confirmMutation = useConfirmStudentTotp();
+}
 
-  const [step, setStep] = useState<"password" | "confirm">("password");
+export function TotpSetupDialog({ open, onOpenChange }: TotpSetupDialogProps) {
+  const setupTotp = useSetupStudentMfaTotp();
+  const confirmTotp = useConfirmStudentMfaTotp();
+
   const [password, setPassword] = useState("");
   const [setup, setSetup] = useState<APIStudentMfaTotpSetup | null>(null);
   const [code, setCode] = useState("");
@@ -32,74 +30,56 @@ export function TotpSetupDialog({
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (open) {
-      setStep("password");
-      setPassword("");
-      setSetup(null);
-      setCode("");
-      setMakeDefault(true);
-      setError("");
-    }
+    if (!open) return;
+    setPassword(""); setSetup(null); setCode(""); setMakeDefault(true); setError("");
   }, [open]);
+
+  const pending = setupTotp.isPending || confirmTotp.isPending;
 
   const submitPassword = (e: React.FormEvent) => {
     e.preventDefault();
-    const parsed = passwordSchema.safeParse({ password });
-    if (!parsed.success) return setError(parsed.error.issues[0].message);
     setError("");
-
-    setupMutation.mutate(parsed.data, {
-      onSuccess: (data) => { setSetup(data); setStep("confirm"); },
-      onError: (err) => toast.error(err instanceof Error ? err.message : "Erreur"),
+    setupTotp.mutate({ password }, {
+      onSuccess: (data) => { setSetup(data); setPassword(""); },
+      onError: (err) => setError(err.message),
     });
   };
 
   const submitCode = (e: React.FormEvent) => {
     e.preventDefault();
-    const parsed = codeSchema.safeParse({ code });
-    if (!parsed.success) return setError(parsed.error.issues[0].message);
     setError("");
-
-    confirmMutation.mutate(
-      { code: parsed.data.code, makeDefault },
-      {
-        onSuccess: () => { toast.success("Application d'authentification configurée"); onOpenChange(false); },
-        onError: (err) => toast.error(err instanceof Error ? err.message : "Code invalide ou expiré"),
-      }
-    );
-  };
-
-  const copySecret = async () => {
-    if (!setup) return;
-    await navigator.clipboard.writeText(setup.secret);
-    toast.success("Clé copiée");
+    const parsed = codeSchema.safeParse(code);
+    if (!parsed.success) {
+      setError(parsed.error.issues[0]?.message ?? "Code invalide.");
+      return;
+    }
+    confirmTotp.mutate({ code: parsed.data, makeDefault }, {
+      onSuccess: () => {
+        toast.success("Application d'authentification activée");
+        onOpenChange(false);
+      },
+      onError: (err) => setError(err.message),
+    });
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
-        {step === "password" ? (
+      <DialogContent className="max-w-md">
+        {!setup ? (
           <form onSubmit={submitPassword} className="space-y-4">
             <DialogHeader>
-              <DialogTitle>Configurer une application d'authentification</DialogTitle>
-              <DialogDescription>Confirmez votre mot de passe pour générer la clé.</DialogDescription>
+              <DialogTitle>Ajouter une application d'authentification</DialogTitle>
+              <DialogDescription>Confirmez votre mot de passe pour générer votre clé de configuration.</DialogDescription>
             </DialogHeader>
-            <div>
-              <Label htmlFor="totp-pw">Mot de passe actuel</Label>
-              <PasswordInput
-                id="totp-pw"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={setupMutation.isPending}
-              />
-              {error && <p className="mt-1 text-xs text-destructive">{error}</p>}
-            </div>
+            <PasswordField
+              id="totp-password" label="Mot de passe actuel" value={password}
+              onChange={setPassword} autoComplete="current-password" disabled={pending}
+            />
+            {error && <p className="text-xs text-destructive">{error}</p>}
             <DialogFooter>
-              <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Annuler</Button>
-              <Button type="submit" disabled={setupMutation.isPending}>
-                {setupMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Continuer
+              <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={pending}>Annuler</Button>
+              <Button type="submit" disabled={pending || !password}>
+                {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} Continuer
               </Button>
             </DialogFooter>
           </form>
@@ -108,48 +88,38 @@ export function TotpSetupDialog({
             <DialogHeader>
               <DialogTitle>Scannez le QR code</DialogTitle>
               <DialogDescription>
-                Ouvrez votre application (Google Authenticator, Authy…), scannez le code, puis saisissez le code à 6 chiffres affiché.
+                Ouvrez votre application (Google Authenticator, Authy…), scannez le code puis saisissez le code à 6 chiffres affiché.
               </DialogDescription>
             </DialogHeader>
 
-            {setup && (
-              <div className="flex flex-col items-center gap-3">
-                <div className="rounded-xl border bg-white p-3">
-                  <QRCodeSVG value={setup.otpauthUri} size={176} />
-                </div>
-                <div className="flex w-full items-center gap-2 rounded-lg border bg-muted/30 p-2">
-                  <code className="min-w-0 flex-1 break-all text-xs">{setup.secret}</code>
-                  <Button type="button" size="sm" variant="outline" onClick={copySecret}>
-                    <Copy className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            )}
-
-            <div>
-              <Label htmlFor="totp-code">Code de l'application</Label>
-              <Input
-                id="totp-code"
-                inputMode="numeric"
-                maxLength={6}
-                autoComplete="one-time-code"
-                value={code}
-                onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-                disabled={confirmMutation.isPending}
-              />
-              {error && <p className="mt-1 text-xs text-destructive">{error}</p>}
+            <div className="flex justify-center rounded-xl border bg-white p-4">
+              <QRCodeSVG value={setup.otpauthUri} size={176} />
             </div>
 
-            <label className="flex cursor-pointer items-center gap-2 text-sm">
-              <input type="checkbox" checked={makeDefault} onChange={(e) => setMakeDefault(e.target.checked)} />
-              Utiliser cette méthode par défaut
-            </label>
+            <div className="text-center text-xs text-muted-foreground">
+              Ou saisissez la clé manuellement :
+              <code className="mt-1 block break-all font-mono text-sm text-foreground">{setup.secret}</code>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="totp-code">Code de vérification</Label>
+              <Input
+                id="totp-code" inputMode="numeric" maxLength={6} className="bg-card tracking-[0.4em]"
+                value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))} disabled={pending}
+              />
+            </div>
+
+            <div className="flex items-center justify-between rounded-lg border p-3">
+              <Label htmlFor="totp-default" className="cursor-pointer">Utiliser comme méthode par défaut</Label>
+              <Switch id="totp-default" checked={makeDefault} onCheckedChange={setMakeDefault} disabled={pending} />
+            </div>
+
+            {error && <p className="text-xs text-destructive">{error}</p>}
 
             <DialogFooter>
-              <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Annuler</Button>
-              <Button type="submit" disabled={confirmMutation.isPending}>
-                {confirmMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Valider
+              <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={pending}>Annuler</Button>
+              <Button type="submit" disabled={pending || code.length !== 6}>
+                {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} Activer
               </Button>
             </DialogFooter>
           </form>
