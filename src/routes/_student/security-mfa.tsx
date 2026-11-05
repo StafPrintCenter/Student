@@ -21,7 +21,7 @@ import {
 import type { APIStudentMfaMethod } from "@/data/mfa";
 import { SITE } from "@/data/site";
 
-export const Route = createFileRoute("/_student/security")({
+export const Route = createFileRoute("/_student/security-mfa")({
   head: () => ({
     meta: [
       { title: `${SITE.tool} - Double authentification | ${SITE.name}` },
