@@ -8,8 +8,9 @@ import type {
   APIStudentMfaEmailResend,
   StudentMfaVerifyPayload,
 } from "@/data/auth";
+import type { APIStudentPasskeyRequestOptions } from "@/data/passkeys";
 
-export class StudentAuthApiError extends Error {}
+export class StudentAuthApiError extends Error { }
 
 export async function loginStudent(
   email: string,
@@ -224,4 +225,17 @@ export async function verifyStudentMfa(payload: StudentMfaVerifyPayload): Promis
   if (!response.ok) {
     throw await buildMfaLoginError(response, "Code invalide ou expiré.");
   }
+}
+
+export async function fetchStudentPasskeyLoginOptions(
+  challengeToken: string
+): Promise<APIStudentPasskeyRequestOptions> {
+  const fd = new FormData();
+  fd.append("challengeToken", challengeToken);
+
+  const response = await studentFetch(`/api/student/auth/mfa/passkey/options`, { method: "POST", body: fd });
+  if (!response.ok) throw await buildMfaLoginError(response, "Impossible de démarrer la vérification par clé d'accès.");
+
+  const body = await response.json();
+  return (body.publicKey ?? body) as APIStudentPasskeyRequestOptions;
 }
