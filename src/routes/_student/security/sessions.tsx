@@ -16,7 +16,7 @@ import {
 import type { APIStudentSession } from "@/data/security-session";
 import { SITE } from "@/data/site";
 
-export const Route = createFileRoute("/_student/security-sessions")({
+export const Route = createFileRoute("/_student/security/sessions")({
   head: () => ({
     meta: [
       { title: `${SITE.tool} - Sessions actives | ${SITE.name}` },

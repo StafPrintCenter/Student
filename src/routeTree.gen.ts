@@ -23,11 +23,11 @@ import { Route as StudentDashboardRouteImport } from './routes/_student/dashboar
 import { Route as StudentPaymentsRouteImport } from './routes/_student/payments'
 import { Route as StudentProfileRouteImport } from './routes/_student/profile'
 import { Route as StudentProgressRouteImport } from './routes/_student/progress'
-import { Route as StudentSecurityMfaRouteImport } from './routes/_student/security-mfa'
-import { Route as StudentSecuritySessionsRouteImport } from './routes/_student/security-sessions'
 import { Route as StudentNotificationsIndexRouteImport } from './routes/_student/notifications/index'
 import { Route as StudentNotificationsIdRouteImport } from './routes/_student/notifications/$id'
 import { Route as StudentNotificationsPreferencesRouteImport } from './routes/_student/notifications/preferences'
+import { Route as StudentSecurityMfaRouteImport } from './routes/_student/security/mfa'
+import { Route as StudentSecuritySessionsRouteImport } from './routes/_student/security/sessions'
 import { Route as StudentSessionsIndexRouteImport } from './routes/_student/sessions/index'
 import { Route as StudentSessionsIdRouteImport } from './routes/_student/sessions/$id'
 import { Route as StudentTrainingsIndexRouteImport } from './routes/_student/trainings/index'
@@ -105,16 +105,6 @@ const StudentProgressRoute = StudentProgressRouteImport.update({
   path: '/progress',
   getParentRoute: () => StudentRoute,
 } as any)
-const StudentSecurityMfaRoute = StudentSecurityMfaRouteImport.update({
-  id: '/security-mfa',
-  path: '/security-mfa',
-  getParentRoute: () => StudentRoute,
-} as any)
-const StudentSecuritySessionsRoute = StudentSecuritySessionsRouteImport.update({
-  id: '/security-sessions',
-  path: '/security-sessions',
-  getParentRoute: () => StudentRoute,
-} as any)
 const StudentNotificationsIndexRoute =
   StudentNotificationsIndexRouteImport.update({
     id: '/notifications/',
@@ -132,6 +122,16 @@ const StudentNotificationsPreferencesRoute =
     path: '/notifications/preferences',
     getParentRoute: () => StudentRoute,
   } as any)
+const StudentSecurityMfaRoute = StudentSecurityMfaRouteImport.update({
+  id: '/security/mfa',
+  path: '/security/mfa',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentSecuritySessionsRoute = StudentSecuritySessionsRouteImport.update({
+  id: '/security/sessions',
+  path: '/security/sessions',
+  getParentRoute: () => StudentRoute,
+} as any)
 const StudentSessionsIndexRoute = StudentSessionsIndexRouteImport.update({
   id: '/sessions/',
   path: '/sessions/',
@@ -189,10 +189,10 @@ export interface FileRoutesByFullPath {
   '/payments': typeof StudentPaymentsRoute
   '/profile': typeof StudentProfileRoute
   '/progress': typeof StudentProgressRoute
-  '/security-mfa': typeof StudentSecurityMfaRoute
-  '/security-sessions': typeof StudentSecuritySessionsRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
+  '/security/mfa': typeof StudentSecurityMfaRoute
+  '/security/sessions': typeof StudentSecuritySessionsRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
   '/notifications/': typeof StudentNotificationsIndexRoute
   '/sessions/': typeof StudentSessionsIndexRoute
@@ -216,10 +216,10 @@ export interface FileRoutesByTo {
   '/payments': typeof StudentPaymentsRoute
   '/profile': typeof StudentProfileRoute
   '/progress': typeof StudentProgressRoute
-  '/security-mfa': typeof StudentSecurityMfaRoute
-  '/security-sessions': typeof StudentSecuritySessionsRoute
   '/notifications/$id': typeof StudentNotificationsIdRoute
   '/notifications/preferences': typeof StudentNotificationsPreferencesRoute
+  '/security/mfa': typeof StudentSecurityMfaRoute
+  '/security/sessions': typeof StudentSecuritySessionsRoute
   '/sessions/$id': typeof StudentSessionsIdRoute
   '/notifications': typeof StudentNotificationsIndexRoute
   '/sessions': typeof StudentSessionsIndexRoute
@@ -246,10 +246,10 @@ export interface FileRoutesById {
   '/_student/payments': typeof StudentPaymentsRoute
   '/_student/profile': typeof StudentProfileRoute
   '/_student/progress': typeof StudentProgressRoute
-  '/_student/security-mfa': typeof StudentSecurityMfaRoute
-  '/_student/security-sessions': typeof StudentSecuritySessionsRoute
   '/_student/notifications/$id': typeof StudentNotificationsIdRoute
   '/_student/notifications/preferences': typeof StudentNotificationsPreferencesRoute
+  '/_student/security/mfa': typeof StudentSecurityMfaRoute
+  '/_student/security/sessions': typeof StudentSecuritySessionsRoute
   '/_student/sessions/$id': typeof StudentSessionsIdRoute
   '/_student/notifications/': typeof StudentNotificationsIndexRoute
   '/_student/sessions/': typeof StudentSessionsIndexRoute
@@ -275,10 +275,10 @@ export interface FileRouteTypes {
     | '/payments'
     | '/profile'
     | '/progress'
-    | '/security-mfa'
-    | '/security-sessions'
     | '/notifications/$id'
     | '/notifications/preferences'
+    | '/security/mfa'
+    | '/security/sessions'
     | '/sessions/$id'
     | '/notifications/'
     | '/sessions/'
@@ -302,10 +302,10 @@ export interface FileRouteTypes {
     | '/payments'
     | '/profile'
     | '/progress'
-    | '/security-mfa'
-    | '/security-sessions'
     | '/notifications/$id'
     | '/notifications/preferences'
+    | '/security/mfa'
+    | '/security/sessions'
     | '/sessions/$id'
     | '/notifications'
     | '/sessions'
@@ -331,10 +331,10 @@ export interface FileRouteTypes {
     | '/_student/payments'
     | '/_student/profile'
     | '/_student/progress'
-    | '/_student/security-mfa'
-    | '/_student/security-sessions'
     | '/_student/notifications/$id'
     | '/_student/notifications/preferences'
+    | '/_student/security/mfa'
+    | '/_student/security/sessions'
     | '/_student/sessions/$id'
     | '/_student/notifications/'
     | '/_student/sessions/'
@@ -454,20 +454,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentProgressRouteImport
       parentRoute: typeof StudentRoute
     }
-    '/_student/security-mfa': {
-      id: '/_student/security-mfa'
-      path: '/security-mfa'
-      fullPath: '/security-mfa'
-      preLoaderRoute: typeof StudentSecurityMfaRouteImport
-      parentRoute: typeof StudentRoute
-    }
-    '/_student/security-sessions': {
-      id: '/_student/security-sessions'
-      path: '/security-sessions'
-      fullPath: '/security-sessions'
-      preLoaderRoute: typeof StudentSecuritySessionsRouteImport
-      parentRoute: typeof StudentRoute
-    }
     '/_student/notifications/': {
       id: '/_student/notifications/'
       path: '/notifications'
@@ -487,6 +473,20 @@ declare module '@tanstack/react-router' {
       path: '/notifications/preferences'
       fullPath: '/notifications/preferences'
       preLoaderRoute: typeof StudentNotificationsPreferencesRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/security/mfa': {
+      id: '/_student/security/mfa'
+      path: '/security/mfa'
+      fullPath: '/security/mfa'
+      preLoaderRoute: typeof StudentSecurityMfaRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/security/sessions': {
+      id: '/_student/security/sessions'
+      path: '/security/sessions'
+      fullPath: '/security/sessions'
+      preLoaderRoute: typeof StudentSecuritySessionsRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/sessions/': {
@@ -570,10 +570,10 @@ interface StudentRouteChildren {
   StudentPaymentsRoute: typeof StudentPaymentsRoute
   StudentProfileRoute: typeof StudentProfileRoute
   StudentProgressRoute: typeof StudentProgressRoute
-  StudentSecurityMfaRoute: typeof StudentSecurityMfaRoute
-  StudentSecuritySessionsRoute: typeof StudentSecuritySessionsRoute
   StudentNotificationsIdRoute: typeof StudentNotificationsIdRoute
   StudentNotificationsPreferencesRoute: typeof StudentNotificationsPreferencesRoute
+  StudentSecurityMfaRoute: typeof StudentSecurityMfaRoute
+  StudentSecuritySessionsRoute: typeof StudentSecuritySessionsRoute
   StudentSessionsIdRoute: typeof StudentSessionsIdRoute
   StudentNotificationsIndexRoute: typeof StudentNotificationsIndexRoute
   StudentSessionsIndexRoute: typeof StudentSessionsIndexRoute
@@ -591,10 +591,10 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentPaymentsRoute: StudentPaymentsRoute,
   StudentProfileRoute: StudentProfileRoute,
   StudentProgressRoute: StudentProgressRoute,
-  StudentSecurityMfaRoute: StudentSecurityMfaRoute,
-  StudentSecuritySessionsRoute: StudentSecuritySessionsRoute,
   StudentNotificationsIdRoute: StudentNotificationsIdRoute,
   StudentNotificationsPreferencesRoute: StudentNotificationsPreferencesRoute,
+  StudentSecurityMfaRoute: StudentSecurityMfaRoute,
+  StudentSecuritySessionsRoute: StudentSecuritySessionsRoute,
   StudentSessionsIdRoute: StudentSessionsIdRoute,
   StudentNotificationsIndexRoute: StudentNotificationsIndexRoute,
   StudentSessionsIndexRoute: StudentSessionsIndexRoute,
