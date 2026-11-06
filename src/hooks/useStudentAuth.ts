@@ -10,6 +10,7 @@ import {
   StudentAuthApiError,
   sendStudentMfaEmailCode,
   verifyStudentMfa,
+  fetchStudentPasskeyLoginOptions,
 } from "@/stores/useAuthStore";
 import { isStudentMfaChallenge } from "@/data/auth";
 import type {
@@ -159,6 +160,11 @@ export function useStudentAuth() {
     await completeSession();
   }, []);
 
+  const getPasskeyLoginOptions = useCallback(
+    (challengeToken: string) => fetchStudentPasskeyLoginOptions(challengeToken),
+    []
+  );
+
   const sendMfaEmailCode = useCallback(
     (challengeToken: string): Promise<APIStudentMfaEmailResend> =>
       sendStudentMfaEmailCode(challengeToken),
@@ -231,6 +237,7 @@ export function useStudentAuth() {
     resetPassword,
     setUser,
     verifyMfa,
+    getPasskeyLoginOptions,
     sendMfaEmailCode,
     refresh,
   };
