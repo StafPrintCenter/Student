@@ -87,7 +87,7 @@ export const confirmStudentMfaTotp = (payload: StudentMfaTotpConfirmPayload) =>
 
 export const deleteStudentMfaMethod = (payload: StudentMfaDeleteMethodPayload) =>
   mfaRequest<APIStudentMfaStatus>(
-    `/methods/${payload.id}`,
+    `/totp/${payload.id}`,
     "Impossible de supprimer cette méthode.",
     {
       method: "DELETE",
