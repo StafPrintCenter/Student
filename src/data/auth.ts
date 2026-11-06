@@ -28,10 +28,10 @@ export type APIStudentLoginResponse = {
   token: string;
 };
 
-export type StudentMfaLoginMethod = "email" | "totp" | "recovery";
+export type StudentMfaLoginMethod = "email" | "totp" | "recovery" | "passkey";
 
 export interface APIStudentMfaChallengeMethod {
-  type: "email" | "totp";
+  type: "email" | "totp" | "passkey";
   label: string;
   hint: string | null;
 }
@@ -39,7 +39,7 @@ export interface APIStudentMfaChallengeMethod {
 export interface APIStudentMfaChallenge {
   mfaRequired: true;
   challengeToken: string;
-  defaultMethod: "email" | "totp";
+  defaultMethod: "email" | "totp" | "passkey";
   methods: APIStudentMfaChallengeMethod[];
   recoveryCodesAvailable: boolean;
   emailCodeSent: boolean;
