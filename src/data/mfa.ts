@@ -53,3 +53,15 @@ export interface StudentMfaEmailMethodPayload {
   enabled: boolean;
   password: string;
 }
+
+export interface APIStudentMfaMethod {
+  id: string | null;
+  type: StudentMfaMethodType;
+  label: string;
+  hint: string | null;
+  enabled: boolean;
+  confirmedAt: string | null;
+  lastUsedAt: string | null;
+  transports?: string[]; // passkey
+  backedUp?: boolean; // passkey
+}
