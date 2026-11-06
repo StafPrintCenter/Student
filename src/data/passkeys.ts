@@ -40,3 +40,8 @@ export interface StudentPasskeyRegisterPayload {
 export interface APIStudentPasskeyRegisterResponse extends APIStudentMfaStatus {
   recoveryCodes?: string[]; // présents à la première configuration MFA
 }
+
+export interface StudentPasskeyDeletePayload {
+  id: string;
+  password: string;
+}
