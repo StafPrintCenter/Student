@@ -5,7 +5,9 @@ import type {
   APIStudentPasskeyRegisterResponse,
   StudentPasskeyOptionsPayload,
   StudentPasskeyRegisterPayload,
+  StudentPasskeyDeletePayload,
 } from "@/data/passkeys";
+import type { APIStudentMfaStatus } from "@/data/mfa";
 
 export const fetchStudentPasskeyOptions = (payload: StudentPasskeyOptionsPayload) =>
   mfaRequest<APIStudentPasskeyCreationOptions>(
@@ -38,5 +40,20 @@ export function useRegisterStudentPasskey() {
   return useMutation({
     mutationFn: registerStudentPasskey,
     onSuccess: ({ recoveryCodes: _recoveryCodes, ...status }) => qc.setQueryData(MFA_KEY, status),
+  });
+}
+
+export const deleteStudentPasskey = (payload: StudentPasskeyDeletePayload) =>
+  mfaRequest<APIStudentMfaStatus>(
+    `/passkeys/${payload.id}`,
+    "Impossible de supprimer cette clé d'accès.",
+    { method: "DELETE", body: buildForm({ password: payload.password }) }
+  );
+
+export function useDeleteStudentPasskey() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: deleteStudentPasskey,
+    onSuccess: (status) => qc.setQueryData(MFA_KEY, status),
   });
 }
