@@ -12,18 +12,18 @@ import type {
   StudentMfaEmailMethodPayload,
 } from "@/data/mfa";
 
-export class StudentMfaApiError extends Error {}
+export class StudentMfaApiError extends Error { }
 
-const MFA_KEY = ["student-mfa"] as const;
+export const MFA_KEY = ["student-mfa"] as const;
 const BASE_PATH = "/api/student/account/security/mfa";
 
-function buildForm(fields: Record<string, string>): FormData {
+export function buildForm(fields: Record<string, string>): FormData {
   const fd = new FormData();
   for (const [key, value] of Object.entries(fields)) fd.append(key, value);
   return fd;
 }
 
-async function mfaRequest<T>(
+export async function mfaRequest<T>(
   path: string,
   fallbackMessage: string,
   init?: { method: "POST" | "PUT" | "DELETE"; body: FormData },
