@@ -7,9 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { PasswordField } from "@/components/site/PasswordField";
-import { useInstructorPasskeyOptions, useRegisterInstructorPasskey } from "@/stores/usePasskeysStore";
+import { useStudentPasskeyOptions, useRegisterStudentPasskey } from "@/stores/usePasskeysStore";
 import { createPasskeyCredential } from "@/lib/webauthn";
-import type { APIInstructorPasskeyCreationOptions } from "@/data/passkeys";
+import type { APIStudentPasskeyCreationOptions } from "@/data/passkeys";
 
 interface PasskeySetupDialogProps {
   open: boolean;
@@ -19,12 +19,12 @@ interface PasskeySetupDialogProps {
 }
 
 export function PasskeySetupDialog({ open, onOpenChange, onRegistered }: PasskeySetupDialogProps) {
-  const optionsMutation = useInstructorPasskeyOptions();
-  const registerMutation = useRegisterInstructorPasskey();
+  const optionsMutation = useStudentPasskeyOptions();
+  const registerMutation = useRegisterStudentPasskey();
 
   const [step, setStep] = useState<"password" | "create">("password");
   const [password, setPassword] = useState("");
-  const [options, setOptions] = useState<APIInstructorPasskeyCreationOptions | null>(null);
+  const [options, setOptions] = useState<APIStudentPasskeyCreationOptions | null>(null);
   const [name, setName] = useState("");
   const [makeDefault, setMakeDefault] = useState(false);
   const [creating, setCreating] = useState(false);
