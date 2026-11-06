@@ -1,4 +1,4 @@
-export type StudentMfaMethodType = "email" | "totp";
+export type StudentMfaMethodType = "email" | "totp" | "passkey";
 
 export interface APIStudentMfaMethod {
   id: string | null; // null pour la méthode e-mail
