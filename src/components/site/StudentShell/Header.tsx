@@ -3,6 +3,7 @@ import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { NotificationBell } from "@/components/pages/notifications/shared";
 import { docsUrl } from "./config";
+import { useHealthToasts } from "@/components/pages/health/useHealthToasts";
 import { StudentUserDropdown } from "./UserDropdown";
 
 export function StudentHeader({
@@ -12,6 +13,8 @@ export function StudentHeader({
   user: ReturnType<typeof useStudentAuth>["user"];
   onDisconnectClick: () => void;
 }) {
+  useHealthToasts();
+
   return (
     <header className="flex items-center gap-3 bg-card/80 backdrop-blur border-b px-5 h-14 shrink-0">
       <SidebarTrigger />
