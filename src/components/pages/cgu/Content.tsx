@@ -3,7 +3,7 @@ import type { LegalSection } from "@/components/site";
 
 const list = (...items: string[]) => items.join(" • ");
 
-export const LEGAL_SECTIONS: LegalSection[] = [
+export const ContentSection: LegalSection[] = [
   {
     id: "objet",
     title: "Article 1 - Objet et accès au service",
