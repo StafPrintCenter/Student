@@ -3,9 +3,9 @@ import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { NotificationBell } from "@/components/pages/notifications/shared";
 import { useHealthToasts } from "@/components/pages/health/useHealthToasts";
-import { docsUrl, StudentUserDropdown } from "./";
+import { docsUrl, SpaceUserDropdown } from "./";
 
-export function StudentHeader({
+export function SpaceHeader({
   user,
   onDisconnectClick,
 }: {
@@ -31,7 +31,7 @@ export function StudentHeader({
           <span className="hidden sm:inline">Documentation</span>
         </a>
 
-        <StudentUserDropdown user={user} onDisconnectClick={onDisconnectClick} />
+        <SpaceUserDropdown user={user} onDisconnectClick={onDisconnectClick} />
       </div>
     </header>
   );
