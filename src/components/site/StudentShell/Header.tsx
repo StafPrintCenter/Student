@@ -2,9 +2,8 @@ import { BookOpen } from "lucide-react";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { NotificationBell } from "@/components/pages/notifications/shared";
-import { docsUrl } from "./config";
 import { useHealthToasts } from "@/components/pages/health/useHealthToasts";
-import { StudentUserDropdown } from "./UserDropdown";
+import { docsUrl, StudentUserDropdown } from "./";
 
 export function StudentHeader({
   user,
