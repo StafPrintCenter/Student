@@ -1,5 +1,5 @@
 import { SITE } from "@/data/site";
-import type { LegalSection } from "@/components/site/LegalDocShell";
+import type { LegalSection } from "@/components/site";
 
 const list = (...items: string[]) => items.join(" • ");
 
