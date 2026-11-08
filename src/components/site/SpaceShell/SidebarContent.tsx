@@ -1,8 +1,8 @@
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { Sidebar, useSidebar } from "@/components/ui/sidebar";
-import { SpaceHeaderBrand, StudentSidebarNav, StudentSidebarFooter } from "./";
+import { SpaceHeaderBrand, SpaceSidebarNav, SpaceSidebarFooter } from "./";
 
-export function StudentSidebarContent({
+export function SpaceSidebarContent({
   user,
   pathname,
   onDisconnectClick,
@@ -17,8 +17,8 @@ export function StudentSidebarContent({
   return (
     <Sidebar collapsible="icon" className="border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
       <SpaceHeaderBrand onNavClick={handleNavClick} />
-      <StudentSidebarNav pathname={pathname} onNavClick={handleNavClick} />
-      <StudentSidebarFooter
+      <SpaceSidebarNav pathname={pathname} onNavClick={handleNavClick} />
+      <SpaceSidebarFooter
         user={user}
         pathname={pathname}
         onNavClick={handleNavClick}
