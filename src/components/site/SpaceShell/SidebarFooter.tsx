@@ -3,7 +3,7 @@ import { BookOpen, FileText, UserCircle, LogOut } from "lucide-react";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import { SocialLinks } from "@/components/site/SocialLinks";
-import { docsUrl, navItemClass } from "./config";
+import { docsUrl, navItemClass } from "../StudentShell/config";
 
 export function StudentSidebarFooter({
   user,
