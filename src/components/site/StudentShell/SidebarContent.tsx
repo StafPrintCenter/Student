@@ -1,8 +1,6 @@
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { Sidebar, useSidebar } from "@/components/ui/sidebar";
-import { StudentHeaderBrand } from "./HeaderBrand";
-import { StudentSidebarNav } from "./SidebarNav";
-import { StudentSidebarFooter } from "./SidebarFooter";
+import { StudentHeaderBrand, StudentSidebarNav, StudentSidebarFooter } from "./";
 
 export function StudentSidebarContent({
   user,
