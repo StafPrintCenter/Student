@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CharterPage } from "@/components/pages/cgu/CharterPage";
+import { CharterPage } from "@/components/pages/cgu/Page";
 import { SITE } from "@/data/site";
 
 const PAGE_TITLE = `Conditions Générales d'Utilisation ${SITE.tool} - ${SITE.name}`;
