@@ -1,4 +1,4 @@
-import { LegalArticleSection, LegalDocShell, LegalKeyPoints } from "@/components/site";
+import { LegalArticleSection, CguShell, LegalKeyPoints } from "@/components/site";
 import { SITE } from "@/data/site";
 import { AcceptanceSection, ContentSection } from "./";
 
@@ -7,7 +7,7 @@ const UPDATED_AT = "31 octobre 2026";
 
 export function CharterPage() {
   return (
-    <LegalDocShell
+    <CguShell
       eyebrow={`Document contractuel - ${SITE.tool}`}
       title="Conditions Générales d'Utilisation"
       description={`Ces CGU encadrent l'utilisation du portail d'apprentissage de ${SITE.name} par ses apprenants : accès au service, conditions financières, propriété intellectuelle, assiduité, certificats et protection des données personnelles.`}
@@ -26,6 +26,6 @@ export function CharterPage() {
       ))}
 
       <AcceptanceSection />
-    </LegalDocShell>
+    </CguShell>
   );
 }
