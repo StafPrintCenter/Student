@@ -4,7 +4,7 @@ import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { toast } from "sonner";
 import { ConfirmDisconnect } from "@/components/site/StudentBits";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import { StudentSidebarContent, SpaceHeader } from "./SpaceShell/index";
+import { SpaceSidebarContent, SpaceHeader } from "./SpaceShell/index";
 
 export function StudentShell({ children }: { children?: React.ReactNode }) {
   const { user, ready, isAuthenticated, logout } = useStudentAuth();
@@ -28,7 +28,7 @@ export function StudentShell({ children }: { children?: React.ReactNode }) {
 
   return (
     <SidebarProvider>
-      <StudentSidebarContent
+      <SpaceSidebarContent
         user={user}
         pathname={pathname}
         onDisconnectClick={() => setConfirmDisconnectOpen(true)}
