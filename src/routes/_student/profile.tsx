@@ -2,13 +2,14 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Calendar, CheckCircle2, Clock, LogOut, Mail, MapPin, Phone, Shield, User as UserIcon, XCircle, Pencil } from "lucide-react";
-import { ConfirmDisconnect } from "@/components/site";
+import { ConfirmDisconnect, FilePreviewModal } from "@/components/site";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/data/site";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { ProfileEditDialog } from "@/components/pages/profile/ProfileEditDialog";
 import { EmailChangeDialog } from "@/components/pages/profile/EmailChangeDialog";
 import { ChangePasswordCard } from "@/components/pages/security/ChangePasswordCard";
+import { resolveStorageUrl } from "@/lib/api/file";
 
 export const Route = createFileRoute("/_student/profile")({
   head: () => ({
@@ -29,6 +30,7 @@ function ProfilePage() {
   const [confirmDisconnectOpen, setConfirmDisconnectOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
+  const [photoPreviewUrl, setPhotoPreviewUrl] = useState<string | null>(null);
 
   const fullName =
     user?.fullname ||
@@ -42,6 +44,7 @@ function ProfilePage() {
     .map((part) => part[0])
     .join("")
     .toUpperCase();
+  const photoUrl = resolveStorageUrl(user?.photo);
 
   const formattedDate = (dateString?: string | null) => {
     if (!dateString) return "Non renseigné";
@@ -73,8 +76,15 @@ function ProfilePage() {
           <div className="-mt-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="flex items-end gap-4">
               <div className="grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded-2xl border-4 border-card bg-primary font-display text-3xl font-bold text-primary-foreground shadow-sm">
-                {user?.photo ? (
-                  <img src={user.photo} alt={fullName} className="h-full w-full object-cover" />
+                {photoUrl ? (
+                  <button
+                    type="button"
+                    className="h-full w-full cursor-zoom-in"
+                    onClick={() => setPhotoPreviewUrl(photoUrl)}
+                    aria-label={`Aperçu de la photo de profil de ${fullName}`}
+                  >
+                    <img src={photoUrl} alt={fullName} className="h-full w-full object-cover" />
+                  </button>
                 ) : (
                   initials
                 )}
@@ -222,6 +232,12 @@ function ProfilePage() {
       <ProfileEditDialog
         open={editOpen}
         onOpenChange={setEditOpen}
+      />
+      <FilePreviewModal
+        url={photoPreviewUrl}
+        title={`Photo de profil - ${fullName}`}
+        mimeType="image/*"
+        onClose={() => setPhotoPreviewUrl(null)}
       />
 
       <EmailChangeDialog
