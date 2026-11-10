@@ -10,6 +10,7 @@ import { ProfileEditDialog } from "@/components/pages/profile/ProfileEditDialog"
 import { EmailChangeDialog } from "@/components/pages/profile/EmailChangeDialog";
 import { ChangePasswordCard } from "@/components/pages/security/ChangePasswordCard";
 import { resolveStorageUrl } from "@/lib/api/file";
+import { UserAvatar } from "@/components/site/UserAvatar";
 
 export const Route = createFileRoute("/_student/profile")({
   head: () => ({
@@ -37,13 +38,6 @@ function ProfilePage() {
     user?.name ||
     `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim() ||
     "Étudiant";
-  const initials = fullName
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join("")
-    .toUpperCase();
   const photoUrl = resolveStorageUrl(user?.photo);
 
   const formattedDate = (dateString?: string | null) => {
@@ -83,10 +77,20 @@ function ProfilePage() {
                     onClick={() => setPhotoPreviewUrl(photoUrl)}
                     aria-label={`Aperçu de la photo de profil de ${fullName}`}
                   >
-                    <img src={photoUrl} alt={fullName} className="h-full w-full object-cover" />
+                    <UserAvatar
+                      name={fullName}
+                      photo={user?.photo}
+                      className="size-full rounded-2xl border-0 bg-primary"
+                      imageClassName="object-cover"
+                      fallbackClassName="rounded-2xl bg-primary font-display text-3xl font-bold text-primary-foreground"
+                    />
                   </button>
                 ) : (
-                  initials
+                  <UserAvatar
+                    name={fullName}
+                    className="size-full rounded-2xl border-0 bg-primary"
+                    fallbackClassName="rounded-2xl bg-primary font-display text-3xl font-bold text-primary-foreground"
+                  />
                 )}
               </div>
               <div className="min-w-0 pb-1">
