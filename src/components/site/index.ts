@@ -4,3 +4,4 @@ export { SpaceShell } from "./SpaceShell";
 export { FilePreviewModal } from "./FilePreviewModal";
 export * from "./StudentBits";
 export { SocialLinks } from "./SocialLinks";
+export { UserAvatar } from "./UserAvatar";
