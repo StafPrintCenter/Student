@@ -11,17 +11,6 @@ export function formatFileSize(bytes: number): string {
   return `${(bytes / 1024 / 1024).toFixed(1).replace(".", ",")} Mo`;
 }
 
-export function initialsOf(name: string): string {
-  return (
-    name
-      .split(/\s+/)
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((word) => word[0]?.toUpperCase())
-      .join("") || "?"
-  );
-}
-
 /** Taille des pages : partagée par l'affichage et la recherche de commentaire, pour tomber sur la même page */
 export const COMMENTS_PER_PAGE = 12;
 export const REPLIES_PER_PAGE = 12;

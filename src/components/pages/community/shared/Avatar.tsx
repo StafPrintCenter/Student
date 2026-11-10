@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { resolveStorageUrl } from "@/lib/api/file";
-import { initialsOf } from "@/components/pages/community/shared/Format";
+import { initials } from "@/components/site/UserAvatar";
 
 const sizes = { sm: "h-8 w-8 text-xs", md: "h-10 w-10 text-sm" } as const;
 
@@ -21,7 +21,7 @@ export function CommunityAvatar({ name, photo, size = "md" }: CommunityAvatarPro
       aria-hidden
       className={cn("grid shrink-0 place-items-center rounded-full bg-primary/10 font-semibold text-primary", sizes[size])}
     >
-      {initialsOf(name)}
+      {initials(name)}
     </span>
   );
 }

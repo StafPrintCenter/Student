@@ -2,17 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { resolveStorageUrl } from "@/lib/api/file";
 import { sortInstructors, trainingInstructorRoleLabels, type APITrainingInstructor } from "@/data/trainings";
-
-function initialsOf(name: string) {
-  return (
-    name
-      .split(/\s+/)
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((word) => word[0]?.toUpperCase())
-      .join("") || "?"
-  );
-}
+import { initials } from "@/components/site/UserAvatar";
 
 export function InstructorAvatar({ name, photo }: { name: string; photo: string | null }) {
   const src = resolveStorageUrl(photo);
@@ -24,7 +14,7 @@ export function InstructorAvatar({ name, photo }: { name: string; photo: string 
       aria-hidden
       className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary/10 text-sm font-semibold text-primary"
     >
-      {initialsOf(name)}
+      {initials(name)}
     </span>
   );
 }

@@ -4,7 +4,7 @@ export { PostForm } from "./PostForm";
 export { PostFormDialog } from "./FormDialog";
 export { CommunityAvatar } from "./Avatar";
 export { PostFormFields } from "./FormFields";
-export { fullDate, formatFileSize, initialsOf, timeAgo, COMMENTS_PER_PAGE, REPLIES_PER_PAGE } from "./Format";
+export { fullDate, formatFileSize, timeAgo, COMMENTS_PER_PAGE, REPLIES_PER_PAGE } from "./Format";
 export { AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, MineBadge } from "./PostBadges";
 export { TagsInput } from "./TagsInput";
 export { PaginationBar } from "./PaginationBar";
