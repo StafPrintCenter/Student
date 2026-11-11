@@ -40,12 +40,12 @@ export type CommunityScope = "general" | "training";
 /** Limites de validation du backend */
 export const COMMUNITY_LIMITS = {
   titleMin: 3,
-  titleMax: 200,
-  bodyMin: 3,
-  bodyMax: 10000,
+  titleMax: 80,
+  bodyMin: 20,
+  bodyMax: 1000,
   maxTags: 5,
-  maxAttachments: 4,
-  maxFileBytes: 5 * 1024 * 1024,
+  maxAttachments: 2,
+  maxFileBytes: 1 * 1024 * 1024,
   allowedExtensions: ["jpg", "jpeg", "png", "webp", "gif", "pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "zip"] as string[],
 };
 
