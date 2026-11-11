@@ -84,7 +84,7 @@ export function AttachmentsPicker({ id, files, onChange, disabled }: Attachments
       )}
 
       <p className="text-xs text-muted-foreground">
-        {files.length}/{maxAttachments} fichiers · 5 Mo maximum chacun · images, PDF, Office, zip
+        {files.length}/{maxAttachments} fichiers · 1 Mo maximum chacun · images, PDF, Office, zip
       </p>
       {error && <p className="text-xs text-destructive">{error}</p>}
     </div>
