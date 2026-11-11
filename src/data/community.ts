@@ -187,7 +187,7 @@ export const communityCommentSortLabels: Record<CommunityCommentSort, string> = 
 };
 
 /** Limites de validation du backend */
-export const COMMUNITY_COMMENT_LIMITS = { bodyMin: 1, bodyMax: 5000 };
+export const COMMUNITY_COMMENT_LIMITS = { bodyMin: 5, bodyMax: 300 };
 
 /** Présent sur une réponse : à qui elle s'adresse */
 export type APICommunityCommentReplyTo = {
