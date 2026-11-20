@@ -17,12 +17,13 @@ interface CatalogCardProps {
 export function CatalogCard({ training: t, already, busy, submitting, onSubscribe }: CatalogCardProps) {
   const deadlinePassed = new Date(t.registrationDeadline) < new Date();
   const closed = t.enrollmentStatus !== "open" || deadlinePassed;
-  const canEnroll = !already && !closed && (t.seatsRemaining > 0 || t.waitingListEnabled);
+  const isFull = t.maxSeats != null && (t.seatsRemaining ?? 0) <= 0;
+  const canEnroll = !already && !closed && (!isFull || t.waitingListEnabled);
   const cta = already
     ? "Déjà inscrit"
     : closed
       ? "Inscriptions fermées"
-      : t.seatsRemaining <= 0
+      : isFull
         ? "Liste d'attente"
         : "S'inscrire";
 
@@ -47,7 +48,7 @@ export function CatalogCard({ training: t, already, busy, submitting, onSubscrib
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <Users className="h-3.5 w-3.5" />
-            {t.seatsRemaining}/{t.maxSeats}
+            {t.maxSeats == null ? "0/∞" : `${t.seatsRemaining ?? 0}/${t.maxSeats}`}
           </span>
           <span>{t.duration}</span>
         </div>
