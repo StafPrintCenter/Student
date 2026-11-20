@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { z } from "zod";
 import { PageHeader } from "@/components/site";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EnrollmentTab, CatalogTab } from "@/components/pages/trainings/home";
@@ -9,6 +9,7 @@ const PAGE_TITLE = `${SITE.tool} - Mes formations et le catalogue | ${SITE.name}
 const PAGE_DESC = `Suivez vos formations en cours et découvrez les nouvelles formations disponibles chez ${SITE.name}.`;
 
 export const Route = createFileRoute("/_student/trainings/")({
+  validateSearch: z.object({ tab: z.enum(["mine", "catalog"]).optional() }),
   head: () => ({
     meta: [
       { title: PAGE_TITLE },
@@ -20,7 +21,8 @@ export const Route = createFileRoute("/_student/trainings/")({
 });
 
 function TrainingsPage() {
-  const [tab, setTab] = useState<"mine" | "catalog">("mine");
+  const { tab } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
 
   return (
     <div className="space-y-6">
@@ -29,7 +31,15 @@ function TrainingsPage() {
         title="Mes formations"
         description="Suivez vos inscriptions actives et découvrez de nouvelles formations."
       />
-      <Tabs value={tab} onValueChange={(v) => setTab(v as "mine" | "catalog")}>
+      <Tabs
+        value={tab ?? "mine"}
+        onValueChange={(value) => {
+          if (value !== "mine" && value !== "catalog") return;
+          void navigate({
+            search: (previous) => ({ ...previous, tab: value === "mine" ? undefined : value }),
+          });
+        }}
+      >
         <TabsList>
           <TabsTrigger value="mine">Mes inscriptions</TabsTrigger>
           <TabsTrigger value="catalog">Catalogue</TabsTrigger>
