@@ -1,11 +1,12 @@
 /** Aligné sur App\Enums\CommunityPostType */
-export type CommunityPostType = "discussion" | "question" | "resource" | "announcement";
+export type CommunityPostType = "discussion" | "question" | "resource" | "announcement" | "poll";
 
 export const communityPostTypeMap: Record<CommunityPostType, { label: string; className: string }> = {
   discussion: { label: "Discussion", className: "bg-muted text-muted-foreground border-border" },
   question: { label: "Question", className: "bg-info/15 text-info border-info/40" },
   resource: { label: "Ressource", className: "bg-emerald/15 text-emerald border-emerald/40" },
   announcement: { label: "Annonce", className: "bg-amber/15 text-amber border-amber/40" },
+  poll: { label: "Sondage", className: "bg-primary/10 text-primary border-primary/40" },
 };
 
 /** Un apprenant ne peut pas publier d'annonce (403 côté backend) */
@@ -90,6 +91,22 @@ export type APICommunityAttachment = {
   size: number;
 };
 
+export type APICommunityPollSummary = {
+  optionsCount: number;
+  totalVotes: number;
+};
+
+export type APICommunityPollOption = {
+  id: string;
+  label: string;
+  votesCount: number;
+};
+
+export type APICommunityPollDetail = APICommunityPollSummary & {
+  options: APICommunityPollOption[];
+  myVote: string | null;
+};
+
 /** Publication telle que renvoyée par la liste (sans le contenu complet) */
 export type APICommunityPostListItem = {
   id: string;
@@ -117,12 +134,14 @@ export type APICommunityPostListItem = {
   permissions: APICommunityPermissions;
   hiddenReason: string | null;
   hiddenAt: string | null;
+  poll?: APICommunityPollSummary | null;
 };
 
 /** GET /api/community/posts/{id} : ajoute le contenu complet et les pièces jointes */
 export type APICommunityPostDetail = APICommunityPostListItem & {
   body: string;
   attachments: APICommunityAttachment[];
+  poll?: APICommunityPollDetail | null;
 };
 
 export type APICommunityPostsMeta = {

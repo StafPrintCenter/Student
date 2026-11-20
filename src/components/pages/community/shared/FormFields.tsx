@@ -87,6 +87,7 @@ export function PostFormFields({
               </option>
             ))}
           </NativeSelect>
+          <FieldError message={errors.type} />
         </div>
       </div>
 

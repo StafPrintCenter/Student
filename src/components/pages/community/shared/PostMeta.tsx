@@ -41,7 +41,6 @@ export function PostStats({ post }: { post: StatsPost }) {
   if (post.attachmentsCount > 0) {
     stats.push({ icon: Paperclip, value: post.attachmentsCount, label: "pièces jointes" });
   }
-
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
       {stats.map(({ icon: Icon, value, label, highlight }) => (
@@ -51,5 +50,15 @@ export function PostStats({ post }: { post: StatsPost }) {
         </span>
       ))}
     </div>
+  );
+}
+
+export function PollStats({ poll }: { poll?: { optionsCount: number; totalVotes: number } | null }) {
+  if (!poll) return null;
+
+  return (
+    <p className="text-xs text-muted-foreground">
+      {poll.optionsCount} options · {poll.totalVotes} vote{poll.totalVotes === 1 ? "" : "s"}
+    </p>
   );
 }

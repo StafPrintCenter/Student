@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { communityAuthorRoleMap, communityPostTypeMap, type APICommunityCategoryRef, type APICommunityPostListItem, type CommunityAuthorRole, type CommunityPostType } from "@/data/community";
 
 export function PostTypeBadge({ type }: { type: CommunityPostType }) {
-  const config = communityPostTypeMap[type] ?? { label: type, className: "bg-muted text-muted-foreground border-border" };
+  const config = communityPostTypeMap[type];
   return (
     <Badge variant="outline" className={cn("text-[10px] font-medium", config.className)}>
       {config.label}

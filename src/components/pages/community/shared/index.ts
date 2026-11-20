@@ -9,5 +9,5 @@ export { AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, MineBadg
 export { TagsInput } from "./TagsInput";
 export { PaginationBar } from "./PaginationBar";
 export { NativeSelect } from "./NativeSelect";
-export { PostStats, PostTags, TrainingBadge } from "./PostMeta";
+export { PollStats, PostStats, PostTags, TrainingBadge } from "./PostMeta";
 export { CommentFocusProvider, useCommentFocus, useCommentFocusState, type CommentFocus } from "./CommentFocus";

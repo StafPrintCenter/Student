@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { AttachmentsPicker } from "@/components/pages/community/detail";
 import { PostFormFields, TagsInput } from "@/components/pages/community/shared";
 import { hasUpdates, postFormSchema, toUpdatePayload, type PostFormValues } from "@/components/pages/community/home";
-import { COMMUNITY_LIMITS, type APICommunityCategory } from "@/data/community";
+import { COMMUNITY_LIMITS, STUDENT_POST_TYPES, type APICommunityCategory } from "@/data/community";
 
 interface PostFormProps {
   mode: "create" | "edit";
@@ -51,6 +51,10 @@ export function PostForm({
         next[issue.path[0] as string] = issue.message;
       });
       setErrors(next);
+      return;
+    }
+    if (mode === "create" && !STUDENT_POST_TYPES.includes(values.type)) {
+      setErrors({ type: "Les apprenants ne peuvent pas créer ce type de publication." });
       return;
     }
     onSubmit(values);

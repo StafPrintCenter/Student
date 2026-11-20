@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, PostTags, TrainingBadge, MineBadge } from "@/components/pages/community/shared";
 import { PostAttachments } from "@/components/pages/community/detail";
+import { PollCard } from "@/components/pages/community/detail/PollCard";
 import { ReactionControl } from "@/components/pages/community/content/reactions/Control";
 import type { APICommunityPostDetail } from "@/data/community";
 import { PostModerationBar, ReportAction } from "@/components/pages/community/content/moderation";
@@ -67,6 +68,8 @@ export function PostDetailCard({ post, onEdit, onDelete }: PostDetailCardProps) 
         {tags.length > 0 && <PostTags tags={tags} />}
 
         <PostModerationBar post={post} />
+
+        <PollCard post={post} />
 
         <ReactionControl
           variant="bar"

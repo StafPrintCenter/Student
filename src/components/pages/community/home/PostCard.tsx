@@ -3,7 +3,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, PostStats, PostTags, TrainingBadge, MineBadge } from "@/components/pages/community/shared";
+import { CommunityAvatar, fullDate, timeAgo, AuthorRoleBadge, CategoryBadge, PostFlagBadges, PostTypeBadge, PollStats, PostStats, PostTags, TrainingBadge, MineBadge } from "@/components/pages/community/shared";
 import type { APICommunityPostListItem } from "@/data/community";
 
 interface PostCardProps {
@@ -53,6 +53,7 @@ export function PostCard({ post, onEdit, onDelete }: PostCardProps) {
           )}
 
           <p className="line-clamp-2 text-sm text-muted-foreground">{post.excerpt}</p>
+          {post.type === "poll" && <PollStats poll={post.poll} />}
           {tags.length > 0 && <PostTags tags={tags} />}
           <PostStats post={post} />
         </div>

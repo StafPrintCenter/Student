@@ -64,6 +64,26 @@ export function useCommunityPostDetail(id: string | undefined) {
   return { item: query.data ?? null, isLoading: query.isLoading, isError: query.isError, refetch: query.refetch };
 }
 
+/* ---- Vote aux sondages ---- */
+
+async function votePoll(postId: string, optionId: string): Promise<void> {
+  const fd = new FormData();
+  fd.append("optionId", optionId);
+  const response = await studentFetch(`/api/community/posts/${postId}/vote`, { method: "POST", body: fd });
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de l'enregistrement de votre vote");
+}
+
+export function useVoteCommunityPoll() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ postId, optionId }: { postId: string; optionId: string }) => votePoll(postId, optionId),
+    onSuccess: (_data, { postId }) => {
+      qc.invalidateQueries({ queryKey: postsKey });
+      qc.invalidateQueries({ queryKey: [...postsKey, "detail", postId] });
+    },
+  });
+}
+
 /* ---- Création ---- */
 
 async function createPost(payload: CommunityPostCreatePayload): Promise<APICommunityPostDetail> {

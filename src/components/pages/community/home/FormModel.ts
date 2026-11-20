@@ -16,7 +16,7 @@ export const postFormSchema = z.object({
     .max(bodyMax, `${bodyMax.toLocaleString("fr-FR")} caractères maximum`),
   categoryId: z.string().min(1, "Choisissez une catégorie"),
   trainingId: z.string(),
-  type: z.enum(["discussion", "question", "resource", "announcement"]),
+  type: z.enum(["discussion", "question", "resource", "announcement", "poll"]),
   tags: z.array(z.string()).max(maxTags, `${maxTags} tags maximum`),
 });
 
