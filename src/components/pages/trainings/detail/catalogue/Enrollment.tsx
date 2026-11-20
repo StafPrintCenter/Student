@@ -21,12 +21,13 @@ export function EnrollmentCard({
 }: EnrollmentCardProps) {
   const deadlinePassed = new Date(training.registrationDeadline) < new Date();
   const closed = training.enrollmentStatus !== "open" || deadlinePassed;
-  const canEnroll = !isEnrolled && !closed && (training.seatsRemaining > 0 || training.waitingListEnabled);
+  const isFull = training.maxSeats != null && (training.seatsRemaining ?? 0) <= 0;
+  const canEnroll = !isEnrolled && !closed && (!isFull || training.waitingListEnabled);
   const ctaLabel = isEnrolled
     ? "Déjà inscrit"
     : closed
       ? "Inscriptions fermées"
-      : training.seatsRemaining <= 0
+      : isFull
         ? "Rejoindre la liste d'attente"
         : "S'inscrire";
 
@@ -45,7 +46,9 @@ export function EnrollmentCard({
         </div>
         <div className="flex justify-between text-xs">
           <span className="text-muted-foreground">Places restantes</span>
-          <span className="tabular-nums font-medium">{training.seatsRemaining}</span>
+          <span className="tabular-nums font-medium">
+            {training.maxSeats == null ? "Illimité" : (training.seatsRemaining ?? 0)}
+          </span>
         </div>
         <div className="flex justify-between text-xs">
           <span className="text-muted-foreground">Deadline</span>
