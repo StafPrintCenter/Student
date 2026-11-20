@@ -37,7 +37,7 @@ export function DashboardStats() {
       <StatCard
         icon={LineChart}
         label="Progression globale"
-        value={`${stats.averageProgress}%`}
+        value={stats.averageProgress == null ? "-" : `${stats.averageProgress}%`}
         hint={`${stats.inProgressCount} en cours · ${plural(stats.completedCount, "terminée")}`}
       >
         <Progress value={stats.averageProgress} className="h-1.5" />
