@@ -38,7 +38,11 @@ export function TrainingMineHero({ training, enrollment, contentLocked }: Traini
 
         <div className="grid gap-3 pt-2 text-sm sm:grid-cols-2 md:grid-cols-4">
           <Info icon={Clock} label="Durée" value={`${training.durationHours} h (${training.duration})`} />
-          <Info icon={Users} label="Places restantes" value={`${training.seatsRemaining} / ${training.maxSeats}`} />
+          <Info
+            icon={Users}
+            label="Places restantes"
+            value={training.maxSeats == null ? "0/∞" : `${training.seatsRemaining ?? 0}/${training.maxSeats}`}
+          />
           <Info icon={MapPin} label="Lieu" value={training.location} />
           <Info
             icon={Calendar}
