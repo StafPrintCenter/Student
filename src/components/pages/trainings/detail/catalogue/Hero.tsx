@@ -31,7 +31,15 @@ export function TrainingHero({
         <p className="max-w-3xl text-sm text-muted-foreground">{training.short}</p>
         <div className="grid gap-3 pt-2 text-sm sm:grid-cols-2 md:grid-cols-4">
           <TrainingInfo icon={Clock} label="Durée" value={`${training.durationHours} h`} />
-          <TrainingInfo icon={Users} label="Places" value={`${training.seatsRemaining}/${training.maxSeats}`} />
+          <TrainingInfo
+            icon={Users}
+            label="Places"
+            value={
+              training.maxSeats == null
+                ? "0/∞"
+                : `${training.seatsRemaining ?? 0}/${training.maxSeats}`
+            }
+          />
           <TrainingInfo icon={MapPin} label="Lieu" value={training.location} />
           <TrainingInfo
             icon={Calendar}
