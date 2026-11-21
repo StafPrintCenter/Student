@@ -24,7 +24,13 @@ export function LessonNavigation({ previous, next, onNavigate, onClose }: Lesson
       <Button variant="outline" size="sm" onClick={onClose}>
         Fermer
       </Button>
-      <Button variant="ghost" size="sm" disabled={!next} title={next?.title} onClick={() => next && onNavigate(next)}>
+      <Button
+        variant="ghost"
+        size="sm"
+        disabled={!next}
+        title={next?.title}
+        onClick={() => next && onNavigate(next)}
+      >
         Suivante <ChevronRight className="ml-1 h-4 w-4" />
       </Button>
     </div>
