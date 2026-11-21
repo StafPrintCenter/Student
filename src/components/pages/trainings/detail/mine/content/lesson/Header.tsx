@@ -13,10 +13,15 @@ export function LessonHeader({ title, lesson }: { title: string; lesson: APILess
             {lessonKindLabels[lesson.kind] ?? lesson.kind}
           </Badge>
           <span className="text-xs text-muted-foreground">
-            {lesson.durationMinutes != null ? `${lesson.durationMinutes} min` : "Durée non précisée"}
+            {lesson.durationMinutes != null
+              ? `${lesson.durationMinutes} min`
+              : "Durée non précisée"}
           </span>
           {lesson.isMandatory && (
-            <Badge variant="outline" className="border-warning/40 bg-warning/10 text-[10px] text-warning-foreground">
+            <Badge
+              variant="outline"
+              className="border-warning/40 bg-warning/10 text-[10px] text-warning-foreground"
+            >
               Obligatoire
             </Badge>
           )}
