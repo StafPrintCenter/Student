@@ -37,12 +37,6 @@ export function QuizQuestionCard({ question, index, selected, onChange, disabled
         </Badge>
       </div>
 
-      <div>
-        <p className="flex items-start gap-1.5 rounded-md bg-muted/40 p-2 text-xs text-muted-foreground">
-          <BadgeInfoIcon className="mt-0.5 h-3.5 w-3.5 shrink-0" /> {question.explanation}
-        </p>
-      </div>
-
       <p className="text-xs text-muted-foreground">
         {isMultiple ? "Plusieurs réponses possibles" : "Une seule réponse possible"}
       </p>
