@@ -4,6 +4,14 @@ import { StatusBadge } from "@/components/shared";
 import { lessonProgressStatusMap, type APILessonDetail } from "@/data/lesson";
 import { lessonKindLabels } from "@/data/trainings";
 
+function normalizeLineBreaks(value: string) {
+  return value
+    .replace(/\\r\\n/g, "\n")
+    .replace(/\\n/g, "\n")
+    .replace(/\\r/g, "\n")
+    .replace(/\r\n?/g, "\n");
+}
+
 export function LessonHeader({ title, lesson }: { title: string; lesson: APILessonDetail | null }) {
   return (
     <DialogHeader>
@@ -25,7 +33,11 @@ export function LessonHeader({ title, lesson }: { title: string; lesson: APILess
       )}
       <DialogTitle>{title}</DialogTitle>
       {lesson && <p className="text-xs text-muted-foreground">Module : {lesson.module.title}</p>}
-      {lesson?.brief && <DialogDescription>{lesson.brief}</DialogDescription>}
+      {lesson?.brief && (
+        <DialogDescription className="whitespace-pre-wrap text-sm">
+          {normalizeLineBreaks(lesson.brief)}
+        </DialogDescription>
+      )}
     </DialogHeader>
   );
 }
