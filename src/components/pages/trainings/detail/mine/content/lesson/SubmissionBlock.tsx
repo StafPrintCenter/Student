@@ -13,7 +13,12 @@ export function SubmissionBlock({ lesson }: { lesson: APILessonDetail }) {
           : "Travail à rendre : consultez la consigne, puis déposez votre réponse ci-dessous."}
       </div>
 
-      <ContentBlock content={lesson.content} emptyMessage="Le contenu de cette activité n'a pas encore été renseigné." />
+      {lesson.kind === "exercise" && (
+        <ContentBlock
+          content={lesson.content}
+          emptyMessage="Le contenu de cette activité n'a pas encore été renseigné."
+        />
+      )}
       <ExternalVideoLink url={lesson.videoUrl} />
 
       <SubmissionHistory submissions={lesson.submissions} />
