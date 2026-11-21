@@ -33,7 +33,7 @@ export function TrainingMineHero({ training, enrollment, contentLocked }: Traini
           <AccessBadge unlocked={!contentLocked} />
         </div>
 
-        <h1 className="break-words font-display text-2xl leading-tight sm:text-3xl md:text-4xl">{training.title}</h1>
+        <h1 className="wrap-break-word font-display text-2xl leading-tight sm:text-3xl md:text-4xl">{training.title}</h1>
         <p className="max-w-3xl text-sm text-muted-foreground">{training.short}</p>
 
         <div className="grid gap-3 pt-2 text-sm sm:grid-cols-2 md:grid-cols-4">
