@@ -32,7 +32,7 @@ export function LessonDialog({ lesson, onClose }: LessonDialogProps) {
   return (
     <Dialog open onOpenChange={(o) => !o && onClose()}>
       <DialogContent
-        className="max-h-[85vh] max-w-2xl overflow-y-auto"
+        className="flex max-h-[85vh] w-[calc(100%-2rem)] max-w-2xl flex-col overflow-hidden p-0"
         // L'aperçu de fichier est monté hors du dialogue (portail) : ses clics et son focus ne doivent pas le fermer
         onInteractOutside={(e) => {
           if (isInsideFilePreview(e.target)) e.preventDefault();
