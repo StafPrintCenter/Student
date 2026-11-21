@@ -26,6 +26,10 @@ export function LessonBody({ lesson, onReportProgress, isReporting }: LessonBody
       return <QuizBlock lesson={lesson} />;
 
     case "exercise":
+      return lesson.quizId
+        ? <QuizBlock lesson={lesson} />
+        : <SubmissionBlock lesson={lesson} />;
+
     case "assignment":
     case "project":
       return <SubmissionBlock lesson={lesson} />;
