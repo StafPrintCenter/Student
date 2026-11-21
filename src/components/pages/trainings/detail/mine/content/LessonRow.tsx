@@ -22,7 +22,7 @@ export function LessonRow({ lesson, locked, onOpen }: LessonRowProps) {
         type="button"
         onClick={onOpen}
         disabled={locked}
-        className="-mx-2 flex w-full items-start justify-between gap-3 rounded-md px-2 py-2.5 text-left text-sm transition-colors hover:bg-muted/40 disabled:cursor-not-allowed disabled:opacity-60"
+        className="-mx-2 flex w-full items-start justify-between gap-3 rounded-md px-2 py-2.5 text-left text-sm transition-colors hover:bg-muted/40 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
       >
         <div className="flex min-w-0 flex-1 items-start gap-3">
           <span className="mt-0.5" title={locked ? "Verrouillée" : lessonProgressStatusMap[status].label}>
