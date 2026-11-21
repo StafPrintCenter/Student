@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { APICommunityPostDetail } from "@/data/community";
+import { cn } from "@/lib/utils";
 import { useVoteCommunityPoll } from "@/stores/useCommunityPostsStore";
 
 export function PollCard({ post }: { post: APICommunityPostDetail }) {
@@ -42,18 +43,22 @@ export function PollCard({ post }: { post: APICommunityPostDetail }) {
           {poll.options.map((option) => {
             const percentage = poll.totalVotes > 0 ? Math.round((option.votesCount / poll.totalVotes) * 100) : 0;
             const isMyVote = poll.myVote === option.id;
+            const isSelected = selectedOption === option.id || isMyVote;
 
             return (
               <label
                 key={option.id}
-                className="block space-y-1.5 rounded-md border border-border p-3 has-[:disabled]:cursor-not-allowed"
+                className={cn(
+                  "block space-y-1.5 rounded-md border p-3 transition-colors has-[:disabled]:cursor-not-allowed",
+                  isSelected ? "border-primary bg-primary/10" : "border-border bg-background",
+                )}
               >
                 <span className="flex items-center gap-2 text-sm">
                   <input
                     type="radio"
                     name={`poll-${post.id}`}
                     value={option.id}
-                    checked={selectedOption === option.id || isMyVote}
+                    checked={isSelected}
                     onChange={() => setSelectedOption(option.id)}
                     disabled={!canVote || voteMutation.isPending}
                   />
