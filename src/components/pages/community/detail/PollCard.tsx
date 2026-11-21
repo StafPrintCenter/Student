@@ -49,7 +49,7 @@ export function PollCard({ post }: { post: APICommunityPostDetail }) {
               <label
                 key={option.id}
                 className={cn(
-                  "block space-y-1.5 rounded-md border p-3 transition-colors has-[:disabled]:cursor-not-allowed",
+                  "block space-y-1.5 rounded-md border p-3 transition-colors has-disabled:cursor-not-allowed",
                   isSelected ? "border-primary bg-primary/10" : "border-border bg-background",
                 )}
               >
