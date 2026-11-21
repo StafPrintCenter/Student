@@ -20,7 +20,7 @@ export function FinancialStatusCard({ training, trainingId, enrollment, accessMi
 
   return (
     <>
-      <Card>
+      <Card className="w-full max-w-full min-w-0 overflow-hidden">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
             <CreditCard className="h-4 w-4 text-primary" /> Statut Financier
@@ -28,31 +28,31 @@ export function FinancialStatusCard({ training, trainingId, enrollment, accessMi
           <CardDescription className="text-xs">Détails du règlement et conditions d'accès</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 text-sm">
-          <div className="flex items-center justify-between">
+          <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
             <span className="text-muted-foreground">Coût de la formation</span>
             <span className="font-medium">{formatFCFA(training.price)}</span>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
             <span className="text-muted-foreground">Statut du paiement</span>
             <StatusBadge status={enrollment.paymentStatus} map={trainingPaymentStatusMap} />
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
             <span className="flex items-center gap-1.5 text-muted-foreground">
               <Wallet className="h-4 w-4" /> Montant réglé
             </span>
             <span className="font-semibold text-primary">{formatFCFA(enrollment.amountPaid)}</span>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
             <span className="flex items-center gap-1.5 text-muted-foreground">
               <Percent className="h-4 w-4" /> Seuil d'accès requis
             </span>
             <span className="font-medium">{accessMinRatioPercent}%</span>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
             <span className="text-muted-foreground">Accès aux cours</span>
             <span className={cn("font-medium", enrollment.accessUnlocked ? "text-success" : "text-warning")}>
               {enrollment.accessUnlocked ? "Débloqué" : "Verrouillé"}

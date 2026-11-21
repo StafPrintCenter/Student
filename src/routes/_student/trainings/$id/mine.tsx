@@ -43,7 +43,7 @@ function TrainingDetail() {
 
   if (!response) {
     return (
-      <div className="space-y-6">
+      <div className="w-full min-w-0 space-y-6">
         <BackButton />
         <EmptyState
           icon={Lock}
@@ -66,8 +66,8 @@ function TrainingDetail() {
         contentLocked={contentLocked}
       />
 
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="space-y-6 lg:col-span-2">
+      <div className="grid w-full min-w-0 grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="min-w-0 space-y-6 lg:col-span-2">
           {/* Formation terminée : annonce du certificat */}
           {enrollment.progress >= 100 && <CertificateAvailableBanner enrollmentId={enrollment.id} />}
           {contentLocked && <LockedAccessAlert minRatioPercent={accessMinRatioPercent} />}
@@ -76,7 +76,7 @@ function TrainingDetail() {
           <TrainingMineProgramCard modules={modules} contentLocked={contentLocked} />
         </div>
 
-        <div className="space-y-6">
+        <div className="min-w-0 space-y-6">
           <EnrollmentStatusCard enrollment={enrollment} />
           <FinancialStatusCard
             training={training}

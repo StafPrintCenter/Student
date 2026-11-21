@@ -7,16 +7,16 @@ import { trainingEnrollmentStatusMap, type APIStudentTrainingEnrollmentInfo } fr
 
 export function EnrollmentStatusCard({ enrollment }: { enrollment: APIStudentTrainingEnrollmentInfo }) {
   return (
-    <Card>
+    <Card className="w-full max-w-full min-w-0 overflow-hidden">
       <CardHeader>
         <CardTitle className="text-base">Votre Inscription</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4 text-sm">
-        <div className="flex items-center justify-between">
+        <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <span className="text-muted-foreground">Inscrit le</span>
           <span className="font-medium">{format(new Date(enrollment.enrolledAt), "d MMM yyyy à HH:mm", { locale: fr })}</span>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <span className="text-muted-foreground">Statut d'inscription</span>
           <StatusBadge status={enrollment.status} map={trainingEnrollmentStatusMap} />
         </div>

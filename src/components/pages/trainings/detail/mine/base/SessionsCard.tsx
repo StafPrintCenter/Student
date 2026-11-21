@@ -19,9 +19,9 @@ export function TrainingSessionsCard({ trainingId }: { trainingId: string }) {
   const toConfirm = sessions.filter((s) => s.isUpcoming && !s.myResponse).length;
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between gap-3 space-y-0">
-        <CardTitle className="flex items-center gap-2 text-base">
+    <Card className="w-full max-w-full min-w-0 overflow-hidden">
+      <CardHeader className="flex-col items-stretch gap-3 space-y-0 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+        <CardTitle className="flex min-w-0 flex-wrap items-center gap-2 text-base">
           <CalendarDays className="h-4 w-4 text-primary" /> Sessions
           {toConfirm > 0 && (
             <Badge variant="outline" className="border-warning/40 bg-warning/15 text-[10px] text-warning-foreground">
@@ -29,14 +29,14 @@ export function TrainingSessionsCard({ trainingId }: { trainingId: string }) {
             </Badge>
           )}
         </CardTitle>
-        <Button size="sm" variant="ghost" asChild>
+        <Button size="sm" variant="ghost" className="w-full px-2 sm:w-auto" asChild>
           <Link to="/sessions">
             Toutes mes sessions <ArrowRight className="ml-1 h-3.5 w-3.5" />
           </Link>
         </Button>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="min-w-0 px-4 pb-4 sm:px-6 sm:pb-6">
         {isLoading ? (
           <Skeleton className="h-28 w-full" />
         ) : isError ? (

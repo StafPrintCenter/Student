@@ -14,7 +14,7 @@ interface TrainingHeroProps {
 
 export function TrainingMineHero({ training, enrollment, contentLocked }: TrainingHeroProps) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border">
+    <div className="w-full max-w-full min-w-0 overflow-hidden rounded-2xl border border-border">
       <div
         className="relative h-28"
         style={{
@@ -23,7 +23,7 @@ export function TrainingMineHero({ training, enrollment, contentLocked }: Traini
       >
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.25),transparent_60%)]" />
       </div>
-      <div className="space-y-4 p-6 md:p-8">
+      <div className="min-w-0 space-y-4 p-4 sm:p-6 md:p-8">
         <div className="flex flex-wrap items-center gap-2 text-xs">
           <Badge variant="outline">{training.theme}</Badge>
           <Badge variant="outline">{training.level}</Badge>
@@ -33,7 +33,7 @@ export function TrainingMineHero({ training, enrollment, contentLocked }: Traini
           <AccessBadge unlocked={!contentLocked} />
         </div>
 
-        <h1 className="font-display text-3xl leading-tight md:text-4xl">{training.title}</h1>
+        <h1 className="break-words font-display text-2xl leading-tight sm:text-3xl md:text-4xl">{training.title}</h1>
         <p className="max-w-3xl text-sm text-muted-foreground">{training.short}</p>
 
         <div className="grid gap-3 pt-2 text-sm sm:grid-cols-2 md:grid-cols-4">

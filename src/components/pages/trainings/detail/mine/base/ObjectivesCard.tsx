@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function TrainingMineObjectivesCard({ objectives }: { objectives: string[] }) {
   return (
-    <Card>
+    <Card className="w-full max-w-full min-w-0 overflow-hidden">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <Target className="h-4 w-4 text-primary" /> Objectifs pédagogiques

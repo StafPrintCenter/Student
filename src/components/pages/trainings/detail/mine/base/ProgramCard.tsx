@@ -21,19 +21,19 @@ export function TrainingMineProgramCard({ modules, contentLocked }: TrainingProg
 
   return (
     <>
-      <Card>
-        <CardHeader className="space-y-3">
-          <div className="flex items-center justify-between gap-3">
+      <Card className="w-full max-w-full min-w-0 overflow-hidden">
+        <CardHeader className="space-y-3 p-4 sm:p-6">
+          <div className="flex min-w-0 flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
             <CardTitle className="flex items-center gap-2 text-base">
               <BookOpen className="h-4 w-4 text-primary" /> Programme
             </CardTitle>
-            <p className="text-xs tabular-nums text-muted-foreground">
+            <p className="text-xs tabular-nums text-muted-foreground sm:text-right">
               {completedLessons}/{totalLessons} leçons terminées
             </p>
           </div>
           {totalLessons > 0 && <Progress value={percent} className="h-1.5" />}
         </CardHeader>
-        <CardContent>
+        <CardContent className="min-w-0 px-4 pb-4 sm:px-6 sm:pb-6">
           <Accordion type="multiple" defaultValue={modules[0] ? [modules[0].id] : []}>
             {modules.map((m) => (
               <ModuleItem
