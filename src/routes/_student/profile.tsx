@@ -94,7 +94,7 @@ function ProfilePage() {
                 )}
               </div>
               <div className="min-w-0 w-full pb-1 sm:w-auto">
-                <h2 className="break-words font-display text-xl font-bold sm:truncate sm:text-2xl">{fullName}</h2>
+                <h2 className="wrap-break-word font-display text-xl font-bold sm:truncate sm:text-2xl">{fullName}</h2>
                 <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
                   <span className="inline-flex items-center gap-1.5">
                     <Mail className="h-3.5 w-3.5 text-primary" />
@@ -272,7 +272,7 @@ function ProfileField({
       <p className="text-xs text-muted-foreground">{label}</p>
       <div className="mt-1 flex min-w-0 items-start gap-2 text-sm font-medium">
         {icon}
-        <span className="min-w-0 break-words">{value?.trim() || "Non renseigné"}</span>
+        <span className="min-w-0 wrap-break-word">{value?.trim() || "Non renseigné"}</span>
       </div>
     </div>
   );
@@ -282,7 +282,7 @@ function DateRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
       <span>{label}</span>
-      <span className="break-words font-medium text-foreground sm:text-right">{value}</span>
+      <span className="wrap-break-word font-medium text-foreground sm:text-right">{value}</span>
     </div>
   );
 }
