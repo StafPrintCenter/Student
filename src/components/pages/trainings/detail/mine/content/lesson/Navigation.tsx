@@ -11,7 +11,7 @@ interface LessonNavigationProps {
 
 export function LessonNavigation({ previous, next, onNavigate, onClose }: LessonNavigationProps) {
   return (
-    <div className="flex items-center justify-between gap-2 border-t pt-3">
+    <div className="z-10 shrink-0 border-t bg-background px-6 py-3 flex items-center justify-between gap-2">
       <Button
         variant="ghost"
         size="sm"
