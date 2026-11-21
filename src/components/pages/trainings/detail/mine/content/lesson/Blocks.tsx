@@ -1,7 +1,13 @@
 import { ExternalLink, FileText, ListOrdered } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-export function ContentBlock({ content, emptyMessage }: { content: string | null; emptyMessage?: string }) {
+export function ContentBlock({
+  content,
+  emptyMessage,
+}: {
+  content: string | null;
+  emptyMessage?: string;
+}) {
   if (!content) {
     return emptyMessage ? <EmptyLessonContent icon={FileText} message={emptyMessage} /> : null;
   }
