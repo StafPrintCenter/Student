@@ -42,7 +42,8 @@ export function LessonDialog({ lesson, onClose }: LessonDialogProps) {
           if (isFilePreviewOpen()) e.preventDefault();
         }}
       >
-        <LessonHeader title={detail?.title ?? current.title} lesson={detail} />
+        <div className="min-h-0 flex-1 overflow-y-auto p-6">
+          <LessonHeader title={detail?.title ?? current.title} lesson={detail} />
 
         {isLoading ? (
           <LessonSkeleton />
