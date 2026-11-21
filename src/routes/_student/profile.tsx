@@ -64,12 +64,12 @@ function ProfilePage() {
 
   return (
     <>
-      <div className="relative overflow-hidden rounded-2xl border bg-card shadow-sm">
-        <div className="h-32 bg-gradient-hero" />
-        <div className="p-6 pt-0">
+      <div className="relative w-full max-w-full min-w-0 overflow-hidden rounded-2xl border bg-card shadow-sm">
+        <div className="h-24 bg-gradient-hero sm:h-32" />
+        <div className="p-4 pt-0 sm:p-6 sm:pt-0">
           <div className="-mt-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div className="flex items-end gap-4">
-              <div className="grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded-2xl border-4 border-card bg-primary font-display text-3xl font-bold text-primary-foreground shadow-sm">
+            <div className="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:items-end sm:gap-4">
+              <div className="grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-2xl border-4 border-card bg-primary font-display text-2xl font-bold text-primary-foreground shadow-sm sm:h-24 sm:w-24 sm:text-3xl">
                 {photoUrl ? (
                   <button
                     type="button"
@@ -93,8 +93,8 @@ function ProfilePage() {
                   />
                 )}
               </div>
-              <div className="min-w-0 pb-1">
-                <h2 className="truncate font-display text-2xl font-bold">{fullName}</h2>
+              <div className="min-w-0 w-full pb-1 sm:w-auto">
+                <h2 className="break-words font-display text-xl font-bold sm:truncate sm:text-2xl">{fullName}</h2>
                 <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
                   <span className="inline-flex items-center gap-1.5">
                     <Mail className="h-3.5 w-3.5 text-primary" />
@@ -112,18 +112,18 @@ function ProfilePage() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 self-start sm:self-auto">
-              <Button variant="outline" size="sm" onClick={() => setEditOpen(true)}>
+            <div className="grid w-full grid-cols-1 gap-2 self-start sm:w-auto sm:flex sm:flex-wrap sm:self-auto">
+              <Button variant="outline" size="sm" className="w-full sm:w-auto" onClick={() => setEditOpen(true)}>
                 <Pencil className="mr-1 h-4 w-4" /> Modifier
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setEmailOpen(true)}>
+              <Button variant="outline" size="sm" className="w-full sm:w-auto" onClick={() => setEmailOpen(true)}>
                 <Mail className="mr-1 h-4 w-4" /> Changer l'e-mail
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setConfirmDisconnectOpen(true)}
-                className="text-destructive hover:bg-destructive/10"
+                className="w-full text-destructive hover:bg-destructive/10 sm:w-auto"
               >
                 <LogOut className="mr-1 h-4 w-4" /> Déconnexion
               </Button>
@@ -132,9 +132,9 @@ function ProfilePage() {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-3">
-        <div className="space-y-6 lg:col-span-2">
-          <div className="rounded-2xl border bg-card p-6 shadow-sm">
+      <div className="mt-6 grid w-full min-w-0 grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="min-w-0 space-y-6 lg:col-span-2">
+          <div className="w-full max-w-full min-w-0 rounded-2xl border bg-card p-4 shadow-sm sm:p-6">
             <div className="mb-5 flex items-center gap-2 border-b pb-4">
               <UserIcon className="h-5 w-5 text-primary" />
               <h3 className="font-display text-lg font-semibold">Informations personnelles</h3>
@@ -183,24 +183,24 @@ function ProfilePage() {
           </div>
         </div>
 
-        <div className="space-y-6 lg:col-span-1">
+        <div className="min-w-0 space-y-6 lg:col-span-1">
           <ChangePasswordCard />
 
-          <div className="rounded-2xl border bg-card p-6 shadow-sm">
+          <div className="w-full max-w-full min-w-0 rounded-2xl border bg-card p-4 shadow-sm sm:p-6">
             <div className="mb-4 flex items-center gap-2 border-b pb-3">
               <Shield className="h-4 w-4 text-primary" />
               <h3 className="font-display text-sm font-semibold">Statut du compte</h3>
             </div>
 
             <div className="space-y-4 text-sm">
-              <div className="flex items-center justify-between">
+              <div className="flex min-w-0 items-center justify-between gap-3">
                 <span className="text-muted-foreground">Rôle</span>
                 <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
                   Apprenant
                 </span>
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex min-w-0 items-center justify-between gap-3">
                 <span className="text-muted-foreground">État du compte</span>
                 {user?.isBlocked ? (
                   <span className="inline-flex items-center gap-1 text-xs font-medium text-destructive">
@@ -219,7 +219,7 @@ function ProfilePage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border bg-card p-6 shadow-sm">
+          <div className="w-full max-w-full min-w-0 rounded-2xl border bg-card p-4 shadow-sm sm:p-6">
             <div className="mb-4 flex items-center gap-2 border-b pb-3">
               <Clock className="h-4 w-4 text-primary" />
               <h3 className="font-display text-sm font-semibold">Dates système</h3>
@@ -270,9 +270,9 @@ function ProfileField({
   return (
     <div>
       <p className="text-xs text-muted-foreground">{label}</p>
-      <div className="mt-1 flex items-center gap-2 text-sm font-medium">
+      <div className="mt-1 flex min-w-0 items-start gap-2 text-sm font-medium">
         {icon}
-        <span className="wrap-break-word">{value?.trim() || "Non renseigné"}</span>
+        <span className="min-w-0 break-words">{value?.trim() || "Non renseigné"}</span>
       </div>
     </div>
   );
@@ -280,9 +280,9 @@ function ProfileField({
 
 function DateRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex justify-between gap-4">
+    <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
       <span>{label}</span>
-      <span className="text-right font-medium text-foreground">{value}</span>
+      <span className="break-words font-medium text-foreground sm:text-right">{value}</span>
     </div>
   );
 }

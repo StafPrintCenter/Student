@@ -93,7 +93,7 @@ export function ProfileEditDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
+      <DialogContent className="max-h-[90vh] w-[calc(100%-2rem)] max-w-2xl overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Modifier mon profil</DialogTitle>
         </DialogHeader>

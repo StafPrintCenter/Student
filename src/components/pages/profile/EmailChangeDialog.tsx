@@ -80,7 +80,7 @@ export function EmailChangeDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="w-[calc(100%-2rem)] max-w-md">
         <DialogHeader>
           <DialogTitle>Changer mon adresse e-mail</DialogTitle>
           <DialogDescription>

@@ -53,7 +53,7 @@ export function ChangePasswordCard() {
   };
 
   return (
-    <section className="rounded-2xl border bg-card p-6 shadow-sm">
+    <section className="w-full max-w-full min-w-0 rounded-2xl border bg-card p-4 shadow-sm sm:p-6">
       <div className="mb-5 flex items-center gap-2 border-b pb-4">
         <KeyRound className="h-5 w-5 text-primary" />
         <div>
@@ -110,7 +110,7 @@ export function ChangePasswordCard() {
           </p>
         )}
 
-        <Button type="submit" disabled={changePassword.isPending}>
+        <Button type="submit" className="w-full sm:w-auto" disabled={changePassword.isPending}>
           {changePassword.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Modifier le mot de passe
         </Button>
