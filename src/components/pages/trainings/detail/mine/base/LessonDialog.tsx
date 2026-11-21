@@ -31,9 +31,14 @@ export function LessonDialog({ lesson, onClose }: LessonDialogProps) {
       { lessonId: current.id, payload },
       {
         onSuccess: (result) =>
-          toast.success(result.status === "completed" ? "Leçon marquée comme terminée." : "Progression enregistrée."),
-        onError: (err) => toast.error(err instanceof Error ? err.message : "Erreur lors de l'enregistrement"),
-      }
+          toast.success(
+            result.status === "completed"
+              ? "Leçon marquée comme terminée."
+              : "Progression enregistrée.",
+          ),
+        onError: (err) =>
+          toast.error(err instanceof Error ? err.message : "Erreur lors de l'enregistrement"),
+      },
     );
   };
 
