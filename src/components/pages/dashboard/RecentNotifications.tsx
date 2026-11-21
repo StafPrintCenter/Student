@@ -14,9 +14,9 @@ export function RecentNotificationsCard() {
   const unread = meta?.unreadTotal ?? 0;
 
   return (
-    <Card className="min-w-0">
-      <CardHeader className="flex-row items-center justify-between gap-2 space-y-0 p-4 sm:p-6">
-        <CardTitle className="flex min-w-0 flex-wrap items-center gap-2 text-base">
+    <Card className="w-full max-w-full min-w-0 overflow-hidden">
+      <CardHeader className="flex-col items-stretch gap-3 space-y-0 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+        <CardTitle className="flex min-w-0 flex-wrap items-center gap-2 text-base leading-snug">
           <Bell className="h-4 w-4 text-primary" /> Notifications récentes
           {unread > 0 && (
             <Badge variant="outline" className="max-w-full whitespace-normal border-primary/40 bg-primary/10 text-[10px] text-primary">
@@ -24,11 +24,11 @@ export function RecentNotificationsCard() {
             </Badge>
           )}
         </CardTitle>
-        <Button variant="ghost" size="sm" className="shrink-0 px-2 sm:px-3" asChild>
+        <Button variant="ghost" size="sm" className="w-full shrink-0 sm:w-auto" asChild>
           <Link to="/notifications">Voir tout</Link>
         </Button>
       </CardHeader>
-      <CardContent className="px-2 pb-2 sm:px-4 sm:pb-4">
+      <CardContent className="w-full min-w-0 px-2 pb-2 sm:px-4 sm:pb-4">
         {isLoading ? (
           <div className="space-y-2 p-2">
             <Skeleton className="h-14 w-full" />
@@ -39,7 +39,7 @@ export function RecentNotificationsCard() {
         ) : items.length === 0 ? (
           <p className="p-4 text-sm text-muted-foreground">Aucune notification pour le moment.</p>
         ) : (
-          <ul className="divide-y">
+          <ul className="w-full min-w-0 divide-y">
             {items.map((n) => (
               <NotificationItem
                 key={n.id}

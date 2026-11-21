@@ -39,7 +39,7 @@ export function NotificationItem({ notification: n, onClick, selectable, selecte
   return (
     <div
       onClick={onClick}
-      className={`group relative flex cursor-pointer items-center gap-2 rounded-lg border p-3 transition sm:gap-3 sm:px-4 sm:py-3 ${selected
+      className={`group relative flex w-full min-w-0 cursor-pointer items-center gap-1 overflow-hidden rounded-lg border p-2 transition sm:gap-3 sm:px-4 sm:py-3 ${selected
         ? "border-primary bg-primary/10"
         : n.isRead
           ? "border-border bg-card hover:bg-muted/50"

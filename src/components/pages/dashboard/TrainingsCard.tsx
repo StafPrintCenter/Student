@@ -18,10 +18,10 @@ export function CurrentTrainingsCard() {
   const hidden = active.length - shown.length;
 
   return (
-    <Card className="min-w-0">
-      <CardHeader className="flex-row items-center justify-between gap-3 space-y-0 p-4 sm:p-6">
+    <Card className="w-full max-w-full min-w-0 overflow-hidden">
+      <CardHeader className="flex-col items-stretch gap-3 space-y-0 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-6">
         <CardTitle className="min-w-0 text-base">Formations en cours</CardTitle>
-        <Button variant="ghost" size="sm" className="shrink-0 px-2 sm:px-3" asChild>
+        <Button variant="ghost" size="sm" className="w-full shrink-0 sm:w-auto" asChild>
           <Link to="/trainings">
             Voir tout <ArrowRight className="ml-1 h-3 w-3" />
           </Link>

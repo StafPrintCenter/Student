@@ -19,12 +19,12 @@ function Dashboard() {
       <ActionsRequiredCard />
       <DashboardStats />
 
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="space-y-6 lg:col-span-2">
+      <div className="grid w-full min-w-0 grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="min-w-0 space-y-6 lg:col-span-2">
           <CurrentTrainingsCard />
           <RecentNotificationsCard />
         </div>
-        <div className="space-y-6">
+        <div className="min-w-0 space-y-6">
           <DashboardSessionsCard />
           <PaymentsOverviewCard />
         </div>
