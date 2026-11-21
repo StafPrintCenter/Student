@@ -62,8 +62,8 @@ export function PollCard({ post }: { post: APICommunityPostDetail }) {
                     onChange={() => setSelectedOption(option.id)}
                     disabled={!canVote || voteMutation.isPending}
                   />
-                  {isMyVote && <span className="font-medium text-primary">Votre vote</span>}
                   <span className="flex-1">{option.label}</span>
+                  {isMyVote && <span className="font-medium text-primary">— Votre vote</span>}
                   <span className="text-xs tabular-nums text-muted-foreground">
                     {option.votesCount} ({percentage}%)
                   </span>
