@@ -1,7 +1,18 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { LessonHeader, LessonBody, LessonNavigation, LessonProgressInfo, LessonError, LessonLockedNotice, LessonSkeleton, isFilePreviewOpen, isInsideFilePreview, ChaptersList } from "@/components/pages/trainings/detail/mine/content/lesson";
+import {
+  LessonHeader,
+  LessonBody,
+  LessonNavigation,
+  LessonProgressInfo,
+  LessonError,
+  LessonLockedNotice,
+  LessonSkeleton,
+  isFilePreviewOpen,
+  isInsideFilePreview,
+  ChaptersList,
+} from "@/components/pages/trainings/detail/mine/content/lesson";
 import type { APILessonLink, LessonProgressPayload } from "@/data/lesson";
 import { useLessonDetail, useMarkLessonProgress } from "@/stores/useLessonStore";
 
