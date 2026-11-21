@@ -33,6 +33,10 @@ export async function updateStudentProfile(
   const fd = new FormData();
   fd.append("firstName", payload.firstName);
   fd.append("lastName", payload.lastName);
+  fd.append("phone", payload.phone ?? "");
+  fd.append("birthDate", payload.birthDate ?? "");
+  fd.append("address", payload.address ?? "");
+  fd.append("occupation", payload.occupation ?? "");
   fd.append("bio", payload.bio ?? "");
   fd.append("removePhoto", payload.removePhoto ? "1" : "0");
   if (payload.photo) fd.append("photo", payload.photo);
