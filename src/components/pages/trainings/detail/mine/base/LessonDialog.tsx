@@ -45,24 +45,25 @@ export function LessonDialog({ lesson, onClose }: LessonDialogProps) {
         <div className="min-h-0 flex-1 overflow-y-auto p-6">
           <LessonHeader title={detail?.title ?? current.title} lesson={detail} />
 
-        {isLoading ? (
-          <LessonSkeleton />
-        ) : isError || !detail ? (
-          <LessonError onRetry={() => refetch()} />
-        ) : detail.contentLocked ? (
-          <LessonLockedNotice onClose={onClose} />
-        ) : (
-          <div className="space-y-4">
-            <LessonProgressInfo lesson={detail} />
-            <LessonBody
-              key={detail.id}
-              lesson={detail}
-              onReportProgress={canTrack ? reportProgress : undefined}
-              isReporting={progressMutation.isPending}
-            />
-            <ChaptersList chapters={detail.chapters} />
-          </div>
-        )}
+          {isLoading ? (
+            <LessonSkeleton />
+          ) : isError || !detail ? (
+            <LessonError onRetry={() => refetch()} />
+          ) : detail.contentLocked ? (
+            <LessonLockedNotice onClose={onClose} />
+          ) : (
+            <div className="space-y-4">
+              <LessonProgressInfo lesson={detail} />
+              <LessonBody
+                key={detail.id}
+                lesson={detail}
+                onReportProgress={canTrack ? reportProgress : undefined}
+                isReporting={progressMutation.isPending}
+              />
+              <ChaptersList chapters={detail.chapters} />
+            </div>
+          )}
+        </div>
 
         <LessonNavigation
           previous={detail?.previousLesson ?? null}
