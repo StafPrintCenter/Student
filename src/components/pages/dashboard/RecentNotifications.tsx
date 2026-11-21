@@ -14,21 +14,21 @@ export function RecentNotificationsCard() {
   const unread = meta?.unreadTotal ?? 0;
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="flex items-center gap-2 text-base">
+    <Card className="min-w-0">
+      <CardHeader className="flex-row items-center justify-between gap-2 space-y-0 p-4 sm:p-6">
+        <CardTitle className="flex min-w-0 flex-wrap items-center gap-2 text-base">
           <Bell className="h-4 w-4 text-primary" /> Notifications récentes
           {unread > 0 && (
-            <Badge variant="outline" className="border-primary/40 bg-primary/10 text-[10px] text-primary">
+            <Badge variant="outline" className="max-w-full whitespace-normal border-primary/40 bg-primary/10 text-[10px] text-primary">
               {unread} non lue{unread > 1 ? "s" : ""}
             </Badge>
           )}
         </CardTitle>
-        <Button variant="ghost" size="sm" asChild>
+        <Button variant="ghost" size="sm" className="shrink-0 px-2 sm:px-3" asChild>
           <Link to="/notifications">Voir tout</Link>
         </Button>
       </CardHeader>
-      <CardContent className="px-2 pb-2">
+      <CardContent className="px-2 pb-2 sm:px-4 sm:pb-4">
         {isLoading ? (
           <div className="space-y-2 p-2">
             <Skeleton className="h-14 w-full" />

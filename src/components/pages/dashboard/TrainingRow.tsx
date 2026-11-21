@@ -8,7 +8,7 @@ export function CurrentTrainingRow({ enrollment: e }: { enrollment: APIStudentTr
     <Link
       to="/trainings/$id/mine"
       params={{ id: e.trainingId }}
-      className="block rounded-xl border border-border p-4 transition-colors hover:border-primary/40 hover:bg-muted/40"
+      className="block rounded-xl border border-border p-3 transition-colors hover:border-primary/40 hover:bg-muted/40 sm:p-4"
     >
       <div className="flex items-start gap-4">
         <div className="hidden h-14 w-14 shrink-0 rounded-lg sm:block" style={{ background: e.coverColor }} aria-hidden />

@@ -18,16 +18,16 @@ export function CurrentTrainingsCard() {
   const hidden = active.length - shown.length;
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-base">Formations en cours</CardTitle>
-        <Button variant="ghost" size="sm" asChild>
+    <Card className="min-w-0">
+      <CardHeader className="flex-row items-center justify-between gap-3 space-y-0 p-4 sm:p-6">
+        <CardTitle className="min-w-0 text-base">Formations en cours</CardTitle>
+        <Button variant="ghost" size="sm" className="shrink-0 px-2 sm:px-3" asChild>
           <Link to="/trainings">
             Voir tout <ArrowRight className="ml-1 h-3 w-3" />
           </Link>
         </Button>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 px-4 pb-4 sm:px-6 sm:pb-6">
         {isLoading ? (
           <>
             <Skeleton className="h-24 w-full" />
