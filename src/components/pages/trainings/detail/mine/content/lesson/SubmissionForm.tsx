@@ -14,8 +14,8 @@ import {
 } from "@/data/lesson";
 import type { LessonKind } from "@/data/trainings";
 
-/** Limite côté backend : max:10240 Ko = 10 Mo, vérifiée ici pour un retour immédiat */
-const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024;
+/** Limite côté backend : max:10240 Ko = 5 Mo, vérifiée ici pour un retour immédiat */
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 
 interface SubmissionFormProps {
   lessonId: string;
@@ -35,7 +35,7 @@ export function SubmissionForm({ lessonId, kind }: SubmissionFormProps) {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0] ?? null;
     if (selected && selected.size > MAX_FILE_SIZE_BYTES) {
-      setFileError("Le fichier dépasse la taille maximale autorisée (10 Mo).");
+      setFileError("Le fichier dépasse la taille maximale autorisée (5 Mo).");
       setFile(null);
       e.target.value = "";
       return;
@@ -126,7 +126,7 @@ export function SubmissionForm({ lessonId, kind }: SubmissionFormProps) {
             className="flex cursor-pointer items-center justify-center gap-2 rounded-md border border-dashed border-border px-3 py-4 text-sm text-muted-foreground hover:bg-muted/40"
           >
             <FileUp className="h-4 w-4" />
-            Choisir un fichier (max 10 Mo)
+            Choisir un fichier (max 5 Mo)
             <input id={fileId} type="file" className="hidden" onChange={handleFileChange} disabled={isSubmitting} />
           </label>
         )}
