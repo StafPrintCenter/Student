@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import { BadgeInfoIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { APIQuizQuestion } from "@/data/quiz";
 
