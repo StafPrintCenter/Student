@@ -61,7 +61,12 @@ function SubmissionItem({
         {feedback?.gradedAt && ` · corrigé le ${formatDateTime(feedback.gradedAt)}`}
       </p>
 
-      {s.body && <p className="whitespace-pre-line text-sm">{s.body}</p>}
+      {s.body && (
+        <div
+          className="rich-text-content whitespace-pre-line text-sm"
+          dangerouslySetInnerHTML={{ __html: s.body }}
+        />
+      )}
 
       {fileUrl && (
         <button
