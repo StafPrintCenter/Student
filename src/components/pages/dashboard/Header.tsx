@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import { CalendarDays, Play } from "lucide-react";
@@ -8,6 +9,7 @@ import { isActiveEnrollment } from "./Utils";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { useStudentProgress } from "@/stores/useProgressStore";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
+import { getGreeting } from "@/lib/greeting";
 
 export function DashboardHeader() {
   const { user } = useStudentAuth();
