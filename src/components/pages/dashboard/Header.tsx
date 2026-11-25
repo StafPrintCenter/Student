@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import { CalendarDays, Play } from "lucide-react";
@@ -9,17 +9,17 @@ import { isActiveEnrollment } from "./Utils";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 import { useStudentProgress } from "@/stores/useProgressStore";
 import { useStudentTrainingsList } from "@/stores/useTrainingsStore";
-import { getGreeting } from "@/lib/greeting";
+import { getGreeting, getWelcomeMessage } from "@/lib/greeting";
 
 export function DashboardHeader() {
   const { user } = useStudentAuth();
   const { items } = useStudentTrainingsList();
   const { stats } = useStudentProgress();
-  const [greeting] = useState(() => getGreeting(user?.firstName ?? ""));
 
   // « Continuer à apprendre » ouvre la première formation en cours qui n'est pas terminée
   const next = items.find((e) => isActiveEnrollment(e.status) && e.progress < 100);
   const firstName = user?.firstName?.trim();
+  const greeting = useMemo(() => getGreeting(firstName ?? ""), [firstName]);
   const lastActivity = stats?.lastActivityAt
     ? ` Dernière activité ${formatDistanceToNow(new Date(stats.lastActivityAt), { addSuffix: true, locale: fr })}.`
     : "";
@@ -27,7 +27,7 @@ export function DashboardHeader() {
   return (
     <PageHeader
       eyebrow={firstName ? `${greeting}` : "Bonjour"}
-      title="Bienvenue dans votre atelier d'apprentissage."
+      title={getWelcomeMessage()}
       description={`Voici l'état de vos formations et de vos prochaines échéances.${lastActivity}`}
       actions={
         <>

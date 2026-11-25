@@ -42,3 +42,18 @@ export function getGreeting(name: string, date: Date = new Date()): string {
   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
   return greeting.replace("{name}", name);
 }
+
+export function getWelcomeMessage(date: Date = new Date()): string {
+  const hour = date.getHours();
+
+  if (hour >= 5 && hour < 12) {
+    return "Bienvenue dans votre atelier d'apprentissage.";
+  }
+  if (hour >= 12 && hour < 18) {
+    return "Bon retour dans votre espace d'apprentissage. Reprenons là où vous en étiez.";
+  }
+  if (hour >= 18 && hour < 22) {
+    return "Votre atelier d'apprentissage vous attend. Avancez à votre rythme.";
+  }
+  return "Il est tard : prenez une pause, votre espace d'apprentissage vous attendra demain.";
+}
