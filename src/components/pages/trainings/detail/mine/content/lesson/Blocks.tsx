@@ -13,7 +13,7 @@ export function ContentBlock({
   }
   return (
     <div
-    className="rich-text-content whitespace-pre-line"
+      className="rich-text-content whitespace-pre-line"
       dangerouslySetInnerHTML={{ __html: content }}
     />
   );
