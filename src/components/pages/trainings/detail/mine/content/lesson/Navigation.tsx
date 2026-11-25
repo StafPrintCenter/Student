@@ -15,6 +15,7 @@ export function LessonNavigation({ previous, next, onNavigate, onClose }: Lesson
       <Button
         variant="ghost"
         size="sm"
+        className="disabled:pointer-events-auto disabled:cursor-not-allowed"
         disabled={!previous}
         title={previous?.title}
         onClick={() => previous && onNavigate(previous)}
@@ -27,6 +28,7 @@ export function LessonNavigation({ previous, next, onNavigate, onClose }: Lesson
       <Button
         variant="ghost"
         size="sm"
+        className="disabled:pointer-events-auto disabled:cursor-not-allowed"
         disabled={!next}
         title={next?.title}
         onClick={() => next && onNavigate(next)}
