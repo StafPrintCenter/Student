@@ -4,7 +4,7 @@ import { CheckCircle2, FileUp, Loader2, Paperclip, Send, X } from "lucide-react"
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { RichTextEditor } from "@/components/site/RichTextEditor";
 import { cn } from "@/lib/utils";
 import { useCreateSubmission } from "@/stores/useLessonStore";
 import {
@@ -30,7 +30,8 @@ export function SubmissionForm({ lessonId, kind }: SubmissionFormProps) {
 
   const submitMutation = useCreateSubmission();
   const isSubmitting = submitMutation.isPending;
-  const isEmpty = !body.trim() && !file;
+  const bodyText = body.replace(/<[^>]*>/g, "").replace(/&nbsp;|&#160;|&#xA0;/gi, " ").trim();
+  const isEmpty = !bodyText && !file;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0] ?? null;
@@ -51,7 +52,7 @@ export function SubmissionForm({ lessonId, kind }: SubmissionFormProps) {
     }
 
     submitMutation.mutate(
-      { lessonId, payload: { body: body.trim() || undefined, file: file ?? undefined } },
+      { lessonId, payload: { body: bodyText ? body.trim() : undefined, file: file ?? undefined } },
       {
         onSuccess: (data) => {
           setResult(data);
@@ -83,19 +84,21 @@ export function SubmissionForm({ lessonId, kind }: SubmissionFormProps) {
   }
 
   const bodyId = `submission-body-${lessonId}`;
+  const bodyLabelId = `${bodyId}-label`;
   const fileId = `submission-file-${lessonId}`;
 
   return (
     <div className="space-y-4 rounded-lg border border-border bg-muted/20 p-4">
       <div className="space-y-2">
-        <Label htmlFor={bodyId}>Votre réponse</Label>
-        <Textarea
+        <Label id={bodyLabelId}>Votre réponse</Label>
+        <RichTextEditor
           id={bodyId}
-          rows={5}
           value={body}
-          onChange={(e) => setBody(e.target.value)}
+          onChange={setBody}
+          ariaLabelledBy={bodyLabelId}
           placeholder="Décrivez votre travail, collez un lien, ou laissez vide si vous joignez uniquement un fichier…"
           disabled={isSubmitting}
+          minHeightClassName="min-h-[120px]"
         />
       </div>
 
