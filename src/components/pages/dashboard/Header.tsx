@@ -15,6 +15,7 @@ export function DashboardHeader() {
   const { user } = useStudentAuth();
   const { items } = useStudentTrainingsList();
   const { stats } = useStudentProgress();
+  const [greeting] = useState(() => getGreeting(user?.firstName ?? ""));
 
   // « Continuer à apprendre » ouvre la première formation en cours qui n'est pas terminée
   const next = items.find((e) => isActiveEnrollment(e.status) && e.progress < 100);
