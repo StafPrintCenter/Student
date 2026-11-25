@@ -26,7 +26,7 @@ export function DashboardHeader() {
 
   return (
     <PageHeader
-      eyebrow={firstName ? `Bonjour, ${firstName}` : "Bonjour"}
+      eyebrow={firstName ? `${greeting}` : "Bonjour"}
       title="Bienvenue dans votre atelier d'apprentissage."
       description={`Voici l'état de vos formations et de vos prochaines échéances.${lastActivity}`}
       actions={

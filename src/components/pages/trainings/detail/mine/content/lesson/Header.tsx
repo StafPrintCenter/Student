@@ -31,10 +31,12 @@ export function LessonHeader({ title, lesson }: { title: string; lesson: APILess
       <DialogTitle>{title}</DialogTitle>
       {lesson && <p className="text-xs text-muted-foreground">Module : {lesson.module.title}</p>}
       {lesson?.brief && (
-        <DialogDescription
-          className="whitespace-pre-line"
-          dangerouslySetInnerHTML={{ __html: lesson.brief }}
-        />
+        <DialogDescription asChild>
+          <div
+            className="rich-text-content whitespace-pre-line text-sm text-muted-foreground"
+            dangerouslySetInnerHTML={{ __html: lesson.brief }}
+          />
+        </DialogDescription>
       )}
     </DialogHeader>
   );

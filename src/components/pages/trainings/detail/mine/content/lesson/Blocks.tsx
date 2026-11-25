@@ -13,7 +13,7 @@ export function ContentBlock({
   }
   return (
     <div
-      className="prose prose-sm max-w-none whitespace-pre-line dark:prose-invert"
+    className="rich-text-content whitespace-pre-line"
       dangerouslySetInnerHTML={{ __html: content }}
     />
   );
