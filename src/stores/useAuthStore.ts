@@ -15,10 +15,12 @@ export class StudentAuthApiError extends Error { }
 export async function loginStudent(
   email: string,
   password: string,
+  turnstileToken: string,
 ): Promise<APIStudentLoginResult> {
   const formData = new FormData();
   formData.append("email", email);
   formData.append("password", password);
+  formData.append("cf-turnstile-response", turnstileToken);
 
   const response = await studentFetch(`/api/student/auth/login`, {
     method: "POST",

@@ -76,12 +76,12 @@ function LoginPage() {
     }
   }, [ready, isAuthenticated, destination, navigate, router]);
 
-  const handleLogin = async (nextEmail: string, password: string) => {
+  const handleLogin = async (nextEmail: string, password: string, turnstileToken: string) => {
     setEmail(nextEmail);
     setLoading(true);
 
     try {
-      const outcome = await login(nextEmail, password);
+      const outcome = await login(nextEmail, password, turnstileToken);
       if (outcome.status === "mfa") {
         setChallenge(outcome.challenge);
         return;
@@ -107,6 +107,7 @@ function LoginPage() {
   return (
     <LoginCredentialsForm
       defaultEmail={email}
+      action="login_student"
       loading={loading}
       onSubmit={handleLogin}
     />

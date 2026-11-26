@@ -144,8 +144,8 @@ export function useStudentAuth() {
   }, []);
 
   const login = useCallback(
-    async (email: string, password: string): Promise<StudentLoginOutcome> => {
-      const result = await loginStudent(email, password);
+    async (email: string, password: string, turnstileToken: string): Promise<StudentLoginOutcome> => {
+      const result = await loginStudent(email, password, turnstileToken);
       if (isStudentMfaChallenge(result)) {
         return { status: "mfa", challenge: result };
       }
