@@ -117,11 +117,12 @@ export type APIPublicTrainingCatalogItem = {
   durationHours: number;
   level: TrainingLevel;
   price: number;
+  originalPrice?: number | null;
+  discountPercentage?: number;
   maxSeats: number | null;
   seatsRemaining: number | null;
   short: string;
   objectives: string[];
-  registrationFee: number;
   accessMinRatio: string;
   registrationDeadline: string;
   startDate: string;
