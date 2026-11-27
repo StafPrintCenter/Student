@@ -19,6 +19,7 @@ export function EnrollmentCard({
   isSubmitting,
   onSubscribe,
 }: EnrollmentCardProps) {
+  const discount = training.discountPercentage ?? 0;
   const deadlinePassed = new Date(training.registrationDeadline) < new Date();
   const closed = training.enrollmentStatus !== "open" || deadlinePassed;
   const isFull = training.maxSeats != null && (training.seatsRemaining ?? 0) <= 0;
@@ -40,9 +41,17 @@ export function EnrollmentCard({
         <div>
           <p className="text-xs text-muted-foreground">Prix</p>
           <p className="text-2xl font-semibold tabular-nums">{formatFCFA(training.price)}</p>
-          <p className="text-xs text-muted-foreground">
-            Frais d'inscription {formatFCFA(training.registrationFee)}
-          </p>
+          {discount > 0 && training.originalPrice != null && (
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <span className="text-xs text-muted-foreground">Prix original</span>
+              <span className="text-xs text-muted-foreground line-through">
+                {formatFCFA(training.originalPrice)}
+              </span>
+              <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+                -{discount}% de réduction
+              </span>
+            </div>
+          )}
         </div>
         <div className="flex justify-between text-xs">
           <span className="text-muted-foreground">Places restantes</span>
