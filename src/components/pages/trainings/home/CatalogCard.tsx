@@ -15,6 +15,7 @@ interface CatalogCardProps {
 }
 
 export function CatalogCard({ training: t, already, busy, submitting, onSubscribe }: CatalogCardProps) {
+  const discount = t.discountPercentage ?? 0;
   const deadlinePassed = new Date(t.registrationDeadline) < new Date();
   const closed = t.enrollmentStatus !== "open" || deadlinePassed;
   const isFull = t.maxSeats != null && (t.seatsRemaining ?? 0) <= 0;
@@ -56,6 +57,16 @@ export function CatalogCard({ training: t, already, busy, submitting, onSubscrib
           <div>
             <p className="text-xs text-muted-foreground">Prix</p>
             <p className="font-semibold tabular-nums">{formatFCFA(t.price)}</p>
+            {discount > 0 && t.originalPrice != null && (
+              <div className="mt-1 flex flex-wrap items-center gap-2">
+                <span className="text-xs text-muted-foreground line-through">
+                  {formatFCFA(t.originalPrice)}
+                </span>
+                <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
+                  -{discount}%
+                </span>
+              </div>
+            )}
           </div>
           <Button
             size="sm"
