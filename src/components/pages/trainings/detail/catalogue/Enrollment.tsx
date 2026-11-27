@@ -43,7 +43,7 @@ export function EnrollmentCard({
           <p className="text-2xl font-semibold tabular-nums">{formatFCFA(training.price)}</p>
           {discount > 0 && training.originalPrice != null && (
             <div className="mt-2 flex flex-wrap items-center gap-2">
-              <span className="text-xs text-muted-foreground">Prix original</span>
+              <span className="text-xs text-muted-foreground">Au lieu de</span>
               <span className="text-xs text-muted-foreground line-through">
                 {formatFCFA(training.originalPrice)}
               </span>
